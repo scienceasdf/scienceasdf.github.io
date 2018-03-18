@@ -1,0 +1,991 @@
+
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="无人机,安卓开发,Qt," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="scienceasdf" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。">
+<meta name="keywords" content="无人机, 安卓开发, Qt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈螺旋桨航模（无人机）的动力系统选配（一）">
+<meta property="og:url" content="http://localhost:4000/programming/2017/08/17/propulsion1/">
+<meta property="og:site_name" content="scienceasdf">
+<meta property="og:description" content="探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/fig1.png">
+<meta property="og:updated_time" content="2018-03-14T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈螺旋桨航模（无人机）的动力系统选配（一）">
+<meta name="twitter:description" content="探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。">
+<meta name="twitter:image" content="http://localhost:4000/assets//blog_images/fig1.png">
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://localhost:4000/"/>
+
+
+
+
+
+  <title>浅谈螺旋桨航模（无人机）的动力系统选配（一）</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ea13fa2dc2aa892b0c36fe0fbc9d067d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">scienceasdf</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+<div id="posts" class="posts-expand">
+  
+  
+
+  
+
+  
+  
+  
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/programming/2017/08/17/propulsion1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="scienceasdf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="scienceasdf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            浅谈螺旋桨航模（无人机）的动力系统选配（一）
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T00:00:00+08:00">
+                2017-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/Programming" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            
+                <div class="post-description">
+                    
+                </div>
+            
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。</strong></p>
+
+<hr />
+<p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
+
+<hr />
+
+<h2 id="动力系统的数学模型">动力系统的数学模型</h2>
+<h3 id="无刷电机的数学模型">无刷电机的数学模型</h3>
+<p>有<br />
+<script type="math/tex">\begin{equation} \label{eqs:1} \tag{a}
+\left \{
+\begin{array}{l}
+U=r_a I+\frac{n}{K_v}\\
+I=\frac{M_{em}}{K_m}
+\end{array}
+\right.
+\end{equation}</script>
+其中，$r_a$为电机内阻，$U$为电机两端电压，$I$为通过电机的电流，$K_v$为电机Kv值，$K_m$为电机转矩常数，$n$为电机转速(RPM)，$M_{em}$是电机的电磁转矩。<br />
+电机的输出转矩为
+\begin{equation}
+M_{mot}=M_{em}-M_{R}=k_m(I-I_0)
+\end{equation}
+$K_v$的量纲为RPM/V，$K_m$的量纲是N$\cdot$m/A，在国际单位制下电机的$K_v$与$K_m$满足关系
+\begin{equation}
+K_m=\frac{60}{2\pi K_v }
+\end{equation}
+电机的输入功率为
+\begin{equation}
+P_{in}=UI
+\end{equation}
+输出功率为
+\begin{equation}
+P_{out}=\frac{2\pi nM_{mot}}{60}
+\end{equation}
+电机的效率为
+\begin{equation}
+%\eta=\frac{P_{out}}{P_{in}}=\frac{2\pi nM_{mot}}{60UI}
+\eta =\frac{P_{out}}{P_{in}}=\frac{2\pi nM_{mot}}{60UI}
+\end{equation}</p>
+
+<h3 id="螺旋桨的数学模型">螺旋桨的数学模型</h3>
+<p>对于螺旋桨，转矩$M$、拉力$T$、功率$P$、效率$\eta$都是空速$v$、螺旋桨转速$n$的函数
+<script type="math/tex">\begin{equation} \label{basics} \tag{b}
+\left\{
+\begin{array}{l}
+M=M(v,n)\\
+T=T(v,n)=C_T(v,n)\cdot\rho n^2 D^4\\
+P=P(v,n)=C_P(v,n)\cdot\rho n^3 D^5\\
+\eta=\eta(v,n)
+\end{array}
+\right.
+\end{equation}</script><br />
+$C_T$是拉力系数、$C_P$是功率系数，且有$P=M\cdot\frac{2\pi n}{60}$，$\eta=\frac{Tv}{P}$。
+定义一个无量纲参数进动比(advance ratio)
+\begin{equation} J=\frac{v}{nD}\end{equation}
+$D$为螺旋桨直径。通常，$\eta$与$J$的变化关系如图所示。在进行初步分析的手工计算中，可以认为$J$
+是一个相似性判定的参数，如果同一螺旋桨，工作在1状况$(v_1,n_1)$与2状况$(v_2,n_2)$，满足进动比相同，即
+$\frac{v_1}{n_1}=\frac{v_2}{n_2}$，则可以认为工作状况下的效率$\eta$、拉力系数$C_T$、功率系数$C_P$均相同。如果要估算某一工作状况
+$(v,n)$的工作参数，仅需先计算进动比$J=\frac{v}{nD}$，然后查找对应进动比的相关$\eta,C_T\text{和}C_P$，然后按照式(\ref{basics})
+计算拉力、转矩、效率与功率。
+<img src="http://localhost:4000/assets//blog_images/fig1.png" width="350px" height="200px" />
+实际上，由于低雷诺数的影响，对于进动比相同的两种工作状况，$\eta,C_T\text{和}C_P$并不一定对应相等。通常高雷诺数的工作状况下螺旋桨的工作效率更高。</p>
+<h3 id="电源模型">电源模型</h3>
+<p>通常，无人机上使用的电源为蓄电池。蓄电池电源的伏安特性关系为：
+\begin{equation} \label{eqs:src1}
+U=U_0-Ir_0 <br />
+\end{equation}
+其中$r_0$为蓄电池内阻。
+ 对于太阳能无人机，通常是太阳能电池直接为蓄电池充电，由蓄电池驱动直流电机，那么电机两端的电压电流关系满足式(\ref{eqs:src1}).而若太阳能无人机有特殊的要求(如某些太阳能飞机竞赛),那么设计的飞机会是太阳能电池片组直接为动力系统供电。太阳能电池片组的伏安特性关系为
+\begin{equation}\label{solar_array} 
+I=I_{sc}[1-A(e^{U/BU_{oc}})-1]
+\end{equation}
+其中，<script type="math/tex">A=(1-\frac{I_m}{I_{sc}})e^{-U_m/(BU_{oc})}</script><br />
+<script type="math/tex">B=(\frac{U_m}{U_{oc}}-1)[\ln(1-\frac{I_m}{I_{sc}})]</script><br />
+$I_{sc}$为电池组的短路电流;<br />
+$U_{oc}$为电池组的开路电压;<br />
+$U_m,I_m$为最大功率点处的太阳能电池的输出电压与电流.</p>
+
+<h3 id="综合模型及其求解">综合模型及其求解</h3>
+<p>已知飞机的飞行速度$v$，无刷电机的$K_v$值，内阻$r_a$与10V下空载电流$i_0$，以及螺旋桨对应的性能数据，则利用电机转矩等于螺旋桨转矩的关系，求解在电压与电流下的转速$n$，其它参数则可对应求解。电源的电压和电流可以符合某种伏安特性曲线,如式(\ref{eqs:src1})、(\ref{solar_array})，求解过程则为弦截法对转速迭代求解。电源也可能是具有限流或限压值，也可以给出电源电压与电流的上限，求解时取转速上限恰好同时满足不超过电源电压与电流的上限。</p>
+<h3 id="非平凡模型">非平凡模型</h3>
+<h4 id="引入减速组">引入减速组</h4>
+<p>设减速组减速比为$K$，机械效率为$\eta_g$，则有<br />
+<script type="math/tex">\begin{equation}
+\left\{
+\begin{array}{l}
+n_{prop}=\frac{n_{mot}}{K}\\
+T_{prop}=K\cdot T_{mot}\cdot\eta_g
+\end{array}
+\right.
+\end{equation}</script><br />
+考虑$\eta_g=1$的理想减速器，与电机形成的系统可以等效为一个$K_v$值折合为原电机$K_v$值$\frac{1}{K}$
+的新电机。通常高效率螺旋桨的特征都是低负载、大直径、大桨距（相对于直径）、低速运行，所以为了动力系统的效率最大化应该用大直径螺旋桨。由于带动大直径螺旋桨所需的转矩大，如果需要使电机工作在最大电流以下，可以使用减速组或使用低$K_v$值的电机。然而低$K_v$值得电机内阻会比高$K_v$值得电机内阻大，使用减速组会有机械能损失。而且大直径螺旋桨的重量大，且能驱动大直径螺旋桨的电机或减速器通常重量也较大。故具体应选用的方案，应考虑效率、重量、成本、加工装配难度等多方面考虑。</p>
+
+<h4 id="单电机驱动两个螺旋桨">单电机驱动两个螺旋桨</h4>
+<p>在这种情况下，有<br />
+<script type="math/tex">\begin{equation} \label{eqs:12} \tag{c}
+\left\{
+\begin{array}{l}
+n_{prop}=n_{mot}\\
+M_{prop}=\frac{M_{mot}}{2}
+\end{array}
+\right.
+\end{equation}</script>
+求解上式则可以求出电机的转速。双电机驱动单螺旋桨及其它类似情况可以按照类似的方法列出公式求解。</p>
+<h3 id="内燃机的特性">内燃机的特性</h3>
+<p>无人机上使用的内燃机通常可分为两行程发动机和四行程发动机。两行程发动机与四行程发动机相比，优点是功率大，可动零件少，维护简便，价格便宜；缺点是油料燃烧不充分，燃料消耗大。两行程发动机还有两个显著特点：</p>
+<ul>
+  <li>使用这类发动机的无人机，爬升时经常可以听到转速明显下降的声音，俯冲时可以明显听到转速明显升高的声音，原因是这种发动机的扭矩小，对负载的变化较敏感。为了减小这种影响，两行程发动机一般使用大直径小桨距螺旋桨。</li>
+  <li>两行程发动机转速普遍较高，也只有在高速下才能发挥出全部功率，所以厂家提供的功率数据也是要达到一定转速。二行程发动机最大的缺点是油门非线性。</li>
+</ul>
+
+<p>四行程发动机的优点是油门线性好，扭矩大，转速稳定，声音柔和，可以使用大桨距的螺旋桨，提高效率。四行程发动机工作室燃料燃烧充分。无人机爬升时，转速稳定、爬升有力、声音无变化。而四行程的缺点是价格昂贵，重量较大，维护不便。同样的工作容积，普通的四行程发动机输出功率理论上只有两行程发动机的一半，但是实际上不同于二行程发动机，四行程发动机的最大输出功率是在一般使用中可以达到要求的转速范围内的。<br />
+由参考文献,对于高亚音速的飞机，内燃机的功率会随着速度的增加而增大；而对于大多数慢速飞机，内燃机的功率可以认为不变。大多数无人机的巡航速度下发动机的功率可以认为近似不变，那么对应其最大输出功率、最大输出转矩，通常需要一个合适的转速，否则发动机性能无法得到最大发挥。</p>
+
+<hr />
+<p>由于博文过长会导致浏览器加载、渲染速度降低，故后续讨论请看下一篇文章。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            
+            <a href="/tag/#/%E6%97%A0%E4%BA%BA%E6%9C%BA" rel="tag"># 无人机</a>
+          
+            
+            <a href="/tag/#/%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91" rel="tag"># 安卓开发</a>
+          
+            
+            <a href="/tag/#/Qt" rel="tag"># Qt</a>
+          
+        </div>
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+        <div class="post-nav" id="post-nav-id">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/programming/2017/08/17/propulsion2/" rel="next" title="浅谈螺旋桨航模（无人机）的动力系统选配（二）">
+                <i class="fa fa-chevron-left"></i> 浅谈螺旋桨航模（无人机）的动力系统选配（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/24/download-this-theme/" rel="prev" title="Download this Theme">
+                Download this Theme <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+      
+
+      
+    </footer>
+  </article>
+
+  <div class="post-spread">
+    
+  </div>
+</div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        
+        
+        
+
+
+
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/assets/images/avatar.png"
+               alt="scienceasdf" />
+          <p class="site-author-name" itemprop="name">scienceasdf</p>
+           
+              <p class="site-description motion-element" itemprop="description">We will bury them !</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+        
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="https://github.com/scienceasdf" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/scienceasdf/activities" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-joomla"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="404.html" target="_blank" title="404公益@宝贝回家">
+                  
+                    <i class="fa fa-fw fa-child"></i>
+                  
+                  404公益@宝贝回家
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#动力系统的数学模型"> <span class="nav-number">1</span> <span class="nav-text">动力系统的数学模型</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#无刷电机的数学模型"> <span class="nav-number">1.1</span> <span class="nav-text">无刷电机的数学模型</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#螺旋桨的数学模型"> <span class="nav-number">1.2</span> <span class="nav-text">螺旋桨的数学模型</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#电源模型"> <span class="nav-number">1.3</span> <span class="nav-text">电源模型</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#综合模型及其求解"> <span class="nav-number">1.4</span> <span class="nav-text">综合模型及其求解</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#非平凡模型"> <span class="nav-number">1.5</span> <span class="nav-text">非平凡模型</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-4"> <a class="nav-link" href="#引入减速组"> <span class="nav-number">1.5.1</span> <span class="nav-text">引入减速组</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#单电机驱动两个螺旋桨"> <span class="nav-number">1.5.2</span> <span class="nav-text">单电机驱动两个螺旋桨</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#内燃机的特性"> <span class="nav-number">1.6</span> <span class="nav-text">内燃机的特性</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">scienceasdf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://jekyllrb.com">Jekyll</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/simpleyyt/jekyll-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+   
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/assets/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/assets/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  <script type="text/javascript" src="/assets/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/assets/js/src/post-details.js?v=5.1.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+    
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
+

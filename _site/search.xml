@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+    <entry>
+      <title><![CDATA[在手机上绘制根轨迹]]></title>
+      <url>/programming/2017/11/15/easyauto/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>写了一个能够绘制线性系统根轨迹、响应曲线、计算幅值裕度、相位裕度等的手机APP。下载地址在文末。</strong></p>
+
+<hr />
+<p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
+
+<hr />
+
+<h2 id="算法">算法</h2>
+<h4 id="各种裕度的计算">各种裕度的计算</h4>
+<p>很简单，就是用弦截法计算各种穿越频率，然后计算裕度。具体的代码以及API设计可以见GitHub，不过弦截法
+需要给出猜测初值，在手机里这个程序也就只能在几个初值里面试，如果这个初值迭代不收敛就换另一个初值
+。目前的算法能够通过所有我写的测试用例，不过不知道是否有不对的情况。</p>
+<h4 id="与绘制各种根轨迹相关的算法">与绘制各种根轨迹相关的算法</h4>
+<h5 id="多项式求根算法">多项式求根算法</h5>
+<p>非常美妙的事情是，NDK虽然是个大坑，不过Eigen库还是能够使用的。</p>
+<h5 id="排序算法">排序算法</h5>
+<p>这个没有想到更好的点子，实现的算法复杂度为$O(n^2)$，但是在手机上没有卡过，代码如下：</p>
+
+<pre><code class="language-C++">for(int i=0; i&lt;matsz; ++i){
+    std::swap(res[i],*std::min_element(res.begin()+i,res.end(),
+    [&amp;i](std::complex&lt;double&gt; &amp;a, std::complex&lt;double&gt; &amp;b)   
+    // static variables don't need to be captured
+    {return norm(a-pre[i]) &lt; norm(b-pre[i]);}));
+    pre[i] = res[i];
+}
+</code></pre>
+
+<h4 id="计算响应的算法">计算响应的算法</h4>
+<p>这个一开始想用矩阵的幂来进行计算，但是发现许多时候线性系统的$\mathbf{A}$矩阵都是奇异的，没办法，
+还是只能用RK45算法，好在现在手机处理器性能很强，没有任何卡的迹象</p>
+
+<h2 id="处理用户输入">处理用户输入</h2>
+<p>为了让用户能够有更好的交互体验，设计的输入格式比较宽送。处理用户输入用了Boost::tokenizer库，这是
+一个Header-only的库，不需要编译（当然我也自己编译了Boost库，除了Math库编译不了，别的都可以编译，
+具体能不能用还没有认真试过）。NDK真的是一个大坑，GOOGLE官方对GCC值支持到GCC4.9，然而Qt for Android是GCC编译的，而GCC4.9对C++14支持不全不说，有的C++11的东西都没法用，比如std::itoa。。。</p>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 自动控制 </tag>
+        
+          <tag> 安卓开发 </tag>
+        
+          <tag> Qt </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[浅谈螺旋桨航模（无人机）的动力系统选配（二）]]></title>
+      <url>/programming/2017/08/17/propulsion2/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。</strong></p>
+
+<hr />
+<p>上一篇文章我们讲了螺旋桨无人机动力系统相关的理论，这篇文章说说程序的设计。</p>
+
+<h2 id="数据来源">数据来源</h2>
+<p>所有的数据都来自于APC官网的数据。由于APC螺旋桨高效率的优点，以及APC在其官网公布了所有型号的理论性能数据文件，故下载所有其官网上的五百个左右性能数据文件，其文件已经存储为固定的格式。先在官网上下载索引文件PER2_TITLEDAT.txt，再用wget批量将所有的螺旋桨性能数据文件下载下来。一共五百来个文件，中间下载是否有连接错误导致文件没有下载完整我也不知道(捂脸）。APC的桨型号很齐全，基本覆盖了航模级别常用的尺寸，从几英寸到26英寸的都有，如果在这些型号以外的型号那就没办法了。。。数据全部都是dat格式的，用std::ifstream读文件非常耗时。对于开发的安卓版本，肯定不会用External folder里面包含所有的数据，只能用Qt资源文件+QDataStream来读写（不支持std::ifstream)，这样速度更快，不过缺点在于如果数据变动、扩展会不太方便。在写完所有程序之后，我还把所有数据迁移到了一个sqlite数据库文件中，并加上索引，访问速度大大提升，不过目前是不想重构sqlite的版本了。</p>
+
+<h2 id="功能介绍">功能介绍</h2>
+<p>程序分为PC版和移动（安卓）版，主要以介绍PC版为主。PC版共有两个程序：DemoProp，用于计算无刷电机动力系统的工作状况并给出一定的建议；PropChart，用于计算电动和油动动力系统的工作状况并绘制图表。</p>
+<h4 id="筛选功能">筛选功能</h4>
+<p>程序可以对给定的工作状况下的符合要求（如拉力、效率等条件）的螺旋桨进行筛选。DemoProp的筛选界面如下图所示，可以输入电机、电源、减速组等相关信息。
+<img src="http://localhost:4000/assets//blog_images/fig2.png" width="350px" height="200px" />
+PropChart的筛选界面如下图所示，这里运用的模型是给定转速或者给定输入功率，这样就既能够用于求解电动系统的工作状况，也适用于求解油动系统的工作状况。
+<img src="http://localhost:4000/assets//blog_images/fig4.png" width="350px" height="200px" /></p>
+
+<h4 id="分析功能">分析功能</h4>
+<p>DemoProp能够对具体的电动系统选配提出指导意见，可以判断当前电机、电源、螺旋桨、减速组的组合究竟是轻载、超载还是正常载荷，如下图所示。
+<img src="http://localhost:4000/assets//blog_images/fig3.png" width="350px" height="200px" /></p>
+
+<h4 id="图表功能">图表功能</h4>
+<p>PropChart能够绘制螺旋桨的拉力曲线、效率曲线等等，这里我用的是QCustomPlot进行绘制，如下图所示。
+<img src="http://localhost:4000/assets//blog_images/fig5.png" width="350px" height="200px" /></p>
+
+<h4 id="移动版">移动版</h4>
+<p>一直苦于在室外进行动力试验的时候，不方便将测量的数据与仿真数据进行校对、不知道动力系统应该怎么调整。感谢伟大的Qt的跨平台特性，让我能够将程序移植到安卓系统上（实际上移植到iOS上也可以，不过就是我没有苹果电脑与手机），极大地方便了在外场的实验。针对手机的一些特点，在功能上进行了一些改进，例如取消筛选功能，并增加绘制能量分析饼图的功能。手机版的交互体验应该比电脑版的好太多了。截图如下：
+<img src="http://localhost:4000/assets//blog_images/scr1.png" width="350px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/scr3.png" width="350px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/scr2.png" width="350px" height="200px" /></p>
+
+<h2 id="存在的问题">存在的问题</h2>
+<ul>
+  <li>筛选功能卡在IO上比较耗时间。当然，MSVC编译的程序能够明显快于MINGW编译的程序。解决方法有很多，只是我不想去重构了</li>
+  <li>电脑版的交互体验非常差</li>
+  <li>电脑版没有对UI进行多分辨率的调整</li>
+</ul>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 无人机 </tag>
+        
+          <tag> 安卓开发 </tag>
+        
+          <tag> Qt </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[浅谈螺旋桨航模（无人机）的动力系统选配（一）]]></title>
+      <url>/programming/2017/08/17/propulsion1/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。</strong></p>
+
+<hr />
+<p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
+
+<hr />
+
+<h2 id="动力系统的数学模型">动力系统的数学模型</h2>
+<h3 id="无刷电机的数学模型">无刷电机的数学模型</h3>
+<p>有<br />
+<script type="math/tex">\begin{equation} \label{eqs:1} \tag{a}
+\left \{
+\begin{array}{l}
+U=r_a I+\frac{n}{K_v}\\
+I=\frac{M_{em}}{K_m}
+\end{array}
+\right.
+\end{equation}</script>
+其中，$r_a$为电机内阻，$U$为电机两端电压，$I$为通过电机的电流，$K_v$为电机Kv值，$K_m$为电机转矩常数，$n$为电机转速(RPM)，$M_{em}$是电机的电磁转矩。<br />
+电机的输出转矩为
+\begin{equation}
+M_{mot}=M_{em}-M_{R}=k_m(I-I_0)
+\end{equation}
+$K_v$的量纲为RPM/V，$K_m$的量纲是N$\cdot$m/A，在国际单位制下电机的$K_v$与$K_m$满足关系
+\begin{equation}
+K_m=\frac{60}{2\pi K_v }
+\end{equation}
+电机的输入功率为
+\begin{equation}
+P_{in}=UI
+\end{equation}
+输出功率为
+\begin{equation}
+P_{out}=\frac{2\pi nM_{mot}}{60}
+\end{equation}
+电机的效率为
+\begin{equation}
+%\eta=\frac{P_{out}}{P_{in}}=\frac{2\pi nM_{mot}}{60UI}
+\eta =\frac{P_{out}}{P_{in}}=\frac{2\pi nM_{mot}}{60UI}
+\end{equation}</p>
+
+<h3 id="螺旋桨的数学模型">螺旋桨的数学模型</h3>
+<p>对于螺旋桨，转矩$M$、拉力$T$、功率$P$、效率$\eta$都是空速$v$、螺旋桨转速$n$的函数
+<script type="math/tex">\begin{equation} \label{basics} \tag{b}
+\left\{
+\begin{array}{l}
+M=M(v,n)\\
+T=T(v,n)=C_T(v,n)\cdot\rho n^2 D^4\\
+P=P(v,n)=C_P(v,n)\cdot\rho n^3 D^5\\
+\eta=\eta(v,n)
+\end{array}
+\right.
+\end{equation}</script><br />
+$C_T$是拉力系数、$C_P$是功率系数，且有$P=M\cdot\frac{2\pi n}{60}$，$\eta=\frac{Tv}{P}$。
+定义一个无量纲参数进动比(advance ratio)
+\begin{equation} J=\frac{v}{nD}\end{equation}
+$D$为螺旋桨直径。通常，$\eta$与$J$的变化关系如图所示。在进行初步分析的手工计算中，可以认为$J$
+是一个相似性判定的参数，如果同一螺旋桨，工作在1状况$(v_1,n_1)$与2状况$(v_2,n_2)$，满足进动比相同，即
+$\frac{v_1}{n_1}=\frac{v_2}{n_2}$，则可以认为工作状况下的效率$\eta$、拉力系数$C_T$、功率系数$C_P$均相同。如果要估算某一工作状况
+$(v,n)$的工作参数，仅需先计算进动比$J=\frac{v}{nD}$，然后查找对应进动比的相关$\eta,C_T\text{和}C_P$，然后按照式(\ref{basics})
+计算拉力、转矩、效率与功率。
+<img src="http://localhost:4000/assets//blog_images/fig1.png" width="350px" height="200px" />
+实际上，由于低雷诺数的影响，对于进动比相同的两种工作状况，$\eta,C_T\text{和}C_P$并不一定对应相等。通常高雷诺数的工作状况下螺旋桨的工作效率更高。</p>
+<h3 id="电源模型">电源模型</h3>
+<p>通常，无人机上使用的电源为蓄电池。蓄电池电源的伏安特性关系为：
+\begin{equation} \label{eqs:src1}
+U=U_0-Ir_0 <br />
+\end{equation}
+其中$r_0$为蓄电池内阻。
+ 对于太阳能无人机，通常是太阳能电池直接为蓄电池充电，由蓄电池驱动直流电机，那么电机两端的电压电流关系满足式(\ref{eqs:src1}).而若太阳能无人机有特殊的要求(如某些太阳能飞机竞赛),那么设计的飞机会是太阳能电池片组直接为动力系统供电。太阳能电池片组的伏安特性关系为
+\begin{equation}\label{solar_array} 
+I=I_{sc}[1-A(e^{U/BU_{oc}})-1]
+\end{equation}
+其中，<script type="math/tex">A=(1-\frac{I_m}{I_{sc}})e^{-U_m/(BU_{oc})}</script><br />
+<script type="math/tex">B=(\frac{U_m}{U_{oc}}-1)[\ln(1-\frac{I_m}{I_{sc}})]</script><br />
+$I_{sc}$为电池组的短路电流;<br />
+$U_{oc}$为电池组的开路电压;<br />
+$U_m,I_m$为最大功率点处的太阳能电池的输出电压与电流.</p>
+
+<h3 id="综合模型及其求解">综合模型及其求解</h3>
+<p>已知飞机的飞行速度$v$，无刷电机的$K_v$值，内阻$r_a$与10V下空载电流$i_0$，以及螺旋桨对应的性能数据，则利用电机转矩等于螺旋桨转矩的关系，求解在电压与电流下的转速$n$，其它参数则可对应求解。电源的电压和电流可以符合某种伏安特性曲线,如式(\ref{eqs:src1})、(\ref{solar_array})，求解过程则为弦截法对转速迭代求解。电源也可能是具有限流或限压值，也可以给出电源电压与电流的上限，求解时取转速上限恰好同时满足不超过电源电压与电流的上限。</p>
+<h3 id="非平凡模型">非平凡模型</h3>
+<h4 id="引入减速组">引入减速组</h4>
+<p>设减速组减速比为$K$，机械效率为$\eta_g$，则有<br />
+<script type="math/tex">\begin{equation}
+\left\{
+\begin{array}{l}
+n_{prop}=\frac{n_{mot}}{K}\\
+T_{prop}=K\cdot T_{mot}\cdot\eta_g
+\end{array}
+\right.
+\end{equation}</script><br />
+考虑$\eta_g=1$的理想减速器，与电机形成的系统可以等效为一个$K_v$值折合为原电机$K_v$值$\frac{1}{K}$
+的新电机。通常高效率螺旋桨的特征都是低负载、大直径、大桨距（相对于直径）、低速运行，所以为了动力系统的效率最大化应该用大直径螺旋桨。由于带动大直径螺旋桨所需的转矩大，如果需要使电机工作在最大电流以下，可以使用减速组或使用低$K_v$值的电机。然而低$K_v$值得电机内阻会比高$K_v$值得电机内阻大，使用减速组会有机械能损失。而且大直径螺旋桨的重量大，且能驱动大直径螺旋桨的电机或减速器通常重量也较大。故具体应选用的方案，应考虑效率、重量、成本、加工装配难度等多方面考虑。</p>
+
+<h4 id="单电机驱动两个螺旋桨">单电机驱动两个螺旋桨</h4>
+<p>在这种情况下，有<br />
+<script type="math/tex">\begin{equation} \label{eqs:12} \tag{c}
+\left\{
+\begin{array}{l}
+n_{prop}=n_{mot}\\
+M_{prop}=\frac{M_{mot}}{2}
+\end{array}
+\right.
+\end{equation}</script>
+求解上式则可以求出电机的转速。双电机驱动单螺旋桨及其它类似情况可以按照类似的方法列出公式求解。</p>
+<h3 id="内燃机的特性">内燃机的特性</h3>
+<p>无人机上使用的内燃机通常可分为两行程发动机和四行程发动机。两行程发动机与四行程发动机相比，优点是功率大，可动零件少，维护简便，价格便宜；缺点是油料燃烧不充分，燃料消耗大。两行程发动机还有两个显著特点：</p>
+<ul>
+  <li>使用这类发动机的无人机，爬升时经常可以听到转速明显下降的声音，俯冲时可以明显听到转速明显升高的声音，原因是这种发动机的扭矩小，对负载的变化较敏感。为了减小这种影响，两行程发动机一般使用大直径小桨距螺旋桨。</li>
+  <li>两行程发动机转速普遍较高，也只有在高速下才能发挥出全部功率，所以厂家提供的功率数据也是要达到一定转速。二行程发动机最大的缺点是油门非线性。</li>
+</ul>
+
+<p>四行程发动机的优点是油门线性好，扭矩大，转速稳定，声音柔和，可以使用大桨距的螺旋桨，提高效率。四行程发动机工作室燃料燃烧充分。无人机爬升时，转速稳定、爬升有力、声音无变化。而四行程的缺点是价格昂贵，重量较大，维护不便。同样的工作容积，普通的四行程发动机输出功率理论上只有两行程发动机的一半，但是实际上不同于二行程发动机，四行程发动机的最大输出功率是在一般使用中可以达到要求的转速范围内的。<br />
+由参考文献,对于高亚音速的飞机，内燃机的功率会随着速度的增加而增大；而对于大多数慢速飞机，内燃机的功率可以认为不变。大多数无人机的巡航速度下发动机的功率可以认为近似不变，那么对应其最大输出功率、最大输出转矩，通常需要一个合适的转速，否则发动机性能无法得到最大发挥。</p>
+
+<hr />
+<p>由于博文过长会导致浏览器加载、渲染速度降低，故后续讨论请看下一篇文章。</p>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 无人机 </tag>
+        
+          <tag> 安卓开发 </tag>
+        
+          <tag> Qt </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Download this Theme]]></title>
+      <url>/2017/06/24/download-this-theme/</url>
+      <content type="html"><![CDATA[<p><strong><em>Fork</em></strong> or <strong><em>download</em></strong> the theme <a href="https://github.com/Jackpon/Jackpon.github.io">here on GitHub</a>.</p>
+]]></content>
+      <categories>
+        
+      </categories>
+      <tags>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+</search>
