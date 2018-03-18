@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-18T11:05:53+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">在手机上绘制根轨迹</title><link href="http://localhost:4000/programming/2017/11/15/easyauto/" rel="alternate" type="text/html" title="在手机上绘制根轨迹" /><published>2017-11-15T00:00:00+08:00</published><updated>2017-11-15T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/11/15/easyauto</id><content type="html" xml:base="http://localhost:4000/programming/2017/11/15/easyauto/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-18T12:03:08+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">在手机上绘制根轨迹</title><link href="http://localhost:4000/programming/2017/11/15/easyauto/" rel="alternate" type="text/html" title="在手机上绘制根轨迹" /><published>2017-11-15T00:00:00+08:00</published><updated>2017-11-15T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/11/15/easyauto</id><content type="html" xml:base="http://localhost:4000/programming/2017/11/15/easyauto/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
   							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
      							   extensions: [&quot;AMSmath.js&quot;]}
@@ -15,15 +15,28 @@
 &lt;hr /&gt;
 
 &lt;h2 id=&quot;算法&quot;&gt;算法&lt;/h2&gt;
-&lt;h4 id=&quot;各种裕度的计算&quot;&gt;各种裕度的计算&lt;/h4&gt;
+&lt;h3 id=&quot;各种裕度的计算&quot;&gt;各种裕度的计算&lt;/h3&gt;
 &lt;p&gt;很简单，就是用弦截法计算各种穿越频率，然后计算裕度。具体的代码以及API设计可以见GitHub，不过弦截法
 需要给出猜测初值，在手机里这个程序也就只能在几个初值里面试，如果这个初值迭代不收敛就换另一个初值
 。目前的算法能够通过所有我写的测试用例，不过不知道是否有不对的情况。&lt;/p&gt;
-&lt;h4 id=&quot;与绘制各种根轨迹相关的算法&quot;&gt;与绘制各种根轨迹相关的算法&lt;/h4&gt;
-&lt;h5 id=&quot;多项式求根算法&quot;&gt;多项式求根算法&lt;/h5&gt;
-&lt;p&gt;非常美妙的事情是，NDK虽然是个大坑，不过Eigen库还是能够使用的。&lt;/p&gt;
-&lt;h5 id=&quot;排序算法&quot;&gt;排序算法&lt;/h5&gt;
-&lt;p&gt;这个没有想到更好的点子，实现的算法复杂度为$O(n^2)$，但是在手机上没有卡过，代码如下：&lt;/p&gt;
+&lt;h3 id=&quot;与绘制各种根轨迹相关的算法&quot;&gt;与绘制各种根轨迹相关的算法&lt;/h3&gt;
+&lt;h4 id=&quot;多项式求根算法&quot;&gt;多项式求根算法&lt;/h4&gt;
+&lt;p&gt;非常美妙的事情是，NDK虽然是个大坑，不过Eigen库还是能够使用的。
+多项式的求根可以转化为它的companion matrix的特征值问题来求解：$p(t)=c_{0}+c_{1}t+\cdots +c_t^+t^{n}$的companion matrix是&lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{equation} \tag{a}
+C(p)=\begin{bmatrix}
+0 &amp; 0 &amp; \dots &amp; 0 &amp; -c_{0}\\
+1 &amp; 0 &amp; \dots &amp; 0 &amp; -c_{1}\\
+0 &amp; 1 &amp; \dots &amp; 0 &amp; -c_{2}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+0 &amp; 0 &amp; \dots &amp; 1 &amp; -c_{n-1}
+\end{bmatrix}
+\end{equation} %]]&gt;&lt;/script&gt;
+这样就可以将多项式求根问题转化为矩阵的特征值问题，然后利用Eigen库求解。&lt;/p&gt;
+&lt;h4 id=&quot;排序算法&quot;&gt;排序算法&lt;/h4&gt;
+&lt;p&gt;由于Eigen求出特征值是无序的，而绘图时是按照方程的根的离散点连线绘制，因此可能会造成各条轨迹交织的情况。为了避免这种情况，需要对根进行排序，即这组点到上组点的距离分别最近进行排序。
+这个没有想到更好的点子，实现的算法复杂度为$O(n^2)$，但是在手机上没有卡过，代码如下：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-C++&quot;&gt;for(int i=0; i&amp;lt;matsz; ++i){
     std::swap(res[i],*std::min_element(res.begin()+i,res.end(),
@@ -34,7 +47,7 @@
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&quot;计算响应的算法&quot;&gt;计算响应的算法&lt;/h4&gt;
+&lt;h3 id=&quot;计算响应的算法&quot;&gt;计算响应的算法&lt;/h3&gt;
 &lt;p&gt;这个一开始想用矩阵的幂来进行计算，但是发现许多时候线性系统的$\mathbf{A}$矩阵都是奇异的，没办法，
 还是只能用RK45算法，好在现在手机处理器性能很强，没有任何卡的迹象&lt;/p&gt;
 
@@ -60,21 +73,21 @@
 
 &lt;h2 id=&quot;功能介绍&quot;&gt;功能介绍&lt;/h2&gt;
 &lt;p&gt;程序分为PC版和移动（安卓）版，主要以介绍PC版为主。PC版共有两个程序：DemoProp，用于计算无刷电机动力系统的工作状况并给出一定的建议；PropChart，用于计算电动和油动动力系统的工作状况并绘制图表。&lt;/p&gt;
-&lt;h4 id=&quot;筛选功能&quot;&gt;筛选功能&lt;/h4&gt;
+&lt;h3 id=&quot;筛选功能&quot;&gt;筛选功能&lt;/h3&gt;
 &lt;p&gt;程序可以对给定的工作状况下的符合要求（如拉力、效率等条件）的螺旋桨进行筛选。DemoProp的筛选界面如下图所示，可以输入电机、电源、减速组等相关信息。
 &lt;img src=&quot;http://localhost:4000/assets//blog_images/fig2.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
 PropChart的筛选界面如下图所示，这里运用的模型是给定转速或者给定输入功率，这样就既能够用于求解电动系统的工作状况，也适用于求解油动系统的工作状况。
 &lt;img src=&quot;http://localhost:4000/assets//blog_images/fig4.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;分析功能&quot;&gt;分析功能&lt;/h4&gt;
+&lt;h3 id=&quot;分析功能&quot;&gt;分析功能&lt;/h3&gt;
 &lt;p&gt;DemoProp能够对具体的电动系统选配提出指导意见，可以判断当前电机、电源、螺旋桨、减速组的组合究竟是轻载、超载还是正常载荷，如下图所示。
 &lt;img src=&quot;http://localhost:4000/assets//blog_images/fig3.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;图表功能&quot;&gt;图表功能&lt;/h4&gt;
+&lt;h3 id=&quot;图表功能&quot;&gt;图表功能&lt;/h3&gt;
 &lt;p&gt;PropChart能够绘制螺旋桨的拉力曲线、效率曲线等等，这里我用的是QCustomPlot进行绘制，如下图所示。
 &lt;img src=&quot;http://localhost:4000/assets//blog_images/fig5.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;移动版&quot;&gt;移动版&lt;/h4&gt;
+&lt;h3 id=&quot;移动版&quot;&gt;移动版&lt;/h3&gt;
 &lt;p&gt;一直苦于在室外进行动力试验的时候，不方便将测量的数据与仿真数据进行校对、不知道动力系统应该怎么调整。感谢伟大的Qt的跨平台特性，让我能够将程序移植到安卓系统上（实际上移植到iOS上也可以，不过就是我没有苹果电脑与手机），极大地方便了在外场的实验。针对手机的一些特点，在功能上进行了一些改进，例如取消筛选功能，并增加绘制能量分析饼图的功能。手机版的交互体验应该比电脑版的好太多了。截图如下：
 &lt;img src=&quot;http://localhost:4000/assets//blog_images/scr1.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
 &lt;img src=&quot;http://localhost:4000/assets//blog_images/scr3.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
