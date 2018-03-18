@@ -429,14 +429,14 @@ C(p)=\begin{bmatrix}
 <p>由于Eigen求出特征值是无序的，而绘图时是按照方程的根的离散点连线绘制，因此可能会造成各条轨迹交织的情况。为了避免这种情况，需要对根进行排序，即这组点到上组点的距离分别最近进行排序。
 这个没有想到更好的点子，实现的算法复杂度为$O(n^2)$，但是在手机上没有卡过，代码如下：</p>
 
-<pre><code class="language-C++">for(int i = 0; i &lt; matsz; ++i){
-    std::swap(res[i], *std::min_element(res.begin() + i,res.end(),
-    [&amp;i](std::complex&lt;double&gt; &amp;a, std::complex&lt;double&gt; &amp;b)   
-    // static variables don't need to be captured
-    {return norm(a - pre[i]) &lt; norm(b - pre[i]);}));
-    pre[i] = res[i];
-}
-</code></pre>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">matsz</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">){</span>
+ <span class="err"> </span> <span class="err"> </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">min_element</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span><span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
+ <span class="err"> </span> <span class="err"> </span><span class="p">[</span><span class="o">&amp;</span><span class="n">i</span><span class="p">](</span><span class="n">std</span><span class="o">::</span><span class="n">complex</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">complex</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="err"> </span> 
+ <span class="err"> </span> <span class="err"> </span><span class="c1">// static variables don't need to be captured
+</span>    <span class="p">{</span><span class="k">return</span> <span class="n">norm</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">norm</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]);}));</span>
+ <span class="err">  </span> <span class="n">pre</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h3 id="计算响应的算法">计算响应的算法</h3>
 <p>这个一开始想用矩阵的幂来进行计算，但是发现许多时候线性系统的$\mathbf{A}$矩阵都是奇异的，没办法，
@@ -446,63 +446,68 @@ C(p)=\begin{bmatrix}
 <p>为了让用户能够有更好的交互体验，设计的输入格式比较宽送。处理用户输入用了Boost::tokenizer库，这是
 一个Header-only的库，不需要编译（当然我也自己编译了Boost库，除了Math库编译不了，别的都可以编译，
 具体能不能用还没有认真试过）。NDK真的是一个大坑，GOOGLE官方对GCC值支持到GCC4.9，然而Qt for Android是GCC编译的，而GCC4.9对C++14支持不全不说，有的C++11的东西都没法用，比如std::stod,std::to_string，所以先自己实现一个。。。</p>
-<pre><code class="language-C++">#ifdef FOR_MOBILE
-namespace std {
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifdef FOR_MOBILE
+</span><span class="k">namespace</span> <span class="n">std</span> <span class="p">{</span>
 
-    template &lt;typename T&gt;
-    std::string to_string(T value)
-    {
-        std::ostringstream os ;
-        os &lt;&lt; value ;
-        return os.str() ;
-    }
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string</span><span class="p">(</span><span class="n">T</span> <span class="n">value</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span> <span class="n">os</span> <span class="p">;</span>
+        <span class="n">os</span> <span class="o">&lt;&lt;</span> <span class="n">value</span> <span class="p">;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="p">.</span><span class="n">str</span><span class="p">()</span> <span class="p">;</span>
+    <span class="p">}</span>
 
-    //template &lt;typename T&gt;
-    double stod(const std::string&amp; str)
-    {
-        double res;
-        std::istringstream ( str ) &gt;&gt; res;
-        return res;
-    }
+    <span class="c1">//template &lt;typename T&gt;
+</span>    <span class="kt">double</span> <span class="n">stod</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">str</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">double</span> <span class="n">res</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="p">(</span> <span class="n">str</span> <span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
 
-}
-#endif
-</code></pre>
+<span class="p">}</span>
+<span class="cp">#endif
+</span></code></pre></div></div>
 <p>用户的输入可以是这样的格式：“1 2 3 * -3 1 * 2,-1<em>2,-1 0”，</em>是各个相乘多项式之间的分隔符, 而空白和英文逗号可以作为多项式中各个系数
  之间的分隔符，表示的多项式就是(s<sup>2</sup>+2s+3)(-3s+1)(2s-1)(2s<sup>2</sup>-s).于是采用Boost::tokenizer将字符串进行两层分割：第一层是乘法运算符*，第二层则是空格和英文逗号。</p>
-<pre><code class="language-C++"> #include &lt;boost/tokenizer.hpp&gt;
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#include &lt;boost/tokenizer.hpp&gt;
+</span>
+ <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">poly</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">myString</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span> <span class="n">sep</span><span class="p">(</span><span class="s">" ,"</span><span class="p">);</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">tokenizer</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">tok</span><span class="p">(</span><span class="n">myString</span><span class="p">,</span><span class="n">sep</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">tokenizer</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;::</span><span class="n">iterator</span> <span class="n">beg</span><span class="o">=</span><span class="n">tok</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">beg</span><span class="o">!=</span><span class="n">tok</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="o">++</span><span class="n">beg</span><span class="p">){</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">stod</span><span class="p">(</span><span class="o">*</span><span class="n">beg</span><span class="p">));</span>
+    <span class="p">}</span>
 
- std::vector&lt;double&gt; poly(const std::string &amp;myString)
-{
-    std::vector&lt;double&gt; res;
-    boost::char_separator&lt;char&gt; sep(" ,");
-    boost::tokenizer&lt;boost::char_separator&lt;char&gt;&gt; tok(myString,sep);
-    for(boost::tokenizer&lt;boost::char_separator&lt;char&gt;&gt;::iterator beg=tok.begin(); beg!=tok.end();++beg){
-        res.push_back(std::stod(*beg));
-    }
+    <span class="n">std</span><span class="o">::</span><span class="n">reverse</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
 
-    std::reverse(res.begin(),res.end());
-    return res;
-}
+ <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">polyFromRawText</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">rawText</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">res</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span> <span class="n">sep</span><span class="p">(</span><span class="s">"*"</span><span class="p">);</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">tokenizer</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">tok</span><span class="p">(</span><span class="n">rawText</span><span class="p">,</span><span class="n">sep</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">tokenizer</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;::</span><span class="n">iterator</span> <span class="n">beg</span><span class="o">=</span><span class="n">tok</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">beg</span><span class="o">!=</span><span class="n">tok</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="o">++</span><span class="n">beg</span><span class="p">){</span>
+        <span class="k">auto</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">poly</span><span class="p">(</span><span class="o">*</span><span class="n">beg</span><span class="p">);</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">convolution</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">vec</span><span class="p">);</span>
+    <span class="p">}</span>
 
- std::vector&lt;double&gt; polyFromRawText(const std::string&amp; rawText)
-{
-    std::vector&lt;double&gt; res = {1};
-    boost::char_separator&lt;char&gt; sep("*");
-    boost::tokenizer&lt;boost::char_separator&lt;char&gt;&gt; tok(rawText,sep);
-    for(boost::tokenizer&lt;boost::char_separator&lt;char&gt;&gt;::iterator beg=tok.begin(); beg!=tok.end();++beg){
-        auto vec = poly(*beg);
-        res = convolution(res,vec);
-    }
-
-    return res;
-}
-</code></pre>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 <p>这段代码的作用是将用户输入分割，并且返回成一个多项式。在这里我自己实现了一个多项式的std::vector<double>用来表示多项式的系数，并实现乘法运算convolution，并且在线性系统的类中也有两个多项式成员：传递函数的分子和分母。  
  实际上使用Boost::tokenizer是一种比较简单可行的方式，也可以用Boost::splitter或者用正则表达式匹配甚至直接自己写一个简单parser都可以实现功能。</double></p>
+
+<h2 id="多项式的富文本输出">多项式的富文本输出</h2>
+<p>为了让用户直观地知道输入的格式代表的多项式，应该在QLabel中将多项式以富文本的形式输出，而且应该同时输出多项式相乘和多项式展开的形式，这里多项式输出时为了追求完美，符合平时的习惯，应该特别注意系数为0,1以及正负号的问题。具体代码太长，见GitHub仓库。</p>
+
 <h2 id="其他">其他</h2>
 <ul>
   <li>这个APP的创意出自我的室友，他觉得每次做完自动控制原理的题之后又要打开电脑开MATLAB去检验非常麻烦，这个APP就能够解决这样的问题</li>
+  <li>APP中绘制根轨迹的增益K是用户输入的，而且绘图时是从0到K线性地取1000个点进行计算绘制，这样的效果并不一定是最好的。在MATLAB中绘制根轨迹的增益取值算法值得借鉴</li>
   <li>本来用的是QCustomPlot来绘制曲线的，结果这个东西在手机上的渲染效果很差，于是改成了
 QtCharts，发现这个模块优点很多，而且在手机上显示的效果很好</li>
   <li>虽然GOOGLE的NDK非常坑，不过有一个替代方案据说还是不错的：Crystax NDK，不过自从2017年就没有发布新版本了，社区也不太活跃（GitHub上的代码倒还在改）</li>
@@ -744,7 +749,7 @@ QtCharts，发现这个模块优点很多，而且在手机上显示的效果很
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#算法"> <span class="nav-number">1</span> <span class="nav-text">算法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#各种裕度的计算"> <span class="nav-number">1.1</span> <span class="nav-text">各种裕度的计算</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#与绘制各种根轨迹相关的算法"> <span class="nav-number">1.2</span> <span class="nav-text">与绘制各种根轨迹相关的算法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-4"> <a class="nav-link" href="#多项式求根算法"> <span class="nav-number">1.2.1</span> <span class="nav-text">多项式求根算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#排序算法"> <span class="nav-number">1.2.2</span> <span class="nav-text">排序算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#计算响应的算法"> <span class="nav-number">1.3</span> <span class="nav-text">计算响应的算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#处理用户输入"> <span class="nav-number">2</span> <span class="nav-text">处理用户输入</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#其他"> <span class="nav-number">3</span> <span class="nav-text">其他</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#算法"> <span class="nav-number">1</span> <span class="nav-text">算法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#各种裕度的计算"> <span class="nav-number">1.1</span> <span class="nav-text">各种裕度的计算</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#与绘制各种根轨迹相关的算法"> <span class="nav-number">1.2</span> <span class="nav-text">与绘制各种根轨迹相关的算法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-4"> <a class="nav-link" href="#多项式求根算法"> <span class="nav-number">1.2.1</span> <span class="nav-text">多项式求根算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#排序算法"> <span class="nav-number">1.2.2</span> <span class="nav-text">排序算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#计算响应的算法"> <span class="nav-number">1.3</span> <span class="nav-text">计算响应的算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#处理用户输入"> <span class="nav-number">2</span> <span class="nav-text">处理用户输入</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#多项式的富文本输出"> <span class="nav-number">3</span> <span class="nav-text">多项式的富文本输出</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#其他"> <span class="nav-number">4</span> <span class="nav-text">其他</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
     </ol>
   </div>
             

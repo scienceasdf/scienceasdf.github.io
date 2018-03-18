@@ -139,6 +139,6 @@ $$
 由参考文献,对于高亚音速的飞机，内燃机的功率会随着速度的增加而增大；而对于大多数慢速飞机，内燃机的功率可以认为不变。大多数无人机的巡航速度下发动机的功率可以认为近似不变，那么对应其最大输出功率、最大输出转矩，通常需要一个合适的转速，否则发动机性能无法得到最大发挥。
 
 ---
-安卓版程序下载地址：https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg  
-Windows版程序下载地址（32位）：https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA  
+[安卓版程序下载地址](https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg)  
+[Windows版程序下载地址（32位](https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA)
 由于博文过长会导致浏览器加载、渲染速度降低，故后续讨论请看下一篇文章。  

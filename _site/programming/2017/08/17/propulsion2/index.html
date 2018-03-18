@@ -435,15 +435,20 @@ PropChart的筛选界面如下图所示，这里运用的模型是给定转速�
 <img src="http://localhost:4000/assets//blog_images/scr1.png" width="350px" height="200px" />
 <img src="http://localhost:4000/assets//blog_images/scr3.png" width="350px" height="200px" />
 <img src="http://localhost:4000/assets//blog_images/scr2.png" width="350px" height="200px" /></p>
-
+<h2 id="数据验证">数据验证</h2>
+<h3 id="静拉力实测数据验证">静拉力实测数据验证</h3>
+<p>测试仿APC12X6E螺旋桨,飓风2820电机，$K_v=920$
+，内阻28mOhm，静拉力1.7千克力，电流47-48安，转速8300RPM。仿真结果为静拉力2.3千克力，转速8830RPM。考虑到APC官网的数据本来比实际值偏高（参考文献的风洞实验数据有验证），误差与使用偏高值以及没有使用正品APC螺旋桨有关。</p>
+<h3 id="应用于太阳能飞机动力系统的例子">应用于太阳能飞机动力系统的例子</h3>
+<p>某翼展为5米的太阳能无人机，没有储能装置，太阳能提供动力系统的所有能量。机翼上的电池片大约提供110瓦电能。实验测试测得电池片能够提供的电压大约不超过13V，电流不超过8A。最早使用KV值1000的电机驱动20英寸的自制螺旋桨，静拉力输出很难超过1千克力。换用340KV电机带20英寸以上的木桨，静拉力能够超过10千克力。经计算表明，电机KV值在200附近时驱动20$\sim$22英寸螺旋桨能够有更高效率，换用200KV螺旋桨，以及APC22X10E的螺旋桨，静拉力为1.35千克力。</p>
 <h2 id="存在的问题">存在的问题</h2>
 <ul>
   <li>筛选功能卡在IO上比较耗时间。当然，MSVC编译的程序能够明显快于MINGW编译的程序。解决方法有很多，只是我不想去重构了</li>
   <li>电脑版的交互体验非常差</li>
   <li>
     <h2 id="电脑版没有对ui进行多分辨率的调整">电脑版没有对UI进行多分辨率的调整</h2>
-    <p>安卓版程序下载地址：https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg<br />
-Windows版程序下载地址（32位）：https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA</p>
+    <p><a href="https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg">安卓版程序下载地址</a><br />
+<a href="https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA">Windows版程序下载地址（32位</a></p>
   </li>
 </ul>
 
@@ -687,7 +692,7 @@ Windows版程序下载地址（32位）：https://pan.baidu.com/s/1W5DtxZFxC6Smj
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#数据来源"> <span class="nav-number">1</span> <span class="nav-text">数据来源</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#功能介绍"> <span class="nav-number">2</span> <span class="nav-text">功能介绍</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#筛选功能"> <span class="nav-number">2.1</span> <span class="nav-text">筛选功能</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#分析功能"> <span class="nav-number">2.2</span> <span class="nav-text">分析功能</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#图表功能"> <span class="nav-number">2.3</span> <span class="nav-text">图表功能</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#移动版"> <span class="nav-number">2.4</span> <span class="nav-text">移动版</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#存在的问题"> <span class="nav-number">3</span> <span class="nav-text">存在的问题</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#电脑版没有对ui进行多分辨率的调整"> <span class="nav-number">4</span> <span class="nav-text">电脑版没有对UI进行多分辨率的调整</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#数据来源"> <span class="nav-number">1</span> <span class="nav-text">数据来源</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#功能介绍"> <span class="nav-number">2</span> <span class="nav-text">功能介绍</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#筛选功能"> <span class="nav-number">2.1</span> <span class="nav-text">筛选功能</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#分析功能"> <span class="nav-number">2.2</span> <span class="nav-text">分析功能</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#图表功能"> <span class="nav-number">2.3</span> <span class="nav-text">图表功能</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#移动版"> <span class="nav-number">2.4</span> <span class="nav-text">移动版</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#数据验证"> <span class="nav-number">3</span> <span class="nav-text">数据验证</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#静拉力实测数据验证"> <span class="nav-number">3.1</span> <span class="nav-text">静拉力实测数据验证</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#应用于太阳能飞机动力系统的例子"> <span class="nav-number">3.2</span> <span class="nav-text">应用于太阳能飞机动力系统的例子</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#存在的问题"> <span class="nav-number">4</span> <span class="nav-text">存在的问题</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#电脑版没有对ui进行多分辨率的调整"> <span class="nav-number">5</span> <span class="nav-text">电脑版没有对UI进行多分辨率的调整</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
     </ol>
   </div>
             

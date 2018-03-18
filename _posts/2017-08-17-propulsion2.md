@@ -44,11 +44,16 @@ PropChart能够绘制螺旋桨的拉力曲线、效率曲线等等，这里我�
 <img src="{{ site.url }}/assets//blog_images/scr1.png" width="350px" height="200px"/>
 <img src="{{ site.url }}/assets//blog_images/scr3.png" width="350px" height="200px"/>
 <img src="{{ site.url }}/assets//blog_images/scr2.png" width="350px" height="200px"/>
-
+## 数据验证
+### 静拉力实测数据验证
+测试仿APC12X6E螺旋桨,飓风2820电机，$K_v=920$
+，内阻28mOhm，静拉力1.7千克力，电流47-48安，转速8300RPM。仿真结果为静拉力2.3千克力，转速8830RPM。考虑到APC官网的数据本来比实际值偏高（参考文献的风洞实验数据有验证），误差与使用偏高值以及没有使用正品APC螺旋桨有关。
+### 应用于太阳能飞机动力系统的例子
+某翼展为5米的太阳能无人机，没有储能装置，太阳能提供动力系统的所有能量。机翼上的电池片大约提供110瓦电能。实验测试测得电池片能够提供的电压大约不超过13V，电流不超过8A。最早使用KV值1000的电机驱动20英寸的自制螺旋桨，静拉力输出很难超过1千克力。换用340KV电机带20英寸以上的木桨，静拉力能够超过10千克力。经计算表明，电机KV值在200附近时驱动20$\sim$22英寸螺旋桨能够有更高效率，换用200KV螺旋桨，以及APC22X10E的螺旋桨，静拉力为1.35千克力。
 ## 存在的问题
 * 筛选功能卡在IO上比较耗时间。当然，MSVC编译的程序能够明显快于MINGW编译的程序。解决方法有很多，只是我不想去重构了  
 * 电脑版的交互体验非常差
 * 电脑版没有对UI进行多分辨率的调整
 --- 
-安卓版程序下载地址：https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg  
-Windows版程序下载地址（32位）：https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA  
+[安卓版程序下载地址](https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg)  
+[Windows版程序下载地址（32位](https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA)

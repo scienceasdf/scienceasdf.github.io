@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-18T14:07:47+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">在手机上绘制根轨迹</title><link href="http://localhost:4000/programming/2017/11/15/easyauto/" rel="alternate" type="text/html" title="在手机上绘制根轨迹" /><published>2017-11-15T00:00:00+08:00</published><updated>2017-11-15T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/11/15/easyauto</id><content type="html" xml:base="http://localhost:4000/programming/2017/11/15/easyauto/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-18T14:54:53+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">在手机上绘制根轨迹</title><link href="http://localhost:4000/programming/2017/11/15/easyauto/" rel="alternate" type="text/html" title="在手机上绘制根轨迹" /><published>2017-11-15T00:00:00+08:00</published><updated>2017-11-15T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/11/15/easyauto</id><content type="html" xml:base="http://localhost:4000/programming/2017/11/15/easyauto/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
   							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
      							   extensions: [&quot;AMSmath.js&quot;]}
@@ -38,14 +38,14 @@ C(p)=\begin{bmatrix}
 &lt;p&gt;由于Eigen求出特征值是无序的，而绘图时是按照方程的根的离散点连线绘制，因此可能会造成各条轨迹交织的情况。为了避免这种情况，需要对根进行排序，即这组点到上组点的距离分别最近进行排序。
 这个没有想到更好的点子，实现的算法复杂度为$O(n^2)$，但是在手机上没有卡过，代码如下：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-C++&quot;&gt;for(int i = 0; i &amp;lt; matsz; ++i){
-    std::swap(res[i], *std::min_element(res.begin() + i,res.end(),
-    [&amp;amp;i](std::complex&amp;lt;double&amp;gt; &amp;amp;a, std::complex&amp;lt;double&amp;gt; &amp;amp;b)   
-    // static variables don't need to be captured
-    {return norm(a - pre[i]) &amp;lt; norm(b - pre[i]);}));
-    pre[i] = res[i];
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;matsz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;swap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;min_element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;](&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;complex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;complex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; 
+ &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// static variables don't need to be captured
+&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;norm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pre&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;norm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pre&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);}));&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;  &lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pre&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;计算响应的算法&quot;&gt;计算响应的算法&lt;/h3&gt;
 &lt;p&gt;这个一开始想用矩阵的幂来进行计算，但是发现许多时候线性系统的$\mathbf{A}$矩阵都是奇异的，没办法，
@@ -55,63 +55,68 @@ C(p)=\begin{bmatrix}
 &lt;p&gt;为了让用户能够有更好的交互体验，设计的输入格式比较宽送。处理用户输入用了Boost::tokenizer库，这是
 一个Header-only的库，不需要编译（当然我也自己编译了Boost库，除了Math库编译不了，别的都可以编译，
 具体能不能用还没有认真试过）。NDK真的是一个大坑，GOOGLE官方对GCC值支持到GCC4.9，然而Qt for Android是GCC编译的，而GCC4.9对C++14支持不全不说，有的C++11的东西都没法用，比如std::stod,std::to_string，所以先自己实现一个。。。&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-C++&quot;&gt;#ifdef FOR_MOBILE
-namespace std {
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#ifdef FOR_MOBILE
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 
-    template &amp;lt;typename T&amp;gt;
-    std::string to_string(T value)
-    {
-        std::ostringstream os ;
-        os &amp;lt;&amp;lt; value ;
-        return os.str() ;
-    }
+    &lt;span class=&quot;k&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typename&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ostringstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-    //template &amp;lt;typename T&amp;gt;
-    double stod(const std::string&amp;amp; str)
-    {
-        double res;
-        std::istringstream ( str ) &amp;gt;&amp;gt; res;
-        return res;
-    }
+    &lt;span class=&quot;c1&quot;&gt;//template &amp;lt;typename T&amp;gt;
+&lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istringstream&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-}
-#endif
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#endif
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;用户的输入可以是这样的格式：“1 2 3 * -3 1 * 2,-1&lt;em&gt;2,-1 0”，&lt;/em&gt;是各个相乘多项式之间的分隔符, 而空白和英文逗号可以作为多项式中各个系数
  之间的分隔符，表示的多项式就是(s&lt;sup&gt;2&lt;/sup&gt;+2s+3)(-3s+1)(2s-1)(2s&lt;sup&gt;2&lt;/sup&gt;-s).于是采用Boost::tokenizer将字符串进行两层分割：第一层是乘法运算符*，第二层则是空格和英文逗号。&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-C++&quot;&gt; #include &amp;lt;boost/tokenizer.hpp&amp;gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;cp&quot;&gt;#include &amp;lt;boost/tokenizer.hpp&amp;gt;
+&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;poly&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;boost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char_separator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; ,&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;boost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tokenizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char_separator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tokenizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char_separator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iterator&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;push_back&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
- std::vector&amp;lt;double&amp;gt; poly(const std::string &amp;amp;myString)
-{
-    std::vector&amp;lt;double&amp;gt; res;
-    boost::char_separator&amp;lt;char&amp;gt; sep(&quot; ,&quot;);
-    boost::tokenizer&amp;lt;boost::char_separator&amp;lt;char&amp;gt;&amp;gt; tok(myString,sep);
-    for(boost::tokenizer&amp;lt;boost::char_separator&amp;lt;char&amp;gt;&amp;gt;::iterator beg=tok.begin(); beg!=tok.end();++beg){
-        res.push_back(std::stod(*beg));
-    }
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reverse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-    std::reverse(res.begin(),res.end());
-    return res;
-}
+ &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;polyFromRawText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rawText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;boost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char_separator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;boost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tokenizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char_separator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rawText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tokenizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char_separator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iterator&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vec&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;poly&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;convolution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
- std::vector&amp;lt;double&amp;gt; polyFromRawText(const std::string&amp;amp; rawText)
-{
-    std::vector&amp;lt;double&amp;gt; res = {1};
-    boost::char_separator&amp;lt;char&amp;gt; sep(&quot;*&quot;);
-    boost::tokenizer&amp;lt;boost::char_separator&amp;lt;char&amp;gt;&amp;gt; tok(rawText,sep);
-    for(boost::tokenizer&amp;lt;boost::char_separator&amp;lt;char&amp;gt;&amp;gt;::iterator beg=tok.begin(); beg!=tok.end();++beg){
-        auto vec = poly(*beg);
-        res = convolution(res,vec);
-    }
-
-    return res;
-}
-&lt;/code&gt;&lt;/pre&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;这段代码的作用是将用户输入分割，并且返回成一个多项式。在这里我自己实现了一个多项式的std::vector&lt;double&gt;用来表示多项式的系数，并实现乘法运算convolution，并且在线性系统的类中也有两个多项式成员：传递函数的分子和分母。  
  实际上使用Boost::tokenizer是一种比较简单可行的方式，也可以用Boost::splitter或者用正则表达式匹配甚至直接自己写一个简单parser都可以实现功能。&lt;/double&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;多项式的富文本输出&quot;&gt;多项式的富文本输出&lt;/h2&gt;
+&lt;p&gt;为了让用户直观地知道输入的格式代表的多项式，应该在QLabel中将多项式以富文本的形式输出，而且应该同时输出多项式相乘和多项式展开的形式，这里多项式输出时为了追求完美，符合平时的习惯，应该特别注意系数为0,1以及正负号的问题。具体代码太长，见GitHub仓库。&lt;/p&gt;
+
 &lt;h2 id=&quot;其他&quot;&gt;其他&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;这个APP的创意出自我的室友，他觉得每次做完自动控制原理的题之后又要打开电脑开MATLAB去检验非常麻烦，这个APP就能够解决这样的问题&lt;/li&gt;
+  &lt;li&gt;APP中绘制根轨迹的增益K是用户输入的，而且绘图时是从0到K线性地取1000个点进行计算绘制，这样的效果并不一定是最好的。在MATLAB中绘制根轨迹的增益取值算法值得借鉴&lt;/li&gt;
   &lt;li&gt;本来用的是QCustomPlot来绘制曲线的，结果这个东西在手机上的渲染效果很差，于是改成了
 QtCharts，发现这个模块优点很多，而且在手机上显示的效果很好&lt;/li&gt;
   &lt;li&gt;虽然GOOGLE的NDK非常坑，不过有一个替代方案据说还是不错的：Crystax NDK，不过自从2017年就没有发布新版本了，社区也不太活跃（GitHub上的代码倒还在改）&lt;/li&gt;
@@ -153,15 +158,20 @@ PropChart的筛选界面如下图所示，这里运用的模型是给定转速�
 &lt;img src=&quot;http://localhost:4000/assets//blog_images/scr1.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
 &lt;img src=&quot;http://localhost:4000/assets//blog_images/scr3.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
 &lt;img src=&quot;http://localhost:4000/assets//blog_images/scr2.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;&lt;/p&gt;
-
+&lt;h2 id=&quot;数据验证&quot;&gt;数据验证&lt;/h2&gt;
+&lt;h3 id=&quot;静拉力实测数据验证&quot;&gt;静拉力实测数据验证&lt;/h3&gt;
+&lt;p&gt;测试仿APC12X6E螺旋桨,飓风2820电机，$K_v=920$
+，内阻28mOhm，静拉力1.7千克力，电流47-48安，转速8300RPM。仿真结果为静拉力2.3千克力，转速8830RPM。考虑到APC官网的数据本来比实际值偏高（参考文献的风洞实验数据有验证），误差与使用偏高值以及没有使用正品APC螺旋桨有关。&lt;/p&gt;
+&lt;h3 id=&quot;应用于太阳能飞机动力系统的例子&quot;&gt;应用于太阳能飞机动力系统的例子&lt;/h3&gt;
+&lt;p&gt;某翼展为5米的太阳能无人机，没有储能装置，太阳能提供动力系统的所有能量。机翼上的电池片大约提供110瓦电能。实验测试测得电池片能够提供的电压大约不超过13V，电流不超过8A。最早使用KV值1000的电机驱动20英寸的自制螺旋桨，静拉力输出很难超过1千克力。换用340KV电机带20英寸以上的木桨，静拉力能够超过10千克力。经计算表明，电机KV值在200附近时驱动20$\sim$22英寸螺旋桨能够有更高效率，换用200KV螺旋桨，以及APC22X10E的螺旋桨，静拉力为1.35千克力。&lt;/p&gt;
 &lt;h2 id=&quot;存在的问题&quot;&gt;存在的问题&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;筛选功能卡在IO上比较耗时间。当然，MSVC编译的程序能够明显快于MINGW编译的程序。解决方法有很多，只是我不想去重构了&lt;/li&gt;
   &lt;li&gt;电脑版的交互体验非常差&lt;/li&gt;
   &lt;li&gt;
     &lt;h2 id=&quot;电脑版没有对ui进行多分辨率的调整&quot;&gt;电脑版没有对UI进行多分辨率的调整&lt;/h2&gt;
-    &lt;p&gt;安卓版程序下载地址：https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg&lt;br /&gt;
-Windows版程序下载地址（32位）：https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg&quot;&gt;安卓版程序下载地址&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA&quot;&gt;Windows版程序下载地址（32位&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;</content><author><name>scienceasdf</name></author><category term="无人机" /><category term="安卓开发" /><category term="Qt" /><summary type="html">探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。</summary></entry><entry><title type="html">浅谈螺旋桨航模（无人机）的动力系统选配（一）</title><link href="http://localhost:4000/programming/2017/08/17/propulsion1/" rel="alternate" type="text/html" title="浅谈螺旋桨航模（无人机）的动力系统选配（一）" /><published>2017-08-17T00:00:00+08:00</published><updated>2017-08-17T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/08/17/propulsion1</id><content type="html" xml:base="http://localhost:4000/programming/2017/08/17/propulsion1/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -289,6 +299,6 @@ M_{prop}=\frac{M_{mot}}{2}
 由参考文献,对于高亚音速的飞机，内燃机的功率会随着速度的增加而增大；而对于大多数慢速飞机，内燃机的功率可以认为不变。大多数无人机的巡航速度下发动机的功率可以认为近似不变，那么对应其最大输出功率、最大输出转矩，通常需要一个合适的转速，否则发动机性能无法得到最大发挥。&lt;/p&gt;
 
 &lt;hr /&gt;
-&lt;p&gt;安卓版程序下载地址：https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg&lt;br /&gt;
-Windows版程序下载地址（32位）：https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA&lt;br /&gt;
+&lt;p&gt;&lt;a href=&quot;https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg&quot;&gt;安卓版程序下载地址&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA&quot;&gt;Windows版程序下载地址（32位&lt;/a&gt;
 由于博文过长会导致浏览器加载、渲染速度降低，故后续讨论请看下一篇文章。&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="无人机" /><category term="安卓开发" /><category term="Qt" /><summary type="html">探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。</summary></entry><entry><title type="html">Download this Theme</title><link href="http://localhost:4000/2017/06/24/download-this-theme/" rel="alternate" type="text/html" title="Download this Theme" /><published>2017-06-24T00:00:00+08:00</published><updated>2017-06-24T00:00:00+08:00</updated><id>http://localhost:4000/2017/06/24/download-this-theme</id><content type="html" xml:base="http://localhost:4000/2017/06/24/download-this-theme/">&lt;p&gt;&lt;strong&gt;&lt;em&gt;Fork&lt;/em&gt;&lt;/strong&gt; or &lt;strong&gt;&lt;em&gt;download&lt;/em&gt;&lt;/strong&gt; the theme &lt;a href=&quot;https://github.com/Jackpon/Jackpon.github.io&quot;&gt;here on GitHub&lt;/a&gt;.&lt;/p&gt;</content><author><name>scienceasdf</name></author><summary type="html">Fork or download the theme here on GitHub.</summary></entry></feed>
