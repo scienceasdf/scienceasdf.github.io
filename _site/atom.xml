@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-18T15:19:24+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">在手机上绘制根轨迹</title><link href="http://localhost:4000/programming/2017/11/15/easyauto/" rel="alternate" type="text/html" title="在手机上绘制根轨迹" /><published>2017-11-15T00:00:00+08:00</published><updated>2017-11-15T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/11/15/easyauto</id><content type="html" xml:base="http://localhost:4000/programming/2017/11/15/easyauto/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-18T21:20:05+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">在手机上绘制根轨迹</title><link href="http://localhost:4000/programming/2017/11/15/easyauto/" rel="alternate" type="text/html" title="在手机上绘制根轨迹" /><published>2017-11-15T00:00:00+08:00</published><updated>2017-11-15T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/11/15/easyauto</id><content type="html" xml:base="http://localhost:4000/programming/2017/11/15/easyauto/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
   							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
      							   extensions: [&quot;AMSmath.js&quot;]}
@@ -123,7 +123,62 @@ C(p)=\begin{bmatrix}
   &lt;li&gt;本来用的是QCustomPlot来绘制曲线的，结果这个东西在手机上的渲染效果很差，于是改成了
 QtCharts，发现这个模块优点很多，而且在手机上显示的效果很好&lt;/li&gt;
   &lt;li&gt;虽然GOOGLE的NDK非常坑，不过有一个替代方案据说还是不错的：Crystax NDK，不过自从2017年就没有发布新版本了，社区也不太活跃（GitHub上的代码倒还在改）&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>scienceasdf</name></author><category term="自动控制" /><category term="安卓开发" /><category term="Qt" /><summary type="html">写了一个能够绘制线性系统根轨迹、响应曲线、计算幅值裕度、相位裕度等的手机APP。下载地址在文末。</summary></entry><entry><title type="html">浅谈螺旋桨航模（无人机）的动力系统选配（二）</title><link href="http://localhost:4000/programming/2017/08/17/propulsion2/" rel="alternate" type="text/html" title="浅谈螺旋桨航模（无人机）的动力系统选配（二）" /><published>2017-08-17T00:00:00+08:00</published><updated>2017-08-17T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/08/17/propulsion2</id><content type="html" xml:base="http://localhost:4000/programming/2017/08/17/propulsion2/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+&lt;/ul&gt;</content><author><name>scienceasdf</name></author><category term="自动控制" /><category term="安卓开发" /><category term="Qt" /><summary type="html">写了一个能够绘制线性系统根轨迹、响应曲线、计算幅值裕度、相位裕度等的手机APP。下载地址在文末。</summary></entry><entry><title type="html">太阳高度角与方位角的计算</title><link href="http://localhost:4000/programming/2017/10/22/soalrAngle/" rel="alternate" type="text/html" title="太阳高度角与方位角的计算" /><published>2017-10-22T00:00:00+08:00</published><updated>2017-10-22T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/10/22/soalrAngle</id><content type="html" xml:base="http://localhost:4000/programming/2017/10/22/soalrAngle/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
+     							   extensions: [&quot;AMSmath.js&quot;]}
+  		});
+		&lt;/script&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;strong&gt;探讨太阳高度角与方位角的计算，并写了个手机程序用于计算此时此刻此地（也可以是任意时刻，任意地点）的太阳高度角与方位角.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;本文公式较多，在浏览器中将会花较长时间用于渲染公式。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;基本算法&quot;&gt;基本算法&lt;/h2&gt;
+&lt;p&gt;就是一大堆玄学（或者叫天文学）的概念了。&lt;/p&gt;
+&lt;h3 id=&quot;当地正午时间&quot;&gt;当地正午时间&lt;/h3&gt;
+&lt;p&gt;给定经度$\Phi$（都假设是东经，主要研究中国国土范围内的问题），那么当地的正午时间在北京时间下的时间可以表示成：（这个感觉用代码比公式更加直观）&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;timeType&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getNoonTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;longitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// assume in the eastern semi-sphere
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// expressed in UTC+8 time
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;//longtitude expressed in degrees
+&lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;static_cast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;120.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;timeType&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;太阳时角&quot;&gt;太阳时角&lt;/h3&gt;
+&lt;p&gt;太阳时角是指日面中心的时角，即从观测点天球子午圈沿天赤道量至太阳所在时圈的角距离。计算公式为
+\begin{equation}
+h=15(ST-12)
+\end{eqaution}
+$ST$为真太阳时。然而平常我们通常都使用北京时间，因此太阳时角的计算公式如下：（还是代码比公式直观）&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getHourAngle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;longitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// The results return the angle expressed in degrees
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// also UTC+8
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;timeType&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getNoonTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;.25&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;太阳赤纬&quot;&gt;太阳赤纬&lt;/h3&gt;
+&lt;p&gt;太阳赤纬，是地球赤道平面与太阳和地球中心的连线之间的夹角。赤纬角以年为周期，在+23 °26′与-23 °26′的范围内移动，成为季节的标志。最简单的方法是将
+赤纬的变化考虑为线性变化。在一篇参考文献上，给出了更为近似的计算方式：按照三角函数变化规律计算。我在这里也按照这种方式计算。而百度百科还给出了一
+个更加精确的公式:
+\begin{equation}
+\delta=0.006918-0.399912 \cos (b)+0.070257 \sin (b)-0.006758 \cos (2b)+ \&lt;br /&gt;
+0.000907\sin (2b)-0.002697\cos (3b)+0.00148\sin (3b)
+\end{equation}
+其中$\delta$的单位为度(deg)；$\pi$=3.1415926为圆周率；$b=2\pi (N-1)/365$，单位为弧度；$N$为日数，自每年1月1日开始计算。&lt;br /&gt;
+有空去把程序改成这个公式再去跑跑。&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="天文" /><category term="安卓开发" /><category term="Qt" /><summary type="html">探讨太阳高度角与方位角的计算，并写了个手机程序用于计算此时此刻此地（也可以是任意时刻，任意地点）的太阳高度角与方位角.</summary></entry><entry><title type="html">浅谈螺旋桨航模（无人机）的动力系统选配（二）</title><link href="http://localhost:4000/programming/2017/08/17/propulsion2/" rel="alternate" type="text/html" title="浅谈螺旋桨航模（无人机）的动力系统选配（二）" /><published>2017-08-17T00:00:00+08:00</published><updated>2017-08-17T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/08/17/propulsion2</id><content type="html" xml:base="http://localhost:4000/programming/2017/08/17/propulsion2/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
   							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
      							   extensions: [&quot;AMSmath.js&quot;]}

@@ -149,6 +149,83 @@ QtCharts，发现这个模块优点很多，而且在手机上显示的效果很
     </entry>
   
     <entry>
+      <title><![CDATA[太阳高度角与方位角的计算]]></title>
+      <url>/programming/2017/10/22/soalrAngle/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>探讨太阳高度角与方位角的计算，并写了个手机程序用于计算此时此刻此地（也可以是任意时刻，任意地点）的太阳高度角与方位角.</strong></p>
+
+<hr />
+<p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
+
+<hr />
+
+<h2 id="基本算法">基本算法</h2>
+<p>就是一大堆玄学（或者叫天文学）的概念了。</p>
+<h3 id="当地正午时间">当地正午时间</h3>
+<p>给定经度$\Phi$（都假设是东经，主要研究中国国土范围内的问题），那么当地的正午时间在北京时间下的时间可以表示成：（这个感觉用代码比公式更加直观）</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">timeType</span> <span class="nf">getNoonTime</span><span class="p">(</span><span class="kt">double</span> <span class="n">longitude</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// assume in the eastern semi-sphere
+</span>    <span class="c1">// expressed in UTC+8 time
+</span>    <span class="c1">//longtitude expressed in degrees
+</span>    <span class="kt">int</span> <span class="n">dt</span><span class="o">=</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="mf">120.0</span><span class="o">-</span><span class="n">longitude</span><span class="p">));</span>
+    <span class="n">timeType</span> <span class="n">t1</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">t1</span><span class="o">+=</span><span class="n">dt</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">t1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h3 id="太阳时角">太阳时角</h3>
+<p>太阳时角是指日面中心的时角，即从观测点天球子午圈沿天赤道量至太阳所在时圈的角距离。计算公式为
+\begin{equation}
+h=15(ST-12)
+\end{eqaution}
+$ST$为真太阳时。然而平常我们通常都使用北京时间，因此太阳时角的计算公式如下：（还是代码比公式直观）</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf">getHourAngle</span><span class="p">(</span><span class="kt">double</span> <span class="n">longitude</span><span class="p">,</span> <span class="k">const</span> <span class="n">timeType</span><span class="o">&amp;</span> <span class="n">t1</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// The results return the angle expressed in degrees
+</span>    <span class="c1">// also UTC+8
+</span>    <span class="n">timeType</span> <span class="n">t2</span><span class="o">=</span><span class="n">getNoonTime</span><span class="p">(</span><span class="n">longitude</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">dt</span><span class="o">=</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mf">.25</span><span class="o">*</span><span class="n">dt</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<h3 id="太阳赤纬">太阳赤纬</h3>
+<p>太阳赤纬，是地球赤道平面与太阳和地球中心的连线之间的夹角。赤纬角以年为周期，在+23 °26′与-23 °26′的范围内移动，成为季节的标志。最简单的方法是将
+赤纬的变化考虑为线性变化。在一篇参考文献上，给出了更为近似的计算方式：按照三角函数变化规律计算。我在这里也按照这种方式计算。而百度百科还给出了一
+个更加精确的公式:
+\begin{equation}
+\delta=0.006918-0.399912 \cos (b)+0.070257 \sin (b)-0.006758 \cos (2b)+ \<br />
+0.000907\sin (2b)-0.002697\cos (3b)+0.00148\sin (3b)
+\end{equation}
+其中$\delta$的单位为度(deg)；$\pi$=3.1415926为圆周率；$b=2\pi (N-1)/365$，单位为弧度；$N$为日数，自每年1月1日开始计算。<br />
+有空去把程序改成这个公式再去跑跑。</p>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 天文 </tag>
+        
+          <tag> 安卓开发 </tag>
+        
+          <tag> Qt </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[浅谈螺旋桨航模（无人机）的动力系统选配（二）]]></title>
       <url>/programming/2017/08/17/propulsion2/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">
