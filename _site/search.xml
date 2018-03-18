@@ -44,11 +44,11 @@ C(p)=\begin{bmatrix}
 <p>由于Eigen求出特征值是无序的，而绘图时是按照方程的根的离散点连线绘制，因此可能会造成各条轨迹交织的情况。为了避免这种情况，需要对根进行排序，即这组点到上组点的距离分别最近进行排序。
 这个没有想到更好的点子，实现的算法复杂度为$O(n^2)$，但是在手机上没有卡过，代码如下：</p>
 
-<pre><code class="language-C++">for(int i=0; i&lt;matsz; ++i){
-    std::swap(res[i],*std::min_element(res.begin()+i,res.end(),
+<pre><code class="language-C++">for(int i = 0; i &lt; matsz; ++i){
+    std::swap(res[i], *std::min_element(res.begin() + i,res.end(),
     [&amp;i](std::complex&lt;double&gt; &amp;a, std::complex&lt;double&gt; &amp;b)   
     // static variables don't need to be captured
-    {return norm(a-pre[i]) &lt; norm(b-pre[i]);}));
+    {return norm(a - pre[i]) &lt; norm(b - pre[i]);}));
     pre[i] = res[i];
 }
 </code></pre>
@@ -60,8 +60,61 @@ C(p)=\begin{bmatrix}
 <h2 id="处理用户输入">处理用户输入</h2>
 <p>为了让用户能够有更好的交互体验，设计的输入格式比较宽送。处理用户输入用了Boost::tokenizer库，这是
 一个Header-only的库，不需要编译（当然我也自己编译了Boost库，除了Math库编译不了，别的都可以编译，
-具体能不能用还没有认真试过）。NDK真的是一个大坑，GOOGLE官方对GCC值支持到GCC4.9，然而Qt for Android是GCC编译的，而GCC4.9对C++14支持不全不说，有的C++11的东西都没法用，比如std::itoa。。。</p>
+具体能不能用还没有认真试过）。NDK真的是一个大坑，GOOGLE官方对GCC值支持到GCC4.9，然而Qt for Android是GCC编译的，而GCC4.9对C++14支持不全不说，有的C++11的东西都没法用，比如std::stod,std::to_string，所以先自己实现一个。。。</p>
+<pre><code class="language-C++">#ifdef FOR_MOBILE
+namespace std {
 
+    template &lt;typename T&gt;
+    std::string to_string(T value)
+    {
+        std::ostringstream os ;
+        os &lt;&lt; value ;
+        return os.str() ;
+    }
+
+    //template &lt;typename T&gt;
+    double stod(const std::string&amp; str)
+    {
+        double res;
+        std::istringstream ( str ) &gt;&gt; res;
+        return res;
+    }
+
+}
+#endif
+</code></pre>
+<p>用户的输入可以是这样的格式：“1 2 3 * -3 1 * 2,-1<em>2,-1 0”，</em>是各个相乘多项式之间的分隔符, 而空白和英文逗号可以作为多项式中各个系数
+ 之间的分隔符，表示的多项式就是(s<sup>2</sup>+2s+3)(-3s+1)(2s-1)(2s<sup>2</sup>-s).于是采用Boost::tokenizer将字符串进行两层分割：第一层是乘法运算符*，第二层则是空格和英文逗号。</p>
+<pre><code class="language-C++"> #include &lt;boost/tokenizer.hpp&gt;
+
+ std::vector&lt;double&gt; poly(const std::string &amp;myString)
+{
+    std::vector&lt;double&gt; res;
+    boost::char_separator&lt;char&gt; sep(" ,");
+    boost::tokenizer&lt;boost::char_separator&lt;char&gt;&gt; tok(myString,sep);
+    for(boost::tokenizer&lt;boost::char_separator&lt;char&gt;&gt;::iterator beg=tok.begin(); beg!=tok.end();++beg){
+        res.push_back(std::stod(*beg));
+    }
+
+    std::reverse(res.begin(),res.end());
+    return res;
+}
+
+ std::vector&lt;double&gt; polyFromRawText(const std::string&amp; rawText)
+{
+    std::vector&lt;double&gt; res = {1};
+    boost::char_separator&lt;char&gt; sep("*");
+    boost::tokenizer&lt;boost::char_separator&lt;char&gt;&gt; tok(rawText,sep);
+    for(boost::tokenizer&lt;boost::char_separator&lt;char&gt;&gt;::iterator beg=tok.begin(); beg!=tok.end();++beg){
+        auto vec = poly(*beg);
+        res = convolution(res,vec);
+    }
+
+    return res;
+}
+</code></pre>
+<p>这段代码的作用是将用户输入分割，并且返回成一个多项式。在这里我自己实现了一个多项式的std::vector<double>用来表示多项式的系数，并实现乘法运算convolution，并且在线性系统的类中也有两个多项式成员：传递函数的分子和分母。  
+ 实际上使用Boost::tokenizer是一种比较简单可行的方式，也可以用Boost::splitter或者用正则表达式匹配甚至直接自己写一个简单parser都可以实现功能。</double></p>
 <h2 id="其他">其他</h2>
 <ul>
   <li>这个APP的创意出自我的室友，他觉得每次做完自动控制原理的题之后又要打开电脑开MATLAB去检验非常麻烦，这个APP就能够解决这样的问题</li>
