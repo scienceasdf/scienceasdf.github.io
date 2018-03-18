@@ -83,7 +83,7 @@ C(p)=\begin{bmatrix}
 <span class="p">}</span>
 <span class="cp">#endif
 </span></code></pre></div></div>
-<p>用户的输入可以是这样的格式：“1 2 3 * -3 1 * 2,-1<em>2,-1 0”，</em>是各个相乘多项式之间的分隔符, 而空白和英文逗号可以作为多项式中各个系数
+<p>用户的输入可以是这样的格式：“1 2 3 * -3 1 * 2,-1*2,-1 0”，通常用户的输入都是以各个零极点为根的多项式之积，*是各个相乘多项式之间的分隔符, 而空白和英文逗号可以作为多项式中各个系数
  之间的分隔符，表示的多项式就是(s<sup>2</sup>+2s+3)(-3s+1)(2s-1)(2s<sup>2</sup>-s).于是采用Boost::tokenizer将字符串进行两层分割：第一层是乘法运算符*，第二层则是空格和英文逗号。</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#include &lt;boost/tokenizer.hpp&gt;
 </span>
@@ -117,8 +117,11 @@ C(p)=\begin{bmatrix}
  实际上使用Boost::tokenizer是一种比较简单可行的方式，也可以用Boost::splitter或者用正则表达式匹配甚至直接自己写一个简单parser都可以实现功能。</double></p>
 
 <h2 id="多项式的富文本输出">多项式的富文本输出</h2>
-<p>为了让用户直观地知道输入的格式代表的多项式，应该在QLabel中将多项式以富文本的形式输出，而且应该同时输出多项式相乘和多项式展开的形式，这里多项式输出时为了追求完美，符合平时的习惯，应该特别注意系数为0,1以及正负号的问题。具体代码太长，见GitHub仓库。</p>
-
+<p>为了让用户直观地知道输入的格式代表的多项式，应该在QLabel中将多项式以富文本的形式输出，而且应该<em>同时输出多项式相乘和多项式展开的形式</em>，这里多项式输出时为了追求完美，符合平时的习惯，应该特别注意系数为0,1以及正负号的问题。具体代码太长，见GitHub仓库。</p>
+<h2 id="截图">截图</h2>
+<p><img src="http://localhost:4000/assets//blog_images/shot1.png" width="350px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/shot2.png" width="350px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/shot3.png" width="350px" height="200px" /></p>
 <h2 id="其他">其他</h2>
 <ul>
   <li>这个APP的创意出自我的室友，他觉得每次做完自动控制原理的题之后又要打开电脑开MATLAB去检验非常麻烦，这个APP就能够解决这样的问题</li>
@@ -183,9 +186,9 @@ PropChart的筛选界面如下图所示，这里运用的模型是给定转速�
 
 <h3 id="移动版">移动版</h3>
 <p>一直苦于在室外进行动力试验的时候，不方便将测量的数据与仿真数据进行校对、不知道动力系统应该怎么调整。感谢伟大的Qt的跨平台特性，让我能够将程序移植到安卓系统上（实际上移植到iOS上也可以，不过就是我没有苹果电脑与手机），极大地方便了在外场的实验。针对手机的一些特点，在功能上进行了一些改进，例如取消筛选功能，并增加绘制能量分析饼图的功能。手机版的交互体验应该比电脑版的好太多了。截图如下：
-<img src="http://localhost:4000/assets//blog_images/scr1.png" width="350px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/scr2.png" width="350px" height="200px" />
 <img src="http://localhost:4000/assets//blog_images/scr3.png" width="350px" height="200px" />
-<img src="http://localhost:4000/assets//blog_images/scr2.png" width="350px" height="200px" /></p>
+<img src="http://localhost:4000/assets//blog_images/scr1.png" width="350px" height="200px" /></p>
 <h2 id="数据验证">数据验证</h2>
 <h3 id="静拉力实测数据验证">静拉力实测数据验证</h3>
 <p>测试仿APC12X6E螺旋桨,飓风2820电机，$K_v=920$

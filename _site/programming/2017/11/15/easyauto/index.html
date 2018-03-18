@@ -119,10 +119,14 @@
 <meta property="og:site_name" content="scienceasdf">
 <meta property="og:description" content="写了一个能够绘制线性系统根轨迹、响应曲线、计算幅值裕度、相位裕度等的手机APP。下载地址在文末。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/shot1.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/shot2.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/shot3.png">
 <meta property="og:updated_time" content="2018-01-04T00:00:00+08:00">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在手机上绘制根轨迹">
 <meta name="twitter:description" content="写了一个能够绘制线性系统根轨迹、响应曲线、计算幅值裕度、相位裕度等的手机APP。下载地址在文末。">
+<meta name="twitter:image" content="http://localhost:4000/assets//blog_images/shot1.png">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -468,7 +472,7 @@ C(p)=\begin{bmatrix}
 <span class="p">}</span>
 <span class="cp">#endif
 </span></code></pre></div></div>
-<p>用户的输入可以是这样的格式：“1 2 3 * -3 1 * 2,-1<em>2,-1 0”，</em>是各个相乘多项式之间的分隔符, 而空白和英文逗号可以作为多项式中各个系数
+<p>用户的输入可以是这样的格式：“1 2 3 * -3 1 * 2,-1*2,-1 0”，通常用户的输入都是以各个零极点为根的多项式之积，*是各个相乘多项式之间的分隔符, 而空白和英文逗号可以作为多项式中各个系数
  之间的分隔符，表示的多项式就是(s<sup>2</sup>+2s+3)(-3s+1)(2s-1)(2s<sup>2</sup>-s).于是采用Boost::tokenizer将字符串进行两层分割：第一层是乘法运算符*，第二层则是空格和英文逗号。</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#include &lt;boost/tokenizer.hpp&gt;
 </span>
@@ -502,8 +506,11 @@ C(p)=\begin{bmatrix}
  实际上使用Boost::tokenizer是一种比较简单可行的方式，也可以用Boost::splitter或者用正则表达式匹配甚至直接自己写一个简单parser都可以实现功能。</double></p>
 
 <h2 id="多项式的富文本输出">多项式的富文本输出</h2>
-<p>为了让用户直观地知道输入的格式代表的多项式，应该在QLabel中将多项式以富文本的形式输出，而且应该同时输出多项式相乘和多项式展开的形式，这里多项式输出时为了追求完美，符合平时的习惯，应该特别注意系数为0,1以及正负号的问题。具体代码太长，见GitHub仓库。</p>
-
+<p>为了让用户直观地知道输入的格式代表的多项式，应该在QLabel中将多项式以富文本的形式输出，而且应该<em>同时输出多项式相乘和多项式展开的形式</em>，这里多项式输出时为了追求完美，符合平时的习惯，应该特别注意系数为0,1以及正负号的问题。具体代码太长，见GitHub仓库。</p>
+<h2 id="截图">截图</h2>
+<p><img src="http://localhost:4000/assets//blog_images/shot1.png" width="350px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/shot2.png" width="350px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/shot3.png" width="350px" height="200px" /></p>
 <h2 id="其他">其他</h2>
 <ul>
   <li>这个APP的创意出自我的室友，他觉得每次做完自动控制原理的题之后又要打开电脑开MATLAB去检验非常麻烦，这个APP就能够解决这样的问题</li>
@@ -749,7 +756,7 @@ QtCharts，发现这个模块优点很多，而且在手机上显示的效果很
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#算法"> <span class="nav-number">1</span> <span class="nav-text">算法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#各种裕度的计算"> <span class="nav-number">1.1</span> <span class="nav-text">各种裕度的计算</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#与绘制各种根轨迹相关的算法"> <span class="nav-number">1.2</span> <span class="nav-text">与绘制各种根轨迹相关的算法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-4"> <a class="nav-link" href="#多项式求根算法"> <span class="nav-number">1.2.1</span> <span class="nav-text">多项式求根算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#排序算法"> <span class="nav-number">1.2.2</span> <span class="nav-text">排序算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#计算响应的算法"> <span class="nav-number">1.3</span> <span class="nav-text">计算响应的算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#处理用户输入"> <span class="nav-number">2</span> <span class="nav-text">处理用户输入</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#多项式的富文本输出"> <span class="nav-number">3</span> <span class="nav-text">多项式的富文本输出</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#其他"> <span class="nav-number">4</span> <span class="nav-text">其他</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#算法"> <span class="nav-number">1</span> <span class="nav-text">算法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#各种裕度的计算"> <span class="nav-number">1.1</span> <span class="nav-text">各种裕度的计算</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#与绘制各种根轨迹相关的算法"> <span class="nav-number">1.2</span> <span class="nav-text">与绘制各种根轨迹相关的算法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-4"> <a class="nav-link" href="#多项式求根算法"> <span class="nav-number">1.2.1</span> <span class="nav-text">多项式求根算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#排序算法"> <span class="nav-number">1.2.2</span> <span class="nav-text">排序算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#计算响应的算法"> <span class="nav-number">1.3</span> <span class="nav-text">计算响应的算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#处理用户输入"> <span class="nav-number">2</span> <span class="nav-text">处理用户输入</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#多项式的富文本输出"> <span class="nav-number">3</span> <span class="nav-text">多项式的富文本输出</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#截图"> <span class="nav-number">4</span> <span class="nav-text">截图</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#其他"> <span class="nav-number">5</span> <span class="nav-text">其他</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
     </ol>
   </div>
             
