@@ -140,5 +140,5 @@ $$
 
 ---
 [安卓版程序下载地址](https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg)  
-[Windows版程序下载地址（32位](https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA)
+[Windows版程序下载地址（32位）](https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA)  
 由于博文过长会导致浏览器加载、渲染速度降低，故后续讨论请看下一篇文章。  

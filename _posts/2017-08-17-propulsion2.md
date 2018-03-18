@@ -56,4 +56,4 @@ PropChart能够绘制螺旋桨的拉力曲线、效率曲线等等，这里我�
 * 电脑版没有对UI进行多分辨率的调整
 --- 
 [安卓版程序下载地址](https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg)  
-[Windows版程序下载地址（32位](https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA)
+[Windows版程序下载地址（32位）](https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA)
