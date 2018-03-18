@@ -417,7 +417,7 @@
 <h3 id="与绘制各种根轨迹相关的算法">与绘制各种根轨迹相关的算法</h3>
 <h4 id="多项式求根算法">多项式求根算法</h4>
 <p>非常美妙的事情是，NDK虽然是个大坑，不过Eigen库还是能够使用的。
-多项式的求根可以转化为它的companion matrix的特征值问题来求解：$p(t)=c_{0}+c_{1}t+\cdots +c_t^+t^{n}$的companion matrix是<br />
+多项式的求根可以转化为它的companion matrix的特征值问题来求解：$p(t)=c_{0}+c_{1}t+\cdots +c_{n-1}t^{n-1}+t^{n}$的companion matrix是<br />
 <script type="math/tex">% <![CDATA[
 \begin{equation} \tag{a}
 C(p)=\begin{bmatrix}
