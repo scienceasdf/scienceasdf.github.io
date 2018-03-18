@@ -447,6 +447,14 @@ C(p)=\begin{bmatrix}
 一个Header-only的库，不需要编译（当然我也自己编译了Boost库，除了Math库编译不了，别的都可以编译，
 具体能不能用还没有认真试过）。NDK真的是一个大坑，GOOGLE官方对GCC值支持到GCC4.9，然而Qt for Android是GCC编译的，而GCC4.9对C++14支持不全不说，有的C++11的东西都没法用，比如std::itoa。。。</p>
 
+<h2 id="其他">其他</h2>
+<ul>
+  <li>这个APP的创意出自我的室友，他觉得每次做完自动控制原理的题之后又要打开电脑开MATLAB去检验非常麻烦，这个APP就能够解决这样的问题</li>
+  <li>本来用的是QCustomPlot来绘制曲线的，结果这个东西在手机上的渲染效果很差，于是改成了
+QtCharts，发现这个模块优点很多，而且在手机上显示的效果很好</li>
+  <li>虽然GOOGLE的NDK非常坑，不过有一个替代方案据说还是不错的：Crystax NDK，不过自从2017年就没有发布新版本了，社区也不太活跃（GitHub上的代码倒还在改）</li>
+</ul>
+
       
     </div>
 
@@ -683,7 +691,7 @@ C(p)=\begin{bmatrix}
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#算法"> <span class="nav-number">1</span> <span class="nav-text">算法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#各种裕度的计算"> <span class="nav-number">1.1</span> <span class="nav-text">各种裕度的计算</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#与绘制各种根轨迹相关的算法"> <span class="nav-number">1.2</span> <span class="nav-text">与绘制各种根轨迹相关的算法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-4"> <a class="nav-link" href="#多项式求根算法"> <span class="nav-number">1.2.1</span> <span class="nav-text">多项式求根算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#排序算法"> <span class="nav-number">1.2.2</span> <span class="nav-text">排序算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#计算响应的算法"> <span class="nav-number">1.3</span> <span class="nav-text">计算响应的算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#处理用户输入"> <span class="nav-number">2</span> <span class="nav-text">处理用户输入</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#算法"> <span class="nav-number">1</span> <span class="nav-text">算法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#各种裕度的计算"> <span class="nav-number">1.1</span> <span class="nav-text">各种裕度的计算</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#与绘制各种根轨迹相关的算法"> <span class="nav-number">1.2</span> <span class="nav-text">与绘制各种根轨迹相关的算法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-4"> <a class="nav-link" href="#多项式求根算法"> <span class="nav-number">1.2.1</span> <span class="nav-text">多项式求根算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#排序算法"> <span class="nav-number">1.2.2</span> <span class="nav-text">排序算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#计算响应的算法"> <span class="nav-number">1.3</span> <span class="nav-text">计算响应的算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#处理用户输入"> <span class="nav-number">2</span> <span class="nav-text">处理用户输入</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#其他"> <span class="nav-number">3</span> <span class="nav-text">其他</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
     </ol>
   </div>
             
