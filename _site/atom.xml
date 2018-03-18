@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-18T21:58:18+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">在手机上绘制根轨迹</title><link href="http://localhost:4000/programming/2017/11/15/easyauto/" rel="alternate" type="text/html" title="在手机上绘制根轨迹" /><published>2017-11-15T00:00:00+08:00</published><updated>2017-11-15T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/11/15/easyauto</id><content type="html" xml:base="http://localhost:4000/programming/2017/11/15/easyauto/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-18T22:34:57+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">在手机上绘制根轨迹</title><link href="http://localhost:4000/programming/2017/11/15/easyauto/" rel="alternate" type="text/html" title="在手机上绘制根轨迹" /><published>2017-11-15T00:00:00+08:00</published><updated>2017-11-15T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/11/15/easyauto</id><content type="html" xml:base="http://localhost:4000/programming/2017/11/15/easyauto/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
   							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
      							   extensions: [&quot;AMSmath.js&quot;]}
@@ -124,9 +124,31 @@ C(p)=\begin{bmatrix}
 QtCharts，发现这个模块优点很多，而且在手机上显示的效果很好&lt;/li&gt;
   &lt;li&gt;虽然GOOGLE的NDK非常坑，不过有一个替代方案据说还是不错的：Crystax NDK，不过自从2017年就没有发布新版本了，社区也不太活跃（GitHub上的代码倒还在改）&lt;/li&gt;
 &lt;/ul&gt;</content><author><name>scienceasdf</name></author><category term="自动控制" /><category term="安卓开发" /><category term="Qt" /><summary type="html">写了一个能够绘制线性系统根轨迹、响应曲线、计算幅值裕度、相位裕度等的手机APP。下载地址在文末。</summary></entry><entry><title type="html">太阳高度角与方位角的计算</title><link href="http://localhost:4000/programming/2017/10/22/soalrAngle/" rel="alternate" type="text/html" title="太阳高度角与方位角的计算" /><published>2017-10-22T00:00:00+08:00</published><updated>2017-10-22T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/10/22/soalrAngle</id><content type="html" xml:base="http://localhost:4000/programming/2017/10/22/soalrAngle/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
-  							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
-     							   extensions: [&quot;AMSmath.js&quot;]}
+  		MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']]
+            },
+  			TeX: { 
+                equationNumbers: {  
+                    autoNumber: &quot;AMS&quot;  
+                },
+     		    extensions: [&quot;AMSmath.js&quot;]
+            },
+            CommonHTML: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            &quot;HTML-CSS&quot;: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            SVG: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            }
   		});
 		&lt;/script&gt;
 
