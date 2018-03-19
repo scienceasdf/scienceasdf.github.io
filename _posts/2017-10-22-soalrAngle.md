@@ -9,31 +9,9 @@ tags:
 updated: 2017-10-22 
 ---
 <script type="text/x-mathjax-config">
-  		MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [['$','$'], ['\\(','\\)']]
-            },
-  			TeX: { 
-                equationNumbers: {  
-                    autoNumber: "AMS"  
-                },
-     		    extensions: ["AMSmath.js"]
-            },
-            CommonHTML: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            "HTML-CSS": { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            SVG: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            }
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
   		});
 		</script>
  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

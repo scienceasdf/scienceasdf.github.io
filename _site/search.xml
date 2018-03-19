@@ -152,31 +152,9 @@ QtCharts，发现这个模块优点很多，而且在手机上显示的效果很
       <title><![CDATA[太阳高度角与方位角的计算]]></title>
       <url>/programming/2017/10/22/soalrAngle/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">
-  		MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [['$','$'], ['\\(','\\)']]
-            },
-  			TeX: { 
-                equationNumbers: {  
-                    autoNumber: "AMS"  
-                },
-     		    extensions: ["AMSmath.js"]
-            },
-            CommonHTML: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            "HTML-CSS": { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            SVG: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            }
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
   		});
 		</script>
 
