@@ -68,7 +68,7 @@ svg:not(:root) { overflow: hidden; }
 
 /* Grouping content ========================================================================== */
 /** 1. Correct the inheritance and scaling of font size in all browsers. 2. Correct the odd `em` font sizing in all browsers. */
-code, kbd, pre, samp { font-family: Consolas,Consolas; /* 1 */ font-size: 1em; /* 2 */ }
+code, kbd, pre, samp { font-family: monospace, monospace; /* 1 */ font-size: 1em; /* 2 */ }
 
 /** Add the correct margin in IE 8. */
 figure { margin: 1em 40px; }
