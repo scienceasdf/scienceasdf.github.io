@@ -1,24 +1,10 @@
-
-<!doctype html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!DOCTYPE html>
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
@@ -28,8 +14,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +33,7 @@
 
   
   
-  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -70,7 +56,7 @@
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -78,23 +64,23 @@
 
 
 
-<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="兰彻斯特方程,蒙特卡洛方法,C语言,作战效能模拟," />
+<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="scienceasdf" type="application/atom+xml" />
+  <meta name="keywords" content="兰彻斯特方程,蒙特卡洛方法,C语言,作战效能模拟,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="scienceasdf" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1">
 
 
 
@@ -154,7 +140,7 @@
 
 
 
-  <link rel="canonical" href="http://localhost:4000/"/>
+  <link rel="canonical" href="http://localhost:4000/">
 
 
 
@@ -204,7 +190,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">scienceasdf</span>
         <span class="logo-line-after"><i></i></span>
@@ -236,7 +222,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -248,7 +234,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -260,7 +246,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -341,7 +327,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -427,24 +413,24 @@
 
 <p><strong>兰彻斯特方程作为一个连续函数的微分方程组，用于计算战场交换比。因为实际应用中双方单位数目为自然数，离散而不连续，所以编写了相应的程序使用蒙特卡洛方法以模拟计算游戏《红色警戒2》中坦克集群间交战的所有可能交换比和双方的获胜概率。通过计算，得到了一些可以修正兰彻斯特方程的结果，对指挥官的战前分析决策具有实际意义。</strong></p>
 
-<hr />
+<hr>
 <p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
 
-<hr />
+<hr>
 
 <h2 id="兰彻斯特方程">兰彻斯特方程</h2>
 <p>该理论于一战前期的1914年，由英国人弗雷德里克·威廉·兰彻斯特首先创立。
 它采用数学演绎战术原则，将数学与军事战术学结合起来。兰彻斯特最先提出了一个关于空战战术的尝试性数学模型，描述作战双方兵力变化过程的数学微分方程。
-这个理论属于确定性数学模型，一般认为可宏观地描述双方战斗的毁伤过程。常用于优选步兵作战兵力的投放、西方研究战争的定量、科学的常用方法。<br />
+这个理论属于确定性数学模型，一般认为可宏观地描述双方战斗的毁伤过程。常用于优选步兵作战兵力的投放、西方研究战争的定量、科学的常用方法。<br>
 在近代战斗条件下，红、蓝两军交战，双方各自装备同类武器，相互通视，并在武器射程范围内进行直接瞄准射击；双方每一战斗单位射击对方每一战斗单位的机会大致相同。将双方在战斗中尚存的战斗单位数作为连续的状态变量，以m(t)、n(t)表示在战斗开始后t时刻蓝方、红方在战斗中尚存的作战单位数，可用下列微分方程组来描述战斗过程中双方兵力随时间的损耗关系：
 \begin{equation}
 \frac{dm(t)}{dn(t)} = \frac{-\beta{n(t)}}{-\alpha{n(t)}}
 \end{equation}
-式中α、β分别为蓝方、红方在单位时间内每一战斗单位毁伤对方战斗单位的数目， 简称为蓝方、 红方的毁伤率系数。<br />
+式中α、β分别为蓝方、红方在单位时间内每一战斗单位毁伤对方战斗单位的数目， 简称为蓝方、 红方的毁伤率系数。<br>
 这是一个连续的方程，它的通解形式、它的实际意义，例如平方率、线性率什么的在网上均有大量论述，这里不再陈述。</p>
 
 <h2 id="红警的伤害机制">红警的伤害机制</h2>
-<p>《红色警戒》是一款经典的RTS游戏。我们可以研究红警中的伤害机制，并编写交战模拟平台的程序，从而验证兰彻斯特方程，为交战提供策略。红警作战主要以坦克战为主，因此我们这里的研究对象也就是坦克了。<br />
+<p>《红色警戒》是一款经典的RTS游戏。我们可以研究红警中的伤害机制，并编写交战模拟平台的程序，从而验证兰彻斯特方程，为交战提供策略。红警作战主要以坦克战为主，因此我们这里的研究对象也就是坦克了。<br>
 红警里面有一个Rulesmd.ini文件，用来定义单位的各种属性。红警中坦克分为轻甲、中甲和重甲。武器对对方的伤害是<strong><em>杀伤力乘上对这种装甲的伤害系数</em></strong>。坦克在受到攻击后，血条便减少相应的伤害值。此外，我们在模拟平台中还要体现装弹间隔时间。红警里面部分单位还有自动回血能力，例如天启坦克、基洛夫空艇、武装采矿车等。这里以对战中的头号杀器：犀牛坦克为例，列举这些属性的值：</p>
 <ul>
   <li>制造成本：900</li>
@@ -452,9 +438,10 @@
   <li>对轻甲、中甲、重甲的伤害分别为：75%，100%，100%</li>
   <li>体力：400</li>
   <li>装弹间隔时间：65</li>
-  <li>不具有自动回血能力<br />
+  <li>不具有自动回血能力<br>
 编写如下的代码：
-    <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">TANK</span>
+    <div class="language-c++ highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">TANK</span>
 <span class="p">{</span>
   <span class="kt">int</span> <span class="n">life</span><span class="p">;</span>
   <span class="kt">int</span> <span class="n">atk</span><span class="p">;</span>  <span class="c1">//攻击力
@@ -474,10 +461,10 @@
 <p>剩下的就是编写程序模拟作战过程了。以一个循环的计数器作为时间线，坦克在最初随意地寻找攻击目标，在锁定目标之后便每间隔一次装填时间完成一次对目标的进攻（以及每经过一次回血周期便恢复一定的血量）。在红警中可能会出现许多个坦克攻击同一辆坦克，导致坦克在毁灭的时刻遭受了远远大于其残余血量的伤害，这个在模拟中也要得到体现。因此，临死一击以及临死所受伤害是一个相对不太好处理的地方。程序里把常见的八种坦克的数据收录进去：灰熊坦克、犀牛坦克、天启坦克、幻影坦克、光棱坦克、遥控坦克、坦克杀手，用户不用手动输入坦克的属性。根据蒙特卡洛方法的思想，对作战过程总共进行1500次模拟。</p>
 
 <p>程序运行的截图如下所示：
-<img src="http://localhost:4000/assets//blog_images/tank1.png" width="450px" height="200px" />
-<img src="http://localhost:4000/assets//blog_images/tank2.png" width="450px" height="200px" />
-<img src="http://localhost:4000/assets//blog_images/tank3.png" width="450px" height="200px" />
-<img src="http://localhost:4000/assets//blog_images/tank4.png" width="450px" height="200px" /><br />
+<img src="http://localhost:4000/assets//blog_images/tank1.png" width="450px" height="200px">
+<img src="http://localhost:4000/assets//blog_images/tank2.png" width="450px" height="200px">
+<img src="http://localhost:4000/assets//blog_images/tank3.png" width="450px" height="200px">
+<img src="http://localhost:4000/assets//blog_images/tank4.png" width="450px" height="200px"><br>
 又比如，模拟结果显示，在理想条件下，30辆犀牛坦克（红军）与25辆坦克杀手（蓝军）交战的结果为</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>交换比：  
 最高1.25  
@@ -506,7 +493,8 @@
   <li>这里没有考虑兵种配合的问题。如在坦克阵中假如与之配合的步兵（尤其是反坦克步兵），则既能吸引敌方火力向步兵开火，又能给以敌方杀伤</li>
   <li>作为一个资深红警玩家<strong><em>（2017年更新，早就不玩了）</em></strong>，也知道这个模拟平台还是有不完善的地方。在真实的红警坦克战里，如果考虑操作，那么坦克攻击范围、移动速度、炮塔转动角度、是否能够移动攻击都会造成非常大的影响，更不用提什么分兵战术、迂回战术等。而且这里没有考虑到作战单位升级的情况</li>
   <li>事实上，对于真正的坦克战而言，机动性、射程、移动攻击能力、阵型、布坦协同都是十分重要的，而我的程序模拟的是定点攻击，这实际上与火炮别无两样。坦克需要发挥其阵型冲锋、冲锋打散阵型、移动攻击等机动性优势，例如犀牛坦克常常强势冲锋等战术，这是程序无法模拟的。因此，程序仅仅能提供一个基本的战术参考，这替代不了指挥官的战术决策</li>
-  <li>2017年更新：现在看自己以前写的代码感觉是真的丑陋，不过这也说明了自己的代码水平还是有一丢丢进步的:grin:</li>
+  <li>2017年更新：现在看自己以前写的代码感觉是真的丑陋，不过这也说明了自己的代码水平还是有一丢丢进步的<img class="emoji" title=":grin:" alt=":grin:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f601.png" height="20" width="20">
+</li>
 </ul>
 
       
@@ -629,7 +617,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -640,9 +628,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/assets/images/avatar.png"
-               alt="scienceasdf" />
+          <img class="site-author-image" itemprop="image" src="/assets/images/avatar.png" alt="scienceasdf">
           <p class="site-author-name" itemprop="name">scienceasdf</p>
            
               <p class="site-description motion-element" itemprop="description">We will bury them !</p>
@@ -751,10 +737,23 @@
 
             
               <div class="post-toc-content">
-    <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#兰彻斯特方程"> <span class="nav-number">1</span> <span class="nav-text">兰彻斯特方程</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#红警的伤害机制"> <span class="nav-number">2</span> <span class="nav-text">红警的伤害机制</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#总结"> <span class="nav-number">3</span> <span class="nav-text">总结</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+    <ol class="nav">
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#%E5%85%B0%E5%BD%BB%E6%96%AF%E7%89%B9%E6%96%B9%E7%A8%8B"> <span class="nav-number">1</span> <span class="nav-text">兰彻斯特方程</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</ol>
+</li>
+</ol>     <li class="nav-item nav-level-2"> <a class="nav-link" href="#%E7%BA%A2%E8%AD%A6%E7%9A%84%E4%BC%A4%E5%AE%B3%E6%9C%BA%E5%88%B6"> <span class="nav-number">2</span> <span class="nav-text">红警的伤害机制</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</ol>
+</li>     <li class="nav-item nav-level-2"> <a class="nav-link" href="#%E6%80%BB%E7%BB%93"> <span class="nav-number">3</span> <span class="nav-text">总结</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
     </ol>
-  </div>
+  </ol>
+</ol>
+</ol>
+</li>
+</div>
             
 
           </div>
@@ -773,9 +772,9 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
-  &copy;  2017 - 
+  ©  2017 - 
   <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -981,4 +980,3 @@
 
 </body>
 </html>
-
