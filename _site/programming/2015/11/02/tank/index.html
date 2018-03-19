@@ -1,0 +1,984 @@
+
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="兰彻斯特方程,蒙特卡洛方法,C语言,作战效能模拟," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="scienceasdf" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="兰彻斯特方程作为一个连续函数的微分方程组，用于计算战场交换比。因为实际应用中双方单位数目为自然数，离散而不连续，所以编写了相应的程序使用蒙特卡洛方法以模拟计算游戏《红色警戒2》中坦克集群间交战的所有可能交换比和双方的获胜概率。通过计算，得到了一些可以修正兰彻斯特方程的结果，对指挥官的战前分析决策具有实际意义。">
+<meta name="keywords" content="兰彻斯特方程, 蒙特卡洛方法, C语言, 作战效能模拟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="红警坦克作战效能模拟平台">
+<meta property="og:url" content="http://localhost:4000/programming/2015/11/02/tank/">
+<meta property="og:site_name" content="scienceasdf">
+<meta property="og:description" content="兰彻斯特方程作为一个连续函数的微分方程组，用于计算战场交换比。因为实际应用中双方单位数目为自然数，离散而不连续，所以编写了相应的程序使用蒙特卡洛方法以模拟计算游戏《红色警戒2》中坦克集群间交战的所有可能交换比和双方的获胜概率。通过计算，得到了一些可以修正兰彻斯特方程的结果，对指挥官的战前分析决策具有实际意义。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/tank1.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/tank2.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/tank3.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/tank4.png">
+<meta property="og:updated_time" content="2017-05-22T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="红警坦克作战效能模拟平台">
+<meta name="twitter:description" content="兰彻斯特方程作为一个连续函数的微分方程组，用于计算战场交换比。因为实际应用中双方单位数目为自然数，离散而不连续，所以编写了相应的程序使用蒙特卡洛方法以模拟计算游戏《红色警戒2》中坦克集群间交战的所有可能交换比和双方的获胜概率。通过计算，得到了一些可以修正兰彻斯特方程的结果，对指挥官的战前分析决策具有实际意义。">
+<meta name="twitter:image" content="http://localhost:4000/assets//blog_images/tank1.png">
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://localhost:4000/"/>
+
+
+
+
+
+  <title>红警坦克作战效能模拟平台</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ea13fa2dc2aa892b0c36fe0fbc9d067d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">scienceasdf</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+<div id="posts" class="posts-expand">
+  
+  
+
+  
+
+  
+  
+  
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/programming/2015/11/02/tank/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="scienceasdf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="scienceasdf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            红警坦克作战效能模拟平台
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-02T00:00:00+08:00">
+                2015-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/Programming" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            
+                <div class="post-description">
+                    
+                </div>
+            
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']]
+            },
+  			TeX: { 
+                equationNumbers: {  
+                    autoNumber: "AMS"  
+                },
+     		    extensions: ["AMSmath.js"]
+            },
+            CommonHTML: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            "HTML-CSS": { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            SVG: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            }
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>兰彻斯特方程作为一个连续函数的微分方程组，用于计算战场交换比。因为实际应用中双方单位数目为自然数，离散而不连续，所以编写了相应的程序使用蒙特卡洛方法以模拟计算游戏《红色警戒2》中坦克集群间交战的所有可能交换比和双方的获胜概率。通过计算，得到了一些可以修正兰彻斯特方程的结果，对指挥官的战前分析决策具有实际意义。</strong></p>
+
+<hr />
+<p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
+
+<hr />
+
+<h2 id="兰彻斯特方程">兰彻斯特方程</h2>
+<p>该理论于一战前期的1914年，由英国人弗雷德里克·威廉·兰彻斯特首先创立。
+它采用数学演绎战术原则，将数学与军事战术学结合起来。兰彻斯特最先提出了一个关于空战战术的尝试性数学模型，描述作战双方兵力变化过程的数学微分方程。
+这个理论属于确定性数学模型，一般认为可宏观地描述双方战斗的毁伤过程。常用于优选步兵作战兵力的投放、西方研究战争的定量、科学的常用方法。<br />
+在近代战斗条件下，红、蓝两军交战，双方各自装备同类武器，相互通视，并在武器射程范围内进行直接瞄准射击；双方每一战斗单位射击对方每一战斗单位的机会大致相同。将双方在战斗中尚存的战斗单位数作为连续的状态变量，以m(t)、n(t)表示在战斗开始后t时刻蓝方、红方在战斗中尚存的作战单位数，可用下列微分方程组来描述战斗过程中双方兵力随时间的损耗关系：
+\begin{equation}
+\frac{dm(t)}{dn(t)} = \frac{-\beta{n(t)}}{-\alpha{n(t)}}
+\end{equation}
+式中α、β分别为蓝方、红方在单位时间内每一战斗单位毁伤对方战斗单位的数目， 简称为蓝方、 红方的毁伤率系数。<br />
+这是一个连续的方程，它的通解形式、它的实际意义，例如平方率、线性率什么的在网上均有大量论述，这里不再陈述。</p>
+
+<h2 id="红警的伤害机制">红警的伤害机制</h2>
+<p>《红色警戒》是一款经典的RTS游戏。我们可以研究红警中的伤害机制，并编写交战模拟平台的程序，从而验证兰彻斯特方程，为交战提供策略。红警作战主要以坦克战为主，因此我们这里的研究对象也就是坦克了。<br />
+红警里面有一个Rulesmd.ini文件，用来定义单位的各种属性。红警中坦克分为轻甲、中甲和重甲。武器对对方的伤害是<strong><em>杀伤力乘上对这种装甲的伤害系数</em></strong>。坦克在受到攻击后，血条便减少相应的伤害值。此外，我们在模拟平台中还要体现装弹间隔时间。红警里面部分单位还有自动回血能力，例如天启坦克、基洛夫空艇、武装采矿车等。这里以对战中的头号杀器：犀牛坦克为例，列举这些属性的值：</p>
+<ul>
+  <li>制造成本：900</li>
+  <li>杀伤力：90</li>
+  <li>对轻甲、中甲、重甲的伤害分别为：75%，100%，100%</li>
+  <li>体力：400</li>
+  <li>装弹间隔时间：65</li>
+  <li>不具有自动回血能力<br />
+编写如下的代码：
+    <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">TANK</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">life</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">atk</span><span class="p">;</span>  <span class="c1">//攻击力
+</span>  <span class="kt">int</span> <span class="n">target</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">time</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">once</span><span class="p">;</span>  <span class="c1">//判断临死一击
+</span>  <span class="kt">int</span> <span class="n">cover</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">armor</span><span class="p">;</span>  <span class="c1">//1、 轻甲 2、中甲 3、重甲
+</span>  <span class="kt">int</span> <span class="n">ps</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="p">};</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">TANK</span> <span class="n">tank</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>剩下的就是编写程序模拟作战过程了。以一个循环的计数器作为时间线，坦克在最初随意地寻找攻击目标，在锁定目标之后便每间隔一次装填时间完成一次对目标的进攻（以及每经过一次回血周期便恢复一定的血量）。在红警中可能会出现许多个坦克攻击同一辆坦克，导致坦克在毁灭的时刻遭受了远远大于其残余血量的伤害，这个在模拟中也要得到体现。因此，临死一击以及临死所受伤害是一个相对不太好处理的地方。程序里把常见的八种坦克的数据收录进去：灰熊坦克、犀牛坦克、天启坦克、幻影坦克、光棱坦克、遥控坦克、坦克杀手，用户不用手动输入坦克的属性。根据蒙特卡洛方法的思想，对作战过程总共进行1500次模拟。</p>
+
+<p>程序运行的截图如下所示：
+<img src="http://localhost:4000/assets//blog_images/tank1.png" width="450px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/tank2.png" width="450px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/tank3.png" width="450px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/tank4.png" width="450px" height="200px" /><br />
+又比如，模拟结果显示，在理想条件下，30辆犀牛坦克（红军）与25辆坦克杀手（蓝军）交战的结果为</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>交换比：  
+最高1.25  
+最低0.33  
+平均0.64  
+价值交换比：0.64  
+胜率：11.67%  
+零伤亡概率：0.00%  
+</code></pre></div></div>
+<p>在理想条件下，40辆犀牛坦克（红军）与20辆坦克杀手（蓝军）交战的结果为</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>交换比：  
+最高20.00  
+最低1.82  
+平均3.27  
+价值交换比：3.27  
+胜率：100.00%  
+零伤亡概率：0.00%  
+</code></pre></div></div>
+
+<h2 id="总结">总结</h2>
+<ul>
+  <li>可以看出，连续的兰彻斯特方程对于小数目的离散作战不能真实预测。若将5辆灰熊坦克与3辆犀牛坦克，则5辆灰熊坦克仅能勉强战胜3辆犀牛坦克。而经过实际的模拟，5辆灰熊坦克与3辆犀牛坦克交战，灰熊坦克胜率为100%，且平均只损失一辆坦克1.56辆坦克，足可见两种模型的差距</li>
+  <li>若双方是相同数目的同等坦克，则双方胜率均会低于50%。如若1辆坦克对抗1辆同型号坦克，同时开火，则双方都不会获胜（双方坦克同时被摧毁）。若双方各两辆坦克对抗，则双方胜率均为26%。双方十辆坦克对抗，任一方胜率为40%.若双方45辆坦克对抗，则任一方胜率为48%.由此可见，坦克的数目越大，可能出现的情况就越多，出现平局的可能性就越小</li>
+  <li>许多人认为成群的光棱海无法击破，实际上单一的光棱坦克没有别的坦克配合的话很难与犀牛坦克群的阵型冲击、天启坦克的重火力重护甲、矿车的重护甲高射速抗衡。尽管光棱坦克射程极远，但没有幻影坦克配合，无法直接正面参与坦克战</li>
+  <li>一般而言，人们常常喜欢集中优势兵力攻打某个单位，这种战术在特殊情况下是错误的。例如天启坦克群与别的坦克群交战，天启坦克依靠重火力有很大的胜算，但是如果所有天启坦克集中火力攻击一辆坦克，这样反而浪费炮弹</li>
+  <li>这里没有考虑兵种配合的问题。如在坦克阵中假如与之配合的步兵（尤其是反坦克步兵），则既能吸引敌方火力向步兵开火，又能给以敌方杀伤</li>
+  <li>作为一个资深红警玩家<strong><em>（2017年更新，早就不玩了）</em></strong>，也知道这个模拟平台还是有不完善的地方。在真实的红警坦克战里，如果考虑操作，那么坦克攻击范围、移动速度、炮塔转动角度、是否能够移动攻击都会造成非常大的影响，更不用提什么分兵战术、迂回战术等。而且这里没有考虑到作战单位升级的情况</li>
+  <li>事实上，对于真正的坦克战而言，机动性、射程、移动攻击能力、阵型、布坦协同都是十分重要的，而我的程序模拟的是定点攻击，这实际上与火炮别无两样。坦克需要发挥其阵型冲锋、冲锋打散阵型、移动攻击等机动性优势，例如犀牛坦克常常强势冲锋等战术，这是程序无法模拟的。因此，程序仅仅能提供一个基本的战术参考，这替代不了指挥官的战术决策</li>
+  <li>2017年更新：现在看自己以前写的代码感觉是真的丑陋，不过这也说明了自己的代码水平还是有一丢丢进步的:grin:</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            
+            <a href="/tag/#/%E5%85%B0%E5%BD%BB%E6%96%AF%E7%89%B9%E6%96%B9%E7%A8%8B" rel="tag"># 兰彻斯特方程</a>
+          
+            
+            <a href="/tag/#/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95" rel="tag"># 蒙特卡洛方法</a>
+          
+            
+            <a href="/tag/#/C%E8%AF%AD%E8%A8%80" rel="tag"># C语言</a>
+          
+            
+            <a href="/tag/#/%E4%BD%9C%E6%88%98%E6%95%88%E8%83%BD%E6%A8%A1%E6%8B%9F" rel="tag"># 作战效能模拟</a>
+          
+        </div>
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+        <div class="post-nav" id="post-nav-id">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/programming/2017/08/17/propulsion1/" rel="next" title="浅谈螺旋桨航模（无人机）的动力系统选配（一）">
+                <i class="fa fa-chevron-left"></i> 浅谈螺旋桨航模（无人机）的动力系统选配（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/24/download-this-theme/" rel="prev" title="Download this Theme">
+                Download this Theme <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+      
+
+      
+    </footer>
+  </article>
+
+  <div class="post-spread">
+    
+  </div>
+</div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        
+        
+        
+
+
+
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/assets/images/avatar.png"
+               alt="scienceasdf" />
+          <p class="site-author-name" itemprop="name">scienceasdf</p>
+           
+              <p class="site-description motion-element" itemprop="description">We will bury them !</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+        
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="https://github.com/scienceasdf" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/scienceasdf/activities" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-joomla"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="404.html" target="_blank" title="404公益@宝贝回家">
+                  
+                    <i class="fa fa-fw fa-child"></i>
+                  
+                  404公益@宝贝回家
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#兰彻斯特方程"> <span class="nav-number">1</span> <span class="nav-text">兰彻斯特方程</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#红警的伤害机制"> <span class="nav-number">2</span> <span class="nav-text">红警的伤害机制</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#总结"> <span class="nav-number">3</span> <span class="nav-text">总结</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">scienceasdf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://jekyllrb.com">Jekyll</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/simpleyyt/jekyll-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+   
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/assets/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/assets/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  <script type="text/javascript" src="/assets/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/assets/js/src/post-details.js?v=5.1.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+    
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
+
