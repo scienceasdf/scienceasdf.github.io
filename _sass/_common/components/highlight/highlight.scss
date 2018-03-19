@@ -14,7 +14,7 @@
   line-height: $line-height-code-block;
 }
 
-pre, code { font-family: Consolas,Consolas; }
+pre, code { font-family: $code-font-family; }
 
 code {
   padding: 2px 4px;
