@@ -1,60 +1,62 @@
 .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight .c, .highlight .cd {
-  color: #5e5d83;
+  color: #75715e;
   font-style: italic;
 }
 .highlight .cm {
-  color: #5e5d83;
+  color: #75715e;
   font-style: italic;
 }
 .highlight .c1 {
-  color: #5e5d83;
+  color: #75715e;
   font-style: italic;
 }
 .highlight .cp {
-  color: #465457;
+  color: #75715e;
   font-weight: bold;
 }
 .highlight .cs {
-  color: #465457;
+  color: #75715e;
   font-weight: bold;
   font-style: italic;
 }
 .highlight .err {
-  color: #f8f8f2;
-  background-color: #403d3d;
+  color: #960050;
+  background-color: #1e0010;
 }
 .highlight .gi {
-  color: #a6e22e;
+  color: #ffffff;
+  background-color: #324932;
 }
 .highlight .gd {
-  color: #f92672;
+  color: #ffffff;
+  background-color: #493131;
 }
 .highlight .ge {
-  color: #1b1d1e;
+  color: #000000;
   font-style: italic;
 }
 .highlight .gr {
-  color: #f92672;
+  color: #aa0000;
 }
 .highlight .gt {
-  color: #f92672;
+  color: #aa0000;
 }
 .highlight .gh {
-  color: #403d3d;
+  color: #999999;
 }
 .highlight .go {
-  color: #403d3d;
+  color: #888888;
 }
 .highlight .gp {
-  color: #66d9ef;
+  color: #555555;
 }
 .highlight .gs {
   font-weight: bold;
 }
 .highlight .gu {
-  color: #465457;
+  color: #aaaaaa;
 }
 .highlight .k, .highlight .kv {
   color: #66d9ef;
@@ -93,58 +95,58 @@
   font-weight: bold;
 }
 .highlight .mf {
-  color: #af87ff;
+  color: #ae81ff;
 }
 .highlight .mh {
-  color: #af87ff;
+  color: #ae81ff;
 }
 .highlight .il {
-  color: #af87ff;
+  color: #ae81ff;
 }
 .highlight .mi {
-  color: #af87ff;
+  color: #ae81ff;
 }
 .highlight .mo {
-  color: #af87ff;
+  color: #ae81ff;
 }
 .highlight .m, .highlight .mb, .highlight .mx {
-  color: #af87ff;
+  color: #ae81ff;
 }
 .highlight .se {
-  color: #af87ff;
+  color: #ae81ff;
 }
 .highlight .sb {
-  color: #d7d787;
+  color: #e6db74;
 }
 .highlight .sc {
-  color: #d7d787;
+  color: #e6db74;
 }
 .highlight .sd {
-  color: #d7d787;
+  color: #e6db74;
 }
 .highlight .s2 {
-  color: #d7d787;
+  color: #e6db74;
 }
 .highlight .sh {
-  color: #d7d787;
+  color: #e6db74;
 }
 .highlight .si {
-  color: #d7d787;
+  color: #e6db74;
 }
 .highlight .sx {
-  color: #d7d787;
+  color: #e6db74;
 }
 .highlight .sr {
-  color: #d7d787;
+  color: #e6db74;
 }
 .highlight .s1 {
-  color: #d7d787;
+  color: #e6db74;
 }
 .highlight .ss {
-  color: #d7d787;
+  color: #e6db74;
 }
 .highlight .s {
-  color: #d7d787;
+  color: #e6db74;
 }
 .highlight .na {
   color: #a6e22e;
@@ -204,5 +206,5 @@
 }
 .highlight {
   color: #f8f8f2;
-  background-color: #1b1d1e;
+  background-color: #49483e;
 }
