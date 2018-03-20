@@ -416,8 +416,9 @@
 。目前的算法能够通过所有我写的测试用例，不过不知道是否有不对的情况。</p>
 <h3 id="与绘制各种根轨迹相关的算法">与绘制各种根轨迹相关的算法</h3>
 <h4 id="多项式求根算法">多项式求根算法</h4>
-<p>非常美妙的事情是，NDK虽然是个大坑，不过Eigen库还是能够使用的。
-多项式的求根可以转化为它的companion matrix的特征值问题来求解：$p(t)=c_{0}+c_{1}t+\cdots +c_{n-1}t^{n-1}+t^{n}$的companion matrix是<br />
+<p>非常美妙的事情是，NDK虽然是个大坑，不过Eigen库还是能够使用的。<br />
+多项式的求根可以转化为它的companion matrix的特征值问题来求解：<br />
+$p(t)=c_{0}+c_{1}t+\cdots +c_{n-1}t^{n-1}+t^{n}$的companion matrix是<br />
 <script type="math/tex">% <![CDATA[
 \begin{equation} \tag{a}
 C(p)=\begin{bmatrix}
@@ -444,12 +445,10 @@ C(p)=\begin{bmatrix}
 
 <h3 id="计算响应的算法">计算响应的算法</h3>
 <p>这个一开始想用矩阵的幂来进行计算，但是发现许多时候线性系统的$\mathbf{A}$矩阵都是奇异的，没办法，
-还是只能用RK45算法，好在现在手机处理器性能很强，没有任何卡的迹象</p>
+还是只能用RK45算法，好在现在手机处理器性能很强，没有任何卡的迹象。</p>
 
 <h2 id="处理用户输入">处理用户输入</h2>
-<p>为了让用户能够有更好的交互体验，设计的输入格式比较宽送。处理用户输入用了Boost::tokenizer库，这是
-一个Header-only的库，不需要编译（当然我也自己编译了Boost库，除了Math库编译不了，别的都可以编译，
-具体能不能用还没有认真试过）。NDK真的是一个大坑，GOOGLE官方对GCC值支持到GCC4.9，然而Qt for Android是GCC编译的，而GCC4.9对C++14支持不全不说，有的C++11的东西都没法用，比如std::stod,std::to_string，所以先自己实现一个。。。</p>
+<p>为了让用户能够有更好的交互体验，设计的输入格式比较宽送。处理用户输入用了Boost::tokenizer库，这是一个Header-only的库，不需要编译（当然我也自己编译了Boost库，除了Math库编译不了，别的都可以编译，具体能不能用还没有认真试过）。NDK真的是一个大坑，GOOGLE官方对GCC值支持到GCC4.9，然而Qt for Android是GCC编译的，而GCC4.9对C++14支持不全不说，有的C++11的东西都没法用，比如std::stod,std::to_string，所以先自己实现一个。。。</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifdef FOR_MOBILE
 </span><span class="k">namespace</span> <span class="n">std</span> <span class="p">{</span>
 
@@ -502,11 +501,12 @@ C(p)=\begin{bmatrix}
     <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>这段代码的作用是将用户输入分割，并且返回成一个多项式。在这里我自己实现了一个多项式的std::vector<double>用来表示多项式的系数，并实现乘法运算convolution，并且在线性系统的类中也有两个多项式成员：传递函数的分子和分母。  
- 实际上使用Boost::tokenizer是一种比较简单可行的方式，也可以用Boost::splitter或者用正则表达式匹配甚至直接自己写一个简单parser都可以实现功能。</double></p>
+<p>这段代码的作用是将用户输入分割，并且返回成一个多项式。在这里我自己实现了一个多项式的std::vector<double>用来表示多项式的系数，并实现乘法运算convolution，并且在线性系统的类中也有两个多项式成员：传递函数的分子和分母。</double></p>
+
+<p>实际上使用Boost::tokenizer是一种比较简单可行的方式，也可以用Boost::splitter或者用正则表达式匹配甚至直接自己写一个简单parser都可以实现功能。</p>
 
 <h2 id="多项式的富文本输出">多项式的富文本输出</h2>
-<p>为了让用户直观地知道输入的格式代表的多项式，应该在QLabel中将多项式以富文本的形式输出，而且应该<strong><em>同时输出多项式相乘和多项式展开的形式</em></strong>，这里多项式输出时为了追求完美，符合平时的习惯，应该特别注意系数为0,1以及正负号的问题。具体代码太长，见GitHub仓库。</p>
+<p>为了让用户直观地知道输入的格式代表的多项式，应该在QLabel中将多项式以富文本的形式输出，而且应该<strong><em>同时输出多项式相乘和多项式展开的形式</em></strong>，这里多项式输出时为了追求完美，符合平时的习惯，应该特别注意系数为0,1以及正负号的问题。具体代码太长，见<a href="https://github.com/scienceasdf/easyAuto">GitHub仓库</a>。</p>
 <h2 id="截图">截图</h2>
 <p><img src="http://localhost:4000/assets//blog_images/shot1.png" width="350px" height="200px" />
 <img src="http://localhost:4000/assets//blog_images/shot2.png" width="350px" height="200px" />
@@ -519,6 +519,11 @@ C(p)=\begin{bmatrix}
 QtCharts，发现这个模块优点很多，而且在手机上显示的效果很好</li>
   <li>虽然GOOGLE的NDK非常坑，不过有一个替代方案据说还是不错的：Crystax NDK，不过自从2017年就没有发布新版本了，社区也不太活跃（GitHub上的代码倒还在改）</li>
 </ul>
+
+<hr />
+
+<p><a href="https://github.com/scienceasdf/easyAuto/releases/download/EasyAutoV1.1/easyAuto.apk">APK下载地址（GitHub镜像）</a>
+<a href="https://pan.baidu.com/s/1c4ewHnM">APK下载地址（百度网盘镜像）</a></p>
 
       
     </div>

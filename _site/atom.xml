@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-19T23:01:28+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">在手机上绘制根轨迹</title><link href="http://localhost:4000/programming/2017/11/15/easyauto/" rel="alternate" type="text/html" title="在手机上绘制根轨迹" /><published>2017-11-15T00:00:00+08:00</published><updated>2017-11-15T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/11/15/easyauto</id><content type="html" xml:base="http://localhost:4000/programming/2017/11/15/easyauto/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-20T11:54:05+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">在手机上绘制根轨迹</title><link href="http://localhost:4000/programming/2017/11/15/easyauto/" rel="alternate" type="text/html" title="在手机上绘制根轨迹" /><published>2017-11-15T00:00:00+08:00</published><updated>2017-11-15T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/11/15/easyauto</id><content type="html" xml:base="http://localhost:4000/programming/2017/11/15/easyauto/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
   							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
      							   extensions: [&quot;AMSmath.js&quot;]}
@@ -21,8 +21,9 @@
 。目前的算法能够通过所有我写的测试用例，不过不知道是否有不对的情况。&lt;/p&gt;
 &lt;h3 id=&quot;与绘制各种根轨迹相关的算法&quot;&gt;与绘制各种根轨迹相关的算法&lt;/h3&gt;
 &lt;h4 id=&quot;多项式求根算法&quot;&gt;多项式求根算法&lt;/h4&gt;
-&lt;p&gt;非常美妙的事情是，NDK虽然是个大坑，不过Eigen库还是能够使用的。
-多项式的求根可以转化为它的companion matrix的特征值问题来求解：$p(t)=c_{0}+c_{1}t+\cdots +c_{n-1}t^{n-1}+t^{n}$的companion matrix是&lt;br /&gt;
+&lt;p&gt;非常美妙的事情是，NDK虽然是个大坑，不过Eigen库还是能够使用的。&lt;br /&gt;
+多项式的求根可以转化为它的companion matrix的特征值问题来求解：&lt;br /&gt;
+$p(t)=c_{0}+c_{1}t+\cdots +c_{n-1}t^{n-1}+t^{n}$的companion matrix是&lt;br /&gt;
 &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
 \begin{equation} \tag{a}
 C(p)=\begin{bmatrix}
@@ -49,12 +50,10 @@ C(p)=\begin{bmatrix}
 
 &lt;h3 id=&quot;计算响应的算法&quot;&gt;计算响应的算法&lt;/h3&gt;
 &lt;p&gt;这个一开始想用矩阵的幂来进行计算，但是发现许多时候线性系统的$\mathbf{A}$矩阵都是奇异的，没办法，
-还是只能用RK45算法，好在现在手机处理器性能很强，没有任何卡的迹象&lt;/p&gt;
+还是只能用RK45算法，好在现在手机处理器性能很强，没有任何卡的迹象。&lt;/p&gt;
 
 &lt;h2 id=&quot;处理用户输入&quot;&gt;处理用户输入&lt;/h2&gt;
-&lt;p&gt;为了让用户能够有更好的交互体验，设计的输入格式比较宽送。处理用户输入用了Boost::tokenizer库，这是
-一个Header-only的库，不需要编译（当然我也自己编译了Boost库，除了Math库编译不了，别的都可以编译，
-具体能不能用还没有认真试过）。NDK真的是一个大坑，GOOGLE官方对GCC值支持到GCC4.9，然而Qt for Android是GCC编译的，而GCC4.9对C++14支持不全不说，有的C++11的东西都没法用，比如std::stod,std::to_string，所以先自己实现一个。。。&lt;/p&gt;
+&lt;p&gt;为了让用户能够有更好的交互体验，设计的输入格式比较宽送。处理用户输入用了Boost::tokenizer库，这是一个Header-only的库，不需要编译（当然我也自己编译了Boost库，除了Math库编译不了，别的都可以编译，具体能不能用还没有认真试过）。NDK真的是一个大坑，GOOGLE官方对GCC值支持到GCC4.9，然而Qt for Android是GCC编译的，而GCC4.9对C++14支持不全不说，有的C++11的东西都没法用，比如std::stod,std::to_string，所以先自己实现一个。。。&lt;/p&gt;
 &lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#ifdef FOR_MOBILE
 &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 
@@ -107,11 +106,12 @@ C(p)=\begin{bmatrix}
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;这段代码的作用是将用户输入分割，并且返回成一个多项式。在这里我自己实现了一个多项式的std::vector&lt;double&gt;用来表示多项式的系数，并实现乘法运算convolution，并且在线性系统的类中也有两个多项式成员：传递函数的分子和分母。  
- 实际上使用Boost::tokenizer是一种比较简单可行的方式，也可以用Boost::splitter或者用正则表达式匹配甚至直接自己写一个简单parser都可以实现功能。&lt;/double&gt;&lt;/p&gt;
+&lt;p&gt;这段代码的作用是将用户输入分割，并且返回成一个多项式。在这里我自己实现了一个多项式的std::vector&lt;double&gt;用来表示多项式的系数，并实现乘法运算convolution，并且在线性系统的类中也有两个多项式成员：传递函数的分子和分母。&lt;/double&gt;&lt;/p&gt;
+
+&lt;p&gt;实际上使用Boost::tokenizer是一种比较简单可行的方式，也可以用Boost::splitter或者用正则表达式匹配甚至直接自己写一个简单parser都可以实现功能。&lt;/p&gt;
 
 &lt;h2 id=&quot;多项式的富文本输出&quot;&gt;多项式的富文本输出&lt;/h2&gt;
-&lt;p&gt;为了让用户直观地知道输入的格式代表的多项式，应该在QLabel中将多项式以富文本的形式输出，而且应该&lt;strong&gt;&lt;em&gt;同时输出多项式相乘和多项式展开的形式&lt;/em&gt;&lt;/strong&gt;，这里多项式输出时为了追求完美，符合平时的习惯，应该特别注意系数为0,1以及正负号的问题。具体代码太长，见GitHub仓库。&lt;/p&gt;
+&lt;p&gt;为了让用户直观地知道输入的格式代表的多项式，应该在QLabel中将多项式以富文本的形式输出，而且应该&lt;strong&gt;&lt;em&gt;同时输出多项式相乘和多项式展开的形式&lt;/em&gt;&lt;/strong&gt;，这里多项式输出时为了追求完美，符合平时的习惯，应该特别注意系数为0,1以及正负号的问题。具体代码太长，见&lt;a href=&quot;https://github.com/scienceasdf/easyAuto&quot;&gt;GitHub仓库&lt;/a&gt;。&lt;/p&gt;
 &lt;h2 id=&quot;截图&quot;&gt;截图&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets//blog_images/shot1.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
 &lt;img src=&quot;http://localhost:4000/assets//blog_images/shot2.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
@@ -123,7 +123,12 @@ C(p)=\begin{bmatrix}
   &lt;li&gt;本来用的是QCustomPlot来绘制曲线的，结果这个东西在手机上的渲染效果很差，于是改成了
 QtCharts，发现这个模块优点很多，而且在手机上显示的效果很好&lt;/li&gt;
   &lt;li&gt;虽然GOOGLE的NDK非常坑，不过有一个替代方案据说还是不错的：Crystax NDK，不过自从2017年就没有发布新版本了，社区也不太活跃（GitHub上的代码倒还在改）&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>scienceasdf</name></author><category term="自动控制" /><category term="安卓开发" /><category term="Qt" /><summary type="html">写了一个能够绘制线性系统根轨迹、响应曲线、计算幅值裕度、相位裕度等的手机APP。下载地址在文末。</summary></entry><entry><title type="html">太阳高度角与方位角的计算</title><link href="http://localhost:4000/programming/2017/10/22/soalrAngle/" rel="alternate" type="text/html" title="太阳高度角与方位角的计算" /><published>2017-10-22T00:00:00+08:00</published><updated>2017-10-22T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/10/22/soalrAngle</id><content type="html" xml:base="http://localhost:4000/programming/2017/10/22/soalrAngle/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/scienceasdf/easyAuto/releases/download/EasyAutoV1.1/easyAuto.apk&quot;&gt;APK下载地址（GitHub镜像）&lt;/a&gt;
+&lt;a href=&quot;https://pan.baidu.com/s/1c4ewHnM&quot;&gt;APK下载地址（百度网盘镜像）&lt;/a&gt;&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="自动控制" /><category term="安卓开发" /><category term="Qt" /><summary type="html">写了一个能够绘制线性系统根轨迹、响应曲线、计算幅值裕度、相位裕度等的手机APP。下载地址在文末。</summary></entry><entry><title type="html">太阳高度角与方位角的计算</title><link href="http://localhost:4000/programming/2017/10/22/soalrAngle/" rel="alternate" type="text/html" title="太阳高度角与方位角的计算" /><published>2017-10-22T00:00:00+08:00</published><updated>2017-10-22T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/10/22/soalrAngle</id><content type="html" xml:base="http://localhost:4000/programming/2017/10/22/soalrAngle/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({
             tex2jax: {
                 inlineMath: [['$','$'], ['\\(','\\)']]
@@ -169,7 +174,7 @@ QtCharts，发现这个模块优点很多，而且在手机上显示的效果很
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;// assume in the eastern semi-sphere
 &lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// expressed in UTC+8 time
-&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;//longtitude expressed in degrees
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// longtitude expressed in degrees
 &lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;static_cast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;120.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;longitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;timeType&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -181,7 +186,7 @@ QtCharts，发现这个模块优点很多，而且在手机上显示的效果很
 \begin{equation}
 h=15\times (ST-12)
 \end{equation}
-$ST$为真太阳时。然而平常我们通常都使用北京时间，因此太阳时角的计算公式如下：（还是代码比公式直观）&lt;/p&gt;
+$ST$为真太阳时。然而平常我们通常都使用北京时间，因此太阳时角的计算公式如下：（还是感觉代码比公式更直观）&lt;/p&gt;
 &lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getHourAngle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;longitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;// The results return the angle expressed in degrees
@@ -226,7 +231,7 @@ $ST$为真太阳时。然而平常我们通常都使用北京时间，因此太�
 \end{equation}&lt;/p&gt;
 
 &lt;h2 id=&quot;程序相关&quot;&gt;程序相关&lt;/h2&gt;
-&lt;p&gt;前面的代码也可以看出，这个问题需要自己实现时间类timeType和日期类dateType，包括一些基本的运算操作，不过也可以用Boost库的或者用Qt的。编程的时候需要特别小心角度与弧度的换算。在安卓程序中需要实现对设备的经纬度定位，还是要感谢Qt，让一切变得十分方便。
+&lt;p&gt;前面的代码也可以看出，这个问题需要自己实现时间类timeType和日期类dateType，包括一些基本的运算操作，不过也可以用Boost库的或者用Qt的。编程的时候需要特别小心角度与弧度的换算。在安卓程序中需要实现对设备的经纬度定位，还是要感谢Qt，让一切变得十分方便。&lt;br /&gt;
 类Widget作为主窗体，定义如下：&lt;/p&gt;
 &lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Widget&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QWidget&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -302,7 +307,7 @@ $ST$为真太阳时。然而平常我们通常都使用北京时间，因此太�
 &lt;p&gt;上一篇文章我们讲了螺旋桨无人机动力系统相关的理论，这篇文章说说程序的设计。&lt;/p&gt;
 
 &lt;h2 id=&quot;数据来源&quot;&gt;数据来源&lt;/h2&gt;
-&lt;p&gt;所有的数据都来自于APC官网的数据。由于APC螺旋桨高效率的优点（正品APC桨的效率非常高，接近0.9），以及APC在其官网公布了所有型号的理论性能数据文件，故下载所有其官网上的五百个左右性能数据文件，其文件已经存储为固定的格式。先在官网上下载索引文件PER2_TITLEDAT.txt，再用wget批量将所有的螺旋桨性能数据文件下载下来。一共五百来个文件，中间下载是否有连接错误导致文件没有下载完整我也不知道(捂脸）。APC的桨型号很齐全，基本覆盖了航模级别常用的尺寸，从几英寸到26英寸的都有，如果在这些型号以外的型号那就没办法了。。。数据全部都是dat格式的，用std::ifstream读文件非常耗时。对于开发的安卓版本，肯定不会用External folder里面包含所有的数据，只能用Qt资源文件+QDataStream来读写（不支持std::ifstream)，这样速度更快，不过缺点在于如果数据变动、扩展会不太方便。在写完所有程序之后，我还把所有数据迁移到了一个sqlite数据库文件中，并加上索引，访问速度大大提升，不过目前是不想重构sqlite的版本了。&lt;/p&gt;
+&lt;p&gt;所有的数据都来自于APC官网的数据。由于APC螺旋桨高效率的优点（正品APC桨的效率非常高，接近0.9），以及APC在其官网公布了所有型号的理论性能数据文件，故下载所有其官网上的五百个左右性能数据文件，其文件已经存储为固定的格式。先在官网上下载索引文件PER2_TITLEDAT.txt，再用wget批量将所有的螺旋桨性能数据文件下载下来。一共五百来个文件，中间下载是否有连接错误导致文件没有下载完整我也不知道:sweat:。APC的桨型号很齐全，基本覆盖了航模级别常用的尺寸，从几英寸到26英寸的都有，如果在这些型号以外的型号那就没办法了。。。数据全部都是dat格式的，用std::ifstream读文件非常耗时。对于开发的安卓版本，肯定不会用External folder里面包含所有的数据，只能用Qt资源文件+QDataStream来读写（不支持std::ifstream)，这样速度更快，不过缺点在于如果数据变动、扩展会不太方便。在写完所有程序之后，我还把所有数据迁移到了一个sqlite数据库文件中，并加上索引，访问速度大大提升，不过目前是不想重构sqlite的版本了。&lt;/p&gt;
 
 &lt;h2 id=&quot;功能介绍&quot;&gt;功能介绍&lt;/h2&gt;
 &lt;p&gt;程序分为PC版和移动（安卓）版，主要以介绍PC版为主。PC版共有两个程序：DemoProp，用于计算无刷电机动力系统的工作状况并给出一定的建议；PropChart，用于计算电动和油动动力系统的工作状况并绘制图表。&lt;/p&gt;
@@ -402,14 +407,11 @@ P=P(v,n)=C_P(v,n)\cdot\rho n^3 D^5\\
 \end{array}
 \right.
 \end{equation}&lt;/script&gt;&lt;br /&gt;
-$C_T$是拉力系数、$C_P$是功率系数，且有$P=M\cdot\frac{2\pi n}{60}$，$\eta=\frac{Tv}{P}$。
+$C_T$是拉力系数、$C_P$是功率系数，且有$P=M\cdot\frac{2\pi n}{60}$，$\eta=\frac{Tv}{P}$。&lt;br /&gt;
 定义一个无量纲参数进动比(advance ratio)
 \begin{equation} J=\frac{v}{nD}\end{equation}
-$D$为螺旋桨直径。通常，$\eta$与$J$的变化关系如图所示。在进行初步分析的手工计算中，可以认为$J$
-是一个相似性判定的参数，如果同一螺旋桨，工作在1状况$(v_1,n_1)$与2状况$(v_2,n_2)$，满足进动比相同，即
-$\frac{v_1}{n_1}=\frac{v_2}{n_2}$，则可以认为工作状况下的效率$\eta$、拉力系数$C_T$、功率系数$C_P$均相同。如果要估算某一工作状况
-$(v,n)$的工作参数，仅需先计算进动比$J=\frac{v}{nD}$，然后查找对应进动比的相关$\eta,C_T\text{和}C_P$，然后按照式(\ref{basics})
-计算拉力、转矩、效率与功率。
+$D$为螺旋桨直径。&lt;br /&gt;
+通常，$\eta$与$J$的变化关系如下图所示。在进行初步分析的手工计算中，可以认为$J$是一个相似性判定的参数，如果同一螺旋桨，工作在1状况$(v_1,n_1)$与2状况$(v_2,n_2)$，满足进动比相同，即$\frac{v_1}{n_1}=\frac{v_2}{n_2}$，则可以认为工作状况下的效率$\eta$、拉力系数$C_T$、功率系数$C_P$均相同。如果要估算某一工作状况$(v,n)$的工作参数，仅需先计算进动比$J=\frac{v}{nD}$，然后查找对应进动比的相关$\eta,C_T\text{和}C_P$，然后按照式(\ref{basics})计算拉力、转矩、效率与功率。
 &lt;img src=&quot;http://localhost:4000/assets//blog_images/fig1.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
 实际上，由于低雷诺数的影响，对于进动比相同的两种工作状况，$\eta,C_T\text{和}C_P$并不一定对应相等。通常高雷诺数的工作状况下螺旋桨的工作效率更高。&lt;/p&gt;
 &lt;h3 id=&quot;电源模型&quot;&gt;电源模型&lt;/h3&gt;
@@ -433,20 +435,19 @@ $U_m,I_m$为最大功率点处的太阳能电池的输出电压与电流.&lt;/p&
 &lt;h3 id=&quot;非平凡模型&quot;&gt;非平凡模型&lt;/h3&gt;
 &lt;h4 id=&quot;引入减速组&quot;&gt;引入减速组&lt;/h4&gt;
 &lt;p&gt;设减速组减速比为$K$，机械效率为$\eta_g$，则有&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;\begin{equation}
+&lt;script type=&quot;math/tex&quot;&gt;\begin{equation} \tag{c}
 \left\{
 \begin{array}{l}
 n_{prop}=\frac{n_{mot}}{K}\\
 T_{prop}=K\cdot T_{mot}\cdot\eta_g
 \end{array}
 \right.
-\end{equation}&lt;/script&gt;&lt;br /&gt;
-考虑$\eta_g=1$的理想减速器，与电机形成的系统可以等效为一个$K_v$值折合为原电机$K_v$值$\frac{1}{K}$
-的新电机。通常高效率螺旋桨的特征都是低负载、大直径、大桨距（相对于直径）、低速运行，所以为了动力系统的效率最大化应该用大直径螺旋桨。由于带动大直径螺旋桨所需的转矩大，如果需要使电机工作在最大电流以下，可以使用减速组或使用低$K_v$值的电机。然而低$K_v$值得电机内阻会比高$K_v$值得电机内阻大，使用减速组会有机械能损失。而且大直径螺旋桨的重量大，且能驱动大直径螺旋桨的电机或减速器通常重量也较大。故具体应选用的方案，应考虑效率、重量、成本、加工装配难度等多方面考虑。&lt;/p&gt;
+\end{equation}&lt;/script&gt;
+考虑$\eta_g=1$的理想减速器，与电机形成的系统可以等效为一个$K_v$值折合为原电机$K_v$值$\frac{1}{K}$的新电机。通常高效率螺旋桨的特征都是低负载、大直径、大桨距（相对于直径）、低速运行，所以为了动力系统的效率最大化应该用大直径螺旋桨。由于带动大直径螺旋桨所需的转矩大，如果需要使电机工作在最大电流以下，可以使用减速组或使用低$K_v$值的电机。然而低$K_v$值得电机内阻会比高$K_v$值得电机内阻大，使用减速组会有机械能损失。而且大直径螺旋桨的重量大，且能驱动大直径螺旋桨的电机或减速器通常重量也较大。故具体应选用的方案，应考虑效率、重量、成本、加工装配难度等多方面考虑。&lt;/p&gt;
 
 &lt;h4 id=&quot;单电机驱动两个螺旋桨&quot;&gt;单电机驱动两个螺旋桨&lt;/h4&gt;
 &lt;p&gt;在这种情况下，有&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;\begin{equation} \label{eqs:12} \tag{c}
+&lt;script type=&quot;math/tex&quot;&gt;\begin{equation} \label{eqs:12} \tag{d}
 \left\{
 \begin{array}{l}
 n_{prop}=n_{mot}\\
@@ -499,7 +500,7 @@ M_{prop}=\frac{M_{mot}}{2}
 
 &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;&lt;strong&gt;兰彻斯特方程作为一个连续函数的微分方程组，用于计算战场交换比。因为实际应用中双方单位数目为自然数，离散而不连续，所以编写了相应的程序使用蒙特卡洛方法以模拟计算游戏《红色警戒2》中坦克集群间交战的所有可能交换比和双方的获胜概率。通过计算，得到了一些可以修正兰彻斯特方程的结果，对指挥官的战前分析决策具有实际意义。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;编写程序使用蒙特卡洛方法以模拟计算游戏《红色警戒2》中坦克集群间交战的所有可能交换比和双方的获胜概率。通过计算，得到了一些可以修正兰彻斯特方程的结果，对指挥官的战前分析决策具有实际意义。&lt;/strong&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 &lt;p&gt;&lt;strong&gt;本文公式较多，在浏览器中将会花较长时间用于渲染公式。&lt;/strong&gt;&lt;/p&gt;
@@ -545,7 +546,7 @@ M_{prop}=\frac{M_{mot}}{2}
 &lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TANK&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tank&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;剩下的就是编写程序模拟作战过程了。以一个循环的计数器作为时间线，坦克在最初随意地寻找攻击目标，在锁定目标之后便每间隔一次装填时间完成一次对目标的进攻（以及每经过一次回血周期便恢复一定的血量）。在红警中可能会出现许多个坦克攻击同一辆坦克，导致坦克在毁灭的时刻遭受了远远大于其残余血量的伤害，这个在模拟中也要得到体现。因此，临死一击以及临死所受伤害是一个相对不太好处理的地方。程序里把常见的八种坦克的数据收录进去：灰熊坦克、犀牛坦克、天启坦克、幻影坦克、光棱坦克、遥控坦克、坦克杀手，用户不用手动输入坦克的属性。根据蒙特卡洛方法的思想，对作战过程总共进行1500次模拟。&lt;/p&gt;
+&lt;p&gt;剩下的就是编写程序模拟作战过程了。以一个循环的计数器作为时间线，坦克在最初随意地寻找攻击目标，在锁定目标之后便每间隔一次装填时间完成一次对目标的进攻（以及每经过一次回血周期便恢复一定的血量）。在红警中可能会出现许多个坦克攻击同一辆坦克，导致坦克在毁灭的时刻遭受了远远大于其残余血量的伤害，这个在模拟中也要得到体现。因此，临死一击以及临死所受伤害是一个相对不太好处理的地方。程序里把常见的八种坦克的数据收录进去：灰熊坦克、犀牛坦克、天启坦克、幻影坦克、光棱坦克、遥控坦克、坦克杀手、武装采矿车，用户不用手动输入坦克的属性。根据蒙特卡洛方法的思想，对作战过程总共进行1500次模拟。&lt;/p&gt;
 
 &lt;p&gt;程序运行的截图如下所示：
 &lt;img src=&quot;http://localhost:4000/assets//blog_images/tank1.png&quot; width=&quot;450px&quot; height=&quot;200px&quot; /&gt;
@@ -581,4 +582,4 @@ M_{prop}=\frac{M_{mot}}{2}
   &lt;li&gt;作为一个资深红警玩家&lt;strong&gt;&lt;em&gt;（2017年更新，早就不玩了）&lt;/em&gt;&lt;/strong&gt;，也知道这个模拟平台还是有不完善的地方。在真实的红警坦克战里，如果考虑操作，那么坦克攻击范围、移动速度、炮塔转动角度、是否能够移动攻击都会造成非常大的影响，更不用提什么分兵战术、迂回战术等。而且这里没有考虑到光棱坦克的溅射伤害和幻影坦克的隐蔽性，还有作战单位升级的情况&lt;/li&gt;
   &lt;li&gt;事实上，对于真正的坦克战而言，机动性、射程、移动攻击能力、阵型、布坦协同都是十分重要的，而我的程序模拟的是定点攻击，这实际上与火炮别无两样。坦克需要发挥其阵型冲锋、冲锋打散阵型、移动攻击等机动性优势，例如犀牛坦克常常强势冲锋等战术，这是程序无法模拟的。因此，程序仅仅能提供一个基本的战术参考，这替代不了指挥官的战术决策&lt;/li&gt;
   &lt;li&gt;2017年更新：现在看自己以前写的代码感觉是真的丑陋，不过这也说明了自己的代码水平还是有一丢丢进步的:grin:&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>scienceasdf</name></author><category term="兰彻斯特方程" /><category term="蒙特卡洛方法" /><category term="C语言" /><category term="作战效能模拟" /><summary type="html">兰彻斯特方程作为一个连续函数的微分方程组，用于计算战场交换比。因为实际应用中双方单位数目为自然数，离散而不连续，所以编写了相应的程序使用蒙特卡洛方法以模拟计算游戏《红色警戒2》中坦克集群间交战的所有可能交换比和双方的获胜概率。通过计算，得到了一些可以修正兰彻斯特方程的结果，对指挥官的战前分析决策具有实际意义。</summary></entry><entry><title type="html">Download this Theme</title><link href="http://localhost:4000/2015/06/24/download-this-theme/" rel="alternate" type="text/html" title="Download this Theme" /><published>2015-06-24T00:00:00+08:00</published><updated>2015-06-24T00:00:00+08:00</updated><id>http://localhost:4000/2015/06/24/download-this-theme</id><content type="html" xml:base="http://localhost:4000/2015/06/24/download-this-theme/">&lt;p&gt;&lt;strong&gt;&lt;em&gt;Fork&lt;/em&gt;&lt;/strong&gt; or &lt;strong&gt;&lt;em&gt;download&lt;/em&gt;&lt;/strong&gt; the theme &lt;a href=&quot;https://github.com/Jackpon/Jackpon.github.io&quot;&gt;here on GitHub&lt;/a&gt;.&lt;/p&gt;</content><author><name>scienceasdf</name></author><summary type="html">Fork or download the theme here on GitHub.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>scienceasdf</name></author><category term="兰彻斯特方程" /><category term="蒙特卡洛方法" /><category term="C语言" /><category term="作战效能模拟" /><summary type="html">编写程序使用蒙特卡洛方法以模拟计算游戏《红色警戒2》中坦克集群间交战的所有可能交换比和双方的获胜概率。通过计算，得到了一些可以修正兰彻斯特方程的结果，对指挥官的战前分析决策具有实际意义。</summary></entry><entry><title type="html">Download this Theme</title><link href="http://localhost:4000/2015/06/24/download-this-theme/" rel="alternate" type="text/html" title="Download this Theme" /><published>2015-06-24T00:00:00+08:00</published><updated>2015-06-24T00:00:00+08:00</updated><id>http://localhost:4000/2015/06/24/download-this-theme</id><content type="html" xml:base="http://localhost:4000/2015/06/24/download-this-theme/">&lt;p&gt;&lt;strong&gt;&lt;em&gt;Fork&lt;/em&gt;&lt;/strong&gt; or &lt;strong&gt;&lt;em&gt;download&lt;/em&gt;&lt;/strong&gt; the theme &lt;a href=&quot;https://github.com/Jackpon/Jackpon.github.io&quot;&gt;here on GitHub&lt;/a&gt;.&lt;/p&gt;</content><author><name>scienceasdf</name></author><summary type="html">Fork or download the theme here on GitHub.</summary></entry></feed>

@@ -1,24 +1,10 @@
-
-<!doctype html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!DOCTYPE html>
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
@@ -28,8 +14,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +33,7 @@
 
   
   
-  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -70,7 +56,7 @@
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -78,23 +64,23 @@
 
 
 
-<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="无人机,安卓开发,Qt," />
+<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="scienceasdf" type="application/atom+xml" />
+  <meta name="keywords" content="无人机,安卓开发,Qt,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="scienceasdf" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1">
 
 
 
@@ -157,7 +143,7 @@
 
 
 
-  <link rel="canonical" href="http://localhost:4000/"/>
+  <link rel="canonical" href="http://localhost:4000/">
 
 
 
@@ -207,7 +193,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">scienceasdf</span>
         <span class="logo-line-after"><i></i></span>
@@ -239,7 +225,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -251,7 +237,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -263,7 +249,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -344,7 +330,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -408,33 +394,33 @@
 
 <p><strong>探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。</strong></p>
 
-<hr />
+<hr>
 <p>上一篇文章我们讲了螺旋桨无人机动力系统相关的理论，这篇文章说说程序的设计。</p>
 
 <h2 id="数据来源">数据来源</h2>
-<p>所有的数据都来自于APC官网的数据。由于APC螺旋桨高效率的优点（正品APC桨的效率非常高，接近0.9），以及APC在其官网公布了所有型号的理论性能数据文件，故下载所有其官网上的五百个左右性能数据文件，其文件已经存储为固定的格式。先在官网上下载索引文件PER2_TITLEDAT.txt，再用wget批量将所有的螺旋桨性能数据文件下载下来。一共五百来个文件，中间下载是否有连接错误导致文件没有下载完整我也不知道(捂脸）。APC的桨型号很齐全，基本覆盖了航模级别常用的尺寸，从几英寸到26英寸的都有，如果在这些型号以外的型号那就没办法了。。。数据全部都是dat格式的，用std::ifstream读文件非常耗时。对于开发的安卓版本，肯定不会用External folder里面包含所有的数据，只能用Qt资源文件+QDataStream来读写（不支持std::ifstream)，这样速度更快，不过缺点在于如果数据变动、扩展会不太方便。在写完所有程序之后，我还把所有数据迁移到了一个sqlite数据库文件中，并加上索引，访问速度大大提升，不过目前是不想重构sqlite的版本了。</p>
+<p>所有的数据都来自于APC官网的数据。由于APC螺旋桨高效率的优点（正品APC桨的效率非常高，接近0.9），以及APC在其官网公布了所有型号的理论性能数据文件，故下载所有其官网上的五百个左右性能数据文件，其文件已经存储为固定的格式。先在官网上下载索引文件PER2_TITLEDAT.txt，再用wget批量将所有的螺旋桨性能数据文件下载下来。一共五百来个文件，中间下载是否有连接错误导致文件没有下载完整我也不知道<img class="emoji" title=":sweat:" alt=":sweat:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f613.png" height="20" width="20">。APC的桨型号很齐全，基本覆盖了航模级别常用的尺寸，从几英寸到26英寸的都有，如果在这些型号以外的型号那就没办法了。。。数据全部都是dat格式的，用std::ifstream读文件非常耗时。对于开发的安卓版本，肯定不会用External folder里面包含所有的数据，只能用Qt资源文件+QDataStream来读写（不支持std::ifstream)，这样速度更快，不过缺点在于如果数据变动、扩展会不太方便。在写完所有程序之后，我还把所有数据迁移到了一个sqlite数据库文件中，并加上索引，访问速度大大提升，不过目前是不想重构sqlite的版本了。</p>
 
 <h2 id="功能介绍">功能介绍</h2>
 <p>程序分为PC版和移动（安卓）版，主要以介绍PC版为主。PC版共有两个程序：DemoProp，用于计算无刷电机动力系统的工作状况并给出一定的建议；PropChart，用于计算电动和油动动力系统的工作状况并绘制图表。</p>
 <h3 id="筛选功能">筛选功能</h3>
 <p>程序可以对给定的工作状况下的符合要求（如拉力、效率等条件）的螺旋桨进行筛选。DemoProp的筛选界面如下图所示，可以输入电机、电源、减速组等相关信息。
-<img src="http://localhost:4000/assets//blog_images/fig2.png" width="350px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/fig2.png" width="350px" height="200px">
 PropChart的筛选界面如下图所示，这里运用的模型是给定转速或者给定输入功率，这样就既能够用于求解电动系统的工作状况，也适用于求解油动系统的工作状况。
-<img src="http://localhost:4000/assets//blog_images/fig4.png" width="350px" height="200px" /></p>
+<img src="http://localhost:4000/assets//blog_images/fig4.png" width="350px" height="200px"></p>
 
 <h3 id="分析功能">分析功能</h3>
 <p>DemoProp能够对具体的电动系统选配提出指导意见，可以判断当前电机、电源、螺旋桨、减速组的组合究竟是轻载、超载还是正常载荷，如下图所示。
-<img src="http://localhost:4000/assets//blog_images/fig3.png" width="350px" height="200px" /></p>
+<img src="http://localhost:4000/assets//blog_images/fig3.png" width="350px" height="200px"></p>
 
 <h3 id="图表功能">图表功能</h3>
 <p>PropChart能够绘制螺旋桨的拉力曲线、效率曲线等等，这里我用的是QCustomPlot进行绘制，如下图所示。
-<img src="http://localhost:4000/assets//blog_images/fig5.png" width="350px" height="200px" /></p>
+<img src="http://localhost:4000/assets//blog_images/fig5.png" width="350px" height="200px"></p>
 
 <h3 id="移动版">移动版</h3>
 <p>一直苦于在室外进行动力试验的时候，不方便将测量的数据与仿真数据进行校对、不知道动力系统应该怎么调整。感谢伟大的Qt的跨平台特性，让我能够将程序移植到安卓系统上（实际上移植到iOS上也可以，不过就是我没有苹果电脑与手机），极大地方便了在外场的实验。针对手机的一些特点，在功能上进行了一些改进，例如取消筛选功能，并增加绘制能量分析饼图的功能。手机版的交互体验应该比电脑版的好太多了。截图如下：
-<img src="http://localhost:4000/assets//blog_images/scr2.png" width="350px" height="200px" />
-<img src="http://localhost:4000/assets//blog_images/scr3.png" width="350px" height="200px" />
-<img src="http://localhost:4000/assets//blog_images/scr1.png" width="350px" height="200px" /></p>
+<img src="http://localhost:4000/assets//blog_images/scr2.png" width="350px" height="200px">
+<img src="http://localhost:4000/assets//blog_images/scr3.png" width="350px" height="200px">
+<img src="http://localhost:4000/assets//blog_images/scr1.png" width="350px" height="200px"></p>
 <h2 id="数据验证">数据验证</h2>
 <h3 id="静拉力实测数据验证">静拉力实测数据验证</h3>
 <p>测试仿APC12X6E螺旋桨,飓风2820电机，$K_v=920$
@@ -447,7 +433,7 @@ PropChart的筛选界面如下图所示，这里运用的模型是给定转速�
   <li>电脑版的交互体验非常差</li>
   <li>
     <h2 id="电脑版没有对ui进行多分辨率的调整">电脑版没有对UI进行多分辨率的调整</h2>
-    <p><a href="https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg">安卓版程序下载地址</a><br />
+    <p><a href="https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg">安卓版程序下载地址</a><br>
 <a href="https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA">Windows版程序下载地址（32位）</a></p>
   </li>
 </ul>
@@ -569,7 +555,7 @@ PropChart的筛选界面如下图所示，这里运用的模型是给定转速�
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -580,9 +566,7 @@ PropChart的筛选界面如下图所示，这里运用的模型是给定转速�
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/assets/images/avatar.png"
-               alt="scienceasdf" />
+          <img class="site-author-image" itemprop="image" src="/assets/images/avatar.png" alt="scienceasdf">
           <p class="site-author-name" itemprop="name">scienceasdf</p>
            
               <p class="site-description motion-element" itemprop="description">We will bury them !</p>
@@ -691,10 +675,43 @@ PropChart的筛选界面如下图所示，这里运用的模型是给定转速�
 
             
               <div class="post-toc-content">
-    <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#数据来源"> <span class="nav-number">1</span> <span class="nav-text">数据来源</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#功能介绍"> <span class="nav-number">2</span> <span class="nav-text">功能介绍</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#筛选功能"> <span class="nav-number">2.1</span> <span class="nav-text">筛选功能</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#分析功能"> <span class="nav-number">2.2</span> <span class="nav-text">分析功能</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#图表功能"> <span class="nav-number">2.3</span> <span class="nav-text">图表功能</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#移动版"> <span class="nav-number">2.4</span> <span class="nav-text">移动版</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#数据验证"> <span class="nav-number">3</span> <span class="nav-text">数据验证</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#静拉力实测数据验证"> <span class="nav-number">3.1</span> <span class="nav-text">静拉力实测数据验证</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#应用于太阳能飞机动力系统的例子"> <span class="nav-number">3.2</span> <span class="nav-text">应用于太阳能飞机动力系统的例子</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#存在的问题"> <span class="nav-number">4</span> <span class="nav-text">存在的问题</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#电脑版没有对ui进行多分辨率的调整"> <span class="nav-number">5</span> <span class="nav-text">电脑版没有对UI进行多分辨率的调整</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+    <ol class="nav">
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90"> <span class="nav-number">1</span> <span class="nav-text">数据来源</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</ol>
+</li>
+</ol>     <li class="nav-item nav-level-2"> <a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D"> <span class="nav-number">2</span> <span class="nav-text">功能介绍</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#%E7%AD%9B%E9%80%89%E5%8A%9F%E8%83%BD"> <span class="nav-number">2.1</span> <span class="nav-text">筛选功能</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</li>
+</ol> </li>   <li class="nav-item nav-level-3"> <a class="nav-link" href="#%E5%88%86%E6%9E%90%E5%8A%9F%E8%83%BD"> <span class="nav-number">2.2</span> <span class="nav-text">分析功能</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</li>    <li class="nav-item nav-level-3"> <a class="nav-link" href="#%E5%9B%BE%E8%A1%A8%E5%8A%9F%E8%83%BD"> <span class="nav-number">2.3</span> <span class="nav-text">图表功能</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</li>    <li class="nav-item nav-level-3"> <a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%89%88"> <span class="nav-number">2.4</span> <span class="nav-text">移动版</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</li>     <li class="nav-item nav-level-2"> <a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81"> <span class="nav-number">3</span> <span class="nav-text">数据验证</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#%E9%9D%99%E6%8B%89%E5%8A%9B%E5%AE%9E%E6%B5%8B%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81"> <span class="nav-number">3.1</span> <span class="nav-text">静拉力实测数据验证</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</li>
+</ol> </li>   <li class="nav-item nav-level-3"> <a class="nav-link" href="#%E5%BA%94%E7%94%A8%E4%BA%8E%E5%A4%AA%E9%98%B3%E8%83%BD%E9%A3%9E%E6%9C%BA%E5%8A%A8%E5%8A%9B%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BE%8B%E5%AD%90"> <span class="nav-number">3.2</span> <span class="nav-text">应用于太阳能飞机动力系统的例子</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</li>     <li class="nav-item nav-level-2"> <a class="nav-link" href="#%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"> <span class="nav-number">4</span> <span class="nav-text">存在的问题</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</ol>
+</li>     <li class="nav-item nav-level-2"> <a class="nav-link" href="#%E7%94%B5%E8%84%91%E7%89%88%E6%B2%A1%E6%9C%89%E5%AF%B9ui%E8%BF%9B%E8%A1%8C%E5%A4%9A%E5%88%86%E8%BE%A8%E7%8E%87%E7%9A%84%E8%B0%83%E6%95%B4"> <span class="nav-number">5</span> <span class="nav-text">电脑版没有对UI进行多分辨率的调整</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
     </ol>
-  </div>
+  </ol>
+</ol>
+</ol>
+</li>
+</div>
             
 
           </div>
@@ -713,9 +730,9 @@ PropChart的筛选界面如下图所示，这里运用的模型是给定转速�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
-  &copy;  2017 - 
+  ©  2017 - 
   <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -921,4 +938,3 @@ PropChart的筛选界面如下图所示，这里运用的模型是给定转速�
 
 </body>
 </html>
-

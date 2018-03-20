@@ -27,8 +27,9 @@
 。目前的算法能够通过所有我写的测试用例，不过不知道是否有不对的情况。</p>
 <h3 id="与绘制各种根轨迹相关的算法">与绘制各种根轨迹相关的算法</h3>
 <h4 id="多项式求根算法">多项式求根算法</h4>
-<p>非常美妙的事情是，NDK虽然是个大坑，不过Eigen库还是能够使用的。
-多项式的求根可以转化为它的companion matrix的特征值问题来求解：$p(t)=c_{0}+c_{1}t+\cdots +c_{n-1}t^{n-1}+t^{n}$的companion matrix是<br />
+<p>非常美妙的事情是，NDK虽然是个大坑，不过Eigen库还是能够使用的。<br />
+多项式的求根可以转化为它的companion matrix的特征值问题来求解：<br />
+$p(t)=c_{0}+c_{1}t+\cdots +c_{n-1}t^{n-1}+t^{n}$的companion matrix是<br />
 <script type="math/tex">% <![CDATA[
 \begin{equation} \tag{a}
 C(p)=\begin{bmatrix}
@@ -55,12 +56,10 @@ C(p)=\begin{bmatrix}
 
 <h3 id="计算响应的算法">计算响应的算法</h3>
 <p>这个一开始想用矩阵的幂来进行计算，但是发现许多时候线性系统的$\mathbf{A}$矩阵都是奇异的，没办法，
-还是只能用RK45算法，好在现在手机处理器性能很强，没有任何卡的迹象</p>
+还是只能用RK45算法，好在现在手机处理器性能很强，没有任何卡的迹象。</p>
 
 <h2 id="处理用户输入">处理用户输入</h2>
-<p>为了让用户能够有更好的交互体验，设计的输入格式比较宽送。处理用户输入用了Boost::tokenizer库，这是
-一个Header-only的库，不需要编译（当然我也自己编译了Boost库，除了Math库编译不了，别的都可以编译，
-具体能不能用还没有认真试过）。NDK真的是一个大坑，GOOGLE官方对GCC值支持到GCC4.9，然而Qt for Android是GCC编译的，而GCC4.9对C++14支持不全不说，有的C++11的东西都没法用，比如std::stod,std::to_string，所以先自己实现一个。。。</p>
+<p>为了让用户能够有更好的交互体验，设计的输入格式比较宽送。处理用户输入用了Boost::tokenizer库，这是一个Header-only的库，不需要编译（当然我也自己编译了Boost库，除了Math库编译不了，别的都可以编译，具体能不能用还没有认真试过）。NDK真的是一个大坑，GOOGLE官方对GCC值支持到GCC4.9，然而Qt for Android是GCC编译的，而GCC4.9对C++14支持不全不说，有的C++11的东西都没法用，比如std::stod,std::to_string，所以先自己实现一个。。。</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifdef FOR_MOBILE
 </span><span class="k">namespace</span> <span class="n">std</span> <span class="p">{</span>
 
@@ -113,11 +112,12 @@ C(p)=\begin{bmatrix}
     <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>这段代码的作用是将用户输入分割，并且返回成一个多项式。在这里我自己实现了一个多项式的std::vector<double>用来表示多项式的系数，并实现乘法运算convolution，并且在线性系统的类中也有两个多项式成员：传递函数的分子和分母。  
- 实际上使用Boost::tokenizer是一种比较简单可行的方式，也可以用Boost::splitter或者用正则表达式匹配甚至直接自己写一个简单parser都可以实现功能。</double></p>
+<p>这段代码的作用是将用户输入分割，并且返回成一个多项式。在这里我自己实现了一个多项式的std::vector<double>用来表示多项式的系数，并实现乘法运算convolution，并且在线性系统的类中也有两个多项式成员：传递函数的分子和分母。</double></p>
+
+<p>实际上使用Boost::tokenizer是一种比较简单可行的方式，也可以用Boost::splitter或者用正则表达式匹配甚至直接自己写一个简单parser都可以实现功能。</p>
 
 <h2 id="多项式的富文本输出">多项式的富文本输出</h2>
-<p>为了让用户直观地知道输入的格式代表的多项式，应该在QLabel中将多项式以富文本的形式输出，而且应该<strong><em>同时输出多项式相乘和多项式展开的形式</em></strong>，这里多项式输出时为了追求完美，符合平时的习惯，应该特别注意系数为0,1以及正负号的问题。具体代码太长，见GitHub仓库。</p>
+<p>为了让用户直观地知道输入的格式代表的多项式，应该在QLabel中将多项式以富文本的形式输出，而且应该<strong><em>同时输出多项式相乘和多项式展开的形式</em></strong>，这里多项式输出时为了追求完美，符合平时的习惯，应该特别注意系数为0,1以及正负号的问题。具体代码太长，见<a href="https://github.com/scienceasdf/easyAuto">GitHub仓库</a>。</p>
 <h2 id="截图">截图</h2>
 <p><img src="http://localhost:4000/assets//blog_images/shot1.png" width="350px" height="200px" />
 <img src="http://localhost:4000/assets//blog_images/shot2.png" width="350px" height="200px" />
@@ -130,6 +130,11 @@ C(p)=\begin{bmatrix}
 QtCharts，发现这个模块优点很多，而且在手机上显示的效果很好</li>
   <li>虽然GOOGLE的NDK非常坑，不过有一个替代方案据说还是不错的：Crystax NDK，不过自从2017年就没有发布新版本了，社区也不太活跃（GitHub上的代码倒还在改）</li>
 </ul>
+
+<hr />
+
+<p><a href="https://github.com/scienceasdf/easyAuto/releases/download/EasyAutoV1.1/easyAuto.apk">APK下载地址（GitHub镜像）</a>
+<a href="https://pan.baidu.com/s/1c4ewHnM">APK下载地址（百度网盘镜像）</a></p>
 ]]></content>
       <categories>
         
@@ -197,7 +202,7 @@ QtCharts，发现这个模块优点很多，而且在手机上显示的效果很
 <span class="p">{</span>
     <span class="c1">// assume in the eastern semi-sphere
 </span>    <span class="c1">// expressed in UTC+8 time
-</span>    <span class="c1">//longtitude expressed in degrees
+</span>    <span class="c1">// longtitude expressed in degrees
 </span>    <span class="kt">int</span> <span class="n">dt</span><span class="o">=</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="mf">120.0</span><span class="o">-</span><span class="n">longitude</span><span class="p">));</span>
     <span class="n">timeType</span> <span class="n">t1</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
     <span class="n">t1</span><span class="o">+=</span><span class="n">dt</span><span class="p">;</span>
@@ -209,7 +214,7 @@ QtCharts，发现这个模块优点很多，而且在手机上显示的效果很
 \begin{equation}
 h=15\times (ST-12)
 \end{equation}
-$ST$为真太阳时。然而平常我们通常都使用北京时间，因此太阳时角的计算公式如下：（还是代码比公式直观）</p>
+$ST$为真太阳时。然而平常我们通常都使用北京时间，因此太阳时角的计算公式如下：（还是感觉代码比公式更直观）</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf">getHourAngle</span><span class="p">(</span><span class="kt">double</span> <span class="n">longitude</span><span class="p">,</span> <span class="k">const</span> <span class="n">timeType</span><span class="o">&amp;</span> <span class="n">t1</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="c1">// The results return the angle expressed in degrees
@@ -254,7 +259,7 @@ $ST$为真太阳时。然而平常我们通常都使用北京时间，因此太�
 \end{equation}</p>
 
 <h2 id="程序相关">程序相关</h2>
-<p>前面的代码也可以看出，这个问题需要自己实现时间类timeType和日期类dateType，包括一些基本的运算操作，不过也可以用Boost库的或者用Qt的。编程的时候需要特别小心角度与弧度的换算。在安卓程序中需要实现对设备的经纬度定位，还是要感谢Qt，让一切变得十分方便。
+<p>前面的代码也可以看出，这个问题需要自己实现时间类timeType和日期类dateType，包括一些基本的运算操作，不过也可以用Boost库的或者用Qt的。编程的时候需要特别小心角度与弧度的换算。在安卓程序中需要实现对设备的经纬度定位，还是要感谢Qt，让一切变得十分方便。<br />
 类Widget作为主窗体，定义如下：</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Widget</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QWidget</span>
 <span class="p">{</span>
@@ -352,7 +357,7 @@ $ST$为真太阳时。然而平常我们通常都使用北京时间，因此太�
 <p>上一篇文章我们讲了螺旋桨无人机动力系统相关的理论，这篇文章说说程序的设计。</p>
 
 <h2 id="数据来源">数据来源</h2>
-<p>所有的数据都来自于APC官网的数据。由于APC螺旋桨高效率的优点（正品APC桨的效率非常高，接近0.9），以及APC在其官网公布了所有型号的理论性能数据文件，故下载所有其官网上的五百个左右性能数据文件，其文件已经存储为固定的格式。先在官网上下载索引文件PER2_TITLEDAT.txt，再用wget批量将所有的螺旋桨性能数据文件下载下来。一共五百来个文件，中间下载是否有连接错误导致文件没有下载完整我也不知道(捂脸）。APC的桨型号很齐全，基本覆盖了航模级别常用的尺寸，从几英寸到26英寸的都有，如果在这些型号以外的型号那就没办法了。。。数据全部都是dat格式的，用std::ifstream读文件非常耗时。对于开发的安卓版本，肯定不会用External folder里面包含所有的数据，只能用Qt资源文件+QDataStream来读写（不支持std::ifstream)，这样速度更快，不过缺点在于如果数据变动、扩展会不太方便。在写完所有程序之后，我还把所有数据迁移到了一个sqlite数据库文件中，并加上索引，访问速度大大提升，不过目前是不想重构sqlite的版本了。</p>
+<p>所有的数据都来自于APC官网的数据。由于APC螺旋桨高效率的优点（正品APC桨的效率非常高，接近0.9），以及APC在其官网公布了所有型号的理论性能数据文件，故下载所有其官网上的五百个左右性能数据文件，其文件已经存储为固定的格式。先在官网上下载索引文件PER2_TITLEDAT.txt，再用wget批量将所有的螺旋桨性能数据文件下载下来。一共五百来个文件，中间下载是否有连接错误导致文件没有下载完整我也不知道:sweat:。APC的桨型号很齐全，基本覆盖了航模级别常用的尺寸，从几英寸到26英寸的都有，如果在这些型号以外的型号那就没办法了。。。数据全部都是dat格式的，用std::ifstream读文件非常耗时。对于开发的安卓版本，肯定不会用External folder里面包含所有的数据，只能用Qt资源文件+QDataStream来读写（不支持std::ifstream)，这样速度更快，不过缺点在于如果数据变动、扩展会不太方便。在写完所有程序之后，我还把所有数据迁移到了一个sqlite数据库文件中，并加上索引，访问速度大大提升，不过目前是不想重构sqlite的版本了。</p>
 
 <h2 id="功能介绍">功能介绍</h2>
 <p>程序分为PC版和移动（安卓）版，主要以介绍PC版为主。PC版共有两个程序：DemoProp，用于计算无刷电机动力系统的工作状况并给出一定的建议；PropChart，用于计算电动和油动动力系统的工作状况并绘制图表。</p>
@@ -474,14 +479,11 @@ P=P(v,n)=C_P(v,n)\cdot\rho n^3 D^5\\
 \end{array}
 \right.
 \end{equation}</script><br />
-$C_T$是拉力系数、$C_P$是功率系数，且有$P=M\cdot\frac{2\pi n}{60}$，$\eta=\frac{Tv}{P}$。
+$C_T$是拉力系数、$C_P$是功率系数，且有$P=M\cdot\frac{2\pi n}{60}$，$\eta=\frac{Tv}{P}$。<br />
 定义一个无量纲参数进动比(advance ratio)
 \begin{equation} J=\frac{v}{nD}\end{equation}
-$D$为螺旋桨直径。通常，$\eta$与$J$的变化关系如图所示。在进行初步分析的手工计算中，可以认为$J$
-是一个相似性判定的参数，如果同一螺旋桨，工作在1状况$(v_1,n_1)$与2状况$(v_2,n_2)$，满足进动比相同，即
-$\frac{v_1}{n_1}=\frac{v_2}{n_2}$，则可以认为工作状况下的效率$\eta$、拉力系数$C_T$、功率系数$C_P$均相同。如果要估算某一工作状况
-$(v,n)$的工作参数，仅需先计算进动比$J=\frac{v}{nD}$，然后查找对应进动比的相关$\eta,C_T\text{和}C_P$，然后按照式(\ref{basics})
-计算拉力、转矩、效率与功率。
+$D$为螺旋桨直径。<br />
+通常，$\eta$与$J$的变化关系如下图所示。在进行初步分析的手工计算中，可以认为$J$是一个相似性判定的参数，如果同一螺旋桨，工作在1状况$(v_1,n_1)$与2状况$(v_2,n_2)$，满足进动比相同，即$\frac{v_1}{n_1}=\frac{v_2}{n_2}$，则可以认为工作状况下的效率$\eta$、拉力系数$C_T$、功率系数$C_P$均相同。如果要估算某一工作状况$(v,n)$的工作参数，仅需先计算进动比$J=\frac{v}{nD}$，然后查找对应进动比的相关$\eta,C_T\text{和}C_P$，然后按照式(\ref{basics})计算拉力、转矩、效率与功率。
 <img src="http://localhost:4000/assets//blog_images/fig1.png" width="350px" height="200px" />
 实际上，由于低雷诺数的影响，对于进动比相同的两种工作状况，$\eta,C_T\text{和}C_P$并不一定对应相等。通常高雷诺数的工作状况下螺旋桨的工作效率更高。</p>
 <h3 id="电源模型">电源模型</h3>
@@ -505,20 +507,19 @@ $U_m,I_m$为最大功率点处的太阳能电池的输出电压与电流.</p>
 <h3 id="非平凡模型">非平凡模型</h3>
 <h4 id="引入减速组">引入减速组</h4>
 <p>设减速组减速比为$K$，机械效率为$\eta_g$，则有<br />
-<script type="math/tex">\begin{equation}
+<script type="math/tex">\begin{equation} \tag{c}
 \left\{
 \begin{array}{l}
 n_{prop}=\frac{n_{mot}}{K}\\
 T_{prop}=K\cdot T_{mot}\cdot\eta_g
 \end{array}
 \right.
-\end{equation}</script><br />
-考虑$\eta_g=1$的理想减速器，与电机形成的系统可以等效为一个$K_v$值折合为原电机$K_v$值$\frac{1}{K}$
-的新电机。通常高效率螺旋桨的特征都是低负载、大直径、大桨距（相对于直径）、低速运行，所以为了动力系统的效率最大化应该用大直径螺旋桨。由于带动大直径螺旋桨所需的转矩大，如果需要使电机工作在最大电流以下，可以使用减速组或使用低$K_v$值的电机。然而低$K_v$值得电机内阻会比高$K_v$值得电机内阻大，使用减速组会有机械能损失。而且大直径螺旋桨的重量大，且能驱动大直径螺旋桨的电机或减速器通常重量也较大。故具体应选用的方案，应考虑效率、重量、成本、加工装配难度等多方面考虑。</p>
+\end{equation}</script>
+考虑$\eta_g=1$的理想减速器，与电机形成的系统可以等效为一个$K_v$值折合为原电机$K_v$值$\frac{1}{K}$的新电机。通常高效率螺旋桨的特征都是低负载、大直径、大桨距（相对于直径）、低速运行，所以为了动力系统的效率最大化应该用大直径螺旋桨。由于带动大直径螺旋桨所需的转矩大，如果需要使电机工作在最大电流以下，可以使用减速组或使用低$K_v$值的电机。然而低$K_v$值得电机内阻会比高$K_v$值得电机内阻大，使用减速组会有机械能损失。而且大直径螺旋桨的重量大，且能驱动大直径螺旋桨的电机或减速器通常重量也较大。故具体应选用的方案，应考虑效率、重量、成本、加工装配难度等多方面考虑。</p>
 
 <h4 id="单电机驱动两个螺旋桨">单电机驱动两个螺旋桨</h4>
 <p>在这种情况下，有<br />
-<script type="math/tex">\begin{equation} \label{eqs:12} \tag{c}
+<script type="math/tex">\begin{equation} \label{eqs:12} \tag{d}
 \left\{
 \begin{array}{l}
 n_{prop}=n_{mot}\\
@@ -593,7 +594,7 @@ M_{prop}=\frac{M_{mot}}{2}
 
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<p><strong>兰彻斯特方程作为一个连续函数的微分方程组，用于计算战场交换比。因为实际应用中双方单位数目为自然数，离散而不连续，所以编写了相应的程序使用蒙特卡洛方法以模拟计算游戏《红色警戒2》中坦克集群间交战的所有可能交换比和双方的获胜概率。通过计算，得到了一些可以修正兰彻斯特方程的结果，对指挥官的战前分析决策具有实际意义。</strong></p>
+<p><strong>编写程序使用蒙特卡洛方法以模拟计算游戏《红色警戒2》中坦克集群间交战的所有可能交换比和双方的获胜概率。通过计算，得到了一些可以修正兰彻斯特方程的结果，对指挥官的战前分析决策具有实际意义。</strong></p>
 
 <hr />
 <p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
@@ -639,7 +640,7 @@ M_{prop}=\frac{M_{mot}}{2}
 <span class="k">typedef</span> <span class="k">struct</span> <span class="n">TANK</span> <span class="n">tank</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>剩下的就是编写程序模拟作战过程了。以一个循环的计数器作为时间线，坦克在最初随意地寻找攻击目标，在锁定目标之后便每间隔一次装填时间完成一次对目标的进攻（以及每经过一次回血周期便恢复一定的血量）。在红警中可能会出现许多个坦克攻击同一辆坦克，导致坦克在毁灭的时刻遭受了远远大于其残余血量的伤害，这个在模拟中也要得到体现。因此，临死一击以及临死所受伤害是一个相对不太好处理的地方。程序里把常见的八种坦克的数据收录进去：灰熊坦克、犀牛坦克、天启坦克、幻影坦克、光棱坦克、遥控坦克、坦克杀手，用户不用手动输入坦克的属性。根据蒙特卡洛方法的思想，对作战过程总共进行1500次模拟。</p>
+<p>剩下的就是编写程序模拟作战过程了。以一个循环的计数器作为时间线，坦克在最初随意地寻找攻击目标，在锁定目标之后便每间隔一次装填时间完成一次对目标的进攻（以及每经过一次回血周期便恢复一定的血量）。在红警中可能会出现许多个坦克攻击同一辆坦克，导致坦克在毁灭的时刻遭受了远远大于其残余血量的伤害，这个在模拟中也要得到体现。因此，临死一击以及临死所受伤害是一个相对不太好处理的地方。程序里把常见的八种坦克的数据收录进去：灰熊坦克、犀牛坦克、天启坦克、幻影坦克、光棱坦克、遥控坦克、坦克杀手、武装采矿车，用户不用手动输入坦克的属性。根据蒙特卡洛方法的思想，对作战过程总共进行1500次模拟。</p>
 
 <p>程序运行的截图如下所示：
 <img src="http://localhost:4000/assets//blog_images/tank1.png" width="450px" height="200px" />

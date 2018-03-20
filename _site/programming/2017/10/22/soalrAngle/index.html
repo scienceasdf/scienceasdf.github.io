@@ -435,7 +435,7 @@
 <span class="p">{</span>
     <span class="c1">// assume in the eastern semi-sphere
 </span>    <span class="c1">// expressed in UTC+8 time
-</span>    <span class="c1">//longtitude expressed in degrees
+</span>    <span class="c1">// longtitude expressed in degrees
 </span>    <span class="kt">int</span> <span class="n">dt</span><span class="o">=</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="mf">120.0</span><span class="o">-</span><span class="n">longitude</span><span class="p">));</span>
     <span class="n">timeType</span> <span class="n">t1</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
     <span class="n">t1</span><span class="o">+=</span><span class="n">dt</span><span class="p">;</span>
@@ -447,7 +447,7 @@
 \begin{equation}
 h=15\times (ST-12)
 \end{equation}
-$ST$为真太阳时。然而平常我们通常都使用北京时间，因此太阳时角的计算公式如下：（还是代码比公式直观）</p>
+$ST$为真太阳时。然而平常我们通常都使用北京时间，因此太阳时角的计算公式如下：（还是感觉代码比公式更直观）</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf">getHourAngle</span><span class="p">(</span><span class="kt">double</span> <span class="n">longitude</span><span class="p">,</span> <span class="k">const</span> <span class="n">timeType</span><span class="o">&amp;</span> <span class="n">t1</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="c1">// The results return the angle expressed in degrees
@@ -492,7 +492,7 @@ $ST$为真太阳时。然而平常我们通常都使用北京时间，因此太�
 \end{equation}</p>
 
 <h2 id="程序相关">程序相关</h2>
-<p>前面的代码也可以看出，这个问题需要自己实现时间类timeType和日期类dateType，包括一些基本的运算操作，不过也可以用Boost库的或者用Qt的。编程的时候需要特别小心角度与弧度的换算。在安卓程序中需要实现对设备的经纬度定位，还是要感谢Qt，让一切变得十分方便。
+<p>前面的代码也可以看出，这个问题需要自己实现时间类timeType和日期类dateType，包括一些基本的运算操作，不过也可以用Boost库的或者用Qt的。编程的时候需要特别小心角度与弧度的换算。在安卓程序中需要实现对设备的经纬度定位，还是要感谢Qt，让一切变得十分方便。<br />
 类Widget作为主窗体，定义如下：</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Widget</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QWidget</span>
 <span class="p">{</span>

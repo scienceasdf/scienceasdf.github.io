@@ -53,7 +53,7 @@ timeType getNoonTime(double longitude)
 {
     // assume in the eastern semi-sphere
     // expressed in UTC+8 time
-    //longtitude expressed in degrees
+    // longtitude expressed in degrees
     int dt=static_cast<int> (4*(120.0-longitude));
     timeType t1(12,0);
     t1+=dt;
@@ -65,7 +65,7 @@ timeType getNoonTime(double longitude)
 \begin{equation}
 h=15\times (ST-12)
 \end{equation}
-$ST$为真太阳时。然而平常我们通常都使用北京时间，因此太阳时角的计算公式如下：（还是代码比公式直观）
+$ST$为真太阳时。然而平常我们通常都使用北京时间，因此太阳时角的计算公式如下：（还是感觉代码比公式更直观）
 ```c++
 double getHourAngle(double longitude, const timeType& t1)
 {
@@ -107,7 +107,7 @@ double getHourAngle(double longitude, const timeType& t1)
 \end{equation}
 
 ## 程序相关
-前面的代码也可以看出，这个问题需要自己实现时间类timeType和日期类dateType，包括一些基本的运算操作，不过也可以用Boost库的或者用Qt的。编程的时候需要特别小心角度与弧度的换算。在安卓程序中需要实现对设备的经纬度定位，还是要感谢Qt，让一切变得十分方便。
+前面的代码也可以看出，这个问题需要自己实现时间类timeType和日期类dateType，包括一些基本的运算操作，不过也可以用Boost库的或者用Qt的。编程的时候需要特别小心角度与弧度的换算。在安卓程序中需要实现对设备的经纬度定位，还是要感谢Qt，让一切变得十分方便。  
 类Widget作为主窗体，定义如下：
 ```c++
 class Widget : public QWidget
