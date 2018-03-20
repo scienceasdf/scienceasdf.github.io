@@ -29,6 +29,14 @@
 <lastmod>2017-11-16T00:00:00+08:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/programming/2017/12/16/swipeGesture/</loc>
+<lastmod>2017-12-16T00:00:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/programming/2017/12/17/updateCheck/</loc>
+<lastmod>2017-12-17T00:00:00+08:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/category/</loc>
 </url>
 <url>
@@ -54,5 +62,8 @@
 </url>
 <url>
 <loc>http://localhost:4000/assets/lib/jquery_lazyload/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/page2/</loc>
 </url>
 </urlset>

@@ -2,6 +2,619 @@
 <search>
   
     <entry>
+      <title><![CDATA[实现Qt程序的新版本检查]]></title>
+      <url>/programming/2017/12/17/updateCheck/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>利用GitHub提供的API,实现程序的新版本检查功能。</strong></p>
+
+<hr />
+
+<h2 id="github的开发者api">GitHub的开发者API</h2>
+<p>对于GitHub上的仓库，我们可以发布Release，每个Release除了源代码以外还可以附加编译后的二进制文件。发布Release之后便可以通过API获取一些有用的信息。不过需要注意的是，如下图所示，发布的Release是不能勾选“This is a pre-release”选项的。
+<img src="http://localhost:4000/assets//blog_images/tank1.png" width="450px" height="200px" />
+例如对于我的easyAuto仓库，那么API是<a href="https://api.github.com/repos/scienceasdf/accoutAssist/releases/latest">https://api.github.com/repos/scienceasdf/accoutAssist/releases/latest</a>。在浏览器中打开，可以看出这里提供json格式的许多信息。当然，如果是pre-release版本的话，就会得到下面的结果：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "message": "Not Found",
+  "documentation_url": "https://developer.github.com/v3/repos/releases/#get-the-latest-release"
+}
+</code></pre></div></div>
+<h2 id="qt的https请求与处理">Qt的HTTPS请求与处理</h2>
+<p>首先需要在.pro文件中加上这两句，分别是加上网络模块和版本号的宏定义：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">QT</span>      <span class="o">+=</span> <span class="p">...</span> <span class="n">network</span>
+<span class="n">DEFINES</span> <span class="o">+=</span> <span class="s">"VERSION=2.2"</span>
+</code></pre></div></div>
+<p>接下来就是具体实现的代码：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;QtNetwork&gt;
+</span><span class="c1">// ...
+</span><span class="kt">void</span> <span class="n">accountAssit</span><span class="o">::</span><span class="n">on_checkUpdate_clicked</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">QNetworkAccessManager</span> <span class="n">networkManager</span><span class="p">;</span>
+
+
+    <span class="n">QUrl</span> <span class="n">url</span><span class="p">(</span><span class="s">"https://api.github.com/repos/scienceasdf/accoutAssist/releases/latest"</span><span class="p">);</span>
+    <span class="n">QNetworkRequest</span> <span class="n">request</span><span class="p">;</span>
+    <span class="n">request</span><span class="p">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+
+    <span class="n">m_currentReply</span> <span class="o">=</span> <span class="n">networkManager</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>  <span class="c1">// GET
+</span>    <span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">networkManager</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">finished</span><span class="p">(</span><span class="n">QNetworkReply</span><span class="o">*</span><span class="p">)),</span> <span class="k">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">onResultUpdate</span><span class="p">(</span><span class="n">QNetworkReply</span><span class="o">*</span><span class="p">)));</span>
+    <span class="n">QEventLoop</span> <span class="n">eventLoop</span><span class="p">;</span>
+    <span class="n">QObject</span><span class="o">::</span><span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">networkManager</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QNetworkAccessManager</span><span class="o">::</span><span class="n">finished</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">eventLoop</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QEventLoop</span><span class="o">::</span><span class="n">quit</span><span class="p">);</span>
+    <span class="n">eventLoop</span><span class="p">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">accountAssit</span><span class="o">::</span><span class="n">onResultUpdate</span><span class="p">(</span><span class="n">QNetworkReply</span> <span class="o">*</span> <span class="n">reply</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_currentReply</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span> <span class="o">!=</span> <span class="n">QNetworkReply</span><span class="o">::</span><span class="n">NoError</span><span class="p">){</span>
+        <span class="c1">//qDebug()&lt;&lt;"ERROR!";
+</span>        <span class="k">return</span><span class="p">;</span>  <span class="c1">// ...only in a blog post
+</span>    <span class="p">}</span>
+
+    <span class="n">QString</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">QString</span><span class="p">)</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">readAll</span><span class="p">();</span>
+    <span class="n">qDebug</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">data</span><span class="p">;</span>
+    <span class="n">QJsonDocument</span> <span class="n">d</span> <span class="o">=</span> <span class="n">QJsonDocument</span><span class="o">::</span><span class="n">fromJson</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">toUtf8</span><span class="p">());</span>
+    <span class="n">QJsonObject</span> <span class="n">sett2</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">object</span><span class="p">();</span>
+    <span class="n">QJsonValue</span> <span class="n">value</span> <span class="o">=</span> <span class="n">sett2</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="s">"tag_name"</span><span class="p">));</span>
+    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">value</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">toDouble</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">VERSION</span><span class="p">){</span>
+        <span class="n">QMessageBox</span><span class="o">::</span><span class="n">StandardButton</span> <span class="n">button</span><span class="p">;</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="n">QMessageBox</span><span class="o">::</span><span class="n">question</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s">"有新的版本"</span><span class="p">),</span>
+                <span class="n">QString</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s">"是否下载新的版本？"</span><span class="p">)),</span>
+                <span class="n">QMessageBox</span><span class="o">::</span><span class="n">Yes</span> <span class="o">|</span> <span class="n">QMessageBox</span><span class="o">::</span><span class="n">No</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">button</span> <span class="o">==</span> <span class="n">QMessageBox</span><span class="o">::</span><span class="n">Yes</span><span class="p">){</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="n">QMessageBox</span><span class="o">::</span><span class="n">information</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">"更新检查"</span><span class="p">,</span><span class="s">"此版本已经是最新发布版本"</span><span class="p">,</span> <span class="n">QMessageBox</span><span class="o">::</span><span class="n">Yes</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>在代码中，accountAssist是一个窗体，里面有一个类型为QNetworkReply*的重要成员：m_currentReply，用来保存网络是否正常的状态。当在获取HTTPS内容时，使用QEventLoop不阻塞GUI线程。当全文获取之后，转到槽函数onResultUpdate，对收到的所有内容进行处理。Qt自带了QJson的处理，非常的方便。如果发现最新版的release版本号大于宏定义的版本号，那么就提示有新的版本。不过这个也太简单粗暴了，如果版本号是从2.1更新到了2.10，这种方法就不奏效。解决方法也很简单，定义大版本号和小版本号，分别比较。比如“2.10”，QString自带了split函数，其实之前做easyAuto还可以用这个方法</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">QStringList</span> <span class="n">list</span> <span class="o">=</span> <span class="n">QString</span><span class="p">(</span><span class="s">"2.10"</span><span class="p">).</span><span class="n">split</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="n">foreach</span><span class="p">(</span><span class="n">QString</span> <span class="n">str</span><span class="p">,</span> <span class="n">list</span><span class="p">){</span>
+	<span class="c1">//...
+</span><span class="p">}</span>
+</code></pre></div></div>
+<p>最后值得注意的是，在安卓程序里，必须要SSL连接，所以需要在网上下载libcrypto.so和libssl.so，并在.pro文件里加上</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>android {
+  ANDROID_EXTRA_LIBS += $$PWD/libcrypto.so
+  ANDROID_EXTRA_LIBS += $$PWD/libssl.so
+}
+</code></pre></div></div>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 网络 </tag>
+        
+          <tag> 安卓开发 </tag>
+        
+          <tag> Qt </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[实现Qt程序的滑动手势]]></title>
+      <url>/programming/2017/12/16/swipeGesture/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>Copy了一份实现单指滑动手势的源码。</strong></p>
+
+<hr />
+<p>Qt的SwipeGesture居然是要三个手指同时操作（这里是说用widget而不是用quick控件，实际上quick控件才是Qt为移动开发打造的）。把源码拿出来看了半天，看是能够看懂，可以就是改了就无法编译了。在GitHub上用搜索功能，终于找到了<a href="https://github.com/digifant/multidisplay-app/blob/b0921e1b0f0c728c58427029374bef072d0c4382/src/mobile/SwipeGestureRecognizer.h">直接可用的方案</a>（神奇的GitHub）：<br />
+头文件,这里面的宏定义MINIMUM_DISTANCE = 50是可以根据需要修改的</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// customGesture.h
+</span><span class="cp">#ifndef CUSTOMGESTURE_H
+#define CUSTOMGESTURE_H
+#include &lt;QGesture&gt;
+#include &lt;QGestureRecognizer&gt;
+#include &lt;QSwipeGesture&gt;
+</span>
+<span class="cm">/**
+
+ * @brief The SwipeGestureRecognizer class
+
+ * needed because the defalt implementation of swipe is a little bit odd: it only triggers on 3 finger swipes! (5.3)
+
+ *
+
+ * http://developer.android.com/design/patterns/gestures.html
+
+ * http://qt-project.org/doc/qt-5/gestures-overview.html
+
+ */</span>
+
+<span class="k">class</span> <span class="nc">SwipeGestureRecognizer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QGestureRecognizer</span>
+
+<span class="p">{</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+    <span class="n">SwipeGestureRecognizer</span><span class="p">();</span>
+
+
+
+
+
+<span class="k">private</span><span class="o">:</span>
+
+    <span class="cp">#ifdef FOR_DESKTOP
+</span>   <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">MINIMUM_DISTANCE</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+<span class="cp">#endif
+#ifdef FOR_MOBILE
+</span>   <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">MINIMUM_DISTANCE</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+<span class="cp">#endif
+</span>
+
+   <span class="k">typedef</span> <span class="n">QGestureRecognizer</span> <span class="n">parent</span><span class="p">;</span>
+
+
+
+   <span class="kt">bool</span> <span class="n">IsValidMove</span><span class="p">(</span><span class="kt">int</span> <span class="n">dx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dy</span><span class="p">);</span>
+
+
+
+   <span class="n">qreal</span> <span class="n">ComputeAngle</span><span class="p">(</span><span class="kt">int</span> <span class="n">dx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dy</span><span class="p">);</span>
+
+
+
+   <span class="k">virtual</span> <span class="n">QGesture</span><span class="o">*</span> <span class="n">create</span><span class="p">(</span><span class="n">QObject</span><span class="o">*</span> <span class="n">pTarget</span><span class="p">);</span>
+
+
+
+   <span class="k">virtual</span> <span class="n">QGestureRecognizer</span><span class="o">::</span><span class="n">Result</span> <span class="n">recognize</span><span class="p">(</span><span class="n">QGesture</span><span class="o">*</span> <span class="n">pGesture</span><span class="p">,</span> <span class="n">QObject</span> <span class="o">*</span><span class="n">pWatched</span><span class="p">,</span> <span class="n">QEvent</span> <span class="o">*</span><span class="n">pEvent</span><span class="p">);</span>
+
+
+
+   <span class="kt">void</span> <span class="n">reset</span> <span class="p">(</span><span class="n">QGesture</span> <span class="o">*</span><span class="n">pGesture</span><span class="p">);</span>
+
+<span class="p">};</span>
+
+
+
+
+
+<span class="k">class</span> <span class="nc">SwipeGestureUtil</span> <span class="p">{</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+    <span class="k">static</span> <span class="n">QSwipeGesture</span><span class="o">::</span><span class="n">SwipeDirection</span> <span class="n">GetHorizontalDirection</span><span class="p">(</span><span class="n">QSwipeGesture</span> <span class="o">*</span><span class="n">pSwipeGesture</span><span class="p">);</span>
+
+    <span class="k">static</span> <span class="n">QSwipeGesture</span><span class="o">::</span><span class="n">SwipeDirection</span> <span class="n">GetVerticalDirection</span><span class="p">(</span><span class="n">QSwipeGesture</span> <span class="o">*</span><span class="n">pSwipeGesture</span><span class="p">);</span>
+
+
+<span class="p">};</span>
+
+<span class="cp">#endif // CUSTOMGESTURE_H
+</span></code></pre></div></div>
+<hr />
+<p>源文件</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// customGesture.cpp
+</span><span class="cp">#include &lt;QMouseEvent&gt;
+</span>
+<span class="cp">#include &lt;QDebug&gt;
+</span>
+
+
+<span class="cp">#include &lt;cmath&gt;
+</span>
+<span class="cp">#include "customgesture.h"
+</span>
+
+
+<span class="n">SwipeGestureRecognizer</span><span class="o">::</span><span class="n">SwipeGestureRecognizer</span><span class="p">()</span>
+
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+
+
+<span class="kt">bool</span>
+
+<span class="n">SwipeGestureRecognizer</span><span class="o">::</span><span class="n">IsValidMove</span><span class="p">(</span><span class="kt">int</span> <span class="n">dx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dy</span><span class="p">)</span>
+
+<span class="p">{</span>
+
+   <span class="c1">// The moved distance is to small to count as not just a glitch.
+</span>
+   <span class="k">if</span> <span class="p">((</span><span class="n">qAbs</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">MINIMUM_DISTANCE</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">qAbs</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">MINIMUM_DISTANCE</span><span class="p">))</span> <span class="p">{</span>
+
+      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+
+   <span class="p">}</span>
+
+
+
+   <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+
+
+
+
+<span class="c1">// virtual
+</span>
+<span class="n">QGesture</span><span class="o">*</span>
+
+<span class="n">SwipeGestureRecognizer</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">QObject</span><span class="o">*</span> <span class="n">pTarget</span><span class="p">)</span>
+
+<span class="p">{</span>
+
+   <span class="c1">//qDebug("SwipeGestureRecognizer::create() called");
+</span>
+   <span class="n">QGesture</span> <span class="o">*</span><span class="n">pGesture</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QSwipeGesture</span><span class="p">(</span><span class="n">pTarget</span><span class="p">);</span>
+
+   <span class="k">return</span> <span class="n">pGesture</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+
+
+
+
+<span class="c1">// virtual
+</span>
+<span class="n">QGestureRecognizer</span><span class="o">::</span><span class="n">Result</span>
+
+<span class="n">SwipeGestureRecognizer</span><span class="o">::</span><span class="n">recognize</span><span class="p">(</span><span class="n">QGesture</span><span class="o">*</span> <span class="n">pGesture</span><span class="p">,</span> <span class="n">QObject</span> <span class="o">*</span><span class="n">pWatched</span><span class="p">,</span> <span class="n">QEvent</span> <span class="o">*</span><span class="n">pEvent</span><span class="p">)</span>
+
+<span class="p">{</span>
+
+   <span class="n">QGestureRecognizer</span><span class="o">::</span><span class="n">Result</span> <span class="n">result</span> <span class="o">=</span> <span class="n">QGestureRecognizer</span><span class="o">::</span><span class="n">Ignore</span><span class="p">;</span>
+
+   <span class="n">QSwipeGesture</span> <span class="o">*</span><span class="n">pSwipe</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">QSwipeGesture</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">pGesture</span><span class="p">);</span>
+
+
+
+   <span class="k">switch</span><span class="p">(</span><span class="n">pEvent</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">())</span> <span class="p">{</span>
+
+      <span class="k">case</span> <span class="n">QEvent</span><span class="p">:</span><span class="o">:</span><span class="n">MouseButtonPress</span><span class="o">:</span> <span class="p">{</span>
+
+         <span class="n">QMouseEvent</span><span class="o">*</span> <span class="n">pMouseEvent</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">QMouseEvent</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">pEvent</span><span class="p">);</span>
+
+<span class="cp">#if QT_VERSION &lt; QT_VERSION_CHECK(5, 0, 0)
+</span>
+         <span class="n">pSwipe</span><span class="o">-&gt;</span><span class="n">setProperty</span><span class="p">(</span><span class="s">"startPoint"</span><span class="p">,</span> <span class="n">pMouseEvent</span><span class="o">-&gt;</span><span class="n">posF</span><span class="p">());</span>
+
+<span class="cp">#else
+</span>
+         <span class="n">pSwipe</span><span class="o">-&gt;</span><span class="n">setProperty</span><span class="p">(</span><span class="s">"startPoint"</span><span class="p">,</span> <span class="n">pMouseEvent</span><span class="o">-&gt;</span><span class="n">localPos</span><span class="p">());</span>
+
+<span class="cp">#endif
+</span>
+         <span class="n">result</span> <span class="o">=</span> <span class="n">QGestureRecognizer</span><span class="o">::</span><span class="n">MayBeGesture</span><span class="p">;</span>
+
+         <span class="c1">//qDebug() &lt;&lt; "Swipe gesture started (start point=" &lt;&lt;  pSwipe-&gt;property("startPoint").toPointF() &lt;&lt;  ")";
+</span>
+      <span class="p">}</span>
+
+      <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="n">QEvent</span><span class="p">:</span><span class="o">:</span><span class="n">MouseButtonRelease</span><span class="o">:</span> <span class="p">{</span>
+
+         <span class="n">QMouseEvent</span><span class="o">*</span> <span class="n">pMouseEvent</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">QMouseEvent</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">pEvent</span><span class="p">);</span>
+
+         <span class="k">const</span> <span class="n">QVariant</span><span class="o">&amp;</span> <span class="n">propValue</span> <span class="o">=</span> <span class="n">pSwipe</span><span class="o">-&gt;</span><span class="n">property</span><span class="p">(</span><span class="s">"startPoint"</span><span class="p">);</span>
+
+         <span class="n">QPointF</span> <span class="n">startPoint</span> <span class="o">=</span> <span class="n">propValue</span><span class="p">.</span><span class="n">toPointF</span><span class="p">();</span>
+
+<span class="cp">#if QT_VERSION &lt; QT_VERSION_CHECK(5, 0, 0)
+</span>
+         <span class="n">QPointF</span> <span class="n">endPoint</span> <span class="o">=</span> <span class="n">pMouseEvent</span><span class="o">-&gt;</span><span class="n">posF</span><span class="p">();</span>
+
+<span class="cp">#else
+</span>
+         <span class="n">QPointF</span> <span class="n">endPoint</span> <span class="o">=</span> <span class="n">pMouseEvent</span><span class="o">-&gt;</span><span class="n">localPos</span><span class="p">();</span>
+
+<span class="cp">#endif
+</span>
+
+
+         <span class="c1">// process distance and direction
+</span>
+         <span class="kt">int</span> <span class="n">dx</span> <span class="o">=</span> <span class="n">endPoint</span><span class="p">.</span><span class="n">x</span><span class="p">()</span> <span class="o">-</span> <span class="n">startPoint</span><span class="p">.</span><span class="n">x</span><span class="p">();</span>
+
+         <span class="kt">int</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">endPoint</span><span class="p">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="n">startPoint</span><span class="p">.</span><span class="n">y</span><span class="p">();</span>
+
+
+
+         <span class="c1">//bugfix: startPoint.isNull because we sometimes get false events with startpoint 0 -&gt; wrong swipe detected!
+</span>
+         <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="o">!</span><span class="n">IsValidMove</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">))</span> <span class="o">||</span> <span class="p">(</span> <span class="n">startPoint</span><span class="p">.</span><span class="n">isNull</span><span class="p">()</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+
+            <span class="c1">// Just a click, so no gesture.
+</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">QGestureRecognizer</span><span class="o">::</span><span class="n">CancelGesture</span><span class="p">;</span>
+
+            <span class="c1">//qDebug("Swipe gesture canceled");
+</span>
+         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+            <span class="c1">// Compute the angle.
+</span>
+             <span class="c1">//qDebug() &lt;&lt; " startPoint= " &lt;&lt; startPoint &lt;&lt; " endPoint=" &lt;&lt; endPoint &lt;&lt; " dx=" &lt;&lt; dx &lt;&lt; " dy=" &lt;&lt; dy;
+</span>
+            <span class="n">qreal</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">ComputeAngle</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">);</span>
+
+            <span class="n">pSwipe</span><span class="o">-&gt;</span><span class="n">setSwipeAngle</span><span class="p">(</span><span class="n">angle</span><span class="p">);</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="n">QGestureRecognizer</span><span class="o">::</span><span class="n">FinishGesture</span><span class="p">;</span>
+
+            <span class="c1">//qDebug("Swipe gesture finished");
+</span>
+         <span class="p">}</span>
+
+      <span class="p">}</span>
+
+      <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">default</span><span class="o">:</span>
+
+        <span class="k">break</span><span class="p">;</span>
+
+   <span class="p">}</span>
+
+
+
+   <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+
+
+<span class="kt">void</span>
+
+<span class="n">SwipeGestureRecognizer</span><span class="o">::</span><span class="n">reset</span><span class="p">(</span><span class="n">QGesture</span> <span class="o">*</span><span class="n">pGesture</span><span class="p">)</span>
+
+<span class="p">{</span>
+
+   <span class="n">pGesture</span><span class="o">-&gt;</span><span class="n">setProperty</span><span class="p">(</span><span class="s">"startPoint"</span><span class="p">,</span> <span class="n">QVariant</span><span class="p">(</span><span class="n">QVariant</span><span class="o">::</span><span class="n">Invalid</span><span class="p">));</span>
+
+   <span class="n">parent</span><span class="o">::</span><span class="n">reset</span><span class="p">(</span><span class="n">pGesture</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+
+
+<span class="n">qreal</span>
+
+<span class="n">SwipeGestureRecognizer</span><span class="o">::</span><span class="n">ComputeAngle</span><span class="p">(</span><span class="kt">int</span> <span class="n">dx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dy</span><span class="p">)</span>
+
+<span class="p">{</span>
+
+   <span class="kt">double</span> <span class="n">PI</span> <span class="o">=</span> <span class="mf">3.14159265</span><span class="p">;</span>
+
+
+
+   <span class="c1">// Need to convert from screen coordinates direction
+</span>
+   <span class="c1">// into classical coordinates direction.
+</span>
+   <span class="n">dy</span> <span class="o">=</span> <span class="o">-</span><span class="n">dy</span><span class="p">;</span>
+
+
+
+   <span class="kt">double</span> <span class="n">result</span> <span class="o">=</span> <span class="n">atan2</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">dy</span><span class="p">,</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">dx</span><span class="p">)</span> <span class="p">;</span>
+
+   <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span> <span class="o">*</span> <span class="mi">180</span><span class="p">)</span> <span class="o">/</span> <span class="n">PI</span><span class="p">;</span>
+
+
+
+   <span class="c1">// Always return positive angle.
+</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="n">result</span> <span class="o">+=</span> <span class="mi">360</span><span class="p">;</span>
+
+   <span class="p">}</span>
+
+
+
+   <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+
+
+
+
+
+
+<span class="cm">/*
+
+==========================================================================
+
+*/</span>
+
+
+
+<span class="n">QSwipeGesture</span><span class="o">::</span><span class="n">SwipeDirection</span>
+
+<span class="n">SwipeGestureUtil</span><span class="o">::</span><span class="n">GetHorizontalDirection</span><span class="p">(</span><span class="n">QSwipeGesture</span> <span class="o">*</span><span class="n">pSwipeGesture</span><span class="p">)</span>
+
+<span class="p">{</span>
+
+   <span class="n">qreal</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">pSwipeGesture</span><span class="o">-&gt;</span><span class="n">swipeAngle</span><span class="p">();</span>
+
+   <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">angle</span> <span class="o">&amp;&amp;</span> <span class="n">angle</span> <span class="o">&lt;=</span> <span class="mi">45</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="k">return</span> <span class="n">QSwipeGesture</span><span class="o">::</span><span class="n">Right</span><span class="p">;</span>
+
+   <span class="p">}</span>
+
+
+
+   <span class="k">if</span> <span class="p">(</span><span class="mi">135</span> <span class="o">&lt;=</span> <span class="n">angle</span> <span class="o">&amp;&amp;</span> <span class="n">angle</span> <span class="o">&lt;=</span> <span class="mi">225</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="k">return</span> <span class="n">QSwipeGesture</span><span class="o">::</span><span class="n">Left</span><span class="p">;</span>
+
+   <span class="p">}</span>
+
+
+
+   <span class="k">if</span> <span class="p">(</span><span class="mi">315</span> <span class="o">&lt;=</span> <span class="n">angle</span> <span class="o">&amp;&amp;</span> <span class="n">angle</span> <span class="o">&lt;=</span> <span class="mi">360</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="k">return</span> <span class="n">QSwipeGesture</span><span class="o">::</span><span class="n">Right</span><span class="p">;</span>
+
+   <span class="p">}</span>
+
+
+
+   <span class="k">return</span> <span class="n">QSwipeGesture</span><span class="o">::</span><span class="n">NoDirection</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+
+
+<span class="n">QSwipeGesture</span><span class="o">::</span><span class="n">SwipeDirection</span>
+
+<span class="n">SwipeGestureUtil</span><span class="o">::</span><span class="n">GetVerticalDirection</span><span class="p">(</span><span class="n">QSwipeGesture</span> <span class="o">*</span><span class="n">pSwipeGesture</span><span class="p">)</span>
+
+<span class="p">{</span>
+
+   <span class="n">qreal</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">pSwipeGesture</span><span class="o">-&gt;</span><span class="n">swipeAngle</span><span class="p">();</span>
+
+
+
+   <span class="k">if</span> <span class="p">(</span><span class="mi">45</span> <span class="o">&lt;</span> <span class="n">angle</span> <span class="o">&amp;&amp;</span> <span class="n">angle</span> <span class="o">&lt;</span> <span class="mi">135</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="k">return</span> <span class="n">QSwipeGesture</span><span class="o">::</span><span class="n">Up</span><span class="p">;</span>
+
+   <span class="p">}</span>
+
+
+
+   <span class="k">if</span> <span class="p">(</span><span class="mi">225</span> <span class="o">&lt;</span> <span class="n">angle</span> <span class="o">&amp;&amp;</span> <span class="n">angle</span> <span class="o">&lt;</span> <span class="mi">315</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="k">return</span> <span class="n">QSwipeGesture</span><span class="o">::</span><span class="n">Down</span><span class="p">;</span>
+
+   <span class="p">}</span>
+
+
+
+   <span class="k">return</span> <span class="n">QSwipeGesture</span><span class="o">::</span><span class="n">NoDirection</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+<p>使用代码就很简单了，比如某个窗体的头文件</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">rangeReport</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QWidget</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+    <span class="c1">// ...
+</span><span class="nl">private:</span>
+    <span class="c1">// ...
+</span>    <span class="n">SwipeGestureRecognizer</span> <span class="o">*</span><span class="n">fftRecognizer</span><span class="p">;</span>
+    <span class="n">Qt</span><span class="o">::</span><span class="n">GestureType</span> <span class="n">fftType</span><span class="p">;</span>
+
+    <span class="kt">void</span> <span class="n">swipeTriggered</span><span class="p">(</span><span class="n">QSwipeGesture</span> <span class="o">*</span><span class="n">gesture</span><span class="p">);</span>
+
+    <span class="kt">bool</span> <span class="n">event</span><span class="p">(</span><span class="n">QEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">);</span>
+
+    <span class="kt">bool</span> <span class="n">gestureEvent</span><span class="p">(</span><span class="n">QGestureEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">currentGraph</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="n">registerGesture</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<p>而源文件就是要注册这个手势识别器，并实现手势之后的响应</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rangeReport</span><span class="o">::</span><span class="n">rangeReport</span><span class="p">(</span><span class="n">rangeType</span> <span class="n">type</span><span class="p">)</span><span class="o">:</span>
+    <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui</span><span class="o">::</span><span class="n">rangeReport</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ui</span><span class="o">-&gt;</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="n">registerGesture</span><span class="p">();</span>
+    <span class="c1">// ...
+</span><span class="p">}</span>
+<span class="c1">// ...
+</span><span class="kt">bool</span> <span class="n">rangeReport</span><span class="o">::</span><span class="n">event</span><span class="p">(</span><span class="n">QEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QEvent</span><span class="o">::</span><span class="n">Gesture</span><span class="p">){</span>
+        <span class="c1">//qDebug()&lt;&lt;"grab!";
+</span>        <span class="k">return</span> <span class="n">gestureEvent</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">QGestureEvent</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">event</span><span class="p">));</span>
+    <span class="p">}</span>
+        <span class="k">return</span> <span class="n">QWidget</span><span class="o">::</span><span class="n">event</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">rangeReport</span><span class="o">::</span><span class="n">swipeTriggered</span><span class="p">(</span><span class="n">QSwipeGesture</span> <span class="o">*</span><span class="n">gesture</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">gesture</span><span class="o">-&gt;</span><span class="n">state</span><span class="p">()</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">::</span><span class="n">GestureFinished</span><span class="p">)</span> <span class="p">{</span>
+           <span class="k">if</span> <span class="p">(</span><span class="n">gesture</span><span class="o">-&gt;</span><span class="n">horizontalDirection</span><span class="p">()</span> <span class="o">==</span> <span class="n">QSwipeGesture</span><span class="o">::</span><span class="n">Left</span>
+               <span class="o">||</span> <span class="n">gesture</span><span class="o">-&gt;</span><span class="n">verticalDirection</span><span class="p">()</span> <span class="o">==</span> <span class="n">QSwipeGesture</span><span class="o">::</span><span class="n">Up</span><span class="p">)</span> <span class="p">{</span>
+               <span class="k">if</span><span class="p">(</span><span class="n">currentGraph</span> <span class="o">!=</span> <span class="n">chart</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">){</span>
+                   <span class="n">currentGraph</span> <span class="o">++</span><span class="p">;</span>
+                   <span class="n">ui</span><span class="o">-&gt;</span><span class="n">graph1</span><span class="o">-&gt;</span><span class="n">setChart</span><span class="p">(</span><span class="n">chart</span><span class="p">[</span><span class="n">currentGraph</span><span class="p">]);</span>
+               <span class="p">}</span>
+           <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+               <span class="k">if</span><span class="p">(</span><span class="n">currentGraph</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+                   <span class="n">currentGraph</span> <span class="o">--</span><span class="p">;</span>
+                   <span class="n">ui</span><span class="o">-&gt;</span><span class="n">graph1</span><span class="o">-&gt;</span><span class="n">setChart</span><span class="p">(</span><span class="n">chart</span><span class="p">[</span><span class="n">currentGraph</span><span class="p">]);</span>
+               <span class="p">}</span>                          <span class="c1">//?ui-&gt;tabWidget-&gt;count():ui-&gt;tabWidget-&gt;currentIndex() + 1 );
+</span>           <span class="p">}</span>
+           <span class="n">update</span><span class="p">();</span>
+       <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kt">bool</span> <span class="n">rangeReport</span><span class="o">::</span><span class="n">gestureEvent</span><span class="p">(</span><span class="n">QGestureEvent</span> <span class="o">*</span><span class="n">event</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//qDebug() &lt;&lt; "gestureEvent():" &lt;&lt; event;
+</span>    <span class="k">if</span> <span class="p">(</span><span class="n">QGesture</span> <span class="o">*</span><span class="n">swipe</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">gesture</span><span class="p">(</span><span class="n">Qt</span><span class="o">::</span><span class="n">SwipeGesture</span><span class="p">))</span>
+        <span class="n">swipeTriggered</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">QSwipeGesture</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">swipe</span><span class="p">));</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">QGesture</span> <span class="o">*</span><span class="n">pan</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">gesture</span><span class="p">(</span><span class="n">Qt</span><span class="o">::</span><span class="n">PanGesture</span><span class="p">))</span>
+        <span class="c1">//panTriggered(static_cast&lt;QPanGesture *&gt;(pan));
+</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">rangeReport</span><span class="o">::</span><span class="n">registerGesture</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">fftRecognizer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SwipeGestureRecognizer</span><span class="p">();</span>
+    <span class="n">fftType</span> <span class="o">=</span> <span class="n">QGestureRecognizer</span><span class="o">::</span><span class="n">registerRecognizer</span><span class="p">(</span><span class="n">fftRecognizer</span><span class="p">);</span>
+    <span class="n">grabGesture</span><span class="p">(</span><span class="n">fftType</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>最后还是要吐槽一下sqlite:我觉得这个数据库的性能特别好，查询速度很快，占用资源也少。不过为什么不支持全外连接语句:angry:让我用连接和并集写全外连接不是白白增加工作量吗？:facepunch:</p>
+
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 安卓开发 </tag>
+        
+          <tag> Qt </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[easyAuto的单元测试]]></title>
       <url>/programming/2017/11/16/easyautoTest/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">
@@ -289,7 +902,7 @@ QtCharts，发现这个模块优点很多，而且在手机上显示的效果很
 
 <hr />
 
-<p><a href="https://github.com/scienceasdf/easyAuto/releases/download/EasyAutoV1.1/easyAuto.apk">APK下载地址（GitHub镜像）</a>
+<p><a href="https://github.com/scienceasdf/easyAuto/releases/download/v1.1/easyAuto.apk">APK下载地址（GitHub镜像）</a>
 <a href="https://pan.baidu.com/s/1c4ewHnM">APK下载地址（百度网盘镜像）</a></p>
 ]]></content>
       <categories>

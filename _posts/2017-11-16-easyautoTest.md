@@ -5,7 +5,7 @@ categories:
 tags:
 - 自动控制 
 - 单元测试 
-updated: 2018-01-04 
+updated: 2018-01-05 
 ---
 <script type="text/x-mathjax-config">
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
