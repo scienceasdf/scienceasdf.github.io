@@ -53,7 +53,8 @@ PropChart能够绘制螺旋桨的拉力曲线、效率曲线等等，这里我�
 ## 存在的问题
 * 筛选功能卡在IO上比较耗时间。当然，MSVC编译的程序能够明显快于MINGW编译的程序。解决方法有很多，只是我不想去重构了  
 * 电脑版的交互体验非常差
-* 电脑版没有对UI进行多分辨率的调整
+* 电脑版没有对UI进行多分辨率的调整  
+  
 --- 
 [安卓版程序下载地址](https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg)  
 [Windows版程序下载地址（32位）](https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA)

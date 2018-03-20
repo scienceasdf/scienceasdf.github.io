@@ -2,6 +2,162 @@
 <search>
   
     <entry>
+      <title><![CDATA[easyAuto的单元测试]]></title>
+      <url>/programming/2017/11/16/easyautoTest/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>出于各种考虑，在easyAuto里面我第一次写了单元测试。</strong></p>
+
+<hr />
+
+<h2 id="单元测试">单元测试</h2>
+<p>以前写代码从来不注重单元测试，不过这次在easyAuto项目里我觉得有必要进行单元测试了。因为包括计算各种穿越频率、处理输入输出这些，常常会修改算法，即使是小改，也不敢保证一切正常。程序刚写出来的时候是我自己输入并看结果是否符合预期。不过这样实在很费精力，因此自己写了单元测试，也是我第一次写单元测试:trollface:。</p>
+
+<blockquote>
+  <p>代码是为了什么，当然是为了重复运行。如何保持unit test代码的稳定？主要靠好的API设计。API切实正确切割了需求，那么在重构的时候API就基本不用变化，unit test也不用重写。以后你重构的时候，只要你的unit test覆盖的够好，基本跑一遍就知道有没有改成**。可以节省大量的时间。</p>
+
+  <p>作者：vczh<br />
+链接：https://www.zhihu.com/question/28729261/answer/94964928<br />
+来源：知乎<br />
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+
+<p>虽然单元测试有许多现成的框架，例如<a href="https://github.com/boostorg/test">Boost::test</a>,<a href="http://doc.qt.io/qt-5/qtest-overview.html">Qt单元测试框架</a>,<a href="https://github.com/catchorg/Catch2">catch2</a>这些，但是从减少折腾成本考虑，我就直接用assert来做单元测试，毕竟在C++之父在他的书里也是用这样的方法进行单元测试的:grin:。</p>
+
+<h2 id="对传递函数相关代码进行单元测试">对传递函数相关代码进行单元测试</h2>
+<p>首先，由于这个代码以及未来的大量代码都需要对数值进行检验，所以定义如下函数</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">bool</span> <span class="n">fuzzyEqual</span><span class="p">(</span><span class="n">T</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span> <span class="n">b</span><span class="p">,</span> <span class="n">T</span> <span class="n">relativeErr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">((</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativeErr</span><span class="p">))</span> <span class="o">*</span>
+       <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">-</span> <span class="n">relativeErr</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>传递函数相关的需要测试以下的内容：</p>
+<ul>
+  <li>多项式相乘是否正确；</li>
+  <li>大量的从自动控制原理的书上找来的传递函数，来测试是否能够正确输出穿越频率、各种裕度；</li>
+  <li>若传递函数表示的线性系统有两个180°穿越频率，给定猜测初值计算能否收敛，不给定初值是否收敛到任意一个值？</li>
+</ul>
+
+<h2 id="对处理用户输入输出相关代码进行测试">对处理用户输入输出相关代码进行测试</h2>
+<p>需要测试的内容包括：</p>
+<ul>
+  <li>将用户输入的内容进行分割，并转换为正确的多项式</li>
+  <li>将多项式以富文本的形式输出，包括按照平时书写习惯正确处理系数是0,1以及正负号的问题</li>
+</ul>
+
+<h2 id="集成测试">集成测试</h2>
+<p>最后写两个大的用例，进行整个完整功能的测试（根轨迹的输出我实在不知道如何测试）</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "comprehensiveTest.h"
+#include "util.h"
+#include "../strop.h"
+#include "../trans.h"
+</span>
+<span class="cp">#include &lt;cassert&gt;
+#include &lt;fstream&gt;
+</span>
+<span class="k">const</span> <span class="kt">double</span> <span class="n">genericErr</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="n">compTestCase1</span><span class="p">();</span>
+<span class="kt">void</span> <span class="n">compTestCase2</span><span class="p">();</span>
+
+<span class="kt">void</span> <span class="nf">comprehensiveTest</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">compTestCase1</span><span class="p">();</span>
+    <span class="n">compTestCase2</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">compTestCase1</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">numStr</span> <span class="o">=</span> <span class="s">"5*12.5 1"</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">denStr</span> <span class="o">=</span> <span class="s">"1 0*1 1*0.5 1*111.111 1"</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">num</span> <span class="o">=</span> <span class="n">polyFromRawText</span><span class="p">(</span><span class="n">numStr</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">den</span> <span class="o">=</span> <span class="n">polyFromRawText</span><span class="p">(</span><span class="n">denStr</span><span class="p">);</span>
+
+    <span class="n">trans</span> <span class="n">tsfunc</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">den</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">phaseMargin</span><span class="p">,</span> <span class="n">freq1</span><span class="p">;</span>
+    <span class="n">tsfunc</span><span class="p">.</span><span class="n">phaseMargin</span><span class="p">(</span><span class="o">&amp;</span><span class="n">phaseMargin</span><span class="p">,</span><span class="o">&amp;</span><span class="n">freq1</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">gainMargin</span><span class="p">,</span> <span class="n">freq2</span><span class="p">;</span>
+    <span class="n">tsfunc</span><span class="p">.</span><span class="n">gainMargin</span><span class="p">(</span><span class="o">&amp;</span><span class="n">gainMargin</span><span class="p">,</span><span class="o">&amp;</span><span class="n">freq2</span><span class="p">);</span>
+
+    <span class="n">assert</span><span class="p">(</span><span class="n">fuzzyEqual</span><span class="p">(</span><span class="n">phaseMargin</span><span class="p">,</span><span class="mf">41.6</span><span class="p">,</span><span class="n">genericErr</span><span class="p">));</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">fuzzyEqual</span><span class="p">(</span><span class="n">freq1</span><span class="p">,</span><span class="mf">0.4955</span><span class="p">,</span><span class="n">genericErr</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">compTestCase2</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">numStr</span> <span class="o">=</span> <span class="s">"95.238 286.6759"</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">denStr</span> <span class="o">=</span> <span class="s">"1 15.3339 110.5719 286.6759"</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">num</span> <span class="o">=</span> <span class="n">polyFromRawText</span><span class="p">(</span><span class="n">numStr</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">den</span> <span class="o">=</span> <span class="n">polyFromRawText</span><span class="p">(</span><span class="n">denStr</span><span class="p">);</span>
+
+    <span class="n">trans</span> <span class="n">tsfunc</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">den</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">res</span> <span class="o">=</span> <span class="n">tsfunc</span><span class="p">.</span><span class="n">unitStepResponse</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">fout</span><span class="p">(</span><span class="s">"D:/out.txt"</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">fout</span><span class="p">.</span><span class="n">is_open</span><span class="p">()</span> <span class="o">==</span> <span class="nb">false</span><span class="p">){</span>
+
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+            <span class="n">fout</span><span class="o">&lt;&lt;</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>第二个用例是计算系统响应的，这里还是把结果输出到了一个文件中，然后我来检查:disappointed:。应该在这里也实现自动化的测试。<br />
+在测试项目的main.cpp里只需写如下代码：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "transTest.h"
+#include "stroptest.h"
+#include "comprehensiveTest.h"
+</span>
+<span class="cp">#include &lt;cassert&gt;
+#include &lt;iostream&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">transTest</span><span class="p">();</span>
+
+    <span class="n">strOpTest</span><span class="p">();</span>
+
+    <span class="n">comprehensiveTest</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>每次修改过源文件中的某些函数，只要接口不变，就可以立即重新编译测试项目并运行，看看在修改代码之后代码是否还能正常工作。不过绘制根轨迹这个我是实在不知道如何构造测试用例啊:dizzy_face:！</p>
+
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 自动控制 </tag>
+        
+          <tag> 单元测试 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[在手机上绘制根轨迹]]></title>
       <url>/programming/2017/11/15/easyauto/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">
@@ -390,12 +546,12 @@ PropChart的筛选界面如下图所示，这里运用的模型是给定转速�
 <ul>
   <li>筛选功能卡在IO上比较耗时间。当然，MSVC编译的程序能够明显快于MINGW编译的程序。解决方法有很多，只是我不想去重构了</li>
   <li>电脑版的交互体验非常差</li>
-  <li>
-    <h2 id="电脑版没有对ui进行多分辨率的调整">电脑版没有对UI进行多分辨率的调整</h2>
-    <p><a href="https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg">安卓版程序下载地址</a><br />
-<a href="https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA">Windows版程序下载地址（32位）</a></p>
-  </li>
+  <li>电脑版没有对UI进行多分辨率的调整</li>
 </ul>
+
+<hr />
+<p><a href="https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg">安卓版程序下载地址</a><br />
+<a href="https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA">Windows版程序下载地址（32位）</a></p>
 ]]></content>
       <categories>
         
