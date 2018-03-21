@@ -148,7 +148,7 @@ void KeplerianState::step(double t)
 如果$e > ( 1 - 1e−12 )$，那么$v_a=0$，否则
 \begin{equation}v_a=\sqrt{\frac{\mu}{a}(\frac{1-e}{1+e})}
 \end{equation}
-\begin{equation}v_a=\sqrt{\frac{\mu}{a}(\frac{1+e}{1-e})}
+\begin{equation}v_p=\sqrt{\frac{\mu}{a}(\frac{1+e}{1-e})}
 \end{equation}
 
 ---
