@@ -432,8 +432,10 @@
 <h2 id="笛卡尔坐标系转换到轨道六根数">笛卡尔坐标系转换到轨道六根数</h2>
 <ul>
   <li>已知：$\mathbf{r},\mathbf{v}$和引力常数$\mu$</li>
-  <li>求：$a,e,i,\omega,\Omega,\nu$<br />
-\begin{equation} \mathbf{h} = \mathbf{r}\times\mathbf{v}\end{equation}
+  <li>求：$a,e,i,\omega,\Omega,\nu$</li>
+</ul>
+
+<p>\begin{equation} \mathbf{h} = \mathbf{r}\times\mathbf{v}\end{equation}
 \begin{equation} h = ||\mathbf{h}||\end{equation}
 升交线方向的矢量是
 \begin{equation} \mathbf{n}=[0,0,1]^T\times\mathbf{h}\end{equation}
@@ -477,24 +479,24 @@
 \begin{equation}\Omega=0\end{equation}
 \begin{equation}\omega=0\end{equation}
 \begin{equation}\nu=\arccos(\frac{r_x}{r})\end{equation}
-如果$r_y&lt;0$，那么$\nu=2\pi-\nu$</li>
-</ul>
+如果$r_y&lt;0$，那么$\nu=2\pi-\nu$</p>
 
 <h2 id="轨道六根数转换到笛卡尔坐标系">轨道六根数转换到笛卡尔坐标系</h2>
 <ul>
   <li>已知：$a,e,i,\omega,\Omega,\nu$ 和引力常数$\mu$</li>
-  <li>求： $\mathbf{r},\mathbf{v}$
-首先是焦准距
+  <li>求： $\mathbf{r},\mathbf{v}$</li>
+</ul>
+
+<p>首先是焦准距
 \begin{equation}p=a(1-e^2)\end{equation}
 \begin{equation}r=\frac{p}{1+e\cos\nu}\end{equation}
 \begin{equation}x=r(\cos(\omega+\nu)\cos\Omega-\cos i\sin(\omega+\nu)\sin\Omega)\end{equation}
 \begin{equation}y=r(\cos(\omega+\nu)\sin\Omega+\cos i\sin(\omega+\nu)\cos\Omega)\end{equation}
-\begin{equation}z=r(sin(\omega+\nu)\sin i)\end{equation}
+\begin{equation}z=r(\sin(\omega+\nu)\sin i)\end{equation}
 这个算法计算计算速度向量的前提是非抛物线轨道，也就是当($||p||\geq1e-30$)，有
 \begin{equation}\dot x=\sqrt\frac{\mu}{p}(\cos\nu+e)(-\sin\omega\cos\Omega-\cos i\sin\Omega\cos\omega)-\sqrt\frac{\mu}{p}\sin{\nu}(\cos\omega\cos\Omega-\cos  i\sin\Omega\sin\omega)\end{equation}
 \begin{equation}\dot y=\sqrt\frac{\mu}{p}(\cos\nu+e)(-\sin\omega\sin\Omega+\cos i\cos\Omega\cos\omega)-\sqrt\frac{\mu}{p}\sin{\nu}(\cos\omega\sin\Omega+\cos i \cos\Omega\sin\omega)\end{equation}
-\begin{equation}\dot z=\sqrt\frac{\mu}{p}[(\cos\nu+e)\sin i\cos\omega-\sin\nu\sin i\sin\omega]\end{equation}</li>
-</ul>
+\begin{equation}\dot z=\sqrt\frac{\mu}{p}[(\cos\nu+e)\sin i\cos\omega-\sin\nu\sin i\sin\omega]\end{equation}</p>
 
 <hr />
 <p><strong>注意这些公式带入运算时都是要化成弧度的！！！</strong></p>

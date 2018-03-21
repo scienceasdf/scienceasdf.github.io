@@ -47,7 +47,7 @@ updated: 2017-4-7
 
 ## 笛卡尔坐标系转换到轨道六根数
 * 已知：$\mathbf{r},\mathbf{v}$和引力常数$\mu$
-* 求：$a,e,i,\omega,\Omega,\nu$  
+* 求：$a,e,i,\omega,\Omega,\nu$  
   
 \begin{equation} \mathbf{h} = \mathbf{r}\times\mathbf{v}\end{equation}
 \begin{equation} h = ||\mathbf{h}||\end{equation}
@@ -97,14 +97,14 @@ updated: 2017-4-7
 
 ## 轨道六根数转换到笛卡尔坐标系
 * 已知：$a,e,i,\omega,\Omega,\nu$ 和引力常数$\mu$  
-* 求： $\mathbf{r},\mathbf{v}$  
+* 求： $\mathbf{r},\mathbf{v}$  
   
 首先是焦准距
 \begin{equation}p=a(1-e^2)\end{equation}
 \begin{equation}r=\frac{p}{1+e\cos\nu}\end{equation}
 \begin{equation}x=r(\cos(\omega+\nu)\cos\Omega-\cos i\sin(\omega+\nu)\sin\Omega)\end{equation}
 \begin{equation}y=r(\cos(\omega+\nu)\sin\Omega+\cos i\sin(\omega+\nu)\cos\Omega)\end{equation}
-\begin{equation}z=r(sin(\omega+\nu)\sin i)\end{equation}
+\begin{equation}z=r(\sin(\omega+\nu)\sin i)\end{equation}
 这个算法计算计算速度向量的前提是非抛物线轨道，也就是当($||p||\geq1e-30$)，有
 \begin{equation}\dot x=\sqrt\frac{\mu}{p}(\cos\nu+e)(-\sin\omega\cos\Omega-\cos i\sin\Omega\cos\omega)-\sqrt\frac{\mu}{p}\sin{\nu}(\cos\omega\cos\Omega-\cos  i\sin\Omega\sin\omega)\end{equation}
 \begin{equation}\dot y=\sqrt\frac{\mu}{p}(\cos\nu+e)(-\sin\omega\sin\Omega+\cos i\cos\Omega\cos\omega)-\sqrt\frac{\mu}{p}\sin{\nu}(\cos\omega\sin\Omega+\cos i \cos\Omega\sin\omega)\end{equation}

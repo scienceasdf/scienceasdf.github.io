@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-21T16:27:50+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">实现Qt程序的新版本检查</title><link href="http://localhost:4000/programming/2017/12/17/updateCheck/" rel="alternate" type="text/html" title="实现Qt程序的新版本检查" /><published>2017-12-17T00:00:00+08:00</published><updated>2017-12-17T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/12/17/updateCheck</id><content type="html" xml:base="http://localhost:4000/programming/2017/12/17/updateCheck/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-21T22:01:10+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">实现Qt程序的新版本检查</title><link href="http://localhost:4000/programming/2017/12/17/updateCheck/" rel="alternate" type="text/html" title="实现Qt程序的新版本检查" /><published>2017-12-17T00:00:00+08:00</published><updated>2017-12-17T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/12/17/updateCheck</id><content type="html" xml:base="http://localhost:4000/programming/2017/12/17/updateCheck/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
   							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
      							   extensions: [&quot;AMSmath.js&quot;]}
@@ -1218,7 +1218,7 @@ M_{prop}=\frac{M_{mot}}{2}
   &lt;li&gt;求：$EA$&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;如果$e&amp;gt;(1=1e-11)$，那么$EA=0$，否则
+&lt;p&gt;如果$e&amp;gt;(1-1e-11)$，那么$EA=0$，否则
 \begin{equation}\sin(EA)=\frac{\sqrt{1-e^2}\sin\nu}{1+e\cos\nu}\end{equation}
 \begin{equation}\cos(EA)=\frac{e+\cos\nu}{1+e\cos\nu}\end{equation}
 \begin{equation} \label{EA}
@@ -1242,12 +1242,12 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
 &lt;h2 id=&quot;偏近点角到真近点角&quot;&gt;偏近点角到真近点角&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;已知：$EA,e$&lt;/li&gt;
-  &lt;li&gt;求：$\mu$&lt;/li&gt;
+  &lt;li&gt;求：$\nu$&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;\begin{equation}\sin\nu=\frac{\sqrt{1-e^2}\sin EA}{1-e\cos EA} \end{equation}
 \begin{equation}\cos\nu=\frac{\cos EA -e}{1-e\cos EA} \end{equation}
-\begin{equation}\mu=atan2(\sin\nu,\cos\nu)\end{equation}&lt;/p&gt;
+\begin{equation}\nu=atan2(\sin\nu,\cos\nu)\end{equation}&lt;/p&gt;
 
 &lt;h2 id=&quot;平近点角到偏近点角&quot;&gt;平近点角到偏近点角&lt;/h2&gt;
 &lt;ul&gt;
@@ -1323,7 +1323,7 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
 &lt;p&gt;如果$e &amp;gt; ( 1 - 1e−12 )$，那么$v_a=0$，否则
 \begin{equation}v_a=\sqrt{\frac{\mu}{a}(\frac{1-e}{1+e})}
 \end{equation}
-\begin{equation}v_a=\sqrt{\frac{\mu}{a}(\frac{1+e}{1-e})}
+\begin{equation}v_p=\sqrt{\frac{\mu}{a}(\frac{1+e}{1-e})}
 \end{equation}&lt;/p&gt;
 
 &lt;hr /&gt;
@@ -1370,8 +1370,10 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
 &lt;h2 id=&quot;笛卡尔坐标系转换到轨道六根数&quot;&gt;笛卡尔坐标系转换到轨道六根数&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;已知：$\mathbf{r},\mathbf{v}$和引力常数$\mu$&lt;/li&gt;
-  &lt;li&gt;求：$a,e,i,\omega,\Omega,\nu$&lt;br /&gt;
-\begin{equation} \mathbf{h} = \mathbf{r}\times\mathbf{v}\end{equation}
+  &lt;li&gt;求：$a,e,i,\omega,\Omega,\nu$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;\begin{equation} \mathbf{h} = \mathbf{r}\times\mathbf{v}\end{equation}
 \begin{equation} h = ||\mathbf{h}||\end{equation}
 升交线方向的矢量是
 \begin{equation} \mathbf{n}=[0,0,1]^T\times\mathbf{h}\end{equation}
@@ -1415,24 +1417,24 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
 \begin{equation}\Omega=0\end{equation}
 \begin{equation}\omega=0\end{equation}
 \begin{equation}\nu=\arccos(\frac{r_x}{r})\end{equation}
-如果$r_y&amp;lt;0$，那么$\nu=2\pi-\nu$&lt;/li&gt;
-&lt;/ul&gt;
+如果$r_y&amp;lt;0$，那么$\nu=2\pi-\nu$&lt;/p&gt;
 
 &lt;h2 id=&quot;轨道六根数转换到笛卡尔坐标系&quot;&gt;轨道六根数转换到笛卡尔坐标系&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;已知：$a,e,i,\omega,\Omega,\nu$ 和引力常数$\mu$&lt;/li&gt;
-  &lt;li&gt;求： $\mathbf{r},\mathbf{v}$
-首先是焦准距
+  &lt;li&gt;求： $\mathbf{r},\mathbf{v}$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;首先是焦准距
 \begin{equation}p=a(1-e^2)\end{equation}
 \begin{equation}r=\frac{p}{1+e\cos\nu}\end{equation}
 \begin{equation}x=r(\cos(\omega+\nu)\cos\Omega-\cos i\sin(\omega+\nu)\sin\Omega)\end{equation}
 \begin{equation}y=r(\cos(\omega+\nu)\sin\Omega+\cos i\sin(\omega+\nu)\cos\Omega)\end{equation}
-\begin{equation}z=r(sin(\omega+\nu)\sin i)\end{equation}
+\begin{equation}z=r(\sin(\omega+\nu)\sin i)\end{equation}
 这个算法计算计算速度向量的前提是非抛物线轨道，也就是当($||p||\geq1e-30$)，有
 \begin{equation}\dot x=\sqrt\frac{\mu}{p}(\cos\nu+e)(-\sin\omega\cos\Omega-\cos i\sin\Omega\cos\omega)-\sqrt\frac{\mu}{p}\sin{\nu}(\cos\omega\cos\Omega-\cos  i\sin\Omega\sin\omega)\end{equation}
 \begin{equation}\dot y=\sqrt\frac{\mu}{p}(\cos\nu+e)(-\sin\omega\sin\Omega+\cos i\cos\Omega\cos\omega)-\sqrt\frac{\mu}{p}\sin{\nu}(\cos\omega\sin\Omega+\cos i \cos\Omega\sin\omega)\end{equation}
-\begin{equation}\dot z=\sqrt\frac{\mu}{p}[(\cos\nu+e)\sin i\cos\omega-\sin\nu\sin i\sin\omega]\end{equation}&lt;/li&gt;
-&lt;/ul&gt;
+\begin{equation}\dot z=\sqrt\frac{\mu}{p}[(\cos\nu+e)\sin i\cos\omega-\sin\nu\sin i\sin\omega]\end{equation}&lt;/p&gt;
 
 &lt;hr /&gt;
 &lt;p&gt;&lt;strong&gt;注意这些公式带入运算时都是要化成弧度的！！！&lt;/strong&gt;&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="天文" /><category term="数值算法" /><summary type="html">这里是一些轨道动力学中常见物理量的计算机算法的总结。</summary></entry><entry><title type="html">红警坦克作战效能模拟平台</title><link href="http://localhost:4000/programming/2015/11/02/tank/" rel="alternate" type="text/html" title="红警坦克作战效能模拟平台" /><published>2015-11-02T00:00:00+08:00</published><updated>2015-11-02T00:00:00+08:00</updated><id>http://localhost:4000/programming/2015/11/02/tank</id><content type="html" xml:base="http://localhost:4000/programming/2015/11/02/tank/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
