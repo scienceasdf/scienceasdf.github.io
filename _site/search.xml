@@ -1378,7 +1378,7 @@ M_{prop}=\frac{M_{mot}}{2}
   <li>求：$EA$</li>
 </ul>
 
-<p>如果$e&gt;(1-1e-11)$，那么$EA=0$，否则
+<p>如果$e&gt;(1-10\times{-11})$，那么$EA=0$，否则
 \begin{equation}\sin(EA)=\frac{\sqrt{1-e^2}\sin\nu}{1+e\cos\nu}\end{equation}
 \begin{equation}\cos(EA)=\frac{e+\cos\nu}{1+e\cos\nu}\end{equation}
 \begin{equation} \label{EA}
@@ -1392,7 +1392,7 @@ EA=atan2(\sin EA,\cos EA)\end{equation}</p>
   <li>求：$MA$</li>
 </ul>
 
-<p>对于椭圆轨道($e\leq 1e-11$)，首先按照式(\ref{EA})算出偏近点角，然后
+<p>对于椭圆轨道($e\leq 10\times{-11}$)，首先按照式(\ref{EA})算出偏近点角，然后
 \begin{equation} MA=EA-e\sin EA\end{equation}
 这个公式是和平均角速度的公式混合食用的：
 \begin{equation}
@@ -1480,7 +1480,7 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
   <li>求：$v_a,v_p$</li>
 </ul>
 
-<p>如果$e &gt; ( 1 - 1e−12 )$，那么$v_a=0$，否则
+<p>如果$e &gt; ( 1 - 10\times{−12} )$，那么$v_a=0$，否则
 \begin{equation}v_a=\sqrt{\frac{\mu}{a}(\frac{1-e}{1+e})}
 \end{equation}
 \begin{equation}v_p=\sqrt{\frac{\mu}{a}(\frac{1+e}{1-e})}
@@ -1611,8 +1611,8 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
 \begin{equation}r=\frac{p}{1+e\cos\nu}\end{equation}
 \begin{equation}x=r(\cos(\omega+\nu)\cos\Omega-\cos i\sin(\omega+\nu)\sin\Omega)\end{equation}
 \begin{equation}y=r(\cos(\omega+\nu)\sin\Omega+\cos i\sin(\omega+\nu)\cos\Omega)\end{equation}
-\begin{equation}z=r(\sin(\omega+\nu)\sin i)\end{equation}
-这个算法计算计算速度向量的前提是非抛物线轨道，也就是当($||p||\geq1e-30$)，有
+\begin{equation}z=r[\sin(\omega+\nu)\sin i]\end{equation}
+这个算法计算计算速度向量的前提是非抛物线轨道，也就是当($||\mathbf{p}||\geq1e-30$)，有
 \begin{equation}\dot x=\sqrt\frac{\mu}{p}(\cos\nu+e)(-\sin\omega\cos\Omega-\cos i\sin\Omega\cos\omega)-\sqrt\frac{\mu}{p}\sin{\nu}(\cos\omega\cos\Omega-\cos  i\sin\Omega\sin\omega)\end{equation}
 \begin{equation}\dot y=\sqrt\frac{\mu}{p}(\cos\nu+e)(-\sin\omega\sin\Omega+\cos i\cos\Omega\cos\omega)-\sqrt\frac{\mu}{p}\sin{\nu}(\cos\omega\sin\Omega+\cos i \cos\Omega\sin\omega)\end{equation}
 \begin{equation}\dot z=\sqrt\frac{\mu}{p}[(\cos\nu+e)\sin i\cos\omega-\sin\nu\sin i\sin\omega]\end{equation}</p>

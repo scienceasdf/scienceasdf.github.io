@@ -47,7 +47,7 @@ updated: 2017-4-7
 * 已知：$\nu,e$
 * 求：$EA$  
 
-如果$e>(1-1e-11)$，那么$EA=0$，否则
+如果$e>(1-10\times{-11})$，那么$EA=0$，否则
 \begin{equation}\sin(EA)=\frac{\sqrt{1-e^2}\sin\nu}{1+e\cos\nu}\end{equation}
 \begin{equation}\cos(EA)=\frac{e+\cos\nu}{1+e\cos\nu}\end{equation}
 \begin{equation} \label{EA}
@@ -59,7 +59,7 @@ EA=atan2(\sin EA,\cos EA)\end{equation}
 * 已知：$\nu,e$
 * 求：$MA$  
 
-对于椭圆轨道($e\leq 1e-11$)，首先按照式(\ref{EA})算出偏近点角，然后
+对于椭圆轨道($e\leq 10\times{-11}$)，首先按照式(\ref{EA})算出偏近点角，然后
 \begin{equation} MA=EA-e\sin EA\end{equation}
 这个公式是和平均角速度的公式混合食用的：
 \begin{equation}
@@ -145,7 +145,7 @@ void KeplerianState::step(double t)
 * 已知：$a,e,\mu$
 * 求：$v_a,v_p$  
 
-如果$e > ( 1 - 1e−12 )$，那么$v_a=0$，否则
+如果$e > ( 1 - 10\times{−12} )$，那么$v_a=0$，否则
 \begin{equation}v_a=\sqrt{\frac{\mu}{a}(\frac{1-e}{1+e})}
 \end{equation}
 \begin{equation}v_p=\sqrt{\frac{\mu}{a}(\frac{1+e}{1-e})}
