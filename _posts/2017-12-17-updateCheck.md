@@ -21,7 +21,7 @@ updated: 2018-12-17
 
 ## GitHub的开发者API
 对于GitHub上的仓库，我们可以发布Release，每个Release除了源代码以外还可以附加编译后的二进制文件。发布Release之后便可以通过API获取一些有用的信息。不过需要注意的是，如下图所示，发布的Release是不能勾选“This is a pre-release”选项的。
-<img src="{{ site.url }}/assets//blog_images/tank1.png" width="450px" height="200px"/>
+<img src="{{ site.url }}/assets//blog_images/release.png" width="450px" height="200px"/>
 例如对于我的easyAuto仓库，那么API是[https://api.github.com/repos/scienceasdf/accoutAssist/releases/latest](https://api.github.com/repos/scienceasdf/accoutAssist/releases/latest)。在浏览器中打开，可以看出这里提供json格式的许多信息。当然，如果是pre-release版本的话，就会得到下面的结果：
 ```
 {
