@@ -119,12 +119,12 @@
 <meta property="og:site_name" content="scienceasdf">
 <meta property="og:description" content="利用GitHub提供的API,实现程序的新版本检查功能。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://localhost:4000/assets//blog_images/tank1.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/release.png">
 <meta property="og:updated_time" content="2018-12-17T00:00:00+08:00">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实现Qt程序的新版本检查">
 <meta name="twitter:description" content="利用GitHub提供的API,实现程序的新版本检查功能。">
-<meta name="twitter:image" content="http://localhost:4000/assets//blog_images/tank1.png">
+<meta name="twitter:image" content="http://localhost:4000/assets//blog_images/release.png">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -406,7 +406,7 @@
 
 <h2 id="github的开发者api">GitHub的开发者API</h2>
 <p>对于GitHub上的仓库，我们可以发布Release，每个Release除了源代码以外还可以附加编译后的二进制文件。发布Release之后便可以通过API获取一些有用的信息。不过需要注意的是，如下图所示，发布的Release是不能勾选“This is a pre-release”选项的。
-<img src="http://localhost:4000/assets//blog_images/tank1.png" width="450px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/release.png" width="450px" height="200px" />
 例如对于我的easyAuto仓库，那么API是<a href="https://api.github.com/repos/scienceasdf/accoutAssist/releases/latest">https://api.github.com/repos/scienceasdf/accoutAssist/releases/latest</a>。在浏览器中打开，可以看出这里提供json格式的许多信息。当然，如果是pre-release版本的话，就会得到下面的结果：</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
   "message": "Not Found",
