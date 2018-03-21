@@ -68,11 +68,11 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
 
 ## 偏近点角到真近点角
 * 已知：$EA,e$
-* 求：$\mu$ 
+* 求：$\nu$ 
 
 \begin{equation}\sin\nu=\frac{\sqrt{1-e^2}\sin EA}{1-e\cos EA} \end{equation}
 \begin{equation}\cos\nu=\frac{\cos EA -e}{1-e\cos EA} \end{equation}
-\begin{equation}\mu=atan2(\sin\nu,\cos\nu)\end{equation}
+\begin{equation}\nu=atan2(\sin\nu,\cos\nu)\end{equation}
 
 ## 平近点角到偏近点角
 * 已知：$MA,e$
