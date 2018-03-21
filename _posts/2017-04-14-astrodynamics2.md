@@ -47,7 +47,7 @@ updated: 2017-4-7
 * 已知：$\nu,e$
 * 求：$EA$  
 
-如果$e>(1=1e-11)$，那么$EA=0$，否则
+如果$e>(1-1e-11)$，那么$EA=0$，否则
 \begin{equation}\sin(EA)=\frac{\sqrt{1-e^2}\sin\nu}{1+e\cos\nu}\end{equation}
 \begin{equation}\cos(EA)=\frac{e+\cos\nu}{1+e\cos\nu}\end{equation}
 \begin{equation} \label{EA}
