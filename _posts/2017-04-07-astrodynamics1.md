@@ -47,7 +47,8 @@ updated: 2017-4-7
 
 ## 笛卡尔坐标系转换到轨道六根数
 * 已知：$\mathbf{r},\mathbf{v}$和引力常数$\mu$
-* 求：$a,e,i,\omega,\Omega,\nu$  
+* 求：$a,e,i,\omega,\Omega,\nu$  
+  
 \begin{equation} \mathbf{h} = \mathbf{r}\times\mathbf{v}\end{equation}
 \begin{equation} h = ||\mathbf{h}||\end{equation}
 升交线方向的矢量是
