@@ -96,7 +96,8 @@ updated: 2017-4-7
 
 ## 轨道六根数转换到笛卡尔坐标系
 * 已知：$a,e,i,\omega,\Omega,\nu$ 和引力常数$\mu$  
-* 求： $\mathbf{r},\mathbf{v}$
+* 求： $\mathbf{r},\mathbf{v}$  
+  
 首先是焦准距
 \begin{equation}p=a(1-e^2)\end{equation}
 \begin{equation}r=\frac{p}{1+e\cos\nu}\end{equation}
