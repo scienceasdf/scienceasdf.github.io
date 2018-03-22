@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-22T16:12:34+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">实现Qt程序的新版本检查</title><link href="http://localhost:4000/programming/2017/12/17/updateCheck/" rel="alternate" type="text/html" title="实现Qt程序的新版本检查" /><published>2017-12-17T00:00:00+08:00</published><updated>2017-12-17T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/12/17/updateCheck</id><content type="html" xml:base="http://localhost:4000/programming/2017/12/17/updateCheck/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-22T16:21:31+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">实现Qt程序的新版本检查</title><link href="http://localhost:4000/programming/2017/12/17/updateCheck/" rel="alternate" type="text/html" title="实现Qt程序的新版本检查" /><published>2017-12-17T00:00:00+08:00</published><updated>2017-12-17T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/12/17/updateCheck</id><content type="html" xml:base="http://localhost:4000/programming/2017/12/17/updateCheck/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
   							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
      							   extensions: [&quot;AMSmath.js&quot;]}
@@ -1361,8 +1361,9 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
 &lt;p&gt;&lt;strong&gt;这里是一些轨道动力学中常见物理量的计算机算法的总结。&lt;/strong&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;本文公式较多，在浏览器中将会花较长时间用于渲染公式。&lt;/strong&gt;&lt;br /&gt;
-—&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;本文公式较多，在浏览器中将会花较长时间用于渲染公式。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;p&gt;最近专业课又是轨道动力学又是姿态动力学什么的，非常有意思。在航天器动力学里面有太多的算法可以讲，从时间转换、坐标系的转换到轨道外推这些，刚体动力学其实还可以借鉴游戏引擎的一些思路。自己最近借学习这些课程的机会，自己实现了3维向量、3阶方阵、四元数的轮子。关于刚体动力学，在航天中也就是姿态动力学的探讨不在本文。这篇文章总结一些轨道动力学常见物理量的算法。&lt;/p&gt;
 
