@@ -2,6 +2,261 @@
 <search>
   
     <entry>
+      <title><![CDATA[利用AutoHotKey实现VI编辑模式下ESC键自动切换至英文输入法]]></title>
+      <url>/programming/2018/03/26/vimIME/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>利用AutoHotKey实现ESC自动切换输入法。</strong></p>
+
+<hr />
+
+<p>最近学习VIM，然而大多数情况下都是用的各种编辑器的VIM模式，我一般不会去使用GVim。然而每次的输入法切换非常影响键入。因此在知乎上搜索到了如下的解决方案：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#Persistent ;一直运行
+~esc::
+
+Send, {ESC}
+
+; 下方代码可只保留一个
+SwitchIME(0x04090409) ; 英语(美国) 美式键盘
+SwitchIME(0x08040804) ; 中文(中国) 简体中文-美式键盘
+return
+
+
+SwitchIME(dwLayout){
+    HKL:=DllCall("LoadKeyboardLayout", Str, dwLayout, UInt, 1)
+    ControlGetFocus,ctl,A
+    SendMessage,0x50,0,HKL,%ctl%,A
+}
+</code></pre></div></div>
+<blockquote>
+  <p>作者：杜立涛
+链接：https://www.zhihu.com/question/41446565/answer/91110371
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+不过这个还存在一些不方便的地方，看以后我是渐渐习惯了这些麻烦还是自己又继续来深入AutoHotKey:</p>
+  <ul>
+    <li>重新回到INSERT模式时，我希望回到中文输入法</li>
+    <li>在不是编辑器的窗口里，我希望ESC键是一个正常的功能</li>
+  </ul>
+</blockquote>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> AutoHotKey </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[一个点球大战游戏的开发]]></title>
+      <url>/programming/2018/03/24/penaltyShootout/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>开发了一个点球大战的手机小游戏。</strong></p>
+
+<hr />
+
+<p>开发了一个点球大战的小游戏，实现了游戏引擎与GUI的分离。</p>
+
+<h2 id="球员类">球员类</h2>
+<h3 id="射手类">射手类</h3>
+<p>类的定义如下：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">striker</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">striker</span><span class="p">(){}</span>
+    <span class="n">striker</span><span class="p">(</span><span class="kt">bool</span> <span class="n">AI</span><span class="p">);</span>
+
+    <span class="kt">double</span> <span class="n">pShootLeft</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">pShootRight</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">pShootCenter</span><span class="p">;</span>
+
+    <span class="n">QString</span> <span class="n">name</span><span class="p">;</span>
+
+    <span class="n">direction</span> <span class="n">shoot</span><span class="p">();</span>
+
+    <span class="kt">bool</span> <span class="n">isAI</span><span class="p">;</span>
+
+<span class="p">};</span>
+</code></pre></div></div>
+<p>这里需要考虑的一个问题是：为了追求尽可能模拟现实，因此罚点球射向左边、右边的概率会远大于射向中间的概率，因此对于一个非用户操控的球员（即AI操控的球员），概率如下：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="n">seed1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">system_clock</span><span class="o">::</span><span class="n">now</span><span class="p">().</span><span class="n">time_since_epoch</span><span class="p">().</span><span class="n">count</span><span class="p">();</span>
+<span class="n">std</span><span class="o">::</span><span class="n">mt19937</span> <span class="n">generator</span><span class="p">(</span><span class="n">seed1</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">uniform_real_distribution</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">dis</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">dice</span><span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">bind</span><span class="p">(</span><span class="n">dis</span><span class="p">,</span><span class="n">generator</span><span class="p">);</span>
+<span class="n">isAI</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">l</span> <span class="o">=</span> <span class="n">dice</span><span class="p">();</span>
+<span class="kt">double</span> <span class="n">c</span> <span class="o">=</span> <span class="n">dice</span><span class="p">();</span>
+<span class="kt">double</span> <span class="n">r</span> <span class="o">=</span> <span class="n">dice</span><span class="p">();</span>
+<span class="n">pSaveLeft</span> <span class="o">=</span> <span class="p">(</span><span class="mf">.95</span> <span class="o">*</span> <span class="n">l</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">.95</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="mf">.95</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="mf">.1</span> <span class="o">*</span> <span class="n">c</span><span class="p">);</span>
+<span class="n">pSaveRight</span> <span class="o">=</span> <span class="p">(</span><span class="mf">.95</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">.95</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="mf">.95</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="mf">.1</span> <span class="o">*</span> <span class="n">c</span><span class="p">);</span>
+<span class="n">pSaveCenter</span> <span class="o">=</span> <span class="p">(</span><span class="mf">.1</span> <span class="o">*</span> <span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">.95</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="mf">.95</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="mf">.1</span> <span class="o">*</span> <span class="n">c</span><span class="p">);</span>
+</code></pre></div></div>
+<p>MinGW都没有实现std::default_random_device，因此用了种子的方法生成随机数。</p>
+
+<p>守门员和这个类似，就不再赘述了。</p>
+
+<h2 id="游戏引擎">游戏引擎</h2>
+
+<p>这是第一次对这个东西进行了架构，与GUI分离后，实现松耦合后能够很容易地编码。不过由于也是第一次架构，因此也存在一些或许不合理的地方。实际上用设计模式应该会收到更好的效果。</p>
+
+<h3 id="回合类">回合类</h3>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">rounds</span><span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">direction</span> <span class="n">direc</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">rounds</span><span class="p">(</span><span class="n">striker</span> <span class="o">*</span><span class="n">st1</span><span class="p">,</span> <span class="n">goalKeeper</span> <span class="o">*</span><span class="n">gk1</span><span class="p">,</span> <span class="n">game</span><span class="o">*</span> <span class="n">eng</span><span class="p">);</span>
+    <span class="n">rounds</span><span class="p">(</span><span class="n">striker</span> <span class="o">*</span><span class="n">st1</span><span class="p">,</span> <span class="n">goalKeeper</span> <span class="o">*</span><span class="n">gk1</span><span class="p">,</span> <span class="n">direction</span> <span class="n">direct</span><span class="p">,</span> <span class="n">game</span><span class="o">*</span> <span class="n">eng</span><span class="p">);</span>
+
+    <span class="n">QString</span> <span class="n">string1</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">string2</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">string3</span><span class="p">;</span>
+
+    <span class="n">striker</span><span class="o">*</span> <span class="n">st</span><span class="p">;</span>
+    <span class="n">goalKeeper</span><span class="o">*</span> <span class="n">gk</span><span class="p">;</span>
+
+    <span class="n">game</span><span class="o">*</span> <span class="n">m_game</span><span class="p">;</span>
+
+    <span class="kt">bool</span> <span class="n">goal</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="引擎类">引擎类</h3>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">game</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">game</span><span class="p">(</span><span class="kt">bool</span> <span class="n">youAreKnown</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">youCanKonwAll</span><span class="p">,</span> <span class="kt">int</span> <span class="n">userTurn</span><span class="p">);</span>
+
+    <span class="c1">// The round number represents the already finished rounds counter
+</span>    <span class="kt">int</span> <span class="n">redRound</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">redScore</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">blueRound</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">blueScore</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">usrTurn</span><span class="p">;</span>
+    <span class="n">goalKeeper</span> <span class="n">redGK</span><span class="p">;</span>
+    <span class="n">goalKeeper</span> <span class="n">blueGK</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">striker</span><span class="o">&gt;</span> <span class="n">stsRed</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">striker</span><span class="o">&gt;</span> <span class="n">stsBlue</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">youKnowAll</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">redFirst</span><span class="p">;</span>
+
+    <span class="kt">bool</span> <span class="n">usrNeedInput</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="n">nextRound</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="n">nextRound</span><span class="p">(</span><span class="n">direction</span> <span class="n">dir</span><span class="p">);</span>
+    <span class="n">gameState</span> <span class="n">getGameState</span><span class="p">();</span>
+    <span class="n">roundState</span> <span class="n">getRoundState</span><span class="p">();</span>
+
+    <span class="n">QString</span> <span class="n">string1</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">string2</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">string3</span><span class="p">;</span>
+
+<span class="c1">//private:
+</span>    <span class="n">allStr</span> <span class="n">stringEngine</span><span class="p">;</span>
+
+<span class="p">};</span>
+</code></pre></div></div>
+<p>game类里面主要就是nextRound成员函数构造round类并进行模拟。这里也是有一些设计的有一些欠妥当，导致round类的构造函数需要一个game的指针，以让关于游戏信息的字符串传回去。</p>
+
+<h3 id="字符串引擎">字符串引擎</h3>
+<p>为了实现松耦合，需要专门设计一个字符串处理的类，类的定义如下：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">allStr</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">allStr</span><span class="p">();</span>
+
+    <span class="n">QString</span> <span class="n">getPrologue</span><span class="p">();</span>
+    <span class="n">QString</span> <span class="n">getStIntro</span><span class="p">();</span>
+    <span class="n">QString</span> <span class="n">getRedWinStr</span><span class="p">();</span>
+    <span class="n">QString</span> <span class="n">getBlueWinStr</span><span class="p">();</span>
+    <span class="n">QString</span> <span class="n">getPenaltyStr</span><span class="p">(</span><span class="n">direction</span> <span class="n">shootDirection</span><span class="p">,</span> <span class="n">direction</span> <span class="n">saveDirection</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">outside</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">goal</span><span class="p">);</span>
+
+<span class="c1">//private:
+</span>    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">redGkName</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">redStName</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">blueGkName</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">blueStName</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">prologue1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">prologue2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">prologue3</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">stIntro1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">stIntro2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">redWinStr1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">redWinStr2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">blueWinStr1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">blueWinStr2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">sameNoGoal1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">sameNoGoal2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">sameAndGoal1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">sameAndGoal2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lrOutside1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lrOutside2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lr_c_goal1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lr_c_goal2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lr_c_noGoal1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lr_c_noGoal2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lr_wrongSave1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lr_wrongSave2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_outside</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_lr_goal1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_lr_goal2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_c1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_c2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_lr_noGoal1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_lr_noGoal2</span><span class="p">;</span>
+
+<span class="p">};</span>
+</code></pre></div></div>
+<p>这些字符串在构造函数里面将所有的字符串插入并使用std::shuffle打乱，通过获取字符串的成员函数可以返回一些随机的但是能够组合在一起的句子，成为游戏中的解说信息。</p>
+
+<h2 id="总结">总结</h2>
+<p>这里写得很少，但是完成这个小游戏还是费挺大劲，遇到了各种各样奇奇怪怪的坑。什么定时器的使用，各种结果的处理，还是挺麻烦的。</p>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 蒙特卡洛方法 </tag>
+        
+          <tag> 安卓开发 </tag>
+        
+          <tag> Qt </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[实现Qt程序的新版本检查]]></title>
       <url>/programming/2017/12/17/updateCheck/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">

@@ -1,0 +1,1037 @@
+
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="蒙特卡洛方法,安卓开发,Qt," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="scienceasdf" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="开发了一个点球大战的手机小游戏。">
+<meta name="keywords" content="蒙特卡洛方法, 安卓开发, Qt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个点球大战游戏的开发">
+<meta property="og:url" content="http://localhost:4000/programming/2018/03/24/penaltyShootout/">
+<meta property="og:site_name" content="scienceasdf">
+<meta property="og:description" content="开发了一个点球大战的手机小游戏。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-24T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个点球大战游戏的开发">
+<meta name="twitter:description" content="开发了一个点球大战的手机小游戏。">
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://localhost:4000/"/>
+
+
+
+
+
+  <title>一个点球大战游戏的开发</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ea13fa2dc2aa892b0c36fe0fbc9d067d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">scienceasdf</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+<div id="posts" class="posts-expand">
+  
+  
+
+  
+
+  
+  
+  
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/programming/2018/03/24/penaltyShootout/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="scienceasdf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="scienceasdf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            一个点球大战游戏的开发
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-24T00:00:00+08:00">
+                2018-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/Programming" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            
+                <div class="post-description">
+                    
+                </div>
+            
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>开发了一个点球大战的手机小游戏。</strong></p>
+
+<hr />
+
+<p>开发了一个点球大战的小游戏，实现了游戏引擎与GUI的分离。</p>
+
+<h2 id="球员类">球员类</h2>
+<h3 id="射手类">射手类</h3>
+<p>类的定义如下：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">striker</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">striker</span><span class="p">(){}</span>
+    <span class="n">striker</span><span class="p">(</span><span class="kt">bool</span> <span class="n">AI</span><span class="p">);</span>
+
+    <span class="kt">double</span> <span class="n">pShootLeft</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">pShootRight</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">pShootCenter</span><span class="p">;</span>
+
+    <span class="n">QString</span> <span class="n">name</span><span class="p">;</span>
+
+    <span class="n">direction</span> <span class="n">shoot</span><span class="p">();</span>
+
+    <span class="kt">bool</span> <span class="n">isAI</span><span class="p">;</span>
+
+<span class="p">};</span>
+</code></pre></div></div>
+<p>这里需要考虑的一个问题是：为了追求尽可能模拟现实，因此罚点球射向左边、右边的概率会远大于射向中间的概率，因此对于一个非用户操控的球员（即AI操控的球员），概率如下：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="n">seed1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">system_clock</span><span class="o">::</span><span class="n">now</span><span class="p">().</span><span class="n">time_since_epoch</span><span class="p">().</span><span class="n">count</span><span class="p">();</span>
+<span class="n">std</span><span class="o">::</span><span class="n">mt19937</span> <span class="n">generator</span><span class="p">(</span><span class="n">seed1</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">uniform_real_distribution</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">dis</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">dice</span><span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">bind</span><span class="p">(</span><span class="n">dis</span><span class="p">,</span><span class="n">generator</span><span class="p">);</span>
+<span class="n">isAI</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">l</span> <span class="o">=</span> <span class="n">dice</span><span class="p">();</span>
+<span class="kt">double</span> <span class="n">c</span> <span class="o">=</span> <span class="n">dice</span><span class="p">();</span>
+<span class="kt">double</span> <span class="n">r</span> <span class="o">=</span> <span class="n">dice</span><span class="p">();</span>
+<span class="n">pSaveLeft</span> <span class="o">=</span> <span class="p">(</span><span class="mf">.95</span> <span class="o">*</span> <span class="n">l</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">.95</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="mf">.95</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="mf">.1</span> <span class="o">*</span> <span class="n">c</span><span class="p">);</span>
+<span class="n">pSaveRight</span> <span class="o">=</span> <span class="p">(</span><span class="mf">.95</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">.95</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="mf">.95</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="mf">.1</span> <span class="o">*</span> <span class="n">c</span><span class="p">);</span>
+<span class="n">pSaveCenter</span> <span class="o">=</span> <span class="p">(</span><span class="mf">.1</span> <span class="o">*</span> <span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">.95</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="mf">.95</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="mf">.1</span> <span class="o">*</span> <span class="n">c</span><span class="p">);</span>
+</code></pre></div></div>
+<p>MinGW都没有实现std::default_random_device，因此用了种子的方法生成随机数。</p>
+
+<p>守门员和这个类似，就不再赘述了。</p>
+
+<h2 id="游戏引擎">游戏引擎</h2>
+
+<p>这是第一次对这个东西进行了架构，与GUI分离后，实现松耦合后能够很容易地编码。不过由于也是第一次架构，因此也存在一些或许不合理的地方。实际上用设计模式应该会收到更好的效果。</p>
+
+<h3 id="回合类">回合类</h3>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">rounds</span><span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">direction</span> <span class="n">direc</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">rounds</span><span class="p">(</span><span class="n">striker</span> <span class="o">*</span><span class="n">st1</span><span class="p">,</span> <span class="n">goalKeeper</span> <span class="o">*</span><span class="n">gk1</span><span class="p">,</span> <span class="n">game</span><span class="o">*</span> <span class="n">eng</span><span class="p">);</span>
+    <span class="n">rounds</span><span class="p">(</span><span class="n">striker</span> <span class="o">*</span><span class="n">st1</span><span class="p">,</span> <span class="n">goalKeeper</span> <span class="o">*</span><span class="n">gk1</span><span class="p">,</span> <span class="n">direction</span> <span class="n">direct</span><span class="p">,</span> <span class="n">game</span><span class="o">*</span> <span class="n">eng</span><span class="p">);</span>
+
+    <span class="n">QString</span> <span class="n">string1</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">string2</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">string3</span><span class="p">;</span>
+
+    <span class="n">striker</span><span class="o">*</span> <span class="n">st</span><span class="p">;</span>
+    <span class="n">goalKeeper</span><span class="o">*</span> <span class="n">gk</span><span class="p">;</span>
+
+    <span class="n">game</span><span class="o">*</span> <span class="n">m_game</span><span class="p">;</span>
+
+    <span class="kt">bool</span> <span class="n">goal</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="引擎类">引擎类</h3>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">game</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">game</span><span class="p">(</span><span class="kt">bool</span> <span class="n">youAreKnown</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">youCanKonwAll</span><span class="p">,</span> <span class="kt">int</span> <span class="n">userTurn</span><span class="p">);</span>
+
+    <span class="c1">// The round number represents the already finished rounds counter
+</span>    <span class="kt">int</span> <span class="n">redRound</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">redScore</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">blueRound</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">blueScore</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">usrTurn</span><span class="p">;</span>
+    <span class="n">goalKeeper</span> <span class="n">redGK</span><span class="p">;</span>
+    <span class="n">goalKeeper</span> <span class="n">blueGK</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">striker</span><span class="o">&gt;</span> <span class="n">stsRed</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">striker</span><span class="o">&gt;</span> <span class="n">stsBlue</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">youKnowAll</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">redFirst</span><span class="p">;</span>
+
+    <span class="kt">bool</span> <span class="n">usrNeedInput</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="n">nextRound</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="n">nextRound</span><span class="p">(</span><span class="n">direction</span> <span class="n">dir</span><span class="p">);</span>
+    <span class="n">gameState</span> <span class="n">getGameState</span><span class="p">();</span>
+    <span class="n">roundState</span> <span class="n">getRoundState</span><span class="p">();</span>
+
+    <span class="n">QString</span> <span class="n">string1</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">string2</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">string3</span><span class="p">;</span>
+
+<span class="c1">//private:
+</span>    <span class="n">allStr</span> <span class="n">stringEngine</span><span class="p">;</span>
+
+<span class="p">};</span>
+</code></pre></div></div>
+<p>game类里面主要就是nextRound成员函数构造round类并进行模拟。这里也是有一些设计的有一些欠妥当，导致round类的构造函数需要一个game的指针，以让关于游戏信息的字符串传回去。</p>
+
+<h3 id="字符串引擎">字符串引擎</h3>
+<p>为了实现松耦合，需要专门设计一个字符串处理的类，类的定义如下：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">allStr</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">allStr</span><span class="p">();</span>
+
+    <span class="n">QString</span> <span class="n">getPrologue</span><span class="p">();</span>
+    <span class="n">QString</span> <span class="n">getStIntro</span><span class="p">();</span>
+    <span class="n">QString</span> <span class="n">getRedWinStr</span><span class="p">();</span>
+    <span class="n">QString</span> <span class="n">getBlueWinStr</span><span class="p">();</span>
+    <span class="n">QString</span> <span class="n">getPenaltyStr</span><span class="p">(</span><span class="n">direction</span> <span class="n">shootDirection</span><span class="p">,</span> <span class="n">direction</span> <span class="n">saveDirection</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">outside</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">goal</span><span class="p">);</span>
+
+<span class="c1">//private:
+</span>    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">redGkName</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">redStName</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">blueGkName</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">blueStName</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">prologue1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">prologue2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">prologue3</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">stIntro1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">stIntro2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">redWinStr1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">redWinStr2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">blueWinStr1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">blueWinStr2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">sameNoGoal1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">sameNoGoal2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">sameAndGoal1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">sameAndGoal2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lrOutside1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lrOutside2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lr_c_goal1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lr_c_goal2</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lr_c_noGoal1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lr_c_noGoal2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lr_wrongSave1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">lr_wrongSave2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_outside</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_lr_goal1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_lr_goal2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_c1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_c2</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_lr_noGoal1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span> <span class="n">c_lr_noGoal2</span><span class="p">;</span>
+
+<span class="p">};</span>
+</code></pre></div></div>
+<p>这些字符串在构造函数里面将所有的字符串插入并使用std::shuffle打乱，通过获取字符串的成员函数可以返回一些随机的但是能够组合在一起的句子，成为游戏中的解说信息。</p>
+
+<h2 id="总结">总结</h2>
+<p>这里写得很少，但是完成这个小游戏还是费挺大劲，遇到了各种各样奇奇怪怪的坑。什么定时器的使用，各种结果的处理，还是挺麻烦的。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            
+            <a href="/tag/#/%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95" rel="tag"># 蒙特卡洛方法</a>
+          
+            
+            <a href="/tag/#/%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91" rel="tag"># 安卓开发</a>
+          
+            
+            <a href="/tag/#/Qt" rel="tag"># Qt</a>
+          
+        </div>
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+        <div class="post-nav" id="post-nav-id">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/programming/2018/03/26/vimIME/" rel="next" title="利用AutoHotKey实现VI编辑模式下ESC键自动切换至英文输入法">
+                <i class="fa fa-chevron-left"></i> 利用AutoHotKey实现VI编辑模式下ESC键自动切换至英文输入法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/programming/2017/12/17/updateCheck/" rel="prev" title="实现Qt程序的新版本检查">
+                实现Qt程序的新版本检查 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+      
+
+      
+    </footer>
+  </article>
+
+  <div class="post-spread">
+    
+  </div>
+</div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        
+        
+        
+
+
+
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/assets/images/avatar.png"
+               alt="scienceasdf" />
+          <p class="site-author-name" itemprop="name">scienceasdf</p>
+           
+              <p class="site-description motion-element" itemprop="description">We will bury them !</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+        
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="https://github.com/scienceasdf" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/scienceasdf/activities" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-joomla"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="404.html" target="_blank" title="404公益@宝贝回家">
+                  
+                    <i class="fa fa-fw fa-child"></i>
+                  
+                  404公益@宝贝回家
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#球员类"> <span class="nav-number">1</span> <span class="nav-text">球员类</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#射手类"> <span class="nav-number">1.1</span> <span class="nav-text">射手类</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#游戏引擎"> <span class="nav-number">2</span> <span class="nav-text">游戏引擎</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#回合类"> <span class="nav-number">2.1</span> <span class="nav-text">回合类</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#引擎类"> <span class="nav-number">2.2</span> <span class="nav-text">引擎类</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#字符串引擎"> <span class="nav-number">2.3</span> <span class="nav-text">字符串引擎</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#总结"> <span class="nav-number">3</span> <span class="nav-text">总结</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">scienceasdf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://jekyllrb.com">Jekyll</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/simpleyyt/jekyll-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+   
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/assets/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/assets/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  <script type="text/javascript" src="/assets/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/assets/js/src/post-details.js?v=5.1.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+    
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
+
