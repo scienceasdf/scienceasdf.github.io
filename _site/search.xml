@@ -1332,6 +1332,152 @@ M_{prop}=\frac{M_{mot}}{2}
     </entry>
   
     <entry>
+      <title><![CDATA[让多种编辑器支持LaTeX的补全]]></title>
+      <url>/programming/2017/04/21/snippets/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']]
+            },
+  			TeX: { 
+                equationNumbers: {  
+                    autoNumber: "AMS"  
+                },
+     		    extensions: ["AMSmath.js"]
+            },
+            CommonHTML: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            "HTML-CSS": { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            SVG: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            }
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>在Qt creator, Sublime Text 3, VS Code中添加相关的snippets，让这些编辑器可以得心应手的处理LaTeX公式。</strong></p>
+
+<hr />
+
+<p>最近用LaTeX写作业，包括在博客里面用MathJax，输入公式总需要一个自动补全的编辑器。用TeX Studio用着很不顺手，因为它的自动补全是用回车键，而我习惯TAB键。于是只能用别的编辑器来替代了。</p>
+<h2 id="sublime-text-3">Sublime Text 3</h2>
+<p>首先是Sublime Text 3，这个有相应的LaTeX插件LaTeX Tools，比较方便。为了让它自动补全更加智能，需要在用户设置中增加下面一条语句：</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"auto_complete_selector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"source, text"</span><span class="p">,</span><span class="w">
+</span></code></pre></div></div>
+<p>不过这样仅仅是针对.tex文件，为了让平时写Markdown文件时也能有自动补全，还需要自己写sublime的sublime-completions文件。这个文件可以存储多个snippet，而一个sublime-snippet文件只能存储一个snippet.在文件中加入如下语句：</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="err">//</span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text.html - source - meta.tag, punctuation.definition.tag.begin"</span><span class="p">,</span><span class="w">
+
+   </span><span class="s2">"completions"</span><span class="p">:</span><span class="w">
+   </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="s2">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frac"</span><span class="p">,</span><span class="w"> </span><span class="s2">"contents"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frac{$1}{$2}$0"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="s2">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bmatrix"</span><span class="p">,</span><span class="w"> </span><span class="s2">"contents"</span><span class="p">:</span><span class="w"> </span><span class="s2">"</span><span class="se">\\</span><span class="s2">begin{matrix}</span><span class="se">\n</span><span class="s2">${1}</span><span class="se">\n\\</span><span class="s2">end{matrix}</span><span class="se">\n</span><span class="s2">$0"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="s2">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mathbf"</span><span class="p">,</span><span class="w"> </span><span class="s2">"contents"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mathbf{$1}{$2}$0"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="s2">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"equaton"</span><span class="p">,</span><span class="w"> </span><span class="s2">"contents"</span><span class="p">:</span><span class="w"> </span><span class="s2">"</span><span class="se">\\</span><span class="s2">begin{equation}</span><span class="se">\n</span><span class="s2">${1}</span><span class="se">\n\\</span><span class="s2">end{equation}</span><span class="se">\n</span><span class="s2">$0"</span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="s2">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"</span><span class="se">\\</span><span class="s2">begin"</span><span class="p">,</span><span class="w"> </span><span class="s2">"contents"</span><span class="p">:</span><span class="w"> </span><span class="s2">"</span><span class="se">\\</span><span class="s2">begin{$1}</span><span class="se">\n</span><span class="s2">${2}</span><span class="se">\n\\</span><span class="s2">end{$1}</span><span class="se">\n</span><span class="s2">$0"</span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>大体上常用的也就是这些了，这样能够大大提升写作效率。</p>
+
+<h2 id="qt-creator">Qt Creator</h2>
+<p>没错，这是一个IDE，但是也可以充分挖掘它的文字编辑器功能。用Qt Creator打开一个Markdown文件，这个时候它会问你是否加载高亮方案，选择加载可以发现很多可以用的高亮格式，是基于Kate编辑器的所以非常齐全，把SQL, Markdown, LaTeX等等常用的高亮方案都下载下来。</p>
+
+<p>接着就是设置snippet了，在Qt中可以不用手动地自己编写xml文件，只需要工具-选项-文本编辑器-片段里面自己设置一些snippet.最后生成的xml文件如下：</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;snippets&gt;</span>
+    <span class="nt">&lt;snippet</span> <span class="na">group=</span><span class="s">"Text"</span> <span class="na">trigger=</span><span class="s">"begin"</span> <span class="na">id=</span><span class="s">""</span> <span class="na">complement=</span><span class="s">""</span> <span class="na">removed=</span><span class="s">"false"</span> <span class="na">modified=</span><span class="s">"false"</span><span class="nt">&gt;</span>begin{$environment$}
+$$
+\\end{$environment$}
+$next$<span class="nt">&lt;/snippet&gt;</span>
+    <span class="nt">&lt;snippet</span> <span class="na">group=</span><span class="s">"Text"</span> <span class="na">trigger=</span><span class="s">"bmatrix"</span> <span class="na">id=</span><span class="s">""</span> <span class="na">complement=</span><span class="s">""</span> <span class="na">removed=</span><span class="s">"false"</span> <span class="na">modified=</span><span class="s">"false"</span><span class="nt">&gt;</span>\\begin{bmatrix}
+$$
+\\end{bmatrix}
+$next$<span class="nt">&lt;/snippet&gt;</span>
+    <span class="nt">&lt;snippet</span> <span class="na">group=</span><span class="s">"Text"</span> <span class="na">trigger=</span><span class="s">"equation"</span> <span class="na">id=</span><span class="s">""</span> <span class="na">complement=</span><span class="s">""</span> <span class="na">removed=</span><span class="s">"false"</span> <span class="na">modified=</span><span class="s">"false"</span><span class="nt">&gt;</span>\\begin{equation}
+$$
+\\end{equation}
+$next$<span class="nt">&lt;/snippet&gt;</span>
+    <span class="nt">&lt;snippet</span> <span class="na">group=</span><span class="s">"Text"</span> <span class="na">trigger=</span><span class="s">"frac"</span> <span class="na">id=</span><span class="s">""</span> <span class="na">complement=</span><span class="s">""</span> <span class="na">removed=</span><span class="s">"false"</span> <span class="na">modified=</span><span class="s">"false"</span><span class="nt">&gt;</span>frac{$num$}{$den$}$$<span class="nt">&lt;/snippet&gt;</span>
+    <span class="nt">&lt;snippet</span> <span class="na">group=</span><span class="s">"Text"</span> <span class="na">trigger=</span><span class="s">"global"</span> <span class="na">id=</span><span class="s">"text_global"</span> <span class="na">complement=</span><span class="s">"example"</span> <span class="na">removed=</span><span class="s">"false"</span> <span class="na">modified=</span><span class="s">"true"</span><span class="nt">&gt;</span>// This is available in all editors.<span class="nt">&lt;/snippet&gt;</span>
+    <span class="nt">&lt;snippet</span> <span class="na">group=</span><span class="s">"Text"</span> <span class="na">trigger=</span><span class="s">"mathbf"</span> <span class="na">id=</span><span class="s">""</span> <span class="na">complement=</span><span class="s">""</span> <span class="na">removed=</span><span class="s">"false"</span> <span class="na">modified=</span><span class="s">"false"</span><span class="nt">&gt;</span>mathbf{$$}$next$
+<span class="nt">&lt;/snippet&gt;</span>
+<span class="nt">&lt;/snippets&gt;</span>
+</code></pre></div></div>
+
+<p>其实还可以自己开发Qt Creator的插件，实现LaTeX文件的编译、预览这些。不过总的来说，Qt Creator的功能稍差些。但是我平时使用这个IDE的机会比较多，偶尔也会用这个处理一些文件。</p>
+
+<h2 id="vs-code">VS Code</h2>
+<p>这个也是比较容易设置的，代码如下：</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="err">Place</span><span class="w"> </span><span class="err">your</span><span class="w"> </span><span class="err">global</span><span class="w"> </span><span class="err">snippets</span><span class="w"> </span><span class="err">here.</span><span class="w"> </span><span class="err">Each</span><span class="w"> </span><span class="err">snippet</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">defined</span><span class="w"> </span><span class="err">under</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">snippet</span><span class="w"> </span><span class="err">name</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">has</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">scope</span><span class="p">,</span><span class="w"> </span><span class="err">prefix</span><span class="p">,</span><span class="w"> </span><span class="err">body</span><span class="w"> </span><span class="err">and</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="err">description.</span><span class="w"> </span><span class="err">Add</span><span class="w"> </span><span class="err">comma</span><span class="w"> </span><span class="err">separated</span><span class="w"> </span><span class="err">ids</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">languages</span><span class="w"> </span><span class="err">where</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">snippet</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">applicable</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">scope</span><span class="w"> </span><span class="err">field.</span><span class="w"> </span><span class="err">If</span><span class="w"> </span><span class="err">scope</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">left</span><span class="w"> </span><span class="err">empty</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="err">omitted</span><span class="p">,</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">snippet</span><span class="w"> </span><span class="err">gets</span><span class="w"> </span><span class="err">applied</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">all</span><span class="w"> </span><span class="err">languages.</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">prefix</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">what</span><span class="w"> </span><span class="err">is</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="err">used</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">trigger</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">snippet</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">body</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">expanded</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">inserted.</span><span class="w"> </span><span class="err">Possible</span><span class="w"> </span><span class="err">variables</span><span class="w"> </span><span class="err">are</span><span class="p">:</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="err">$</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">$</span><span class="mi">2</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">tab</span><span class="w"> </span><span class="err">stops</span><span class="p">,</span><span class="w"> </span><span class="err">$</span><span class="mi">0</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">final</span><span class="w"> </span><span class="err">cursor</span><span class="w"> </span><span class="err">position</span><span class="p">,</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="err">label</span><span class="p">},</span><span class="w"> </span><span class="err">$</span><span class="p">{</span><span class="mi">2</span><span class="p">:</span><span class="err">another</span><span class="p">}</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">placeholders.</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="err">Placeholders</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">same</span><span class="w"> </span><span class="err">ids</span><span class="w"> </span><span class="err">are</span><span class="w"> </span><span class="err">connected.</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="err">Example</span><span class="p">:</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="s2">"Print to console"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">//</span><span class="w"> 	</span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"javascript,typescript"</span><span class="p">,</span><span class="w">
+        </span><span class="err">//</span><span class="w"> 	</span><span class="s2">"prefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span><span class="w">
+        </span><span class="err">//</span><span class="w"> 	</span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="err">//</span><span class="w"> 		</span><span class="s2">"console.log('$1');"</span><span class="p">,</span><span class="w">
+        </span><span class="err">//</span><span class="w"> 		</span><span class="s2">"$2"</span><span class="w">
+        </span><span class="err">//</span><span class="w"> 	</span><span class="p">],</span><span class="w">
+        </span><span class="err">//</span><span class="w"> 	</span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Log output to console"</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"eqn"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"prefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"equation"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"</span><span class="se">\\</span><span class="s2">begin{equation}</span><span class="se">\n</span><span class="s2">$1</span><span class="se">\n\\</span><span class="s2">end{equation}"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A LaTeX equation"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>不过一开始我很奇怪，同样设置了snippet，在LaTeX文件中就会提示，但是Markdown文件中就不提示。GOOGLE了一把，发现原因是：</p>
+<blockquote>
+  <p>Full extensions get auto (7x24) completion by default (e.g. latex, cake), some built-in extensions like Markdown do not.</p>
+</blockquote>
+
+<p>所以需要进行特定语言设置：敲击Ctrl+Shift+P，输入Configure language specific settings，输入Markdown，进行下面的设置：</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"[markdown]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"editor.quickSuggestions"</span><span class="p">:</span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+
+</span></code></pre></div></div>
+
+<hr />
+
+<p>更新：我发现了支持TAB键补全的LaTeX编辑器：TeXMaker，在写tex文件时就用TeXMaker了，不过在写Markdown文件时还是这些文本编辑器更好用，因为有时还需要打开别的类型的文件。</p>
+
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> LaTeX </tag>
+        
+          <tag> 编辑器 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[轨道动力学中常用的计算机算法（二）]]></title>
       <url>/programming/2017/04/14/astrodynamics2/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">
