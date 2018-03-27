@@ -31,7 +31,7 @@ updated: 2018-08-17
 ### 韦尔莱积分
 推导如下：  
 $$r(t_1+\Delta t)=r(t_1)+\dot r\Delta t+\frac{1}{2}\ddot r(t_1)\Delta t^2+\frac{1}{6}\dddot r(t_1)\Delta t^3+o(\Delta t^4)$$  
-$$r(t_1-\Delta t)=r(t_1)-\dot r\Delta t+\frac{1}{2}\ddot r(t_1)\Delta t^2-\frac{1}{6}\dddot(t_1)\Delta t^3+o(\Delta t^4)$$  
+$$r(t_1-\Delta t)=r(t_1)-\dot r\Delta t+\frac{1}{2}\ddot r(t_1)\Delta t^2-\frac{1}{6}\dddot r(t_1)\Delta t^3+o(\Delta t^4)$$  
 $$r(t_1+\Delta t)=2r(t_1)-r(t_1-\Delta t)+a(t_1)\Delta t^2+o(\Delta t^4)$$  
 $$r(t_1+\Delta t)=2r(t_1)-r(t_1-\Delta t)+\frac{F(t_1)}{m}(t_1)\Delta t^2+o(\Delta t^4)$$  
 这里速度就被消去了。  
