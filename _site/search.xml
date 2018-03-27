@@ -176,6 +176,27 @@ SwitchIME(dwLayout){
 </code></pre></div></div>
 <p>game类里面主要就是nextRound成员函数构造round类并进行模拟。这里也是有一些设计的有一些欠妥当，导致round类的构造函数需要一个game的指针，以让关于游戏信息的字符串传回去。</p>
 
+<p>在点球大战中还需要专门判断点球大战是否提前结束了，这样才更符合真实的点球大战，因为如果某一方劣势已经确定就不会踢满5轮点球大战了。</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gameState</span> <span class="n">game</span><span class="o">::</span><span class="n">getGameState</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">redRound</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="n">blueRound</span> <span class="o">==</span> <span class="n">redRound</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">redScore</span> <span class="o">==</span> <span class="n">blueScore</span><span class="p">)</span> <span class="k">return</span> <span class="n">notFinished</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">redScore</span> <span class="o">&gt;</span> <span class="n">blueScore</span><span class="p">)</span> <span class="k">return</span> <span class="n">redWin</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">redScore</span> <span class="o">&lt;</span> <span class="n">blueScore</span><span class="p">)</span> <span class="k">return</span> <span class="n">blueWin</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">redRound</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">||</span> <span class="n">blueRound</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">notFinished</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">redScore</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="n">blueRound</span> <span class="o">+</span> <span class="n">blueScore</span><span class="p">)){</span>
+        <span class="k">return</span> <span class="n">redWin</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">blueScore</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="n">redRound</span> <span class="o">+</span> <span class="n">redScore</span><span class="p">)){</span>
+        <span class="k">return</span> <span class="n">blueWin</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">notFinished</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="字符串引擎">字符串引擎</h3>
 <p>为了实现松耦合，需要专门设计一个字符串处理的类，类的定义如下：</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">allStr</span>
@@ -237,7 +258,7 @@ SwitchIME(dwLayout){
 <p>这些字符串在构造函数里面将所有的字符串插入并使用std::shuffle打乱，通过获取字符串的成员函数可以返回一些随机的但是能够组合在一起的句子，成为游戏中的解说信息。</p>
 
 <h2 id="总结">总结</h2>
-<p>这里写得很少，但是完成这个小游戏还是费挺大劲，遇到了各种各样奇奇怪怪的坑。什么定时器的使用，各种结果的处理，还是挺麻烦的。</p>
+<p>这里写得很少，但是完成这个小游戏还是费挺大劲，遇到了各种各样奇奇怪怪的坑。什么定时器的使用，各种结果的处理，还是挺麻烦的。另外这里我还是没有考虑到点球大战踢满11轮的情况，一旦踢满11轮程序按理说会崩溃，但是现在晚了这么久我还没有遇到哪一次踢满了11轮:satisfied:。</p>
 ]]></content>
       <categories>
         
@@ -2032,6 +2053,412 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
           <tag> 天文 </tag>
         
           <tag> 数值算法 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[姿态动力学简易仿真系统]]></title>
+      <url>/programming/2017/03/27/rigidBody/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>实现了一个卫星姿态动力学的仿真程序，包括动力学的仿真以及3维显示。</strong></p>
+
+<hr />
+<p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
+
+<hr />
+
+<p>这篇文章参考了不少叶劲峰（Milo Yip）大神翻译的经典著作《游戏引擎架构》，以及SimTK引擎的文档。</p>
+
+<h2 id="常见算法">常见算法</h2>
+<p>刚体动力学问题里面最容易遇到的就是微分方程，数值求解微分方程最经典的方法莫过于欧拉法和RK4方法，这里就不多说了。不过，游戏引擎里还经常有一种算法：韦尔莱积分（Verlet intergration）。</p>
+
+<h3 id="韦尔莱积分">韦尔莱积分</h3>
+<p>推导如下：<br />
+<script type="math/tex">r(t_1+\Delta t)=r(t_1)+\dot r\Delta t+\frac{1}{2}\ddot r(t_1)\Delta t^2+\frac{1}{6}\dddot r(t_1)\Delta t^3+o(\Delta t^4)</script><br />
+<script type="math/tex">r(t_1-\Delta t)=r(t_1)-\dot r\Delta t+\frac{1}{2}\ddot r(t_1)\Delta t^2-\frac{1}{6}\dddot(t_1)\Delta t^3+o(\Delta t^4)</script><br />
+<script type="math/tex">r(t_1+\Delta t)=2r(t_1)-r(t_1-\Delta t)+a(t_1)\Delta t^2+o(\Delta t^4)</script><br />
+<script type="math/tex">r(t_1+\Delta t)=2r(t_1)-r(t_1-\Delta t)+\frac{F(t_1)}{m}(t_1)\Delta t^2+o(\Delta t^4)</script><br />
+这里速度就被消去了。</p>
+
+<p>还有一种速度韦尔莱：</p>
+<ol>
+  <li>$r(t_1+\Delta t)=r(t_1)+v(t_1)\Delta t+\frac{1}{2}a(t_1)\Delta t^2$</li>
+  <li>$v(t_1+\frac{1}{2}\Delta t)=v(t_1) + \frac{1}{2}a(t_1)\Delta t$</li>
+  <li>$a(t_1+\Delta t) = m^{-1}F(t_2,r(t_2),v(t_2))$</li>
+  <li>$v(t_1+\Delta t) = r(t_1+\frac{1}{2}\Delta t) + \frac{1}{2}a(t_1+\Delta t)\Delta t$</li>
+</ol>
+
+<p>这个第三步实际上也用的是近似值，我感觉和CFD中的麦考马克法有些类似。虽然这里是速度，位移，但是同样适用于角度，角速度的情况。</p>
+
+<h3 id="龙格库塔算法">龙格库塔算法</h3>
+<p>韦尔莱积分具有兼顾速度和精度的特点，因此在游戏引擎中得到了大量运用。但是如果对于需要精确预测的问题，或许还是需要龙格库塔算法。经典龙格库塔法我就不写了，这里写一下更一般的龙格库塔方法。</p>
+
+<p>令初值问题表述如下。</p>
+
+<script type="math/tex; mode=display">y'=f(t,y),\quad    y(t_{0})=y_{0}</script>
+
+<p>那么
+<script type="math/tex">y_{n+1}=y_{n}+h\sum _{i=1}^{s}b_{i}k_{i},</script>
+其中<br />
+<script type="math/tex">k_{1}=f(t_{n},y_{n}),</script><br />
+<script type="math/tex">k_{2}=f(t_{n}+c_{2}h,y_{n}+a_{21}hk_{1}),</script><br />
+<script type="math/tex">k_{3}=f(t_{n}+c_{3}h,y_{n}+a_{31}hk_{1}+a_{32}hk_{2}),</script><br />
+<script type="math/tex">\vdots</script><br />
+<script type="math/tex">k_{s}=f(t_{n}+c_{s}h,y_{n}+a_{s1}hk_{1}+a_{s2}hk_{2}+\cdots +a_{s,s-1}hk_{s-1}).</script><br />
+要给定一个特定的方法，必须提供整数$s$（级数），以及系数 $a_{ij}$（对于1 ≤ $j &lt; i$ ≤ s）,$b_i$（对于$i = 1, 2, …, s$）和$c_i$（对于$i = 2, 3, …, s$）。这些数据通常排列在一个助记工具中，称为Butcher tableau（得名自John C. Butcher）：<br />
+<img src="http://localhost:4000/assets//blog_images/rk_method.png" width="300px" height="200px" />
+例如，RK4法可以表示为
+<img src="http://localhost:4000/assets//blog_images/rk4.png" width="200px" height="200px" /><br />
+欧拉法可以表示为：
+<img src="http://localhost:4000/assets//blog_images/Euler.png" width="50px" height="400px" />
+而下面给出的是Prince-Dormand 45系数：
+<img src="http://localhost:4000/assets//blog_images/RK_n1.png" width="600px" height="400px" />
+Runge-Kutta-Fehlberg 56系数：
+<img src="http://localhost:4000/assets//blog_images/RK_n2.png" width="600px" height="400px" /></p>
+
+<h3 id="四元数">四元数</h3>
+<p>\begin{equation}
+q = [\mathbf{q}_v\quad q_s]=[\mathbf{a}\sin\frac{\theta}{2}\quad\cos\frac{\theta}{2}]
+\end{equation}
+其中：</p>
+<ul>
+  <li>$\mathbf{a}$是旋转轴，模长单位化</li>
+  <li>$\frac{\theta}{2}$是旋转半角</li>
+</ul>
+
+<p>四元数的共轭四元数是
+\begin{equation}
+q^{*}=[-\mathbf{q}_v\quad q_s]
+\end{equation}
+容易证明，当$|q|=1$时，$q^{-1}=q^{*}$</p>
+
+<p>四元数表示向量的旋转：例如将向量$\mathbf{v}$写成四元数$v=[\mathbf{v}\quad 0]=[v_x\quad v_y\quad v_z 0]$，则有
+\begin{equation}
+v^{\prime}=rotate(q,\mathbf{v}) = qvq^{-1}
+\end{equation}
+对于刚体，在刚体坐标系下取例如$\mathbf{F_M}=[0\quad 0\quad 1]$，则在惯性系中，
+<script type="math/tex">F_w=qF_Mq^{-1}=q[0\quad 0\quad 1\quad 0]q^{-1}</script></p>
+
+<h3 id="刚体的姿态动力学方程及求解算法">刚体的姿态动力学方程及求解算法</h3>
+<p>就算一个刚体在没有外力的情况下旋转，在三维旋转动力学中，其角速度矢量$\mathbf{\omega}$可能并不是常亮，转轴会不停地改变方向。以长方体为例，其绕最短或最长轴旋转时，能产生均角速度矢量，而以中间长度的轴旋转，$\mathbf{\omega}$的方向就会改变。<br />
+刚体的角动量守恒
+\begin{equation}
+\mathbf{L}=\mathbf{I\omega(t)}
+\end{equation}
+而$\mathbf{\omega}$不守恒。<br />
+三维旋转不能直接求解$\mathbf{\omega}$，而应该按照如下方式求解：
+\begin{equation}
+\mathbf{\dot L}(t)=\mathbf{N}(t)
+\end{equation}
+\begin{equation}
+\mathbf{\omega}(t)=\mathbf{I^{-1}L}(t)
+\end{equation}
+下面两个方程是四元数的方程：
+\begin{equation}
+\omega(t)=[\omega_x\quad \omega_y\quad \omega_z\quad 0]
+\end{equation}
+\begin{equation}
+\frac{1}{2}\omega(t)q(t)=\dot q(t) 
+\end{equation}
+$q$是定向四元数，表示刚体的定向，$\omega$是角速度四元数。</p>
+
+<p>而惯性张量的坐标变换则是
+\begin{equation}
+\mathbf{I^{\prime}=AIA^T}
+\end{equation}</p>
+
+<h3 id="齐次坐标">齐次坐标</h3>
+<p>如果定义齐次坐标，则平移运算也可以转化为旋转运算：$\mathbf{r}=[r_x\quad r_y\quad r_z\quad 1]$，若在$\mathbf{r}$向量上平移$\mathbf{s}$，则可以表示为 <br />
+<script type="math/tex">% <![CDATA[
+\begin{equation} \tag{a}
+[\mathbf{r}\quad 1]\begin{bmatrix}
+\mathbf{I} & \mathbf{0} \\
+\mathbf{t} & 1 
+\end{bmatrix}
+=[(\mathbf{r+t})\quad 1]
+\end{equation} %]]></script></p>
+
+<h3 id="别的观点">别的观点</h3>
+<p>一个刚体的质量特性包括刚体的质量$m$，质心的位置向量$\mathbf{p}$，以及惯性张量$\mathbf{I}$或者$\mathbf{J}$.如果定义回转张量$\mathbf{G}$满足$\mathbf{J}=m\mathbf{G}$，那么一个刚体的特性可以被如下的$6\times6$矩阵描述：
+<script type="math/tex">% <![CDATA[
+\begin{equation} \tag{b}
+ M = m \begin{bmatrix}
+ \mathbf{G} & \mathbf{p_{\times}} \\
+ \mathbf{p_{\times}} & \mathbf{I_3}
+ \end{bmatrix}
+ \end{equation} %]]></script>
+类似的，定义关于质心的空间速度矢量$V^C=\begin{bmatrix}\mathbf{\omega}\ \mathbf{V_C}\end{bmatrix}$，就可以类似的定义动量$P^C=M^CV^C$和动能$KE=\frac{1}{2}V^TMV$
+这样定义以后，关于空间坐标转换有一些好的性质，不过这些公式较为复杂，MathJax的渲染能力有限，我就不写在这里了。具体可以参见SimTK的文档。</p>
+
+<h2 id="编写程序">编写程序</h2>
+<p>对于姿态动力学问题，还是需要求解微分方程，需要用到龙格库塔算法。<br />
+定义一个简单的，但以后还可以扩展的刚体类</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">rigidBody</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">rigidBody</span><span class="p">();</span>
+    <span class="n">rigidBody</span><span class="p">(</span><span class="kt">double</span> <span class="n">Ix</span><span class="p">,</span> <span class="kt">double</span> <span class="n">Iy</span><span class="p">,</span> <span class="kt">double</span> <span class="n">Iz</span><span class="p">,</span> <span class="n">mat33</span><span class="o">&amp;</span> <span class="n">cosineMat</span><span class="p">,</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">omega</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">vec3</span><span class="p">(</span><span class="n">vec3</span><span class="o">&amp;</span><span class="p">,</span><span class="n">mat33</span><span class="o">&amp;</span><span class="p">,</span><span class="kt">double</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">mome</span><span class="p">)</span><span class="o">:</span>
+        <span class="n">m_Ix</span><span class="p">(</span><span class="n">Ix</span><span class="p">),</span><span class="n">m_Iy</span><span class="p">(</span><span class="n">Iy</span><span class="p">),</span><span class="n">m_Iz</span><span class="p">(</span><span class="n">Iz</span><span class="p">),</span> <span class="n">m_inertia</span><span class="p">(</span><span class="n">mat33</span><span class="o">::</span><span class="n">fromDiag</span><span class="p">(</span><span class="n">Ix</span><span class="p">,</span><span class="n">Iy</span><span class="p">,</span><span class="n">Iz</span><span class="p">)),</span>
+        <span class="n">m_cosMat</span><span class="p">(</span><span class="n">cosineMat</span><span class="p">),</span> <span class="n">m_omega</span><span class="p">(</span><span class="n">omega</span><span class="p">),</span><span class="n">m_time</span><span class="p">(</span><span class="mf">.0</span><span class="p">),</span> <span class="n">moment</span><span class="p">(</span><span class="n">mome</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="o">~</span><span class="n">rigidBody</span><span class="p">()</span> <span class="p">{}</span>
+
+    <span class="kt">void</span> <span class="n">do_step</span><span class="p">(</span><span class="kt">double</span> <span class="n">dt</span><span class="p">);</span>    <span class="c1">//calculate the state after time dt
+</span>
+    <span class="kt">double</span> <span class="n">getRotKineticEnergy</span><span class="p">();</span>
+    <span class="n">vec3</span> <span class="n">getAngularMomentum</span><span class="p">();</span>     <span class="c1">//expressed in the inertial frame
+</span>    <span class="n">vec3</span> <span class="n">getOmega</span><span class="p">();</span>            <span class="c1">//expressed in the inertial frame
+</span>    <span class="n">mat33</span> <span class="n">getInertiaTensor</span><span class="p">();</span>   <span class="c1">//expressed in the inertial frame
+</span>    <span class="n">mat33</span> <span class="n">getCosineMat</span><span class="p">();</span>
+
+<span class="k">private</span><span class="o">:</span>
+    <span class="c1">//double m_mass;
+</span>    <span class="kt">double</span> <span class="n">m_Ix</span><span class="p">,</span><span class="n">m_Iy</span><span class="p">,</span><span class="n">m_Iz</span><span class="p">;</span>
+    <span class="n">mat33</span> <span class="n">m_inertia</span><span class="p">;</span>    <span class="c1">//expressed in the body frame
+</span>    <span class="n">mat33</span> <span class="n">m_cosMat</span><span class="p">;</span>
+    <span class="c1">//vec3 m_pos;
+</span>    <span class="n">vec3</span> <span class="n">m_omega</span><span class="p">;</span>       <span class="c1">//expressed in the body frame
+</span>    <span class="c1">//vec3 m_speed;
+</span>    <span class="kt">double</span> <span class="n">m_time</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">vec3</span><span class="p">(</span><span class="n">vec3</span><span class="o">&amp;</span><span class="p">,</span><span class="n">mat33</span><span class="o">&amp;</span><span class="p">,</span><span class="kt">double</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">moment</span><span class="p">;</span> 
+    <span class="c1">//suppose M=M(omega,cosineMatrix,t), expressed in the body frame
+</span>    <span class="c1">//vec3 force(parameters);
+</span>
+    <span class="kt">void</span> <span class="n">func</span><span class="p">(</span><span class="kt">double</span> <span class="n">t</span><span class="p">,</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">omega</span><span class="p">,</span> <span class="n">mat33</span><span class="o">&amp;</span> <span class="n">cosMat</span><span class="p">,</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">resVec</span><span class="p">,</span> <span class="n">mat33</span><span class="o">&amp;</span> <span class="n">resMat</span><span class="p">);</span>
+    <span class="c1">// get the diff format of the moment dynamics
+</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<p>代码中都有具体的注释解释。我实现的动力学的时间步进代码如下：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">rigidBody</span><span class="o">::</span><span class="n">func</span><span class="p">(</span><span class="kt">double</span> <span class="n">t</span><span class="p">,</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">vec</span><span class="p">,</span> <span class="n">mat33</span><span class="o">&amp;</span> <span class="n">cosMat</span><span class="p">,</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">resVec</span><span class="p">,</span> <span class="n">mat33</span><span class="o">&amp;</span> <span class="n">resMat</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">vec3</span> <span class="n">M</span><span class="o">=</span><span class="n">moment</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span><span class="n">cosMat</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">dwx</span><span class="o">=</span><span class="n">M</span><span class="p">.</span><span class="n">getX</span><span class="p">()</span><span class="o">/</span><span class="n">m_Ix</span><span class="o">+</span><span class="n">vec</span><span class="p">.</span><span class="n">getY</span><span class="p">()</span><span class="o">*</span><span class="n">vec</span><span class="p">.</span><span class="n">getZ</span><span class="p">()</span><span class="o">/</span><span class="n">m_Ix</span><span class="o">*</span><span class="p">(</span><span class="n">m_Iz</span><span class="o">-</span><span class="n">m_Iy</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">dwy</span><span class="o">=</span><span class="n">M</span><span class="p">.</span><span class="n">getY</span><span class="p">()</span><span class="o">/</span><span class="n">m_Iy</span><span class="o">+</span><span class="n">vec</span><span class="p">.</span><span class="n">getX</span><span class="p">()</span><span class="o">*</span><span class="n">vec</span><span class="p">.</span><span class="n">getZ</span><span class="p">()</span><span class="o">/</span><span class="n">m_Iy</span><span class="o">*</span><span class="p">(</span><span class="n">m_Ix</span><span class="o">-</span><span class="n">m_Iz</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">dwz</span><span class="o">=</span><span class="n">M</span><span class="p">.</span><span class="n">getZ</span><span class="p">()</span><span class="o">/</span><span class="n">m_Iz</span><span class="o">+</span><span class="n">vec</span><span class="p">.</span><span class="n">getX</span><span class="p">()</span><span class="o">*</span><span class="n">vec</span><span class="p">.</span><span class="n">getY</span><span class="p">()</span><span class="o">/</span><span class="n">m_Iz</span><span class="o">*</span><span class="p">(</span><span class="n">m_Iy</span><span class="o">-</span><span class="n">m_Ix</span><span class="p">);</span>
+    <span class="n">resVec</span><span class="o">=</span><span class="n">vec3</span><span class="p">(</span><span class="n">dwx</span><span class="p">,</span><span class="n">dwy</span><span class="p">,</span><span class="n">dwz</span><span class="p">);</span>
+
+    <span class="n">resMat</span><span class="o">=</span><span class="n">crossProductMat3</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span><span class="o">*</span><span class="n">cosMat</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">rigidBody</span><span class="o">::</span><span class="n">do_step</span><span class="p">(</span><span class="kt">double</span> <span class="n">dt</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//using RK4 algorithm
+</span>
+    <span class="k">static</span> <span class="n">vec3</span> <span class="n">vk1</span><span class="p">,</span><span class="n">vk2</span><span class="p">,</span><span class="n">vk3</span><span class="p">,</span><span class="n">vk4</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">mat33</span> <span class="n">mk1</span><span class="p">,</span><span class="n">mk2</span><span class="p">,</span><span class="n">mk3</span><span class="p">,</span><span class="n">mk4</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">vec3</span> <span class="n">resV</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">mat33</span> <span class="n">resM</span><span class="p">;</span>
+
+    <span class="kt">double</span> <span class="n">t</span><span class="o">=</span><span class="n">m_time</span><span class="p">;</span>
+
+    <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">m_omega</span><span class="p">,</span><span class="n">m_cosMat</span><span class="p">,</span><span class="n">vk1</span><span class="p">,</span><span class="n">mk1</span><span class="p">);</span>
+    <span class="n">mk1</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
+    <span class="n">vk1</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
+    <span class="n">resV</span><span class="o">=</span><span class="n">m_omega</span><span class="o">+</span><span class="mf">.5</span><span class="o">*</span><span class="n">vk1</span><span class="p">;</span>
+    <span class="n">resM</span><span class="o">=</span><span class="n">m_cosMat</span><span class="o">+</span><span class="mf">.5</span><span class="o">*</span><span class="n">mk1</span><span class="p">;</span>
+
+    <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mf">.5</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span><span class="n">resV</span><span class="p">,</span><span class="n">resM</span><span class="p">,</span><span class="n">vk2</span><span class="p">,</span><span class="n">mk2</span><span class="p">);</span>
+    <span class="n">mk2</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
+    <span class="n">vk2</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
+    <span class="n">resV</span><span class="o">=</span><span class="n">m_omega</span><span class="o">+</span><span class="mf">.5</span><span class="o">*</span><span class="n">vk2</span><span class="p">;</span>
+    <span class="n">resM</span><span class="o">=</span><span class="n">m_cosMat</span><span class="o">+</span><span class="mf">.5</span><span class="o">*</span><span class="n">mk2</span><span class="p">;</span>
+
+    <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mf">.5</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span><span class="n">resV</span><span class="p">,</span><span class="n">resM</span><span class="p">,</span><span class="n">vk3</span><span class="p">,</span><span class="n">mk3</span><span class="p">);</span>
+    <span class="n">mk3</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
+    <span class="n">vk3</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
+    <span class="n">resV</span><span class="o">=</span><span class="n">m_omega</span><span class="o">+</span><span class="n">vk3</span><span class="p">;</span>
+    <span class="n">resM</span><span class="o">=</span><span class="n">m_cosMat</span><span class="o">+</span><span class="n">mk3</span><span class="p">;</span>
+
+    <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">dt</span><span class="p">,</span><span class="n">resV</span><span class="p">,</span><span class="n">resM</span><span class="p">,</span><span class="n">vk4</span><span class="p">,</span><span class="n">mk4</span><span class="p">);</span>
+    <span class="n">mk4</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
+    <span class="n">vk4</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
+
+    <span class="n">m_time</span><span class="o">+=</span><span class="n">dt</span><span class="p">;</span>
+    <span class="n">m_omega</span><span class="o">+=</span><span class="p">(</span><span class="mf">.16666666666666666666666666666666666666666666666666666666666</span>
+        <span class="o">*</span><span class="p">(</span><span class="n">vk1</span><span class="o">+</span><span class="mf">2.0</span><span class="o">*</span><span class="n">vk2</span><span class="o">+</span><span class="mf">2.0</span><span class="o">*</span><span class="n">vk3</span><span class="o">+</span><span class="n">vk4</span><span class="p">));</span>
+    <span class="n">m_cosMat</span><span class="o">+=</span><span class="p">(</span><span class="mf">.16666666666666666666666666666666666666666666666666666666666</span>
+        <span class="o">*</span><span class="p">(</span><span class="n">mk1</span><span class="o">+</span><span class="mf">2.0</span><span class="o">*</span><span class="n">mk2</span><span class="o">+</span><span class="mf">2.0</span><span class="o">*</span><span class="n">mk3</span><span class="o">+</span><span class="n">mk4</span><span class="p">));</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>然后需要绘制3维的动画，这一点也很麻烦。首先需要写一个sceneModifier来显示三维模型：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SceneModifier</span><span class="o">::</span><span class="n">SceneModifier</span><span class="p">(</span><span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QEntity</span> <span class="o">*</span><span class="n">rootEntity</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">m_rootEntity</span><span class="p">(</span><span class="n">rootEntity</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Cylinder shape data
+</span>    <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QCylinderMesh</span> <span class="o">*</span><span class="n">cylinder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QCylinderMesh</span><span class="p">();</span>
+    <span class="n">cylinder</span><span class="o">-&gt;</span><span class="n">setRadius</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">cylinder</span><span class="o">-&gt;</span><span class="n">setLength</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">cylinder</span><span class="o">-&gt;</span><span class="n">setRings</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    <span class="n">cylinder</span><span class="o">-&gt;</span><span class="n">setSlices</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+
+    <span class="c1">// CylinderMesh Transform
+</span>    <span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span> <span class="o">*</span><span class="n">cylinderTransform</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span><span class="p">();</span>
+    <span class="n">cylinderTransform</span><span class="o">-&gt;</span><span class="n">setScale</span><span class="p">(</span><span class="mf">1.5</span><span class="n">f</span><span class="p">);</span>
+    <span class="n">cylinderTransform</span><span class="o">-&gt;</span><span class="n">setRotation</span><span class="p">(</span><span class="n">QQuaternion</span><span class="o">::</span><span class="n">fromAxisAndAngle</span><span class="p">(</span><span class="n">QVector3D</span><span class="p">(</span><span class="mf">1.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">0.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">0.0</span><span class="n">f</span><span class="p">),</span> <span class="mf">20.0</span><span class="n">f</span><span class="p">));</span>
+    <span class="n">cylinderTransform</span><span class="o">-&gt;</span><span class="n">setTranslation</span><span class="p">(</span><span class="n">QVector3D</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">4.0</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">));</span>
+
+    <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QPhongMaterial</span> <span class="o">*</span><span class="n">cylinderMaterial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QPhongMaterial</span><span class="p">();</span>
+    <span class="n">cylinderMaterial</span><span class="o">-&gt;</span><span class="n">setDiffuse</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="n">QRgb</span><span class="p">(</span><span class="mh">0x928327</span><span class="p">)));</span>
+
+    <span class="c1">// Cylinder
+</span>    <span class="n">m_satEntity</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QEntity</span><span class="p">(</span><span class="n">m_rootEntity</span><span class="p">);</span>
+    <span class="n">m_satEntity</span><span class="o">-&gt;</span><span class="n">addComponent</span><span class="p">(</span><span class="n">cylinder</span><span class="p">);</span>
+    <span class="n">m_satEntity</span><span class="o">-&gt;</span><span class="n">addComponent</span><span class="p">(</span><span class="n">cylinderMaterial</span><span class="p">);</span>
+    <span class="n">m_satEntity</span><span class="o">-&gt;</span><span class="n">addComponent</span><span class="p">(</span><span class="n">cylinderTransform</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>这个例子是从Qt3D的一个example改过来的，Qt3D可以让我们更加方便地绘制3D模型。具体的调用方法很简单，其中光线、材质渲染与这里讨论的主题关系不大，可以不用管。主要是需要对动画涉及的刚体的transform需要制作动画。</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">SceneModifier</span><span class="o">::</span><span class="n">setSome</span><span class="p">(</span><span class="kt">int</span> <span class="n">type</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">delete</span> <span class="n">m_satEntity</span><span class="p">;</span>
+    <span class="n">m_satEntity</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QEntity</span><span class="p">(</span><span class="n">m_rootEntity</span><span class="p">);</span>
+
+    <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QPhongMaterial</span> <span class="o">*</span><span class="n">satMaterial</span><span class="o">=</span><span class="k">new</span> <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QPhongMaterial</span><span class="p">();</span>
+    <span class="n">satMaterial</span><span class="o">-&gt;</span><span class="n">setDiffuse</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="n">QRgb</span><span class="p">(</span><span class="mh">0x928327</span><span class="p">)));</span>
+
+    <span class="c1">// satMesh Transform
+</span>    <span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span> <span class="o">*</span><span class="n">satTransform</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span><span class="p">();</span>
+    <span class="n">satTransform</span><span class="o">-&gt;</span><span class="n">setScale</span><span class="p">(</span><span class="mf">1.5</span><span class="n">f</span><span class="p">);</span>
+
+    <span class="n">satTransform</span><span class="o">-&gt;</span><span class="n">setTranslation</span><span class="p">(</span><span class="n">QVector3D</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">4.0</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">));</span>
+    <span class="n">TransformController</span> <span class="o">*</span><span class="n">ctrl</span><span class="o">=</span><span class="k">new</span> <span class="n">TransformController</span><span class="p">(</span><span class="n">satTransform</span><span class="p">);</span>
+    <span class="n">ctrl</span><span class="o">-&gt;</span><span class="n">setType</span><span class="p">(</span><span class="n">type</span><span class="p">);</span>
+    <span class="n">ctrl</span><span class="o">-&gt;</span><span class="n">setTarget</span><span class="p">(</span><span class="n">satTransform</span><span class="p">);</span>
+    <span class="n">ctrl</span><span class="o">-&gt;</span><span class="n">setTime</span><span class="p">(</span><span class="mf">.0</span><span class="n">f</span><span class="p">);</span>
+
+    <span class="n">QPropertyAnimation</span> <span class="o">*</span><span class="n">animation</span><span class="o">=</span><span class="k">new</span> <span class="n">QPropertyAnimation</span><span class="p">(</span><span class="n">satTransform</span><span class="p">);</span>
+    <span class="n">animation</span><span class="o">-&gt;</span><span class="n">setTargetObject</span><span class="p">(</span><span class="n">ctrl</span><span class="p">);</span>
+    <span class="n">animation</span><span class="o">-&gt;</span><span class="n">setPropertyName</span><span class="p">(</span><span class="s">"time"</span><span class="p">);</span>
+    <span class="n">animation</span><span class="o">-&gt;</span><span class="n">setDuration</span><span class="p">(</span><span class="mi">100000</span><span class="p">);</span>
+    <span class="n">animation</span><span class="o">-&gt;</span><span class="n">setStartValue</span><span class="p">(</span><span class="n">QVariant</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="mf">.0</span><span class="p">));</span>
+    <span class="n">animation</span><span class="o">-&gt;</span><span class="n">setEndValue</span><span class="p">(</span><span class="n">QVariant</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="mi">800000000</span><span class="p">));</span>
+    <span class="n">animation</span><span class="o">-&gt;</span><span class="n">setLoopCount</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">animation</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span>
+
+    <span class="c1">// sat
+</span>    <span class="n">m_satEntity</span><span class="o">-&gt;</span><span class="n">addComponent</span><span class="p">(</span><span class="n">satTransform</span><span class="p">);</span>
+    <span class="n">m_satEntity</span><span class="o">-&gt;</span><span class="n">addComponent</span><span class="p">(</span><span class="n">satMaterial</span><span class="p">);</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+<p>因此我们需要定义一个TransformController的类：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TransformController</span><span class="o">:</span> <span class="k">public</span> <span class="n">QObject</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span><span class="o">*</span> <span class="n">target</span> <span class="n">READ</span> <span class="n">target</span> <span class="n">WRITE</span> <span class="n">setTarget</span> <span class="n">NOTIFY</span> <span class="n">targetChanged</span><span class="p">)</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="kt">float</span> <span class="n">time</span> <span class="n">READ</span> <span class="n">time</span> <span class="n">WRITE</span> <span class="n">setTime</span> <span class="n">NOTIFY</span> <span class="n">timeChanged</span><span class="p">)</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">TransformController</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="kt">void</span> <span class="n">setTarget</span><span class="p">(</span><span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span> <span class="o">*</span><span class="n">target</span><span class="p">);</span>
+    <span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span> <span class="o">*</span><span class="n">target</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="kt">void</span> <span class="n">setTime</span><span class="p">(</span><span class="kt">float</span> <span class="n">time</span><span class="p">);</span>
+    <span class="kt">float</span> <span class="n">time</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+
+<span class="n">signals</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">targetChanged</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="n">timeChanged</span><span class="p">();</span>
+
+<span class="k">protected</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">updateQuat</span><span class="p">();</span>
+
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span> <span class="o">*</span><span class="n">m_target</span><span class="p">;</span>
+    <span class="n">QQuaternion</span> <span class="n">m_quat</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">m_time</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">dt</span><span class="p">;</span>
+
+    <span class="n">rigidBody</span> <span class="n">m_body</span><span class="p">;</span>
+
+    <span class="cm">/*mat33 tensor;
+    vec3 omega;
+    vec3 angularM;
+    mat33 cosineMat;*/</span>
+
+<span class="p">};</span>
+</code></pre></div></div>
+<p>TransformController中比较关键的几个代码如下：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">TransformController</span><span class="o">::</span><span class="n">setTarget</span><span class="p">(</span><span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span> <span class="o">*</span><span class="n">target</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m_target</span> <span class="o">!=</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">m_target</span> <span class="o">=</span> <span class="n">target</span><span class="p">;</span>
+        <span class="n">emit</span> <span class="n">targetChanged</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span> <span class="o">*</span><span class="n">TransformController</span><span class="o">::</span><span class="n">target</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_target</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">TransformController</span><span class="o">::</span><span class="n">setTime</span><span class="p">(</span><span class="kt">float</span> <span class="n">time</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">qFuzzyCompare</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">m_time</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">dt</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="o">-</span><span class="n">m_time</span><span class="p">)</span><span class="o">/</span><span class="mf">12000000.0</span><span class="p">;</span><span class="c1">//1000.0;
+</span>        <span class="c1">//dt=.01;
+</span>        <span class="n">m_time</span><span class="o">=</span><span class="n">time</span><span class="p">;</span>
+        <span class="n">updateQuat</span><span class="p">();</span>
+        <span class="n">emit</span> <span class="n">timeChanged</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">float</span> <span class="n">TransformController</span><span class="o">::</span><span class="n">time</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_time</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">TransformController</span><span class="o">::</span><span class="n">updateQuat</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">m_body</span><span class="p">.</span><span class="n">do_step</span><span class="p">(</span><span class="n">dt</span><span class="p">);</span>
+    <span class="n">m_quat</span><span class="o">=</span><span class="n">fromMat33</span><span class="p">(</span><span class="n">m_body</span><span class="p">.</span><span class="n">getCosineMat</span><span class="p">());</span>
+    <span class="n">m_target</span><span class="o">-&gt;</span><span class="n">setRotation</span><span class="p">(</span><span class="n">m_quat</span><span class="p">);</span>
+
+
+    <span class="k">static</span> <span class="n">vec3</span> <span class="n">am</span><span class="p">,</span><span class="n">omega</span><span class="p">,</span><span class="n">z_</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">vec3</span> <span class="n">z</span><span class="p">(</span><span class="mf">.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">.0</span><span class="p">);</span>
+    <span class="n">z_</span><span class="o">=</span><span class="n">m_body</span><span class="p">.</span><span class="n">getCosineMat</span><span class="p">().</span><span class="n">transpose</span><span class="p">()</span><span class="o">*</span><span class="n">z</span><span class="p">;</span>     
+    <span class="c1">//express the vector in the inertial frame
+</span>    <span class="n">am</span><span class="o">=</span><span class="n">m_body</span><span class="p">.</span><span class="n">getAngularMomentum</span><span class="p">();</span>
+
+    <span class="c1">//omega=m_body.getOmega();
+</span>    <span class="n">omega</span><span class="o">=</span><span class="n">m_body</span><span class="p">.</span><span class="n">m_omega</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">T</span><span class="o">=</span><span class="n">m_body</span><span class="p">.</span><span class="n">getRotKineticEnergy</span><span class="p">(),</span><span class="n">theta</span><span class="o">=</span><span class="n">angle</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">z_</span><span class="p">)</span><span class="o">*</span><span class="n">degPerRad</span><span class="p">;</span>  
+    <span class="c1">//theta is called the nutation angle
+</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>由于TransformController的类定义有这样一条语句：<code class="highlighter-rouge">Q_PROPERTY(float time READ time WRITE setTime NOTIFY timeChanged)</code>,因此如果时间变化，就会调用setTime函数，setTime函数会调用updateQuat函数，在updateQuat函数中进行动力学的时间步进求解，而m_target就保存的是刚体的旋转四元数信息，更新之后就会用新的旋转四元数渲染三维模型。</p>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 刚体动力学 </tag>
+        
+          <tag> 天文 </tag>
+        
+          <tag> 数值算法 </tag>
+        
+          <tag> Qt </tag>
         
       </tags>
       <tags></tags>

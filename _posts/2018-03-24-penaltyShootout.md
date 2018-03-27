@@ -121,7 +121,31 @@ public:
 
 };
 ```
-game类里面主要就是nextRound成员函数构造round类并进行模拟。这里也是有一些设计的有一些欠妥当，导致round类的构造函数需要一个game的指针，以让关于游戏信息的字符串传回去。
+game类里面主要就是nextRound成员函数构造round类并进行模拟。这里也是有一些设计的有一些欠妥当，导致round类的构造函数需要一个game的指针，以让关于游戏信息的字符串传回去。  
+  
+
+在点球大战中还需要专门判断点球大战是否提前结束了，这样才更符合真实的点球大战，因为如果某一方劣势已经确定就不会踢满5轮点球大战了。
+```c++
+gameState game::getGameState()
+{
+    if (redRound > 5 && blueRound == redRound){
+        if(redScore == blueScore) return notFinished;
+        if(redScore > blueScore) return redWin;
+        if(redScore < blueScore) return blueWin;
+    }
+    if(redRound > 5 || blueRound > 5){
+        return notFinished;
+    }
+    if(redScore > (5 - blueRound + blueScore)){
+        return redWin;
+    }
+    if(blueScore > (5 - redRound + redScore)){
+        return blueWin;
+    }
+    return notFinished;
+}
+```
+
 
 ### 字符串引擎
 为了实现松耦合，需要专门设计一个字符串处理的类，类的定义如下：
@@ -185,4 +209,4 @@ public:
 这些字符串在构造函数里面将所有的字符串插入并使用std::shuffle打乱，通过获取字符串的成员函数可以返回一些随机的但是能够组合在一起的句子，成为游戏中的解说信息。
 
 ## 总结
-这里写得很少，但是完成这个小游戏还是费挺大劲，遇到了各种各样奇奇怪怪的坑。什么定时器的使用，各种结果的处理，还是挺麻烦的。
+这里写得很少，但是完成这个小游戏还是费挺大劲，遇到了各种各样奇奇怪怪的坑。什么定时器的使用，各种结果的处理，还是挺麻烦的。另外这里我还是没有考虑到点球大战踢满11轮的情况，一旦踢满11轮程序按理说会崩溃，但是现在晚了这么久我还没有遇到哪一次踢满了11轮:satisfied:。

@@ -1,24 +1,10 @@
-
-<!doctype html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!DOCTYPE html>
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
@@ -28,8 +14,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -47,7 +33,7 @@
 
   
   
-  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -70,7 +56,7 @@
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -78,23 +64,23 @@
 
 
 
-<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="蒙特卡洛方法,安卓开发,Qt," />
+<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="scienceasdf" type="application/atom+xml" />
+  <meta name="keywords" content="蒙特卡洛方法,安卓开发,Qt,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="scienceasdf" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1">
 
 
 
@@ -149,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="http://localhost:4000/"/>
+  <link rel="canonical" href="http://localhost:4000/">
 
 
 
@@ -199,7 +185,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">scienceasdf</span>
         <span class="logo-line-after"><i></i></span>
@@ -231,7 +217,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -243,7 +229,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -255,7 +241,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -336,7 +322,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -400,7 +386,7 @@
 
 <p><strong>开发了一个点球大战的手机小游戏。</strong></p>
 
-<hr />
+<hr>
 
 <p>开发了一个点球大战的小游戏，实现了游戏引擎与GUI的分离。</p>
 
@@ -502,6 +488,27 @@
 </code></pre></div></div>
 <p>game类里面主要就是nextRound成员函数构造round类并进行模拟。这里也是有一些设计的有一些欠妥当，导致round类的构造函数需要一个game的指针，以让关于游戏信息的字符串传回去。</p>
 
+<p>在点球大战中还需要专门判断点球大战是否提前结束了，这样才更符合真实的点球大战，因为如果某一方劣势已经确定就不会踢满5轮点球大战了。</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gameState</span> <span class="n">game</span><span class="o">::</span><span class="n">getGameState</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">redRound</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="n">blueRound</span> <span class="o">==</span> <span class="n">redRound</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">redScore</span> <span class="o">==</span> <span class="n">blueScore</span><span class="p">)</span> <span class="k">return</span> <span class="n">notFinished</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">redScore</span> <span class="o">&gt;</span> <span class="n">blueScore</span><span class="p">)</span> <span class="k">return</span> <span class="n">redWin</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">redScore</span> <span class="o">&lt;</span> <span class="n">blueScore</span><span class="p">)</span> <span class="k">return</span> <span class="n">blueWin</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">redRound</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">||</span> <span class="n">blueRound</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">){</span>
+        <span class="k">return</span> <span class="n">notFinished</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">redScore</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="n">blueRound</span> <span class="o">+</span> <span class="n">blueScore</span><span class="p">)){</span>
+        <span class="k">return</span> <span class="n">redWin</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">blueScore</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="n">redRound</span> <span class="o">+</span> <span class="n">redScore</span><span class="p">)){</span>
+        <span class="k">return</span> <span class="n">blueWin</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">notFinished</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
 <h3 id="字符串引擎">字符串引擎</h3>
 <p>为了实现松耦合，需要专门设计一个字符串处理的类，类的定义如下：</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">allStr</span>
@@ -563,7 +570,7 @@
 <p>这些字符串在构造函数里面将所有的字符串插入并使用std::shuffle打乱，通过获取字符串的成员函数可以返回一些随机的但是能够组合在一起的句子，成为游戏中的解说信息。</p>
 
 <h2 id="总结">总结</h2>
-<p>这里写得很少，但是完成这个小游戏还是费挺大劲，遇到了各种各样奇奇怪怪的坑。什么定时器的使用，各种结果的处理，还是挺麻烦的。</p>
+<p>这里写得很少，但是完成这个小游戏还是费挺大劲，遇到了各种各样奇奇怪怪的坑。什么定时器的使用，各种结果的处理，还是挺麻烦的。另外这里我还是没有考虑到点球大战踢满11轮的情况，一旦踢满11轮程序按理说会崩溃，但是现在晚了这么久我还没有遇到哪一次踢满了11轮<img class="emoji" title=":satisfied:" alt=":satisfied:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f606.png" height="20" width="20">。</p>
 
       
     </div>
@@ -682,7 +689,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -693,9 +700,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/assets/images/avatar.png"
-               alt="scienceasdf" />
+          <img class="site-author-image" itemprop="image" src="/assets/images/avatar.png" alt="scienceasdf">
           <p class="site-author-name" itemprop="name">scienceasdf</p>
            
               <p class="site-description motion-element" itemprop="description">We will bury them !</p>
@@ -706,7 +711,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -804,10 +809,29 @@
 
             
               <div class="post-toc-content">
-    <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#球员类"> <span class="nav-number">1</span> <span class="nav-text">球员类</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#射手类"> <span class="nav-number">1.1</span> <span class="nav-text">射手类</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#游戏引擎"> <span class="nav-number">2</span> <span class="nav-text">游戏引擎</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#回合类"> <span class="nav-number">2.1</span> <span class="nav-text">回合类</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#引擎类"> <span class="nav-number">2.2</span> <span class="nav-text">引擎类</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#字符串引擎"> <span class="nav-number">2.3</span> <span class="nav-text">字符串引擎</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#总结"> <span class="nav-number">3</span> <span class="nav-text">总结</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+    <ol class="nav">
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#%E7%90%83%E5%91%98%E7%B1%BB"> <span class="nav-number">1</span> <span class="nav-text">球员类</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#%E5%B0%84%E6%89%8B%E7%B1%BB"> <span class="nav-number">1.1</span> <span class="nav-text">射手类</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</li>
+</ol> </li>
+</ol>    <li class="nav-item nav-level-2"> <a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E5%BC%95%E6%93%8E"> <span class="nav-number">2</span> <span class="nav-text">游戏引擎</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#%E5%9B%9E%E5%90%88%E7%B1%BB"> <span class="nav-number">2.1</span> <span class="nav-text">回合类</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</li>
+</ol> </li>   <li class="nav-item nav-level-3"> <a class="nav-link" href="#%E5%BC%95%E6%93%8E%E7%B1%BB"> <span class="nav-number">2.2</span> <span class="nav-text">引擎类</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</li>    <li class="nav-item nav-level-3"> <a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%BC%95%E6%93%8E"> <span class="nav-number">2.3</span> <span class="nav-text">字符串引擎</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</li>     <li class="nav-item nav-level-2"> <a class="nav-link" href="#%E6%80%BB%E7%BB%93"> <span class="nav-number">3</span> <span class="nav-text">总结</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
     </ol>
-  </div>
+  </ol>
+</ol>
+</ol>
+</li>
+</div>
             
 
           </div>
@@ -826,9 +850,9 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
-  &copy;  2017 - 
+  ©  2017 - 
   <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -1034,4 +1058,3 @@
 
 </body>
 </html>
-
