@@ -60,15 +60,15 @@ $$k_{3}=f(t_{n}+c_{3}h,y_{n}+a_{31}hk_{1}+a_{32}hk_{2}),$$
 $$\vdots $$  
 $$k_{s}=f(t_{n}+c_{s}h,y_{n}+a_{s1}hk_{1}+a_{s2}hk_{2}+\cdots +a_{s,s-1}hk_{s-1}).$$  
 要给定一个特定的方法，必须提供整数$s$（级数），以及系数 $a_{ij}$（对于1 ≤ $j < i$ ≤ s）,$b_i$（对于$i = 1, 2, ..., s$）和$c_i$（对于$i = 2, 3, ..., s$）。这些数据通常排列在一个助记工具中，称为Butcher tableau（得名自John C. Butcher）：  
-<img src="{{ site.url }}/assets//blog_images/rk_method.png" width="300px" height="200px"/>
+<img src="{{ site.url }}/assets//blog_images/rk_method.jpg" width="300px" height="200px"/>
 例如，RK4法可以表示为
-<img src="{{ site.url }}/assets//blog_images/rk4.png" width="200px" height="200px"/>  
+<img src="{{ site.url }}/assets//blog_images/rk4.jpg" width="200px" height="200px"/>  
 欧拉法可以表示为：
-<img src="{{ site.url }}/assets//blog_images/Euler.png" width="50px" height="400px"/>
+<img src="{{ site.url }}/assets//blog_images/Euler.jpg" width="50px" height="400px"/>
 而下面给出的是Prince-Dormand 45系数：
-<img src="{{ site.url }}/assets//blog_images/RK_n1.png" width="600px" height="400px"/>
+<img src="{{ site.url }}/assets//blog_images/RK_n1.jpg" width="600px" height="400px"/>
 Runge-Kutta-Fehlberg 56系数：
-<img src="{{ site.url }}/assets//blog_images/RK_n2.png" width="600px" height="400px"/>
+<img src="{{ site.url }}/assets//blog_images/RK_n2.jpg" width="600px" height="400px"/>
 
 ### 四元数
 \begin{equation}
