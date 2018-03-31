@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Editor,Vim,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="scienceasdf" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="修改sublime和VS code的keymap配置，使其能够有mswin.vim的操作方式。">
+<meta name="keywords" content="Editor, Vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将VS code和Sublime Text3的VIM改成behave-mswin-like">
+<meta property="og:url" content="http://localhost:4000/programming/2018/03/31/editorVIM/">
+<meta property="og:site_name" content="scienceasdf">
+<meta property="og:description" content="修改sublime和VS code的keymap配置，使其能够有mswin.vim的操作方式。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-26T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="将VS code和Sublime Text3的VIM改成behave-mswin-like">
+<meta name="twitter:description" content="修改sublime和VS code的keymap配置，使其能够有mswin.vim的操作方式。">
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://localhost:4000/">
+
+
+
+
+
+  <title>将VS code和Sublime Text3的VIM改成behave-mswin-like</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ea13fa2dc2aa892b0c36fe0fbc9d067d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">scienceasdf</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+<div id="posts" class="posts-expand">
+  
+  
+
+  
+
+  
+  
+  
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/programming/2018/03/31/editorVIM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="scienceasdf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="scienceasdf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            将VS code和Sublime Text3的VIM改成behave-mswin-like
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-31T00:00:00+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/Programming" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            
+                <div class="post-description">
+                    
+                </div>
+            
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>修改sublime和VS code的keymap配置，使其能够有mswin.vim的操作方式。</strong></p>
+
+<hr>
+
+<hr>
+
+<p>最近学习VIM，但是我一般不直接用VIM，因为配置插件太过于麻烦，而且UI感觉也不美观，因此我用的都是别的IDE/编辑器的VIM操作模式。Qt creator自带的fakeVim感觉非常好用，因为可以直接导入vimrc文件。我平时的习惯还是希望能够有mswin.vim的配置，包括Home和End键，Qt Creator导入很方便。而Kate, Kile虽然也提供导入vimrc文件的功能，但是实现很不完整，还是需要自己手动修改keymap。Kile是一个可以支持vim操作模式的LaTeX的IDE，这一点非常好。</p>
+
+<h2 id="kate和kile">Kate和Kile</h2>
+<p>这个一开始就是在设置里面进行手动地输入。也需要改一下热键，Ctrl+Q原本是关闭程序的，我把它改成了Alt+Q。最后得到了一个katevirc的文件，Kile和KDevelop都会按照这个配置来。文件的全文如下：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Kate Vi Input Mode Settings]
+Command Mode Mapping Keys=
+Command Mode Mappings=
+Command Mode Mappings Recursion=
+Insert Mode Mapping Keys=&lt;c-y&gt;,&lt;end&gt;,&lt;c-v&gt;,&lt;c-z&gt;,&lt;home&gt;,&lt;c-a&gt;
+Insert Mode Mappings=&lt;c-o&gt;&lt;c-r&gt;,&lt;c-o&gt;$,&lt;esc&gt;"+gPi,&lt;c-o&gt;u,&lt;c-o&gt;^,&lt;esc&gt;ggvG
+Insert Mode Mappings Recursion=false,false,false,false,false,false
+Macro Completions=
+Macro Contents=
+Macro Registers=
+Map Leader=\\
+Normal Mode Mapping Keys=&lt;c-y&gt;,&lt;c-tab&gt;,&lt;c-q&gt;,&lt;end&gt;,&lt;c-v&gt;,&lt;c-s&gt;,&lt;c-z&gt;,&lt;home&gt;,&lt;c-a&gt;,&lt;c-f4&gt;
+Normal Mode Mappings=U,&lt;c-w&gt;w,&lt;c-v&gt;,$,"+gP,:w&lt;cr&gt;,u,^,ggvG,&lt;c-w&gt;c
+Normal Mode Mappings Recursion=false,false,false,false,false,false,false,false,false,false
+Visual Mode Mapping Keys=&lt;c-x&gt;,&lt;end&gt;,&lt;c-v&gt;,&lt;home&gt;,&lt;c-a&gt;,&lt;c-c&gt;
+Visual Mode Mappings="+x,$,"+p,^,vggvG,"+y&lt;esc&gt;
+Visual Mode Mappings Recursion=false,false,false,false,false,false
+</code></pre></div></div>
+
+<h2 id="sublime-text-3">Sublime Text 3</h2>
+<p>这个需要安装插件NeoVintageous，别的插件功能太弱。这个插件可以自己写配置文件，不过也不是很强大，imap这些不支持。不过在Insert Mode里面似乎是直接支持相关操作的。另外不知道为什么，Normal Mode里面的Ctrl+S不可用。配置文件全文如下：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"" backspace in Visual mode deletes selection  
+vnoremap &lt;BS&gt; d  
+"   
+"" CTRL-X and SHIFT-Del are Cut  
+vnoremap &lt;C-x&gt; "+x  
+"
+vnoremap &lt;S-Del&gt; "+x  
+"   
+"" CTRL-C and CTRL-Insert are Copy  
+vnoremap &lt;C-c&gt; "+y  
+vnoremap &lt;C-Insert&gt; "+y  
+"   
+"" CTRL-V and SHIFT-Insert are Paste  
+""map &lt;C-v&gt;        p  
+noremap &lt;C-v&gt;         "+p 
+
+"" Pasting blockwise and linewise selections is not possible in Insert and  
+"" Visual mode "without the +virtualedit feature.  They are pasted as if they  
+"" were characterwise instead.  
+"" Uses the paste.vim auto"load script.  
+"   
+vmap &lt;S-Insert&gt;        &lt;C-V&gt;  
+"   
+"" Use CTRL-Q to do what CTRL-V used to do 
+nnoremap &lt;C-q&gt;        &lt;C-v&gt;  
+"   
+"" Use CTRL-S for saving, also in Insert mode  
+"noremap &lt;C-s&gt;        :w   
+"vnoremap &lt;C-s&gt;       v:w  
+"   
+
+"" CTRL-Z is Undo; not in cmdline though  
+noremap &lt;C-z&gt; u  
+"   
+"" CTRL-Y is Redo (although not repeat); not in cmdline though  
+noremap &lt;C-y&gt; &lt;C-r&gt;  
+""inoremap &lt;C-Y&gt; &lt;C-O&gt;&lt;C-R&gt;  
+"
+"" CTRL-A is Select all  
+noremap &lt;C-a&gt; ggvG
+""onoremap &lt;C-a&gt; &lt;C-C&gt;gggH&lt;C-O&gt;G  
+""snoremap &lt;C-a&gt; &lt;C-C&gt;gggH&lt;C-O&gt;G  
+vnoremap &lt;C-a&gt; vggvG   
+"" CTRL-Tab is Next window  
+noremap &lt;C-Tab&gt; &lt;C-W&gt;w  
+onoremap &lt;C-Tab&gt; &lt;C-C&gt;&lt;C-W&gt;w   
+"
+"   
+"" CTRL-F4 is Close window  
+noremap &lt;C-F4&gt; &lt;C-W&gt;c  
+onoremap &lt;C-F4&gt; &lt;C-C&gt;&lt;C-W&gt;c  
+"     
+nnoremap i i&lt;Ctrl-Shift-1&gt;  
+</code></pre></div></div>
+
+<h2 id="vs-code">VS Code</h2>
+<p>这个需要同时改一些Key binding和vim插件的配置，用户设置文件如下：</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"markdown-preview-enhanced.mathRenderingOption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MathJax"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"emmet.showSuggestionsAsSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"[markdown]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"editor.quickSuggestions"</span><span class="p">:</span><span class="kc">true</span><span class="w">    
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"latex-workshop.view.pdf.viewer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tab"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"latex-workshop.view.pdf.hand"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">可变编译方式</span><span class="w"> 
+    </span><span class="s2">"latex-workshop.latex.toolchain"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">注意这里是留空的</span><span class="w">
+          </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"-synctex=1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"-interaction=nonstopmode"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"-file-line-error"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"%DOC%"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"window.zoomLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"vim.neovimPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D:</span><span class="se">\\</span><span class="s2">downloads</span><span class="se">\\</span><span class="s2">nvim-win64</span><span class="se">\\</span><span class="s2">Neovim</span><span class="se">\\</span><span class="s2">bin</span><span class="se">\\</span><span class="s2">nvim.exe"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"vim.enableNeovim"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"vim.insertModeKeyBindings"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-v&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"</span><span class="se">\"</span><span class="s2">+gP"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">  
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"vim.insertModeKeyBindingsNonRecursive"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-s&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-o&gt;:w"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-z&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-o&gt;u"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">  
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-y&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-o&gt;&lt;C-r&gt;"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-a&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-o&gt;gg&lt;C-o&gt;gH&lt;C-o&gt;G"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-Tab&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-O&gt;&lt;C-W&gt;w"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-F4&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-O&gt;&lt;C-W&gt;c"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">       
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"vim.otherModesKeyBindingsNonRecursive"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-s&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">":w"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-z&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"u"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-y&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-r&gt;"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-a&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"gggH&lt;C-O&gt;G"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-F4&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-w&gt;c"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"vim.otherModesKeyBindings"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>Key Binding的配置文件如下：</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">将键绑定放入此文件中以覆盖默认值</span><span class="w">
+</span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt+q"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"workbench.action.quickOpenView"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+q"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-workbench.action.quickOpenView"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt+q"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"workbench.action.quickOpenNavigateNextInViewPicker"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inQuickOpen &amp;&amp; inViewsPicker"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+q"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-workbench.action.quickOpenNavigateNextInViewPicker"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inQuickOpen &amp;&amp; inViewsPicker"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt+y"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extension.vim_ctrl+y"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.use&lt;C-y&gt; &amp;&amp; !inDebugRepl"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+y"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-extension.vim_ctrl+y"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.use&lt;C-y&gt; &amp;&amp; !inDebugRepl"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt+a"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extension.vim_ctrl+a"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.use&lt;C-a&gt; &amp;&amp; !inDebugRepl"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+a"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-extension.vim_ctrl+a"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.use&lt;C-a&gt; &amp;&amp; !inDebugRepl"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt+c"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extension.vim_ctrl+c"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.overrideCtrlC &amp;&amp; vim.use&lt;C-c&gt; &amp;&amp; !inDebugRepl"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+c"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-extension.vim_ctrl+c"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.overrideCtrlC &amp;&amp; vim.use&lt;C-c&gt; &amp;&amp; !inDebugRepl"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+q"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extension.vim_ctrl+v"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.use&lt;C-v&gt; &amp;&amp; !inDebugRepl &amp;&amp; vim.mode != 'Insert'"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+v"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-extension.vim_ctrl+v"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.use&lt;C-v&gt; &amp;&amp; !inDebugRepl &amp;&amp; vim.mode != 'Insert'"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="其他">其他</h2>
+<p>还是没有解决输入法切换的Keymap<img class="emoji" title=":disappointed:" alt=":disappointed:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f61e.png" height="20" width="20">。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            
+            <a href="/tag/#/Editor" rel="tag"># Editor</a>
+          
+            
+            <a href="/tag/#/Vim" rel="tag"># Vim</a>
+          
+        </div>
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+        <div class="post-nav" id="post-nav-id">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/programming/2018/03/26/vimIME/" rel="prev" title="利用AutoHotKey实现VI编辑模式下ESC键自动切换至英文输入法">
+                利用AutoHotKey实现VI编辑模式下ESC键自动切换至英文输入法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+      
+
+      
+    </footer>
+  </article>
+
+  <div class="post-spread">
+    
+  </div>
+</div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        
+        
+        
+
+
+
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/assets/images/avatar.png" alt="scienceasdf">
+          <p class="site-author-name" itemprop="name">scienceasdf</p>
+           
+              <p class="site-description motion-element" itemprop="description">We will bury them !</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+        
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="https://github.com/scienceasdf" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/scienceasdf/activities" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-joomla"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="404.html" target="_blank" title="404公益@宝贝回家">
+                  
+                    <i class="fa fa-fw fa-child"></i>
+                  
+                  404公益@宝贝回家
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class="nav">
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#kate%E5%92%8Ckile"> <span class="nav-number">1</span> <span class="nav-text">Kate和Kile</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</ol>
+</li>
+</ol>     <li class="nav-item nav-level-2"> <a class="nav-link" href="#sublime-text-3"> <span class="nav-number">2</span> <span class="nav-text">Sublime Text 3</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</ol>
+</li>     <li class="nav-item nav-level-2"> <a class="nav-link" href="#vs-code"> <span class="nav-number">3</span> <span class="nav-text">VS Code</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </ol>
+</ol>
+</ol>
+</ol>
+</li>     <li class="nav-item nav-level-2"> <a class="nav-link" href="#%E5%85%B6%E4%BB%96"> <span class="nav-number">4</span> <span class="nav-text">其他</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+    </ol>
+  </ol>
+</ol>
+</ol>
+</li>
+</div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  ©  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">scienceasdf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://jekyllrb.com">Jekyll</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/simpleyyt/jekyll-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+   
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/assets/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/assets/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  <script type="text/javascript" src="/assets/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/assets/js/src/post-details.js?v=5.1.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+    
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 ﻿---
-title: 姿态动力学简易仿真系统
+title: 姿态动力学仿真系统
 categories:
 - Programming
 tags:

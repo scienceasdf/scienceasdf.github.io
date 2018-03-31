@@ -2,6 +2,268 @@
 <search>
   
     <entry>
+      <title><![CDATA[将VS code和Sublime Text3的VIM改成behave-mswin-like]]></title>
+      <url>/programming/2018/03/31/editorVIM/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>修改sublime和VS code的keymap配置，使其能够有mswin.vim的操作方式。</strong></p>
+
+<hr />
+
+<hr />
+
+<p>最近学习VIM，但是我一般不直接用VIM，因为配置插件太过于麻烦，而且UI感觉也不美观，因此我用的都是别的IDE/编辑器的VIM操作模式。Qt creator自带的fakeVim感觉非常好用，因为可以直接导入vimrc文件。我平时的习惯还是希望能够有mswin.vim的配置，包括Home和End键，Qt Creator导入很方便。而Kate, Kile虽然也提供导入vimrc文件的功能，但是实现很不完整，还是需要自己手动修改keymap。Kile是一个可以支持vim操作模式的LaTeX的IDE，这一点非常好。</p>
+
+<h2 id="kate和kile">Kate和Kile</h2>
+<p>这个一开始就是在设置里面进行手动地输入。也需要改一下热键，Ctrl+Q原本是关闭程序的，我把它改成了Alt+Q。最后得到了一个katevirc的文件，Kile和KDevelop都会按照这个配置来。文件的全文如下：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Kate Vi Input Mode Settings]
+Command Mode Mapping Keys=
+Command Mode Mappings=
+Command Mode Mappings Recursion=
+Insert Mode Mapping Keys=&lt;c-y&gt;,&lt;end&gt;,&lt;c-v&gt;,&lt;c-z&gt;,&lt;home&gt;,&lt;c-a&gt;
+Insert Mode Mappings=&lt;c-o&gt;&lt;c-r&gt;,&lt;c-o&gt;$,&lt;esc&gt;"+gPi,&lt;c-o&gt;u,&lt;c-o&gt;^,&lt;esc&gt;ggvG
+Insert Mode Mappings Recursion=false,false,false,false,false,false
+Macro Completions=
+Macro Contents=
+Macro Registers=
+Map Leader=\\
+Normal Mode Mapping Keys=&lt;c-y&gt;,&lt;c-tab&gt;,&lt;c-q&gt;,&lt;end&gt;,&lt;c-v&gt;,&lt;c-s&gt;,&lt;c-z&gt;,&lt;home&gt;,&lt;c-a&gt;,&lt;c-f4&gt;
+Normal Mode Mappings=U,&lt;c-w&gt;w,&lt;c-v&gt;,$,"+gP,:w&lt;cr&gt;,u,^,ggvG,&lt;c-w&gt;c
+Normal Mode Mappings Recursion=false,false,false,false,false,false,false,false,false,false
+Visual Mode Mapping Keys=&lt;c-x&gt;,&lt;end&gt;,&lt;c-v&gt;,&lt;home&gt;,&lt;c-a&gt;,&lt;c-c&gt;
+Visual Mode Mappings="+x,$,"+p,^,vggvG,"+y&lt;esc&gt;
+Visual Mode Mappings Recursion=false,false,false,false,false,false
+</code></pre></div></div>
+
+<h2 id="sublime-text-3">Sublime Text 3</h2>
+<p>这个需要安装插件NeoVintageous，别的插件功能太弱。这个插件可以自己写配置文件，不过也不是很强大，imap这些不支持。不过在Insert Mode里面似乎是直接支持相关操作的。另外不知道为什么，Normal Mode里面的Ctrl+S不可用。配置文件全文如下：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"" backspace in Visual mode deletes selection  
+vnoremap &lt;BS&gt; d  
+"   
+"" CTRL-X and SHIFT-Del are Cut  
+vnoremap &lt;C-x&gt; "+x  
+"
+vnoremap &lt;S-Del&gt; "+x  
+"   
+"" CTRL-C and CTRL-Insert are Copy  
+vnoremap &lt;C-c&gt; "+y  
+vnoremap &lt;C-Insert&gt; "+y  
+"   
+"" CTRL-V and SHIFT-Insert are Paste  
+""map &lt;C-v&gt;        p  
+noremap &lt;C-v&gt;         "+p 
+
+"" Pasting blockwise and linewise selections is not possible in Insert and  
+"" Visual mode "without the +virtualedit feature.  They are pasted as if they  
+"" were characterwise instead.  
+"" Uses the paste.vim auto"load script.  
+"   
+vmap &lt;S-Insert&gt;        &lt;C-V&gt;  
+"   
+"" Use CTRL-Q to do what CTRL-V used to do 
+nnoremap &lt;C-q&gt;        &lt;C-v&gt;  
+"   
+"" Use CTRL-S for saving, also in Insert mode  
+"noremap &lt;C-s&gt;        :w   
+"vnoremap &lt;C-s&gt;       v:w  
+"   
+
+"" CTRL-Z is Undo; not in cmdline though  
+noremap &lt;C-z&gt; u  
+"   
+"" CTRL-Y is Redo (although not repeat); not in cmdline though  
+noremap &lt;C-y&gt; &lt;C-r&gt;  
+""inoremap &lt;C-Y&gt; &lt;C-O&gt;&lt;C-R&gt;  
+"
+"" CTRL-A is Select all  
+noremap &lt;C-a&gt; ggvG
+""onoremap &lt;C-a&gt; &lt;C-C&gt;gggH&lt;C-O&gt;G  
+""snoremap &lt;C-a&gt; &lt;C-C&gt;gggH&lt;C-O&gt;G  
+vnoremap &lt;C-a&gt; vggvG   
+"" CTRL-Tab is Next window  
+noremap &lt;C-Tab&gt; &lt;C-W&gt;w  
+onoremap &lt;C-Tab&gt; &lt;C-C&gt;&lt;C-W&gt;w   
+"
+"   
+"" CTRL-F4 is Close window  
+noremap &lt;C-F4&gt; &lt;C-W&gt;c  
+onoremap &lt;C-F4&gt; &lt;C-C&gt;&lt;C-W&gt;c  
+"     
+nnoremap i i&lt;Ctrl-Shift-1&gt;  
+</code></pre></div></div>
+
+<h2 id="vs-code">VS Code</h2>
+<p>这个需要同时改一些Key binding和vim插件的配置，用户设置文件如下：</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"markdown-preview-enhanced.mathRenderingOption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MathJax"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"emmet.showSuggestionsAsSnippets"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"[markdown]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"editor.quickSuggestions"</span><span class="p">:</span><span class="kc">true</span><span class="w">    
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"latex-workshop.view.pdf.viewer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tab"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"latex-workshop.view.pdf.hand"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">可变编译方式</span><span class="w"> 
+    </span><span class="s2">"latex-workshop.latex.toolchain"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">注意这里是留空的</span><span class="w">
+          </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"-synctex=1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"-interaction=nonstopmode"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"-file-line-error"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"%DOC%"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"window.zoomLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"vim.neovimPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D:</span><span class="se">\\</span><span class="s2">downloads</span><span class="se">\\</span><span class="s2">nvim-win64</span><span class="se">\\</span><span class="s2">Neovim</span><span class="se">\\</span><span class="s2">bin</span><span class="se">\\</span><span class="s2">nvim.exe"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"vim.enableNeovim"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"vim.insertModeKeyBindings"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-v&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"</span><span class="se">\"</span><span class="s2">+gP"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">  
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"vim.insertModeKeyBindingsNonRecursive"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-s&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-o&gt;:w"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-z&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-o&gt;u"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">  
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-y&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-o&gt;&lt;C-r&gt;"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-a&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-o&gt;gg&lt;C-o&gt;gH&lt;C-o&gt;G"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-Tab&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-O&gt;&lt;C-W&gt;w"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-F4&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-O&gt;&lt;C-W&gt;c"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">       
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"vim.otherModesKeyBindingsNonRecursive"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-s&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">":w"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-z&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"u"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-y&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-r&gt;"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-a&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"gggH&lt;C-O&gt;G"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">  
+          </span><span class="s2">"before"</span><span class="p">:[</span><span class="s2">"&lt;C-F4&gt;"</span><span class="p">],</span><span class="w">  
+          </span><span class="s2">"after"</span><span class="p">:[</span><span class="s2">"&lt;C-w&gt;c"</span><span class="p">],</span><span class="w">  
+        </span><span class="p">},</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"vim.otherModesKeyBindings"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>Key Binding的配置文件如下：</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">将键绑定放入此文件中以覆盖默认值</span><span class="w">
+</span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt+q"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"workbench.action.quickOpenView"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+q"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-workbench.action.quickOpenView"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt+q"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"workbench.action.quickOpenNavigateNextInViewPicker"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inQuickOpen &amp;&amp; inViewsPicker"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+q"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-workbench.action.quickOpenNavigateNextInViewPicker"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inQuickOpen &amp;&amp; inViewsPicker"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt+y"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extension.vim_ctrl+y"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.use&lt;C-y&gt; &amp;&amp; !inDebugRepl"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+y"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-extension.vim_ctrl+y"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.use&lt;C-y&gt; &amp;&amp; !inDebugRepl"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt+a"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extension.vim_ctrl+a"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.use&lt;C-a&gt; &amp;&amp; !inDebugRepl"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+a"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-extension.vim_ctrl+a"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.use&lt;C-a&gt; &amp;&amp; !inDebugRepl"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt+c"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extension.vim_ctrl+c"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.overrideCtrlC &amp;&amp; vim.use&lt;C-c&gt; &amp;&amp; !inDebugRepl"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+c"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-extension.vim_ctrl+c"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.overrideCtrlC &amp;&amp; vim.use&lt;C-c&gt; &amp;&amp; !inDebugRepl"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+q"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extension.vim_ctrl+v"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.use&lt;C-v&gt; &amp;&amp; !inDebugRepl &amp;&amp; vim.mode != 'Insert'"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ctrl+v"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-extension.vim_ctrl+v"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"when"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editorTextFocus &amp;&amp; vim.active &amp;&amp; vim.use&lt;C-v&gt; &amp;&amp; !inDebugRepl &amp;&amp; vim.mode != 'Insert'"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="其他">其他</h2>
+<p>还是没有解决输入法切换的Keymap:disappointed:。</p>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Editor </tag>
+        
+          <tag> Vim </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[利用AutoHotKey实现VI编辑模式下ESC键自动切换至英文输入法]]></title>
       <url>/programming/2018/03/26/vimIME/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">
@@ -2059,7 +2321,7 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
     </entry>
   
     <entry>
-      <title><![CDATA[姿态动力学简易仿真系统]]></title>
+      <title><![CDATA[姿态动力学仿真系统]]></title>
       <url>/programming/2017/03/27/rigidBody/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
