@@ -5,7 +5,7 @@ categories:
 tags:
 - Editor
 - Vim
-updated: 2018-03-26
+updated: 2018-03-31
 ---
 <script type="text/x-mathjax-config">
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -43,6 +43,7 @@ Visual Mode Mapping Keys=<c-x>,<end>,<c-v>,<home>,<c-a>,<c-c>
 Visual Mode Mappings="+x,$,"+p,^,vggvG,"+y<esc>
 Visual Mode Mappings Recursion=false,false,false,false,false,false
 ```
+
 
 ## Sublime Text 3
 这个需要安装插件NeoVintageous，别的插件功能太弱。这个插件可以自己写配置文件，不过也不是很强大，imap这些不支持。不过在Insert Mode里面似乎是直接支持相关操作的。另外不知道为什么，Normal Mode里面的Ctrl+S不可用。配置文件全文如下：
@@ -101,6 +102,7 @@ onoremap <C-F4> <C-C><C-W>c
 "     
 nnoremap i i<Ctrl-Shift-1>  
 ```
+
 
 ## VS Code
 这个需要同时改一些Key binding和vim插件的配置，用户设置文件如下：
@@ -250,5 +252,6 @@ Key Binding的配置文件如下：
 ]
 ```
 
+
 ## 其他
-还是没有解决输入法切换的Keymap:disappointed:。
+还是没有解决输入法切换的Keymap:disappointed:。还有为什么Jekyll的右边生成的目录排版有时会抽风啊？
