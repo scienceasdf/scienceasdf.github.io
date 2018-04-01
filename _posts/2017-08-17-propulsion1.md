@@ -14,7 +14,7 @@ updated: 2018-08-17
      							   extensions: ["AMSmath.js"]}
   		});
 		</script>
- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+ <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 **探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。**
 
 ---

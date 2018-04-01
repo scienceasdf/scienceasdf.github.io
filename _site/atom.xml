@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-31T21:53:52+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">将VS code和Sublime Text3的VIM改成behave-mswin-like</title><link href="http://localhost:4000/programming/2018/03/31/editorVIM/" rel="alternate" type="text/html" title="将VS code和Sublime Text3的VIM改成behave-mswin-like" /><published>2018-03-31T00:00:00+08:00</published><updated>2018-03-31T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/03/31/editorVIM</id><content type="html" xml:base="http://localhost:4000/programming/2018/03/31/editorVIM/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-04-01T10:59:21+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">将VS code和Sublime Text3的VIM改成behave-mswin-like</title><link href="http://localhost:4000/programming/2018/03/31/editorVIM/" rel="alternate" type="text/html" title="将VS code和Sublime Text3的VIM改成behave-mswin-like" /><published>2018-03-31T00:00:00+08:00</published><updated>2018-03-31T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/03/31/editorVIM</id><content type="html" xml:base="http://localhost:4000/programming/2018/03/31/editorVIM/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
   							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
      							   extensions: [&quot;AMSmath.js&quot;]}
@@ -1188,7 +1188,7 @@ SwitchIME(dwLayout){
   		});
 		&lt;/script&gt;
 
-&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
 
 &lt;p&gt;&lt;strong&gt;写了一个能够绘制线性系统根轨迹、响应曲线、计算幅值裕度、相位裕度等的手机APP。下载地址在文末。&lt;/strong&gt;&lt;/p&gt;
 
@@ -1535,7 +1535,7 @@ PropChart的筛选界面如下图所示，这里运用的模型是给定转速�
   		});
 		&lt;/script&gt;
 
-&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
 
 &lt;p&gt;&lt;strong&gt;探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。&lt;/strong&gt;&lt;/p&gt;
 
