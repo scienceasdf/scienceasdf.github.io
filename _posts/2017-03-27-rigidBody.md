@@ -15,7 +15,7 @@ updated: 2018-08-17
      							   extensions: ["AMSmath.js"]}
   		});
 		</script>
- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+ <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 **实现了一个卫星姿态动力学的仿真程序，包括动力学的仿真以及3维显示。**
 
 ---
