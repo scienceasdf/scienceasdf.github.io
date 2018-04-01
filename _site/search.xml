@@ -1494,7 +1494,7 @@ QtCharts，发现这个模块优点很多，而且在手机上显示的效果很
   		});
 		</script>
 
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 <p><strong>探讨太阳高度角与方位角的计算，并写了个手机程序用于计算此时此刻此地（也可以是任意时刻，任意地点）的太阳高度角与方位角.</strong></p>
 
@@ -2047,7 +2047,7 @@ $next$<span class="nt">&lt;/snippet&gt;</span>
   		});
 		</script>
 
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 <p><strong>这里是一些轨道动力学中常见物理量的计算机算法的总结。</strong></p>
 
@@ -2221,7 +2221,7 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
   		});
 		</script>
 
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 <p><strong>这里是一些轨道动力学中常见物理量的计算机算法的总结。</strong></p>
 

@@ -36,7 +36,8 @@ updated: 2017-10-22
             }
   		});
 		</script>
- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+ 
+ <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 **探讨太阳高度角与方位角的计算，并写了个手机程序用于计算此时此刻此地（也可以是任意时刻，任意地点）的太阳高度角与方位角.**
 
 ---

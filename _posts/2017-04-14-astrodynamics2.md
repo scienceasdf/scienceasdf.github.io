@@ -35,7 +35,8 @@ updated: 2017-4-7
             }
   		});
 		</script>
- <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 **这里是一些轨道动力学中常见物理量的计算机算法的总结。**
 
 ---
