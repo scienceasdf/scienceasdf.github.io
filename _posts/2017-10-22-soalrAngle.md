@@ -38,12 +38,16 @@ updated: 2017-10-22
 		</script>
  
  <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<link href="https://cdn.bootcss.com/highlight.js/6.12.0/styles/qtcreator_light.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 **探讨太阳高度角与方位角的计算，并写了个手机程序用于计算此时此刻此地（也可以是任意时刻，任意地点）的太阳高度角与方位角.**
 
 ---
 **本文公式较多，在浏览器中将会花较长时间用于渲染公式。**  
   
 --- 
+
 
 ## 基本算法
 就是一大堆玄学（或者叫天文学）的概念了。

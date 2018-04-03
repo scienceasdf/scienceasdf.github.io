@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-04-01T18:15:54+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">将VS code和Sublime Text3的VIM改成behave-mswin-like</title><link href="http://localhost:4000/programming/2018/03/31/editorVIM/" rel="alternate" type="text/html" title="将VS code和Sublime Text3的VIM改成behave-mswin-like" /><published>2018-03-31T00:00:00+08:00</published><updated>2018-03-31T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/03/31/editorVIM</id><content type="html" xml:base="http://localhost:4000/programming/2018/03/31/editorVIM/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-04-03T16:59:27+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">将VS code和Sublime Text3的VIM改成behave-mswin-like</title><link href="http://localhost:4000/programming/2018/03/31/editorVIM/" rel="alternate" type="text/html" title="将VS code和Sublime Text3的VIM改成behave-mswin-like" /><published>2018-03-31T00:00:00+08:00</published><updated>2018-03-31T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/03/31/editorVIM</id><content type="html" xml:base="http://localhost:4000/programming/2018/03/31/editorVIM/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
   							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
      							   extensions: [&quot;AMSmath.js&quot;]}
@@ -1341,6 +1341,12 @@ QtCharts，发现这个模块优点很多，而且在手机上显示的效果很
 		&lt;/script&gt;
 
 &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
+
+&lt;link href=&quot;https://cdn.bootcss.com/highlight.js/6.12.0/styles/qtcreator_light.min.css&quot; rel=&quot;stylesheet&quot; /&gt;
+
+&lt;script src=&quot;https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;
 
 &lt;p&gt;&lt;strong&gt;探讨太阳高度角与方位角的计算，并写了个手机程序用于计算此时此刻此地（也可以是任意时刻，任意地点）的太阳高度角与方位角.&lt;/strong&gt;&lt;/p&gt;
 
