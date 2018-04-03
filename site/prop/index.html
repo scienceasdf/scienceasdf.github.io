@@ -25,7 +25,7 @@
   <button type="button" class="btn btn-default"  onclick = "plot()">默认按钮</button>
  </div>
 
- <select name="day" id="day">
+ <select name="mySelect" id="mySelect">
 
 </select>
 
@@ -48,9 +48,8 @@ function searchProp(){
   var xhr = new XMLHttpRequest();
   xhr.open('GET', '../propDB.db', true);
   xhr.responseType = 'arraybuffer';
-  var mySelect = document.createElement("select");
+  var mySelect =document.getElementById('mySelect');
   mySelect.id = "mySelect";
-  document.body.appendChild(mySelect);
 
   xhr.onload = function(e) {
   var uInt8Array = new Uint8Array(this.response);
