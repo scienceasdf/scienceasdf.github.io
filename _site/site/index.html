@@ -142,36 +142,7 @@ Preview.Init();
         }
     });
 </script>
-<script src='js/sql.js'></script>
-<script src="https://cdn.bootcss.com/mathjs/4.0.1/math.js"></script>
-<script>
-	function print(value) {
-	    var precision = 14;
-	    document.write(math.format(value, precision) + '<br>');
-  	}
-
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'propDB.db', true);
-	xhr.responseType = 'arraybuffer';
-
-	xhr.onload = function(e) {
-	var uInt8Array = new Uint8Array(this.response);
-	var db = new SQL.Database(uInt8Array);
-	var contents = db.exec("SELECT V,Thrust FROM propellers WHERE propName = '10.5x4.5' AND RPM = '3000'");
-	document.write(contents);
-
-
-
-  	// contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}]
-  	var fs = require("fs");
-	// [...] (create the database)
-	var db = new sql.Database();
-	// NOTE: You can also use new sql.Database(data) where
-	// data is an Uint8Array representing an SQLite database file
-
-};
-xhr.send();
-</script>
+<img title=" (shown for gain between 0 and 10)" height="307" width="300" alt=" (shown for gain between 0 and 10)" src="https://www4d.wolframalpha.com/Calculate/MSP/MSP1932396f0aa579hfi2i00001b57f7cdb337aii6?MSPStoreType=image/gif&s=25"/>
 
 	<button>按钮</button>
 
