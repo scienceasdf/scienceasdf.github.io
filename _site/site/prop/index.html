@@ -90,6 +90,7 @@ function plot(){
   for(i=0;i<contents[0].values.length;i++)
   {//query values
     //document.write(contents[0].values[i]+' ');
+
   }
   var myChart = echarts.init(document.getElementById('main'));
 
@@ -102,7 +103,7 @@ function plot(){
             }},
     yAxis: {
        axisLabel : {
-                formatter: '{value} kgf'
+                formatter: '{value} N'
             }
     },
     series: [{
