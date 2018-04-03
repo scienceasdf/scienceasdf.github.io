@@ -56,16 +56,14 @@ function searchProp(){
   var uInt8Array = new Uint8Array(this.response);
   var db = new SQL.Database(uInt8Array);
   var qstr ="SELECT propName FROM propellers WHERE propName like '%" + "10" + "%' group by propName";
-  window.alert(qstr); 
+  //window.alert(qstr); 
   var contents = db.exec(qstr);
   //print(contents[0].values);
   for(i=0;i<contents[0].values.length;i++){
   //  document.write("<option value =\"" + contents[0].values[i] +"\"" + contents[0].values[i] +"</option>")o;
-    window.alert(contents[0].values[i]+' ');
+    //window.alert(contents[0].values[i]+' ');
     mySelect.add(new Option(contents[0].values[i],contents[0].values[i]));
   }
-  mySelect.options.add(new Option("a","a"));
-  mySelect.options.add(new Option('label','value'));
   };
   xhr.send();
   //document.write("</select>");
@@ -83,8 +81,13 @@ function plot(){
   xhr.onload = function(e) {
   var uInt8Array = new Uint8Array(this.response);
   var db = new SQL.Database(uInt8Array);
-  var contents = db.exec("SELECT V,Thrust FROM propellers WHERE propName = '10.5x4.5' AND RPM = '3000'");
+  var obj=document.getElementById('mySelect');
+  var index = obj.selectedIndex;
+  var qstr = "SELECT V,Thrust FROM propellers WHERE propName = '" + obj.options[index].value+"' AND RPM = '3000'";
+   
+  var contents = db.exec(qstr);
   //print(contents[0].values);
+  window.alert(qstr);
   for(i=0;i<contents[0].values.length;i++)
   {//query values
     //document.write(contents[0].values[i]+' ');
