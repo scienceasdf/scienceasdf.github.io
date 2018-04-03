@@ -5,9 +5,8 @@
 <head>
   <meta charset="utf8">
   <title>sql.js demo: Online SQL interpreter</title>
- <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.3.2/jquery.mobile.min.css" rel="stylesheet">
- <script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery-mobile/1.3.2/jquery.mobile.min.js"></script>
+
+
 <script src='../js/sql.js'></script>
 <script src="https://cdn.bootcss.com/mathjs/4.0.1/math.js"></script>
 
@@ -18,12 +17,12 @@
 
   <div data-role="page">
    <div data-role="content">
-    <a  data-role="button" onclick = "searchProp()">查找</a>
+    <button type="button" class="btn btn-default"  onclick = "searchProp()">查找</button>
    </div>
 
 
  <div data-role="content">
-  <a  data-role="button" onclick = "plot()">按钮</a>
+  <button type="button" class="btn btn-default"  onclick = "plot()">默认按钮</button>
  </div>
 
  <select name="day" id="day">
@@ -56,13 +55,14 @@ function searchProp(){
   xhr.onload = function(e) {
   var uInt8Array = new Uint8Array(this.response);
   var db = new SQL.Database(uInt8Array);
-  var contents = db.exec("SELECT propName FROM propellers WHERE propName like '&" + "10" + "&' group by propName");
+  var qstr ="SELECT propName FROM propellers WHERE propName like '%" + "10" + "%' group by propName";
+  window.alert(qstr); 
+  var contents = db.exec(qstr);
   //print(contents[0].values);
-  
   for(i=0;i<contents[0].values.length;i++){
   //  document.write("<option value =\"" + contents[0].values[i] +"\"" + contents[0].values[i] +"</option>")o;
-    document.write(contents[0].values[i]+' ');
-    //mySelect.add(new Option(contents[0].values[i],contents[0].values[i]));
+    window.alert(contents[0].values[i]+' ');
+    mySelect.add(new Option(contents[0].values[i],contents[0].values[i]));
   }
   mySelect.options.add(new Option("a","a"));
   mySelect.options.add(new Option('label','value'));
