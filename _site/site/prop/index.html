@@ -71,8 +71,8 @@ function searchProp(){
     //window.alert(contents[0].values[i]+' ');
     mySelect.add(new Option(contents[0].values[i],contents[0].values[i]));
   }
-  mySelect.selectedIndex = 0;
-   mySelect.selectmenu("refresh");
+  mySelect[0].selectedIndex = 0;
+  mySelect.selectmenu("refresh");
   
   };
   xhr.send();
@@ -110,13 +110,30 @@ function plot(){
    title : {
         text: obj.options[index].value+'推力-转速曲线',
     },
+    tooltip: {},
+    legend: {
+                data:['拉力']
+    },
+    dataZoom: [
+        {   // 这个dataZoom组件，默认控制x轴。
+            type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+            start: 10,      // 左边在 10% 的位置。
+            end: 60         // 右边在 60% 的位置。
+        },
+        {   // 这个dataZoom组件，也控制x轴。
+            type: 'inside', // 这个 dataZoom 组件是 inside 型 dataZoom 组件
+            start: 10,      // 左边在 10% 的位置。
+            end: 60         // 右边在 60% 的位置。
+        }
+    ],
     xAxis: { axisLabel : {
                 formatter: '{value} RPM'
             }},
     yAxis: {
        axisLabel : {
                 formatter: '{value} N'
-            }
+            },
+            position: 'right'
     },
     series: [{
         data: contents[0].values,
