@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>在线绘制根轨迹</title>
+<!-- Copyright (c) 2012-2018 The MathJax Consortium -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+
+</head>
+<body>
+<div data-role="page" id="pageone">
+
+
+<label cols="60" rows="10" for="num">分子：</label>
+<input cols="60" rows="10" type="text" name="num" id="num">       
+<label cols="60" rows="10" for="den">分母：</label>
+<input cols="60" rows="10" type="text" name="den" id="den">
+<button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "plot()">绘制根轨迹</button>
+</div>
+
+</body>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    showProcessingMessages: false,
+    tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+  });
+</script>
+
+ <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<img id = "res" ></img>
+
+<script>
+function plot(){
+  var str1 = document.getElementById("num").value;
+  var str2 = document.getElementById("den").value;
+  qstr = "(" + str1 + ")/(" + str2 + ")";
+  var obj = document.getElementById("res");
+  res.src = "https://api.wolframalpha.com/v1/simple?appid=GJGKTL-VVEAG5K6HT&i=root+locus+for+transfer+function+" + encodeURIComponent(qstr);
+}
+
+/*jQuery.getJSON("https://api.wolframalpha.com/v2/query?input=root+locus+(s%5E2%2B3)%2F(s%5E3%2B5)&format=image&output=JSON&appid=GJGKTL-VVEAG5K6HT",{ 
+   // q: "Arsenal" 
+},function(tweets) { 
+    // Handle response here 
+    window.alert("Twitter returned: ",tweets); 
+});*/
+
+</script>
+<script src="../js/vim.js"></script>
+<script type="text/javascript">
+    vim.open({
+        debug   : true,
+        showMsg : function(msg){
+            alert('vim.js say:' + msg);
+        }
+    });
+</script>
+
+
+
+</html>
