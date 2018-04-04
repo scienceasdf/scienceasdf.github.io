@@ -7,9 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
-<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
 
 
 <script type="text/x-mathjax-config">
@@ -113,21 +113,21 @@ Preview.callback.autoReset = true;  // make sure it can run more than once
 </head>
 <body>
 
-<p> Type text (mixed with MathML, TeX or asciimath) in the box below for a live preview.</p>
+<p> 输入需要预览的文字和公式（支持MathML, TeX 和 asciimath，文本框支持Vim模式) .</p>
 
 <textarea id="MathInput" cols="60" rows="10" class="input" onkeyup="Preview.Update()" style="margin-top:5px">
 </textarea>
-<p>Configured delimiters: 
+<p>分隔符: 
 <ul>
-<li>TeX, inline mode: <code>\(...\)</code> or <code>$...$</code></li>
-<li>TeX, display mode: <code>\[...\]</code> or <code> $$...$$</code></li>
+<li>TeX, 行内公式: <code>\(...\)</code> or <code>$...$</code></li>
+<li>TeX, 行间公式: <code>\[...\]</code> or <code> $$...$$</code></li>
 <li>Asciimath: <code>`...`</code>.</li>
 </ul>
 </p>
 
-<p>Preview is shown here:</p>
-<div id="MathPreview" style="border:1px solid; padding: 3px; width:50%; margin-top:5px"></div>
-<div id="MathBuffer" style="border:1px solid; padding: 3px; width:50%; margin-top:5px; 
+<p>这里是预览部分:</p>
+<div id="MathPreview" style="border:1px solid; padding: 3px; width:100%; margin-top:5px"></div>
+<div id="MathBuffer" style="border:1px solid; padding: 3px; width:100%; margin-top:5px; 
 visibility:hidden; position:absolute; top:0; left: 0"></div>
 
 <script>

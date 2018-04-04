@@ -1,4 +1,144 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-04-04T19:49:20+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">将VS code和Sublime Text3的VIM改成behave-mswin-like</title><link href="http://localhost:4000/programming/2018/03/31/editorVIM/" rel="alternate" type="text/html" title="将VS code和Sublime Text3的VIM改成behave-mswin-like" /><published>2018-03-31T00:00:00+08:00</published><updated>2018-03-31T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/03/31/editorVIM</id><content type="html" xml:base="http://localhost:4000/programming/2018/03/31/editorVIM/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-04-04T21:26:08+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">在手机上绘制根轨迹（2）</title><link href="http://localhost:4000/programming/2018/04/04/easyAuto(2)/" rel="alternate" type="text/html" title="在手机上绘制根轨迹（2）" /><published>2018-04-04T00:00:00+08:00</published><updated>2018-04-04T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/04/04/easyAuto(2)</id><content type="html" xml:base="http://localhost:4000/programming/2018/04/04/easyAuto(2)/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
+     							   extensions: [&quot;AMSmath.js&quot;]}
+  		});
+		&lt;/script&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;strong&gt;另一种方式实现手机上绘制根轨迹。并且在手机上绘制螺旋桨性能曲线。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;在手机上绘制根轨迹&quot;&gt;在手机上绘制根轨迹&lt;/h2&gt;
+
+&lt;p&gt;上一次写的easyAuto，好倒是挺好的，但是有一个问题：仅仅有安卓的版本，没有iOS版本。这样一来，有很多用户无法得到方便。因此，要么自己买一套iOS的设备，要么换一种方式：网页实现。&lt;/p&gt;
+
+&lt;p&gt;网页绘制的好处有很多，可以实现真正的跨平台，每一次代码的更新用户并不需要任何的升级这些，因此好处太多了。没能开发iOS程序一直是我的遗憾，这样也算是一种弥补。现在的前端技术很火，bootcdn上面一大堆js库，都很有意思，没事浏览浏览上面的目录，说不定能发现宝贝。&lt;/p&gt;
+
+&lt;p&gt;在上次的文章里我们详细的讨论了算法，又是多项式又是矩阵什么的，比较麻烦。网上找到的轮子有&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;math.js库，比较强大，但是矩阵不能求特征值&lt;/li&gt;
+  &lt;li&gt;numerical.js库，很久没有更新了，矩阵能够求特征值，还有样条插值函数&lt;/li&gt;
+  &lt;li&gt;polynomial.js，比较简陋，就是用来表示多项式的
+即使有这些低层次的轮子，要移植我曾经的一大堆专门的数值代码也是非常麻烦的。手写就不说了，自己想想都觉得多。我在网上看到了几种方案：&lt;/li&gt;
+  &lt;li&gt;emscripten-qt直接移植Qt程序，这个项目已经没有维护了，不可能能移植QtCharts模块&lt;/li&gt;
+  &lt;li&gt;Qt+WebAssembly，看了几个demo，效果很差&lt;/li&gt;
+  &lt;li&gt;用emscripten移植数值算法的代码，但是自己本来就完全不会javascript，这样自己也会更麻烦&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;那也没有实现的办法呢？我想到了WolframAlpha，试了试，可以画根轨迹，当然这个问题可以结束了，所有手机要想画根轨迹直接访问WolframAlpha不就完了？！但是还是要自己写程序，看了看有没有WolframAlpha的API，还真有，那就好说。通过API访问https://api.wolframalpha.com/v2/query?input=root+locus+for+transfer+function+(s%5E2%2B3)%2F(s%5E3%2B5)&amp;amp;format=image&amp;amp;output=JSON&amp;amp;appid=DEMO可以得到一个这样的json:&lt;/p&gt;
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;queryresult&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;success&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;error&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;numpods&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;datatypes&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ControlSystem&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;timedout&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;timedoutpods&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;timing&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.244&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;parsetiming&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.397&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;parsetimedout&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;recalculate&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;MSPa3194185g424ef9ic5i8b000031903e0de369bii3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;host&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://www4d.wolframalpha.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;server&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;15&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;related&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://www4d.wolframalpha.com/api/v2/relatedQueries.jsp?id=MSPa3195185g424ef9ic5i8b00002hd488g9fggigd5f3827527191664667052&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2.6&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;pods&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Input interpretation&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;scanner&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Identity&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Input&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;position&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;error&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;numsubpods&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;subpods&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;img&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                            &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;src&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://www4d.wolframalpha.com/Calculate/MSP/MSP3196185g424ef9ic5i8b00000e5afg304gfd51fb?MSPStoreType=image/gif&amp;amp;s=15&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                            &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;alt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;root locus plot | transfer function  (3 + s^2)/(5 + s^3)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                            &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;root locus plot | transfer function  (3 + s^2)/(5 + s^3)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                            &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;width&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;314&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                            &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;height&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;55&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Root locus plot&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;scanner&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ControlSystems&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;RootLocusPlot&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;position&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;error&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;numsubpods&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;subpods&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;img&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                            &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;src&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://www4d.wolframalpha.com/Calculate/MSP/MSP3197185g424ef9ic5i8b0000445b174i6b48h4ea?MSPStoreType=image/gif&amp;amp;s=15&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                            &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;alt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;(shown for gain between 0 and 10)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                            &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;(shown for gain between 0 and 10)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                            &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;width&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                            &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;height&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;318&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;states&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Increase range&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;input&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;RootLocusPlot__Increase range&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Decrease range&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;input&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;RootLocusPlot__Decrease range&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+            &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这样只用通过javascript进行http的get请求就能行了。理论很美满，显示很骨感，试了大半天，总是会遇到Access-Control-Allow-Origin的问题。上谷歌去查各种方案，都说WolframAlpha的API不能通过javascript访问，要么用服务端代码，要么用proxy，好像没有解决方案。但是，在网上查javascript跨域的问题，也是得到了一大堆奇奇怪怪的解决方法，我最终实现了跨域访问：&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;num&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;den&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;querystr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://api.wolframalpha.com/v2/query?input=root+locus+for+transfer+function+(&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;encodeURIComponent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;encodeURIComponent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;)/(&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;encodeURIComponent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;)&amp;amp;format=image&amp;amp;output=JSON&amp;amp;appid=XXXX&amp;amp;callback=?&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ajax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; 
+  &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'GET'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+  &lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;querystr&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+  &lt;span class=&quot;c1&quot;&gt;//是否使用缓存 &lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+  &lt;span class=&quot;c1&quot;&gt;//数据类型，这里我用的是json &lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;dataType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;json&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+  &lt;span class=&quot;na&quot;&gt;crossDomain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+  &lt;span class=&quot;c1&quot;&gt;//必要的时候需要用JSON.stringify() 将JSON对象转换成字符串 &lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;//data: JSON.strigify({key:value}), &lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;//data : &quot;&quot;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;//添加额外的请求头 &lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Access-Control-Allow-Origin'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'*'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; 
+  &lt;span class=&quot;c1&quot;&gt;//请求成功的回调函数 success: &lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;success&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;  
+    &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;res1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;queryresult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;subpods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;res2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;queryresult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;subpods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;不知道实现了跨域访问的原因到底是在URL里面加了”&amp;amp;callback=?”还是加了请求头的原因:cold_sweat:。这样就实现了在网页上绘制根轨迹。不过这个网页的使用体验肯定没有安卓版的easyAuto好，一个是输入格式更为严格，第二个是速度太慢。就这个访问速度，我相信即使是javascript代码也能做到更快把图画出来，不过我是真的不想再去用javascript写数值的代码了。&lt;/p&gt;
+&lt;h2 id=&quot;螺旋桨性能查询网页&quot;&gt;螺旋桨性能查询网页&lt;/h2&gt;
+
+&lt;p&gt;做这个的原因和上一个一样，想实现彻底的跨平台。之前把demoProp的所有数据全部导入到了一个sqlite文件中，加上索引一共40+MB，正好在网上看到了sql.js项目，这个是emscripten把sqlite直接翻译过来的结果，想试一试，于是把数据库和网页挂在网上，试了试发现访问速度太慢了。而且一不注意，手机用了200+MB的流量，血淋淋的教训啊。我明白这个的意思了：用http请求把url的数据库先下载下来，然后再在内存中运行sql语句。这个代价相比PHP+MySQL的代价的确太大了。我把索引全部删除，数据库的大小还是20+MB，没办法，想了想一般在无人机我们关注的是静拉力，于是删除了所有动拉力数据，仅保留静拉力数据，这下只有600+KB了。当然，也可以把所有数据以文本形式保存在网站上，具体对于某个螺旋桨，只需要读取具体的一个数据就行，不过处理文件肯定没有sql语句来得方便。&lt;/p&gt;
+
+&lt;p&gt;关于图表的绘制，我使用的是ECharts3.而UI的绘制则是使用jQuery Mobile，都是直接挂的bootcdn，希望服务器不要宕机:stuck_out_tongue_winking_eye:。jQuery Mobile的空间要想更好地适应移动端，需要加上如下代码：&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;X-UA-Compatible&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;IE=edge&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;viewport&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;width=device-width, initial-scale=1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;最后放上链接：
+&lt;a href=&quot;https://scienceasdf.github.io/site/rootLocus/index.html&quot;&gt;在线绘制根轨迹&lt;/a&gt;
+&lt;a href=&quot;https://scienceasdf.github.io/site/prop/index.html&quot;&gt;在线查询螺旋桨数据&lt;/a&gt;&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="JavaScript" /><summary type="html">另一种方式实现手机上绘制根轨迹。并且在手机上绘制螺旋桨性能曲线。</summary></entry><entry><title type="html">将VS code和Sublime Text3的VIM改成behave-mswin-like</title><link href="http://localhost:4000/programming/2018/03/31/editorVIM/" rel="alternate" type="text/html" title="将VS code和Sublime Text3的VIM改成behave-mswin-like" /><published>2018-03-31T00:00:00+08:00</published><updated>2018-03-31T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/03/31/editorVIM</id><content type="html" xml:base="http://localhost:4000/programming/2018/03/31/editorVIM/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
   							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
      							   extensions: [&quot;AMSmath.js&quot;]}
@@ -1534,128 +1674,4 @@ PropChart的筛选界面如下图所示，这里运用的模型是给定转速�
 
 &lt;hr /&gt;
 &lt;p&gt;&lt;a href=&quot;https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg&quot;&gt;安卓版程序下载地址&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA&quot;&gt;Windows版程序下载地址（32位）&lt;/a&gt;&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="无人机" /><category term="安卓开发" /><category term="Qt" /><summary type="html">探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。</summary></entry><entry><title type="html">浅谈螺旋桨航模（无人机）的动力系统选配（一）</title><link href="http://localhost:4000/programming/2017/08/17/propulsion1/" rel="alternate" type="text/html" title="浅谈螺旋桨航模（无人机）的动力系统选配（一）" /><published>2017-08-17T00:00:00+08:00</published><updated>2017-08-17T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/08/17/propulsion1</id><content type="html" xml:base="http://localhost:4000/programming/2017/08/17/propulsion1/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
-  							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
-     							   extensions: [&quot;AMSmath.js&quot;]}
-  		});
-		&lt;/script&gt;
-
-&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;本文公式较多，在浏览器中将会花较长时间用于渲染公式。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;动力系统的数学模型&quot;&gt;动力系统的数学模型&lt;/h2&gt;
-&lt;h3 id=&quot;无刷电机的数学模型&quot;&gt;无刷电机的数学模型&lt;/h3&gt;
-&lt;p&gt;有&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;\begin{equation} \label{eqs:1} \tag{a}
-\left \{
-\begin{array}{l}
-U=r_a I+\frac{n}{K_v}\\
-I=\frac{M_{em}}{K_m}
-\end{array}
-\right.
-\end{equation}&lt;/script&gt;
-其中，$r_a$为电机内阻，$U$为电机两端电压，$I$为通过电机的电流，$K_v$为电机Kv值，$K_m$为电机转矩常数，$n$为电机转速(RPM)，$M_{em}$是电机的电磁转矩。&lt;br /&gt;
-电机的输出转矩为
-\begin{equation}
-M_{mot}=M_{em}-M_{R}=k_m(I-I_0)
-\end{equation}
-$K_v$的量纲为RPM/V，$K_m$的量纲是N$\cdot$m/A，在国际单位制下电机的$K_v$与$K_m$满足关系
-\begin{equation}
-K_m=\frac{60}{2\pi K_v }
-\end{equation}
-电机的输入功率为
-\begin{equation}
-P_{in}=UI
-\end{equation}
-输出功率为
-\begin{equation}
-P_{out}=\frac{2\pi nM_{mot}}{60}
-\end{equation}
-电机的效率为
-\begin{equation}
-%\eta=\frac{P_{out}}{P_{in}}=\frac{2\pi nM_{mot}}{60UI}
-\eta =\frac{P_{out}}{P_{in}}=\frac{2\pi nM_{mot}}{60UI}
-\end{equation}&lt;/p&gt;
-
-&lt;h3 id=&quot;螺旋桨的数学模型&quot;&gt;螺旋桨的数学模型&lt;/h3&gt;
-&lt;p&gt;对于螺旋桨，转矩$M$、拉力$T$、功率$P$、效率$\eta$都是空速$v$、螺旋桨转速$n$的函数
-&lt;script type=&quot;math/tex&quot;&gt;\begin{equation} \label{basics} \tag{b}
-\left\{
-\begin{array}{l}
-M=M(v,n)\\
-T=T(v,n)=C_T(v,n)\cdot\rho n^2 D^4\\
-P=P(v,n)=C_P(v,n)\cdot\rho n^3 D^5\\
-\eta=\eta(v,n)
-\end{array}
-\right.
-\end{equation}&lt;/script&gt;&lt;br /&gt;
-$C_T$是拉力系数、$C_P$是功率系数，且有$P=M\cdot\frac{2\pi n}{60}$，$\eta=\frac{Tv}{P}$。&lt;br /&gt;
-定义一个无量纲参数进动比(advance ratio)
-\begin{equation} J=\frac{v}{nD}\end{equation}
-$D$为螺旋桨直径。&lt;br /&gt;
-通常，$\eta$与$J$的变化关系如下图所示。在进行初步分析的手工计算中，可以认为$J$是一个相似性判定的参数，如果同一螺旋桨，工作在1状况$(v_1,n_1)$与2状况$(v_2,n_2)$，满足进动比相同，即$\frac{v_1}{n_1}=\frac{v_2}{n_2}$，则可以认为工作状况下的效率$\eta$、拉力系数$C_T$、功率系数$C_P$均相同。如果要估算某一工作状况$(v,n)$的工作参数，仅需先计算进动比$J=\frac{v}{nD}$，然后查找对应进动比的相关$\eta,C_T\text{和}C_P$，然后按照式(\ref{basics})计算拉力、转矩、效率与功率。
-&lt;img src=&quot;http://localhost:4000/assets//blog_images/fig1.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
-实际上，由于低雷诺数的影响，对于进动比相同的两种工作状况，$\eta,C_T\text{和}C_P$并不一定对应相等。通常高雷诺数的工作状况下螺旋桨的工作效率更高。&lt;/p&gt;
-&lt;h3 id=&quot;电源模型&quot;&gt;电源模型&lt;/h3&gt;
-&lt;p&gt;通常，无人机上使用的电源为蓄电池。蓄电池电源的伏安特性关系为：
-\begin{equation} \label{eqs:src1}
-U=U_0-Ir_0 &lt;br /&gt;
-\end{equation}
-其中$r_0$为蓄电池内阻。
- 对于太阳能无人机，通常是太阳能电池直接为蓄电池充电，由蓄电池驱动直流电机，那么电机两端的电压电流关系满足式(\ref{eqs:src1}).而若太阳能无人机有特殊的要求(如某些太阳能飞机竞赛),那么设计的飞机会是太阳能电池片组直接为动力系统供电。太阳能电池片组的伏安特性关系为
-\begin{equation}\label{solar_array} 
-I=I_{sc}[1-A(e^{U/BU_{oc}})-1]
-\end{equation}
-其中，&lt;script type=&quot;math/tex&quot;&gt;A=(1-\frac{I_m}{I_{sc}})e^{-U_m/(BU_{oc})}&lt;/script&gt;&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;B=(\frac{U_m}{U_{oc}}-1)[\ln(1-\frac{I_m}{I_{sc}})]&lt;/script&gt;&lt;br /&gt;
-$I_{sc}$为电池组的短路电流;&lt;br /&gt;
-$U_{oc}$为电池组的开路电压;&lt;br /&gt;
-$U_m,I_m$为最大功率点处的太阳能电池的输出电压与电流.&lt;/p&gt;
-
-&lt;h3 id=&quot;综合模型及其求解&quot;&gt;综合模型及其求解&lt;/h3&gt;
-&lt;p&gt;已知飞机的飞行速度$v$，无刷电机的$K_v$值，内阻$r_a$与10V下空载电流$i_0$，以及螺旋桨对应的性能数据，则利用电机转矩等于螺旋桨转矩的关系，求解在电压与电流下的转速$n$，其它参数则可对应求解。电源的电压和电流可以符合某种伏安特性曲线,如式(\ref{eqs:src1})、(\ref{solar_array})，求解过程则为弦截法对转速迭代求解。电源也可能是具有限流或限压值，也可以给出电源电压与电流的上限，求解时取转速上限恰好同时满足不超过电源电压与电流的上限。&lt;/p&gt;
-&lt;h3 id=&quot;非平凡模型&quot;&gt;非平凡模型&lt;/h3&gt;
-&lt;h4 id=&quot;引入减速组&quot;&gt;引入减速组&lt;/h4&gt;
-&lt;p&gt;设减速组减速比为$K$，机械效率为$\eta_g$，则有&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;\begin{equation} \tag{c}
-\left\{
-\begin{array}{l}
-n_{prop}=\frac{n_{mot}}{K}\\
-T_{prop}=K\cdot T_{mot}\cdot\eta_g
-\end{array}
-\right.
-\end{equation}&lt;/script&gt;
-考虑$\eta_g=1$的理想减速器，与电机形成的系统可以等效为一个$K_v$值折合为原电机$K_v$值$\frac{1}{K}$的新电机。通常高效率螺旋桨的特征都是低负载、大直径、大桨距（相对于直径）、低速运行，所以为了动力系统的效率最大化应该用大直径螺旋桨。由于带动大直径螺旋桨所需的转矩大，如果需要使电机工作在最大电流以下，可以使用减速组或使用低$K_v$值的电机。然而低$K_v$值得电机内阻会比高$K_v$值得电机内阻大，使用减速组会有机械能损失。而且大直径螺旋桨的重量大，且能驱动大直径螺旋桨的电机或减速器通常重量也较大。故具体应选用的方案，应考虑效率、重量、成本、加工装配难度等多方面考虑。&lt;/p&gt;
-
-&lt;h4 id=&quot;单电机驱动两个螺旋桨&quot;&gt;单电机驱动两个螺旋桨&lt;/h4&gt;
-&lt;p&gt;在这种情况下，有&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;\begin{equation} \label{eqs:12} \tag{d}
-\left\{
-\begin{array}{l}
-n_{prop}=n_{mot}\\
-M_{prop}=\frac{M_{mot}}{2}
-\end{array}
-\right.
-\end{equation}&lt;/script&gt;
-求解上式则可以求出电机的转速。双电机驱动单螺旋桨及其它类似情况可以按照类似的方法列出公式求解。&lt;/p&gt;
-&lt;h3 id=&quot;内燃机的特性&quot;&gt;内燃机的特性&lt;/h3&gt;
-&lt;p&gt;无人机上使用的内燃机通常可分为两行程发动机和四行程发动机。两行程发动机与四行程发动机相比，优点是功率大，可动零件少，维护简便，价格便宜；缺点是油料燃烧不充分，燃料消耗大。两行程发动机还有两个显著特点：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;使用这类发动机的无人机，爬升时经常可以听到转速明显下降的声音，俯冲时可以明显听到转速明显升高的声音，原因是这种发动机的扭矩小，对负载的变化较敏感。为了减小这种影响，两行程发动机一般使用大直径小桨距螺旋桨。&lt;/li&gt;
-  &lt;li&gt;两行程发动机转速普遍较高，也只有在高速下才能发挥出全部功率，所以厂家提供的功率数据也是要达到一定转速。二行程发动机最大的缺点是油门非线性。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;四行程发动机的优点是油门线性好，扭矩大，转速稳定，声音柔和，可以使用大桨距的螺旋桨，提高效率。四行程发动机工作室燃料燃烧充分。无人机爬升时，转速稳定、爬升有力、声音无变化。而四行程的缺点是价格昂贵，重量较大，维护不便。同样的工作容积，普通的四行程发动机输出功率理论上只有两行程发动机的一半，但是实际上不同于二行程发动机，四行程发动机的最大输出功率是在一般使用中可以达到要求的转速范围内的。&lt;br /&gt;
-由参考文献,对于高亚音速的飞机，内燃机的功率会随着速度的增加而增大；而对于大多数慢速飞机，内燃机的功率可以认为不变。大多数无人机的巡航速度下发动机的功率可以认为近似不变，那么对应其最大输出功率、最大输出转矩，通常需要一个合适的转速，否则发动机性能无法得到最大发挥。&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;&lt;a href=&quot;https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg&quot;&gt;安卓版程序下载地址&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA&quot;&gt;Windows版程序下载地址（32位）&lt;/a&gt;&lt;br /&gt;
-由于博文过长会导致浏览器加载、渲染速度降低，故后续讨论请看下一篇文章。&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="无人机" /><category term="安卓开发" /><category term="Qt" /><summary type="html">探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。</summary></entry></feed>
+&lt;a href=&quot;https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA&quot;&gt;Windows版程序下载地址（32位）&lt;/a&gt;&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="无人机" /><category term="安卓开发" /><category term="Qt" /><summary type="html">探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。</summary></entry></feed>

@@ -2,6 +2,164 @@
 <search>
   
     <entry>
+      <title><![CDATA[在手机上绘制根轨迹（2）]]></title>
+      <url>/programming/2018/04/04/easyAuto(2)/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>另一种方式实现手机上绘制根轨迹。并且在手机上绘制螺旋桨性能曲线。</strong></p>
+
+<hr />
+<h2 id="在手机上绘制根轨迹">在手机上绘制根轨迹</h2>
+
+<p>上一次写的easyAuto，好倒是挺好的，但是有一个问题：仅仅有安卓的版本，没有iOS版本。这样一来，有很多用户无法得到方便。因此，要么自己买一套iOS的设备，要么换一种方式：网页实现。</p>
+
+<p>网页绘制的好处有很多，可以实现真正的跨平台，每一次代码的更新用户并不需要任何的升级这些，因此好处太多了。没能开发iOS程序一直是我的遗憾，这样也算是一种弥补。现在的前端技术很火，bootcdn上面一大堆js库，都很有意思，没事浏览浏览上面的目录，说不定能发现宝贝。</p>
+
+<p>在上次的文章里我们详细的讨论了算法，又是多项式又是矩阵什么的，比较麻烦。网上找到的轮子有</p>
+<ul>
+  <li>math.js库，比较强大，但是矩阵不能求特征值</li>
+  <li>numerical.js库，很久没有更新了，矩阵能够求特征值，还有样条插值函数</li>
+  <li>polynomial.js，比较简陋，就是用来表示多项式的
+即使有这些低层次的轮子，要移植我曾经的一大堆专门的数值代码也是非常麻烦的。手写就不说了，自己想想都觉得多。我在网上看到了几种方案：</li>
+  <li>emscripten-qt直接移植Qt程序，这个项目已经没有维护了，不可能能移植QtCharts模块</li>
+  <li>Qt+WebAssembly，看了几个demo，效果很差</li>
+  <li>用emscripten移植数值算法的代码，但是自己本来就完全不会javascript，这样自己也会更麻烦</li>
+</ul>
+
+<p>那也没有实现的办法呢？我想到了WolframAlpha，试了试，可以画根轨迹，当然这个问题可以结束了，所有手机要想画根轨迹直接访问WolframAlpha不就完了？！但是还是要自己写程序，看了看有没有WolframAlpha的API，还真有，那就好说。通过API访问https://api.wolframalpha.com/v2/query?input=root+locus+for+transfer+function+(s%5E2%2B3)%2F(s%5E3%2B5)&amp;format=image&amp;output=JSON&amp;appid=DEMO可以得到一个这样的json:</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"queryresult"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"numpods"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"datatypes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ControlSystem"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timedout"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timedoutpods"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timing"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.244</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"parsetiming"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.397</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"parsetimedout"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recalculate"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MSPa3194185g424ef9ic5i8b000031903e0de369bii3"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www4d.wolframalpha.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"server"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www4d.wolframalpha.com/api/v2/relatedQueries.jsp?id=MSPa3195185g424ef9ic5i8b00002hd488g9fggigd5f3827527191664667052"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.6"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pods"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Input interpretation"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"scanner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Identity"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Input"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"numsubpods"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"subpods"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"img"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="s2">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www4d.wolframalpha.com/Calculate/MSP/MSP3196185g424ef9ic5i8b00000e5afg304gfd51fb?MSPStoreType=image/gif&amp;s=15"</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"alt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"root locus plot | transfer function  (3 + s^2)/(5 + s^3)"</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"root locus plot | transfer function  (3 + s^2)/(5 + s^3)"</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">314</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Root locus plot"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"scanner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ControlSystems"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RootLocusPlot"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"numsubpods"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"subpods"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"img"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="s2">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www4d.wolframalpha.com/Calculate/MSP/MSP3197185g424ef9ic5i8b0000445b174i6b48h4ea?MSPStoreType=image/gif&amp;s=15"</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"alt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"</span><span class="se">\n</span><span class="s2">(shown for gain between 0 and 10)"</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"</span><span class="se">\n</span><span class="s2">(shown for gain between 0 and 10)"</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w">
+                            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">318</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Increase range"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"input"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RootLocusPlot__Increase range"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Decrease range"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"input"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RootLocusPlot__Decrease range"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>这样只用通过javascript进行http的get请求就能行了。理论很美满，显示很骨感，试了大半天，总是会遇到Access-Control-Allow-Origin的问题。上谷歌去查各种方案，都说WolframAlpha的API不能通过javascript访问，要么用服务端代码，要么用proxy，好像没有解决方案。但是，在网上查javascript跨域的问题，也是得到了一大堆奇奇怪怪的解决方法，我最终实现了跨域访问：</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"num"</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">str2</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"den"</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">querystr</span> <span class="o">=</span> <span class="s2">"https://api.wolframalpha.com/v2/query?input=root+locus+for+transfer+function+("</span> <span class="o">+</span>
+    <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">str1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="s2">")/("</span><span class="p">)</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">str2</span><span class="p">)</span> <span class="o">+</span>
+    <span class="s2">")&amp;format=image&amp;output=JSON&amp;appid=XXXX&amp;callback=?"</span><span class="p">;</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span> 
+  <span class="na">type</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span> 
+  <span class="na">url</span><span class="p">:</span> <span class="nx">querystr</span> <span class="p">,</span> 
+  <span class="c1">//是否使用缓存 </span>
+  <span class="na">cache</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span> 
+  <span class="c1">//数据类型，这里我用的是json </span>
+  <span class="na">dataType</span><span class="p">:</span> <span class="s2">"json"</span><span class="p">,</span> 
+  <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> 
+  <span class="c1">//必要的时候需要用JSON.stringify() 将JSON对象转换成字符串 </span>
+  <span class="c1">//data: JSON.strigify({key:value}), </span>
+  <span class="c1">//data : ""</span>
+  <span class="c1">//添加额外的请求头 </span>
+  <span class="na">headers</span> <span class="p">:</span> <span class="p">{</span><span class="s1">'Access-Control-Allow-Origin'</span><span class="p">:</span><span class="s1">'*'</span><span class="p">},</span> 
+  <span class="c1">//请求成功的回调函数 success: </span>
+  <span class="na">success</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>  
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"res1"</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">queryresult</span><span class="p">.</span><span class="nx">pods</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">subpods</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">img</span><span class="p">.</span><span class="nx">src</span><span class="p">;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"res2"</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">queryresult</span><span class="p">.</span><span class="nx">pods</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">subpods</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">img</span><span class="p">.</span><span class="nx">src</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+<p>不知道实现了跨域访问的原因到底是在URL里面加了”&amp;callback=?”还是加了请求头的原因:cold_sweat:。这样就实现了在网页上绘制根轨迹。不过这个网页的使用体验肯定没有安卓版的easyAuto好，一个是输入格式更为严格，第二个是速度太慢。就这个访问速度，我相信即使是javascript代码也能做到更快把图画出来，不过我是真的不想再去用javascript写数值的代码了。</p>
+<h2 id="螺旋桨性能查询网页">螺旋桨性能查询网页</h2>
+
+<p>做这个的原因和上一个一样，想实现彻底的跨平台。之前把demoProp的所有数据全部导入到了一个sqlite文件中，加上索引一共40+MB，正好在网上看到了sql.js项目，这个是emscripten把sqlite直接翻译过来的结果，想试一试，于是把数据库和网页挂在网上，试了试发现访问速度太慢了。而且一不注意，手机用了200+MB的流量，血淋淋的教训啊。我明白这个的意思了：用http请求把url的数据库先下载下来，然后再在内存中运行sql语句。这个代价相比PHP+MySQL的代价的确太大了。我把索引全部删除，数据库的大小还是20+MB，没办法，想了想一般在无人机我们关注的是静拉力，于是删除了所有动拉力数据，仅保留静拉力数据，这下只有600+KB了。当然，也可以把所有数据以文本形式保存在网站上，具体对于某个螺旋桨，只需要读取具体的一个数据就行，不过处理文件肯定没有sql语句来得方便。</p>
+
+<p>关于图表的绘制，我使用的是ECharts3.而UI的绘制则是使用jQuery Mobile，都是直接挂的bootcdn，希望服务器不要宕机:stuck_out_tongue_winking_eye:。jQuery Mobile的空间要想更好地适应移动端，需要加上如下代码：</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>最后放上链接：
+<a href="https://scienceasdf.github.io/site/rootLocus/index.html">在线绘制根轨迹</a>
+<a href="https://scienceasdf.github.io/site/prop/index.html">在线查询螺旋桨数据</a></p>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JavaScript </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[将VS code和Sublime Text3的VIM改成behave-mswin-like]]></title>
       <url>/programming/2018/03/31/editorVIM/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">
