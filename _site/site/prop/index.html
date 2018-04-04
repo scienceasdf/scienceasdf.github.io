@@ -24,7 +24,7 @@
 <label cols="60" rows="10" for="name" class="ui-hidden-accessible">型号关键字</label>
 <input cols="60" rows="10" type="text" name="name" id="name" placeholder="型号关键字...">
 <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "searchProp()">查找</button>
-<select cols="60" rows="10" name="mySelect" id="mySelect" onchange="plot()"></select>
+<select cols="60" rows="10" name="mySelect" id="mySelect" onchange="plot()" placeholder="所有查询结果"></select>
 <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "plot()">绘制拉力-转速曲线</button>
 <div cols="60" rows="10" id="main" style="width: 100%;height:400%;"></div>
 <div data-role="footer">
@@ -68,7 +68,9 @@ function searchProp(){
     //window.alert(contents[0].values[i]+' ');
     mySelect.add(new Option(contents[0].values[i],contents[0].values[i]));
   }
-  mySelect[0].selected=true;
+  mySelect.selectedIndex = 0;
+   mySelect.selectmenu("refresh");
+  
   };
   xhr.send();
   plot();
