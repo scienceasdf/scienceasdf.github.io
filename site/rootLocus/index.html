@@ -28,20 +28,7 @@
 
 </body>
 
-
-
-
 <script>
-  /*$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=cat&tagmode=any&format=json&jsoncallback=?", function(data){
-  $.each(data.items, function(i,item){
-    $("<img/>").attr("src", item.media.m).appendTo("#images");
-    if ( i == 3 ) return false;
-  });
-});*/
-
-
-
-
   document.getElementById("num").value= "s";
   document.getElementById("den").value = "5s3+4";
   var str1 = document.getElementById("num").value;
@@ -49,41 +36,6 @@
   var qstr = "https://api.wolframalpha.com/v2/query?input=root+locus+for+transfer+function+(" +
    encodeURIComponent(str1) + encodeURIComponent(")/(") + encodeURIComponent(str2) +
     ")&format=image&output=JSON&appid=GJGKTL-VVEAG5K6HT&callback=?";
-
-  /*$.ajax({ 
-  type: 'GET', 
-  url: qstr , 
-  //是否使用缓存 
-  cache:false, 
-  //数据类型，这里我用的是json 
-  dataType: "json", 
-  crossDomain: true, 
-  //必要的时候需要用JSON.stringify() 将JSON对象转换成字符串 
-  //data: JSON.strigify({key:value}), 
-  //data : ""
-  //添加额外的请求头 
-  headers : {'Access-Control-Allow-Origin':'*'}, 
-  //请求成功的回调函数 success: 
-  success : function(data){  
-    window.alert(data.queryresult.pods[0].subpods[0].img.src);
-    window.alert(data.queryresult.pods[1].subpods[0].img.src);
-  }
-  }); 
-
-
-//qstr="http://api.flickr.com/services/feeds/photos_public.gne?tags=cat&tagmode=any&format=json&jsoncallback=?"
- /*$.getJSON(qstr,function(data) {
-  window.alert(data.queryresult[0].pods[0].subpods[0].img[0].src[0]);
-  $.each(data.queryresult, function(i,queryresult){
-    $.each(queryresult.pods,function(j,pods){
-      window.alert(pods.subpods[0].img.src);
-      $("<img/>").attr("src", item.media.m).appendTo("#images");
-      //if ( i == 3 ) return false;
-    });
-  });
- });*/
-
-
 
 function plot(){
   var str1 = document.getElementById("num").value;
@@ -116,13 +68,6 @@ function plot(){
   }
 });
 }
-
-/*jQuery.getJSON("https://api.wolframalpha.com/v2/query?input=root+locus+(s%5E2%2B3)%2F(s%5E3%2B5)&format=image&output=JSON&appid=GJGKTL-VVEAG5K6HT",{ 
-   // q: "Arsenal" 
-},function(tweets) { 
-    // Handle response here 
-    window.alert("Twitter returned: ",tweets); 
-});*/
 
 </script>
 

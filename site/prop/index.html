@@ -9,25 +9,37 @@
 
 <script src='../js/sql.js'></script>
 <script src="https://cdn.bootcss.com/mathjs/4.0.1/math.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.3.2/jquery.mobile.min.css">
+<script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-mobile/1.3.2/jquery.mobile.min.js"></script>
+
 
 </head>
+
+
+
 <body>
+<div data-role="page" id="pageone">
+    <div data-role="header">
+        <h1>为了减少您的流量消耗，并提高访问速度，仅提供静拉力的查询。</h1>
+      </div>
+      <label for="name" class="ui-hidden-accessible">型号关键字</label>
+      <input type="text" name="name" id="name" placeholder="型号关键字...">
 
-
-
-  <div data-role="page">
    <div data-role="content">
     <button type="button" class="btn btn-default"  onclick = "searchProp()">查找</button>
    </div>
 
-
+ <select name="mySelect" id="mySelect"></select>
  <div data-role="content">
-  <button type="button" class="btn btn-default"  onclick = "plot()">默认按钮</button>
+  <button type="button" class="btn btn-default"  onclick = "plot()">绘制拉力-转速曲线</button>
  </div>
 
- <select name="mySelect" id="mySelect">
 
-</select>
+
+  <div id="main" style="width: 100%;height:400px;"></div>
+
+</body>
 
 <script>
   function print(value) {
@@ -46,7 +58,7 @@
 <script type="text/javascript">
 function searchProp(){
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', '../propDB.db', true);
+  xhr.open('GET', '../propDB_min.db', true);
   xhr.responseType = 'arraybuffer';
   var mySelect =document.getElementById('mySelect');
   mySelect.id = "mySelect";
@@ -54,27 +66,30 @@ function searchProp(){
   xhr.onload = function(e) {
   var uInt8Array = new Uint8Array(this.response);
   var db = new SQL.Database(uInt8Array);
-  var qstr ="SELECT propName FROM propellers WHERE propName like '%" + "10" + "%' group by propName";
+  var qstr ="SELECT propName FROM propellers WHERE propName like '%" + document.getElementById("name").value + "%' group by propName";
   //window.alert(qstr); 
   var contents = db.exec(qstr);
   //print(contents[0].values);
+  mySelect.length=0;
   for(i=0;i<contents[0].values.length;i++){
   //  document.write("<option value =\"" + contents[0].values[i] +"\"" + contents[0].values[i] +"</option>")o;
     //window.alert(contents[0].values[i]+' ');
     mySelect.add(new Option(contents[0].values[i],contents[0].values[i]));
   }
+  mySelect[0].selected=true;
   };
   xhr.send();
+  plot();
   //document.write("</select>");
 }
 </script>
 
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="width: 600px;height:400px;"></div>
+    
 <script type="text/javascript">
 function plot(){
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', '../propDB.db', true);
+  xhr.open('GET', '../propDB_min.db', true);
   xhr.responseType = 'arraybuffer';
 
   xhr.onload = function(e) {
@@ -82,7 +97,7 @@ function plot(){
   var db = new SQL.Database(uInt8Array);
   var obj=document.getElementById('mySelect');
   var index = obj.selectedIndex;
-  var qstr = "SELECT V,Thrust FROM propellers WHERE propName = '" + obj.options[index].value+"' AND RPM = '3000'";
+  var qstr = "SELECT RPM,Thrust FROM propellers WHERE propName = '" + obj.options[index].value+"' AND v = 0";
    
   var contents = db.exec(qstr);
   //print(contents[0].values);
@@ -96,10 +111,10 @@ function plot(){
 
   var option = {
    title : {
-        text: '推力-速度曲线',
+        text: obj.options[index].value+'推力-转速曲线',
     },
     xAxis: { axisLabel : {
-                formatter: '{value} m/s'
+                formatter: '{value} RPM'
             }},
     yAxis: {
        axisLabel : {
@@ -127,5 +142,5 @@ function plot(){
 
 
 </div>
-</body>
+
 </html>
