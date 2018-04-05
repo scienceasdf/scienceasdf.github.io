@@ -122,7 +122,6 @@ menu:
   archives: /archives/
   tags: /tags/
   #search: 
-  more: site/
   #sitemap: /sitemap.xml
   #commonweal: /404.html
 
@@ -250,8 +249,8 @@ toc:
   # Automatically add list number to toc.
   number: true
 
-  # If true, all words will placed on next lines if header width longer then sidebar width.
-  wrap: false
+  # If true, all words will placed on next lines if header width longer than sidebar width.
+  wrap: true
 
 
 # Creative Commons 4.0 International License.
@@ -559,7 +558,7 @@ algolia_search:
 
 # Local search
 local_search:
-  enable: true
+  enable: false 
   # if auto, trigger search by changing input
   # if manual, trigger search by pressing enter key or search button
   trigger: auto
