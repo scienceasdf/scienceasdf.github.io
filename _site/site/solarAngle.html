@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>在线计算太阳高度角与方位角</title>
+<script src='../js/sql.js'></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+
+</head>
+
+
+<body>
+    <div data-role="page">
+        <div data-role="header">
+          <h1>在线计算太阳高度角和方位角</h1>
+        </div>
+        <div id="pageone" data-role="main" class="ui-content">
+            <div data-role="fieldcontain">
+                <label for="long">经度</label>
+                <input type="text" name="long" id="long" data-clear-btn="true">
+                <label for="lat">纬度</label>
+                <input type="text" name="lat" id="lat" data-clear-btn="true">
+                <label for="dateInput">日期</label>
+                <input type="date" name="dateInput" id="dateInput" data-clear-btn="true">
+                <label for="time1">时间</label>
+                <input name="time1" id="time1" type="time" value="" data-clear-btn="true">
+            </div>
+            <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "refreshTime()">刷新时间至当前时间</button>
+            <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "refreshGeo()">刷新坐标为自己所在地</button>
+            <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "getResult()">给出结果</button>
+            <img id = "res" width="100%"></img>
+            <img id="images" width = "100%"></img>
+        </div>
+    
+        
+    </div>
+</body>
+
+
+<script>
+
+    function refreshTime(){
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+        $('#dateInput').val(today);
+        var hh = ("0" + now.getHours()).slice(-2);
+        var mm = ("0" + (now.getMinutes())).slice(-2);
+        var currentTime = (hh)+":"+(mm) ;
+        $('#time1').val(currentTime); 
+    }
+
+    function refreshGeo(){
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        else{window.alert("Geolocation is not supported by this browser.");}
+        function showPosition(position)
+        {
+        document.getElementById("lat").value = position.coords.latitude;
+        document.getElementById("long").value = position.coords.longitude;
+        }
+    }
+    refreshGeo();
+    refreshTime();
+
+    function getResult(){
+        //window.alert($('#dateInput').val());
+        var queryStr = "https://api.wolframalpha.com/v2/query?input=sun+location+in+"
+        + document.getElementById("lat").value.substring(0,4) +"North," + document.getElementById("long").value.substring(0,5) + "East+at+"
+        + $('#time1').val() + "UTC%2B8," + $('#dateInput').val()+ "&output=JSON&appid=GJGKTL-VVEAG5K6HT&callback=?";
+
+        $.ajax({ 
+            type: 'GET', 
+            url: queryStr , 
+            //是否使用缓存 
+            cache:false, 
+            //数据类型，这里我用的是json 
+            dataType: "json", 
+            crossDomain: true, 
+            //必要的时候需要用JSON.stringify() 将JSON对象转换成字符串 
+            //data: JSON.strigify({key:value}), 
+            //data : ""
+            //添加额外的请求头 
+            headers : {'Access-Control-Allow-Origin':'*'}, 
+            //请求成功的回调函数 success: 
+            success : function(data){  
+                if(data.queryresult.success == false){
+                    window.alert("请重试");
+                }
+                else{
+                    document.getElementById("res").src = data.queryresult.pods[2].subpods[0].img.src;
+                    document.getElementById("images").src = data.queryresult.pods[2].subpods[1].img.src;
+                }
+            }
+        });
+    }
+</script>
