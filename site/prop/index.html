@@ -75,8 +75,9 @@ function searchProp(){
     //window.alert(contents[0].values[i]+' ');
     mySelect.add(new Option(contents[0].values[i],contents[0].values[i]));
   }
-  mySelect[0].selectedIndex = 0;
-  mySelect.selectmenu("refresh");
+  $('#mySelect').val(contents[0].values[0]).selectmenu('refresh');
+  //mySelect[0].selectedIndex = 0;
+  //mySelect.selectmenu("refresh");
   
   };
   xhr.send();
