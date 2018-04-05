@@ -117,11 +117,12 @@ index_with_subtitle: false
 # When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash (/archives -> archives)
 menu:
   home: /
-  #categories: /categories/
+  categories: /categories/
   #about: /about/
   archives: /archives/
   tags: /tags/
   #search: 
+  more: site/
   #sitemap: /sitemap.xml
   #commonweal: /404.html
 
@@ -142,6 +143,7 @@ menu_icons:
   archives: archive
   sitemap: sitemap
   commonweal: heartbeat
+  #LeetCode: drupal
 
 
 
@@ -232,7 +234,7 @@ social_icons:
   GitHub: github
   ZhiHu: joomla
   404公益@宝贝回家: child
-  #LeetCode: drupal
+  LeetCode: drupal
   #Weibo: weibo
 
 
@@ -557,7 +559,7 @@ algolia_search:
 
 # Local search
 local_search:
-  enable: false
+  enable: true
   # if auto, trigger search by changing input
   # if manual, trigger search by pressing enter key or search button
   trigger: auto
