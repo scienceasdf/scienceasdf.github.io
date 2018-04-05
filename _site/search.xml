@@ -30,6 +30,7 @@
 即使有这些低层次的轮子，要移植我曾经的一大堆专门的数值代码也是非常麻烦的。手写就不说了，自己想想都觉得多。我在网上看到了几种方案：</li>
   <li>emscripten-qt直接移植Qt程序，这个项目已经没有维护了，不可能能移植QtCharts模块</li>
   <li>Qt+WebAssembly，看了几个demo，效果很差</li>
+  <li>在网页里面直接运行apk，也没有看见理想的方案</li>
   <li>用emscripten移植数值算法的代码，但是自己本来就完全不会javascript，这样自己也会更麻烦</li>
 </ul>
 
@@ -135,7 +136,12 @@
 <p>不知道实现了跨域访问的原因到底是在URL里面加了”&amp;callback=?”还是加了请求头的原因:cold_sweat:。这样就实现了在网页上绘制根轨迹。不过这个网页的使用体验肯定没有安卓版的easyAuto好，一个是输入格式更为严格，第二个是速度太慢。就这个访问速度，我相信即使是javascript代码也能做到更快把图画出来，不过我是真的不想再去用javascript写数值的代码了。</p>
 <h2 id="螺旋桨性能查询网页">螺旋桨性能查询网页</h2>
 
-<p>做这个的原因和上一个一样，想实现彻底的跨平台。之前把demoProp的所有数据全部导入到了一个sqlite文件中，加上索引一共40+MB，正好在网上看到了sql.js项目，这个是emscripten把sqlite直接翻译过来的结果，想试一试，于是把数据库和网页挂在网上，试了试发现访问速度太慢了。而且一不注意，手机用了200+MB的流量，血淋淋的教训啊。我明白这个的意思了：用http请求把url的数据库先下载下来，然后再在内存中运行sql语句。这个代价相比PHP+MySQL的代价的确太大了。我把索引全部删除，数据库的大小还是20+MB，没办法，想了想一般在无人机我们关注的是静拉力，于是删除了所有动拉力数据，仅保留静拉力数据，这下只有600+KB了。当然，也可以把所有数据以文本形式保存在网站上，具体对于某个螺旋桨，只需要读取具体的一个数据就行，不过处理文件肯定没有sql语句来得方便。</p>
+<p>做这个的原因和上一个一样，想实现彻底的跨平台。之前把demoProp的所有数据全部导入到了一个sqlite文件中，加上索引一共40+MB，正好在网上看到了sql.js项目，这个是emscripten把sqlite直接翻译过来的结果，想试一试，于是把数据库和网页挂在网上，试了试发现访问速度太慢了。而且一不注意，手机用了200+MB的流量，血淋淋的教训啊。我明白这个的意思了：用http请求把url的数据库先下载下来，然后再在内存中运行sql语句。这个代价相比PHP+MySQL的代价的确太大了。我把索引全部删除，数据库的大小还是20+MB，没办法，想了想一般在无人机我们关注的是静拉力，于是删除了所有动拉力数据，仅保留静拉力数据，这下只有600+KB了。再把一些无关的字段删去，sqlite对sql的支持太差，删除字段还需要这样写：</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">create</span> <span class="k">table</span> <span class="k">temp</span> <span class="k">as</span> <span class="k">select</span> <span class="n">propName</span><span class="p">,</span><span class="n">RPM</span><span class="p">,</span><span class="n">PWR</span><span class="p">,</span><span class="n">Thrust</span> <span class="k">from</span> <span class="n">propellers</span><span class="p">;</span>  
+<span class="k">drop</span> <span class="k">table</span> <span class="n">propellers</span><span class="p">;</span>  
+<span class="k">alter</span> <span class="k">table</span> <span class="k">temp</span> <span class="k">rename</span> <span class="k">to</span> <span class="n">propellers</span><span class="p">;</span>  
+</code></pre></div></div>
+<p>这样数据库只剩300KB了。当然，也可以把所有数据以文本形式保存在网站上，具体对于某个螺旋桨，只需要读取具体的一个数据就行，不过处理文件肯定没有sql语句来得方便。</p>
 
 <p>关于图表的绘制，我使用的是ECharts3.而UI的绘制则是使用jQuery Mobile，都是直接挂的bootcdn，希望服务器不要宕机:stuck_out_tongue_winking_eye:。jQuery Mobile的空间要想更好地适应移动端，需要加上如下代码：</p>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span> <span class="nt">/&gt;</span>
