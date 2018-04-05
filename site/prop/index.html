@@ -31,10 +31,10 @@
       <fieldset data-role="controlgroup" data-type="horizontal" style="text-align:center;">  
         <legend>输出曲线选择</legend>  
         <input type="radio" name="figureType" id="Thrust" value="推力-转速曲线" checked="checked" />  
-        <label for="Thrust" data-theme="b" onclick="plot()">推力-转速曲线</label>  
+        <label for="Thrust" data-theme="b" >推力-转速曲线</label>  
 
         <input type="radio" name="figureType" id="PWR" value="功率-转速曲线"  />  
-        <label for="PWR" data-theme="b" onclick="plot()">功率-转速曲线</label>  
+        <label for="PWR" data-theme="b" >功率-转速曲线</label>  
       </fieldset>  
   
       <div id="main" style="width: 100%;height:400%;"></div>
@@ -88,6 +88,9 @@ function searchProp(){
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
     
 <script type="text/javascript">
+$("input[name=figureType]").bind( "change", function(event, ui) {
+  plot();
+});
 function plot(){
   
   var xhr = new XMLHttpRequest();
