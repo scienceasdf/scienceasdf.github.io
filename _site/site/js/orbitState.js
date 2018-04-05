@@ -145,9 +145,10 @@ orbit.prototype.getGroundTrack = function (time){
         this.step( dt);
         res[i] = this.toGEO();
         var x = new Array(2);
+        res[i].adjust();
         res[i].long -= i * dt  * earthRot;
         //m = i * dt * earthRot;
-        res[i].adjust();
+        //res[i].adjust();
         x[0] = res[i].long;
         x[1] = res[i].lat;
         result[i] = x;
@@ -159,7 +160,7 @@ orbit.prototype.getGroundTrack = function (time){
 
 geo.prototype.adjust = function (){
     this.lat = this.lat % 90.0;
-    this.long = this.long % 180.0;
+    this.long = (Math.cos(this.long * radPerDeg / 2) > 0)?this.long % 180.0 : (-this.long % 180.0);
 };
 
 
