@@ -138,18 +138,21 @@ orbit.prototype.toGEO = function(){
 
 orbit.prototype.getGroundTrack = function (time){
     dt = time / 6000.0;
+    //var m = 0;
     var res = new Array(6000);
     var result = new Array(6000);
     for(var i = 0; i < 6000; ++i){
-        this.step(dt * i);
+        this.step( dt);
         res[i] = this.toGEO();
         var x = new Array(2);
-        res[i].long -= dt * i * earthRot;
+        res[i].long -= i * dt  * earthRot;
+        //m = i * dt * earthRot;
         res[i].adjust();
         x[0] = res[i].long;
         x[1] = res[i].lat;
         result[i] = x;
     }
+    //window.alert(m);
     return result;
 };
 

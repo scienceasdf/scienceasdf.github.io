@@ -66,6 +66,7 @@ $('#iINC').val(112.228);
 $('#iAOP').val(19.6);
 $('#iRAAN').val(120.671);
 $('#iTA').val(25.325);
+$('#iN').val(1);
 
 function plotGroundTrack(){
   var a = Number($('#iSMA').val()) * 1000.0;
@@ -80,6 +81,7 @@ function plotGroundTrack(){
   var worldMapContainer = document.getElementById('main');
 
   var allData = orbit1.getGroundTrack(time);
+  window.alert(time);
   window.alert(allData);
 
   
@@ -111,7 +113,7 @@ function plotGroundTrack(){
       series: [
       {
         name: '星下点轨迹', // series名称
-        symbolSize: 5,
+        symbolSize: 3,
         type: 'scatter', // series图表类型
         coordinateSystem: 'geo', // series坐标系类型
         data : allData
