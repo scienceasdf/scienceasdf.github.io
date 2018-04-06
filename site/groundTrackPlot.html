@@ -171,7 +171,8 @@ function plotGroundTrack(){
     var chart = myChart;
     chart.setOption({
       tooltip:{
-        formatter: '{a}:</br> {c0}'
+        formatter: '{a}:</br> {c0}',
+        position: 'bottom',//['50%', '90%']
       },
       geo:{
         map:'world'
