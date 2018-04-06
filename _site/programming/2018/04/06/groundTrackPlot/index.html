@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Jekyll, NexT" />
+  <meta name="keywords" content="JavaScript,天文," />
 
 
 
@@ -111,19 +111,18 @@
 
 
 
-<meta name="description" content="# Lazy Load Plugin for jQuery Lazy Load delays loading of images in long web pages. Images outside of viewport wont be loaded before user scrolls to them. This is opposite of image preloading. Using Lazy Load on long web pages containing many large images makes the page load faster. Browser will be in ready state after loading visible images. In some cases it can also help to reduce server load. Lazy Load is inspired by [YUI ImageLoader](http://developer.yahoo.com/yui/imageloader/) Utility by Matt Mlinac. ## How to Use? Lazy Load depends on jQuery. Include them both in end of your HTML code: ```html ``` You must alter your HTML code. URL of the real image must be put into data-original attribute. It is good idea to give Lazy Loaded image a specific class. This way you can easily control which images plugin is binded to. Note that you should have width and height attributes in your image tag. ```html ``` then in your code do: ```js $(&quot;img.lazy&quot;).lazyload(); ``` This causes all images of class lazy to be lazy loaded. More information on [Lazy Load](http://www.appelsiini.net/projects/lazyload) project page. ## Install You can install with [bower](http://bower.io/) or [npm](https://www.npmjs.com/). ```sh $ bower install jquery.lazyload $ npm install jquery-lazyload ``` # License All code licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php). All images licensed under [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/deed.en_US). In other words you are basically free to do whatever you want. Just don&apos;t remove my name from the source.">
-<meta name="keywords" content="Jekyll, NexT">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lazy Load Plugin for jQuery">
-<meta property="og:url" content="http://localhost:4000/assets/lib/jquery_lazyload/">
+<meta name="description" content="自己写了写网页绘制星下点轨迹的代码。">
+<meta name="keywords" content="JavaScript, 天文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在线绘制星下点轨迹">
+<meta property="og:url" content="http://localhost:4000/programming/2018/04/06/groundTrackPlot/">
 <meta property="og:site_name" content="scienceasdf">
-<meta property="og:description" content="# Lazy Load Plugin for jQuery Lazy Load delays loading of images in long web pages. Images outside of viewport wont be loaded before user scrolls to them. This is opposite of image preloading. Using Lazy Load on long web pages containing many large images makes the page load faster. Browser will be in ready state after loading visible images. In some cases it can also help to reduce server load. Lazy Load is inspired by [YUI ImageLoader](http://developer.yahoo.com/yui/imageloader/) Utility by Matt Mlinac. ## How to Use? Lazy Load depends on jQuery. Include them both in end of your HTML code: ```html ``` You must alter your HTML code. URL of the real image must be put into data-original attribute. It is good idea to give Lazy Loaded image a specific class. This way you can easily control which images plugin is binded to. Note that you should have width and height attributes in your image tag. ```html ``` then in your code do: ```js $(&quot;img.lazy&quot;).lazyload(); ``` This causes all images of class lazy to be lazy loaded. More information on [Lazy Load](http://www.appelsiini.net/projects/lazyload) project page. ## Install You can install with [bower](http://bower.io/) or [npm](https://www.npmjs.com/). ```sh $ bower install jquery.lazyload $ npm install jquery-lazyload ``` # License All code licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php). All images licensed under [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/deed.en_US). In other words you are basically free to do whatever you want. Just don&apos;t remove my name from the source.">
+<meta property="og:description" content="自己写了写网页绘制星下点轨迹的代码。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="lazy">
+<meta property="og:updated_time" content="2018-04-04T00:00:00+08:00">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lazy Load Plugin for jQuery">
-<meta name="twitter:description" content="# Lazy Load Plugin for jQuery Lazy Load delays loading of images in long web pages. Images outside of viewport wont be loaded before user scrolls to them. This is opposite of image preloading. Using Lazy Load on long web pages containing many large images makes the page load faster. Browser will be in ready state after loading visible images. In some cases it can also help to reduce server load. Lazy Load is inspired by [YUI ImageLoader](http://developer.yahoo.com/yui/imageloader/) Utility by Matt Mlinac. ## How to Use? Lazy Load depends on jQuery. Include them both in end of your HTML code: ```html ``` You must alter your HTML code. URL of the real image must be put into data-original attribute. It is good idea to give Lazy Loaded image a specific class. This way you can easily control which images plugin is binded to. Note that you should have width and height attributes in your image tag. ```html ``` then in your code do: ```js $(&quot;img.lazy&quot;).lazyload(); ``` This causes all images of class lazy to be lazy loaded. More information on [Lazy Load](http://www.appelsiini.net/projects/lazyload) project page. ## Install You can install with [bower](http://bower.io/) or [npm](https://www.npmjs.com/). ```sh $ bower install jquery.lazyload $ npm install jquery-lazyload ``` # License All code licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php). All images licensed under [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/deed.en_US). In other words you are basically free to do whatever you want. Just don&apos;t remove my name from the source.">
-<meta name="twitter:image" content="lazy">
+<meta name="twitter:title" content="在线绘制星下点轨迹">
+<meta name="twitter:description" content="自己写了写网页绘制星下点轨迹的代码。">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -156,7 +155,7 @@
 
 
 
-  <title>Lazy Load Plugin for jQuery</title>
+  <title>在线绘制星下点轨迹</title>
   
 
 
@@ -292,61 +291,233 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+
 <div id="posts" class="posts-expand">
-<header class="post-header">
+  
+  
 
-	<h1 class="post-title" itemprop="name headline">Lazy Load Plugin for jQuery</h1>
-
-
-
-</header>
+  
 
   
   
-    <h1 id="lazy-load-plugin-for-jquery">Lazy Load Plugin for jQuery</h1>
-
-<p>Lazy Load delays loading of images in long web pages. Images outside of viewport wont be loaded before user scrolls to them. This is opposite of image preloading.</p>
-
-<p>Using Lazy Load on long web pages containing many large images makes the page load faster. Browser will be in ready state after loading visible images. In some cases it can also help to reduce server load.</p>
-
-<p>Lazy Load is inspired by <a href="http://developer.yahoo.com/yui/imageloader/">YUI ImageLoader</a> Utility by Matt Mlinac.</p>
-
-<h2 id="how-to-use">How to Use?</h2>
-
-<p>Lazy Load depends on jQuery. Include them both in end of your HTML code:</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.lazyload.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre></div></div>
-
-<p>You must alter your HTML code. URL of the real image must be put into data-original attribute. It is good idea to give Lazy Loaded image a specific class. This way you can easily control which images plugin is binded to. Note that you should have width and height attributes in your image tag.</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">class=</span><span class="s">"lazy"</span> <span class="na">data-original=</span><span class="s">"img/example.jpg"</span> <span class="na">width=</span><span class="s">"640"</span> <span class="na">height=</span><span class="s">"480"</span><span class="nt">&gt;</span>
-</code></pre></div></div>
-
-<p>then in your code do:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="s2">"img.lazy"</span><span class="p">).</span><span class="nx">lazyload</span><span class="p">();</span>
-</code></pre></div></div>
-
-<p>This causes all images of class lazy to be lazy loaded.</p>
-
-<p>More information on <a href="http://www.appelsiini.net/projects/lazyload">Lazy Load</a> project page.</p>
-
-<h2 id="install">Install</h2>
-
-<p>You can install with <a href="http://bower.io/">bower</a> or <a href="https://www.npmjs.com/">npm</a>.</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bower install jquery.lazyload
-<span class="nv">$ </span>npm install jquery-lazyload
-</code></pre></div></div>
-
-<h1 id="license">License</h1>
-
-<p>All code licensed under the <a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>. All images licensed under <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>. In other words you are basically free to do whatever you want. Just don’t remove my name from the source.</p>
-
-
   
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/programming/2018/04/06/groundTrackPlot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="scienceasdf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="scienceasdf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            在线绘制星下点轨迹
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T00:00:00+08:00">
+                2018-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/Programming" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            
+                <div class="post-description">
+                    
+                </div>
+            
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
+     							   extensions: ["AMSmath.js"]}
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>自己写了写网页绘制星下点轨迹的代码。</strong></p>
+
+<hr />
+<h2 id="算法">算法</h2>
+<p>这个算是原创算法了吧，身边没有轨道动力学和弹道导弹学的教材，都是自己瞎琢磨的算法。之前我们分析了<a href="https://scienceasdf.github.io/programming/2017/04/07/astrodynamics1/">轨道动力学中常用的计算机算法</a>,<a href="https://scienceasdf.github.io/programming/2017/04/14/astrodynamics2/">轨道动力学中常用的计算机算法（二）</a>，这些很有用，可以让我们把轨道六根数转化为笛卡尔坐标系的坐标，以及进行轨道外推。<br />
+星下点轨迹的具体计算过程如下：每隔时间$dt$后，外推此时的轨道六根数，并得到相应的笛卡尔坐标系坐标。然后经度
+\begin{equation}
+\lambda = \mathrm{atan2}(y,x)
+\end{equation}
+纬度
+\begin{equation}
+\phi = \mathrm{asin}(\frac{z}{r})
+\end{equation}
+其中
+\begin{equation}
+r=\sqrt{x^2+y^2+z^2}
+\end{equatino}
+这里就基本完成了。不过还要考虑地球自转的影响，这个很让人头疼，因为atan2函数本身值域没问题,$[-\pi,\pi]$,但是考虑地球自转后需要
+\begin{equation}
+\lambda = \lambda - t * \omega
+\end{equation}
+这样$\lambda$的值域就会变化。想了挺长时间，得到这样的一种解决方法</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">geo</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">adjust</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(){</span>
+    <span class="c1">//this.long = (Math.cos(this.long * radPerDeg / 2) &gt; 0)?this.long % 180.0 : (-this.long % 180.0);</span>
+    <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="kr">long</span> <span class="o">&gt;</span> <span class="mi">180</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="kr">long</span> <span class="o">&lt;</span> <span class="mi">180</span><span class="p">){</span>
+        <span class="kd">var</span> <span class="nx">theta</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="kr">long</span> <span class="o">*</span> <span class="nx">radPerDeg</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">theta</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">theta</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">res</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">atan2</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span><span class="nx">c</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="kr">long</span> <span class="o">=</span> <span class="nx">res</span> <span class="o">*</span> <span class="nx">degPerRad</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="具体实现">具体实现</h2>
+<p>我是javascript的门外汉，把我以前写的C++代码全部移植到javascript很是费劲。不过运算速度比我想象中快多了。这里直接用的是开普勒运动的轨道外推，如果考虑摄动项那就需要用龙格库塔算法了。整个javascript的代码在<a href="https://scienceasdf.github.io/site/js/orbitState.js">orbitState.js</a>，代码是可读的。<br />
+UI还是以前的东西，用jQuery Mobile+ECharts做的。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            
+            <a href="/tag/#/JavaScript" rel="tag"># JavaScript</a>
+          
+            
+            <a href="/tag/#/%E5%A4%A9%E6%96%87" rel="tag"># 天文</a>
+          
+        </div>
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+        <div class="post-nav" id="post-nav-id">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/programming/2018/04/04/easyAuto(2)/" rel="prev" title="在手机上绘制根轨迹（2）">
+                在手机上绘制根轨迹（2） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+      
+
+      
+    </footer>
+  </article>
+
+  <div class="post-spread">
+    
+  </div>
 </div>
 
 
@@ -355,6 +526,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -372,10 +547,27 @@
     <div class="sidebar-inner">
 
       
+        
+        
+        
+
+
+
 
       
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/avatar.png"
@@ -483,6 +675,31 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#算法"> <span class="nav-number">1</span> <span class="nav-text">算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#具体实现"> <span class="nav-number">2</span> <span class="nav-text">具体实现</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

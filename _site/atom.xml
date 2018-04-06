@@ -1,4 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-04-06T10:21:12+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">在手机上绘制根轨迹（2）</title><link href="http://localhost:4000/programming/2018/04/04/easyAuto(2)/" rel="alternate" type="text/html" title="在手机上绘制根轨迹（2）" /><published>2018-04-04T00:00:00+08:00</published><updated>2018-04-04T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/04/04/easyAuto(2)</id><content type="html" xml:base="http://localhost:4000/programming/2018/04/04/easyAuto(2)/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-04-06T11:17:37+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">在线绘制星下点轨迹</title><link href="http://localhost:4000/programming/2018/04/06/groundTrackPlot/" rel="alternate" type="text/html" title="在线绘制星下点轨迹" /><published>2018-04-06T00:00:00+08:00</published><updated>2018-04-06T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/04/06/groundTrackPlot</id><content type="html" xml:base="http://localhost:4000/programming/2018/04/06/groundTrackPlot/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+  							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
+     							   extensions: [&quot;AMSmath.js&quot;]}
+  		});
+		&lt;/script&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;strong&gt;自己写了写网页绘制星下点轨迹的代码。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;算法&quot;&gt;算法&lt;/h2&gt;
+&lt;p&gt;这个算是原创算法了吧，身边没有轨道动力学和弹道导弹学的教材，都是自己瞎琢磨的算法。之前我们分析了&lt;a href=&quot;https://scienceasdf.github.io/programming/2017/04/07/astrodynamics1/&quot;&gt;轨道动力学中常用的计算机算法&lt;/a&gt;,&lt;a href=&quot;https://scienceasdf.github.io/programming/2017/04/14/astrodynamics2/&quot;&gt;轨道动力学中常用的计算机算法（二）&lt;/a&gt;，这些很有用，可以让我们把轨道六根数转化为笛卡尔坐标系的坐标，以及进行轨道外推。&lt;br /&gt;
+星下点轨迹的具体计算过程如下：每隔时间$dt$后，外推此时的轨道六根数，并得到相应的笛卡尔坐标系坐标。然后经度
+\begin{equation}
+\lambda = \mathrm{atan2}(y,x)
+\end{equation}
+纬度
+\begin{equation}
+\phi = \mathrm{asin}(\frac{z}{r})
+\end{equation}
+其中
+\begin{equation}
+r=\sqrt{x^2+y^2+z^2}
+\end{equatino}
+这里就基本完成了。不过还要考虑地球自转的影响，这个很让人头疼，因为atan2函数本身值域没问题,$[-\pi,\pi]$,但是考虑地球自转后需要
+\begin{equation}
+\lambda = \lambda - t * \omega
+\end{equation}
+这样$\lambda$的值域就会变化。想了挺长时间，得到这样的一种解决方法&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;geo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;adjust&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//this.long = (Math.cos(this.long * radPerDeg / 2) &amp;gt; 0)?this.long % 180.0 : (-this.long % 180.0);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;180&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;radPerDeg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;atan2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;degPerRad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;具体实现&quot;&gt;具体实现&lt;/h2&gt;
+&lt;p&gt;我是javascript的门外汉，把我以前写的C++代码全部移植到javascript很是费劲。不过运算速度比我想象中快多了。这里直接用的是开普勒运动的轨道外推，如果考虑摄动项那就需要用龙格库塔算法了。整个javascript的代码在&lt;a href=&quot;https://scienceasdf.github.io/site/js/orbitState.js&quot;&gt;orbitState.js&lt;/a&gt;，代码是可读的。&lt;br /&gt;
+UI还是以前的东西，用jQuery Mobile+ECharts做的。&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="JavaScript" /><category term="天文" /><summary type="html">自己写了写网页绘制星下点轨迹的代码。</summary></entry><entry><title type="html">在手机上绘制根轨迹（2）</title><link href="http://localhost:4000/programming/2018/04/04/easyAuto(2)/" rel="alternate" type="text/html" title="在手机上绘制根轨迹（2）" /><published>2018-04-04T00:00:00+08:00</published><updated>2018-04-04T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/04/04/easyAuto(2)</id><content type="html" xml:base="http://localhost:4000/programming/2018/04/04/easyAuto(2)/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
   							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
      							   extensions: [&quot;AMSmath.js&quot;]}
@@ -1627,57 +1672,4 @@ $ST$为真太阳时。然而平常我们通常都使用北京时间，因此太�
   &lt;li&gt;和Stellarium里面的太阳高度角、方位角进行了对比，虽然在这里的计算中有些是近似公式，但是误差也不会超过1°&lt;/li&gt;
   &lt;li&gt;这个程序，这种方法让我在外地，只要有晴天，就能找到东西南北&lt;/li&gt;
   &lt;li&gt;这个程序还可以应用于一些太阳能实验上，如太阳能飞机的动力试车，大概选在哪些月份，哪些时刻，或者说如何调整电池片的方向以使电池片接收到最多的太阳光强能够心里有数&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>scienceasdf</name></author><category term="天文" /><category term="安卓开发" /><category term="Qt" /><summary type="html">探讨太阳高度角与方位角的计算，并写了个手机程序用于计算此时此刻此地（也可以是任意时刻，任意地点）的太阳高度角与方位角.</summary></entry><entry><title type="html">浅谈螺旋桨航模（无人机）的动力系统选配（二）</title><link href="http://localhost:4000/programming/2017/08/17/propulsion2/" rel="alternate" type="text/html" title="浅谈螺旋桨航模（无人机）的动力系统选配（二）" /><published>2017-08-17T00:00:00+08:00</published><updated>2017-08-17T00:00:00+08:00</updated><id>http://localhost:4000/programming/2017/08/17/propulsion2</id><content type="html" xml:base="http://localhost:4000/programming/2017/08/17/propulsion2/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
-  							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
-     							   extensions: [&quot;AMSmath.js&quot;]}
-  		});
-		&lt;/script&gt;
-
-&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;上一篇文章我们讲了螺旋桨无人机动力系统相关的理论，这篇文章说说程序的设计。&lt;/p&gt;
-
-&lt;h2 id=&quot;数据来源&quot;&gt;数据来源&lt;/h2&gt;
-&lt;p&gt;所有的数据都来自于APC官网的数据。由于APC螺旋桨高效率的优点（正品APC桨的效率非常高，接近0.9），以及APC在其官网公布了所有型号的理论性能数据文件，故下载所有其官网上的五百个左右性能数据文件，其文件已经存储为固定的格式。先在官网上下载索引文件PER2_TITLEDAT.txt，再用wget批量将所有的螺旋桨性能数据文件下载下来。一共五百来个文件，中间下载是否有连接错误导致文件没有下载完整我也不知道:sweat:。APC的桨型号很齐全，基本覆盖了航模级别常用的尺寸，从几英寸到26英寸的都有，如果在这些型号以外的型号那就没办法了。。。数据全部都是dat格式的，用std::ifstream读文件非常耗时。对于开发的安卓版本，肯定不会用External folder里面包含所有的数据，只能用Qt资源文件+QDataStream来读写（不支持std::ifstream)，这样速度更快，不过缺点在于如果数据变动、扩展会不太方便。在写完所有程序之后，我还把所有数据迁移到了一个sqlite数据库文件中，并加上索引，访问速度大大提升，不过目前是不想重构sqlite的版本了。&lt;/p&gt;
-
-&lt;h2 id=&quot;功能介绍&quot;&gt;功能介绍&lt;/h2&gt;
-&lt;p&gt;程序分为PC版和移动（安卓）版，主要以介绍PC版为主。PC版共有两个程序：DemoProp，用于计算无刷电机动力系统的工作状况并给出一定的建议；PropChart，用于计算电动和油动动力系统的工作状况并绘制图表。&lt;/p&gt;
-&lt;h3 id=&quot;筛选功能&quot;&gt;筛选功能&lt;/h3&gt;
-&lt;p&gt;程序可以对给定的工作状况下的符合要求（如拉力、效率等条件）的螺旋桨进行筛选。DemoProp的筛选界面如下图所示，可以输入电机、电源、减速组等相关信息。
-&lt;img src=&quot;http://localhost:4000/assets//blog_images/fig2.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
-PropChart的筛选界面如下图所示，这里运用的模型是给定转速或者给定输入功率，这样就既能够用于求解电动系统的工作状况，也适用于求解油动系统的工作状况。
-&lt;img src=&quot;http://localhost:4000/assets//blog_images/fig4.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;分析功能&quot;&gt;分析功能&lt;/h3&gt;
-&lt;p&gt;DemoProp能够对具体的电动系统选配提出指导意见，可以判断当前电机、电源、螺旋桨、减速组的组合究竟是轻载、超载还是正常载荷，如下图所示。
-&lt;img src=&quot;http://localhost:4000/assets//blog_images/fig3.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;图表功能&quot;&gt;图表功能&lt;/h3&gt;
-&lt;p&gt;PropChart能够绘制螺旋桨的拉力曲线、效率曲线等等，这里我用的是QCustomPlot进行绘制，如下图所示。
-&lt;img src=&quot;http://localhost:4000/assets//blog_images/fig5.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;移动版&quot;&gt;移动版&lt;/h3&gt;
-&lt;p&gt;一直苦于在室外进行动力试验的时候，不方便将测量的数据与仿真数据进行校对、不知道动力系统应该怎么调整。感谢伟大的Qt的跨平台特性，让我能够将程序移植到安卓系统上（实际上移植到iOS上也可以，不过就是我没有苹果电脑与手机），极大地方便了在外场的实验。针对手机的一些特点，在功能上进行了一些改进，例如取消筛选功能，并增加绘制能量分析饼图的功能。手机版的交互体验应该比电脑版的好太多了。截图如下：
-&lt;img src=&quot;http://localhost:4000/assets//blog_images/scr2.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
-&lt;img src=&quot;http://localhost:4000/assets//blog_images/scr3.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
-&lt;img src=&quot;http://localhost:4000/assets//blog_images/scr1.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;&lt;/p&gt;
-&lt;h2 id=&quot;数据验证&quot;&gt;数据验证&lt;/h2&gt;
-&lt;h3 id=&quot;静拉力实测数据验证&quot;&gt;静拉力实测数据验证&lt;/h3&gt;
-&lt;p&gt;测试仿APC12X6E螺旋桨,飓风2820电机，$K_v=920$
-，内阻28mOhm，静拉力1.7千克力，电流47-48安，转速8300RPM。仿真结果为静拉力2.3千克力，转速8830RPM。考虑到APC官网的数据本来比实际值偏高（参考文献的风洞实验数据有验证），误差与使用偏高值以及没有使用正品APC螺旋桨有关。&lt;/p&gt;
-&lt;h3 id=&quot;应用于太阳能飞机动力系统的例子&quot;&gt;应用于太阳能飞机动力系统的例子&lt;/h3&gt;
-&lt;p&gt;某翼展为5米的太阳能无人机，没有储能装置，太阳能提供动力系统的所有能量。机翼上的电池片大约提供110瓦电能。实验测试测得电池片能够提供的电压大约不超过13V，电流不超过8A。最早使用KV值1000的电机驱动20英寸的自制螺旋桨，静拉力输出很难超过1千克力。换用340KV电机带20英寸以上的木桨，静拉力能够超过10千克力。经计算表明，电机KV值在200附近时驱动20$\sim$22英寸螺旋桨能够有更高效率，换用200KV螺旋桨，以及APC22X10E的螺旋桨，静拉力为1.35千克力。&lt;/p&gt;
-&lt;h2 id=&quot;存在的问题&quot;&gt;存在的问题&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;筛选功能卡在IO上比较耗时间。当然，MSVC编译的程序能够明显快于MINGW编译的程序。解决方法有很多，只是我不想去重构了&lt;/li&gt;
-  &lt;li&gt;电脑版的交互体验非常差&lt;/li&gt;
-  &lt;li&gt;电脑版没有对UI进行多分辨率的调整&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;&lt;a href=&quot;https://pan.baidu.com/s/1QaN9CxFEfJz0RHewitcCgg&quot;&gt;安卓版程序下载地址&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://pan.baidu.com/s/1W5DtxZFxC6SmjRxvO9F_tA&quot;&gt;Windows版程序下载地址（32位）&lt;/a&gt;&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="无人机" /><category term="安卓开发" /><category term="Qt" /><summary type="html">探讨了螺旋桨无人机动力系统的相关理论，并开发手机与电脑版程序解决相关问题。下载地址在文末。</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>scienceasdf</name></author><category term="天文" /><category term="安卓开发" /><category term="Qt" /><summary type="html">探讨太阳高度角与方位角的计算，并写了个手机程序用于计算此时此刻此地（也可以是任意时刻，任意地点）的太阳高度角与方位角.</summary></entry></feed>

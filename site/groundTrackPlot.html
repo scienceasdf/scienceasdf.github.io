@@ -20,10 +20,22 @@
 <body>
 <div data-role="page">
     <div data-role="header">
+      <a href="./index.html" data-role="button" data-icon="home" data-ajax="false">首页</a>
       <h1>在线绘制星下点轨迹</h1>
-    </div
+      <a href="#myPopup" data-rel="popup" data-position-to="window" data-role="button" data-icon="info">说明</a>
+    </div>
+  
 
     <div id="pageone" data-role="main" class="ui-content">
+
+        <fieldset data-role="fieldcontain">
+            <label for="sat">预设数据</label>
+            <select name="sat" id="sat" onchange="loadSat()">
+              <option value="normal">一般的一个卫星</option>
+              <option value="GeoSync">印尼上空的静止同步卫星</option>
+              <option value="eightSat">8字同步卫星</option>
+            </select>
+          </fieldset>
         <div data-role="fieldcontain">
             <label for="iSMA">半长轴(KM)</label>
             <input type="text" name="iSMA" id="iSMA" data-clear-btn="true">
@@ -43,17 +55,30 @@
             <input type="text" name="iNPLOT" id="iNPLOT" data-clear-btn="true">
             </div>
 
+
             <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "plotGroundTrack()">绘制星下点轨迹</button>
-  
+
+
       <div id="main" style="width: 100%;height:67%"></div>
       <div data-role="popup" id="myPopup">
+          <p>说明</p> 
+          <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+          0、在电脑上显示效果更好，手机请横屏放置<br>
+          1、坐标系是Earth Fixed坐标系<br>
+          2、没有考虑J2项摄动、空气阻力、其他天体等等奇奇怪怪的摄动<br>
+          3、具体计算原理请看博客<br>
+          4、欢迎反馈BUG
+        </div>
+    </div>
+
+    <div data-role="popup" id="myPopup2">
         <p>需要专业版程序请加QQ</p> 
-      </div>
+        <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <img src="QR.png" style="width:100%;">
     </div>
 
   <div data-role="footer" style="text-align:center;">
-    <h1>为了减少您的流量消耗，并提高访问速度，<br>仅提供静拉力和功率的的查询。</h1>
-    <a href="#myPopup" data-rel="popup" data-position-to="window">专业版程序点这里</a>
+    <a href="#myPopup2" data-rel="popup" data-position-to="window">接受捐助，打赏点这里</a>
   </div>
 </div>
 </body>
@@ -71,9 +96,40 @@ $('#iTA').val(25.325);
 $('#iN').val(1);
 $('#iNPLOT').val(1000);
 
+function loadSat(){
+  var str = document.getElementById("sat").value;
+  if(str == 'GeoSync'){
+    $('#iSMA').val(42164);
+    $('#iECC').val(0);
+    $('#iINC').val(0);
+    $('#iAOP').val(19.6);
+    $('#iRAAN').val(70);
+    $('#iTA').val(25.325);
+    $('#iN').val(1);
+    $('#iNPLOT').val(1000);
+  }else if(str == 'eightSat'){
+    $('#iSMA').val(42164);
+    $('#iECC').val(0);
+    $('#iINC').val(50);
+    $('#iAOP').val(19.6);
+    $('#iRAAN').val(80);
+    $('#iTA').val(25.325);
+    $('#iN').val(1);
+    $('#iNPLOT').val(1000);
+  }else if(str == 'normal'){
+    $('#iSMA').val('8576');
+    $('#iECC').val(0.241);
+    $('#iINC').val(112.228);
+    $('#iAOP').val(19.6);
+    $('#iRAAN').val(120.671);
+    $('#iTA').val(25.325);
+    $('#iN').val(1);
+    $('#iNPLOT').val(1000);
+  }
+}
+
 function plotGroundTrack(){
   var a = Number($('#iSMA').val()) * 1000.0;
-  //window.alert("PERIOD = " + 2 * pi * Math.pow(a*a*a/mu,0.5));
   var time = 2 * pi * Math.pow(a*a*a/mu,0.5) * Number($('#iN').val())
   var orbit1 = new orbit(Number($('#iSMA').val() * 1000.0),
                      Number($('#iECC').val()),
@@ -84,11 +140,7 @@ function plotGroundTrack(){
   var worldMapContainer = document.getElementById('main');
 
   var allData = orbit1.getGroundTrack(time);
-  //window.alert(time);
-  //window.alert(allData);
-
   
-
   //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
   var resizeWorldMapContainer = function () {
       worldMapContainer.style.width = window.innerWidth+'px';
@@ -106,10 +158,6 @@ function plotGroundTrack(){
     echarts.registerMap('world', chinaJson);
     var chart = myChart;
     chart.setOption({
-      tooltip: {},
-      legend: {
-                //data:['拉力']
-      },
       geo:{
         map:'world'
       },
@@ -157,7 +205,7 @@ function plotWorldMap(){
       },
       series: [
       {
-        name: '销量', // series名称
+        name: '星下点轨迹', // series名称
         symbolSize: 5,
         type: 'scatter', // series图表类型
         coordinateSystem: 'geo', // series坐标系类型
