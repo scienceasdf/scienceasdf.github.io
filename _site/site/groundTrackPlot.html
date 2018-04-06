@@ -34,6 +34,7 @@
               <option value="normal">一般的一个卫星</option>
               <option value="GeoSync">印尼上空的静止同步卫星</option>
               <option value="eightSat">8字同步卫星</option>
+              <option value="eightSat2">斜8字同步卫星</option>
             </select>
           </fieldset>
         <div data-role="fieldcontain">
@@ -72,7 +73,7 @@
     </div>
 
     <div data-role="popup" id="myPopup2">
-        <p>需要专业版程序请加QQ</p> 
+        <p>微信捐助</p> 
         <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <img src="QR.png" style="width:100%;">
     </div>
@@ -122,6 +123,15 @@ function loadSat(){
     $('#iINC').val(112.228);
     $('#iAOP').val(19.6);
     $('#iRAAN').val(120.671);
+    $('#iTA').val(25.325);
+    $('#iN').val(1);
+    $('#iNPLOT').val(1000);
+  }else if(str == 'eightSat2'){
+    $('#iSMA').val(42164);
+    $('#iECC').val(0.4);
+    $('#iINC').val(50);
+    $('#iAOP').val(19.6);
+    $('#iRAAN').val(80);
     $('#iTA').val(25.325);
     $('#iN').val(1);
     $('#iNPLOT').val(1000);
