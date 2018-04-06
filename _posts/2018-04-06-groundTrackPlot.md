@@ -19,6 +19,7 @@ updated: 2018-04-04
 ---
 ## 算法
 这个算是原创算法了吧，身边没有轨道动力学和弹道导弹学的教材，都是自己瞎琢磨的算法。之前我们分析了[轨道动力学中常用的计算机算法](https://scienceasdf.github.io/programming/2017/04/07/astrodynamics1/),[轨道动力学中常用的计算机算法（二）](https://scienceasdf.github.io/programming/2017/04/14/astrodynamics2/)，这些很有用，可以让我们把轨道六根数转化为笛卡尔坐标系的坐标，以及进行轨道外推。  
+  
 星下点轨迹的具体计算过程如下：每隔时间$dt$后，外推此时的轨道六根数，并得到相应的笛卡尔坐标系坐标。然后经度
 \begin{equation}
 \lambda = \mathrm{atan2}(y,x)
@@ -38,7 +39,6 @@ r=\sqrt{x^2+y^2+z^2}
 这样$\lambda$的值域就会变化。想了挺长时间，得到这样的一种解决方法
 ```javascript
 geo.prototype.adjust = function (){
-    //this.long = (Math.cos(this.long * radPerDeg / 2) > 0)?this.long % 180.0 : (-this.long % 180.0);
     if(this.long > 180 || this.long < 180){
         var theta = this.long * radPerDeg;
         var s = Math.sin(theta);
@@ -50,5 +50,6 @@ geo.prototype.adjust = function (){
 ```
 
 ## 具体实现
-我是javascript的门外汉，把我以前写的C++代码全部移植到javascript很是费劲。不过运算速度比我想象中快多了。这里直接用的是开普勒运动的轨道外推，如果考虑摄动项那就需要用龙格库塔算法了。整个javascript的代码在[orbitState.js](https://scienceasdf.github.io/site/js/orbitState.js)，代码是可读的。  
+我是javascript的门外汉，把我以前写的C++代码全部移植到javascript很是费劲。不过运算速度比我想象中快多了。这里直接用的是开普勒运动的轨道外推，如果考虑摄动项那就需要用龙格库塔算法了。整个javascript的代码在[orbitState.js](https://scienceasdf.github.io/site/js/orbitState.js)，代码是可读的。 
+   
 UI还是以前的东西，用jQuery Mobile+ECharts做的。
