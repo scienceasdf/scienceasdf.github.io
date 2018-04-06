@@ -37,7 +37,6 @@ r=\sqrt{x^2+y^2+z^2}
 \end{equation}
 这样$\lambda$的值域就会变化。想了挺长时间，得到这样的一种解决方法</p>
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">geo</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">adjust</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(){</span>
-    <span class="c1">//this.long = (Math.cos(this.long * radPerDeg / 2) &gt; 0)?this.long % 180.0 : (-this.long % 180.0);</span>
     <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="kr">long</span> <span class="o">&gt;</span> <span class="mi">180</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="kr">long</span> <span class="o">&lt;</span> <span class="mi">180</span><span class="p">){</span>
         <span class="kd">var</span> <span class="nx">theta</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="kr">long</span> <span class="o">*</span> <span class="nx">radPerDeg</span><span class="p">;</span>
         <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">theta</span><span class="p">);</span>
