@@ -137,11 +137,12 @@ orbit.prototype.toGEO = function(){
 
 
 orbit.prototype.getGroundTrack = function (time){
-    dt = time / 6000.0;
+    var slice = Number($('#iNPLOT').val());
+    dt = time / slice;
     //var m = 0;
-    var res = new Array(6000);
-    var result = new Array(6000);
-    for(var i = 0; i < 6000; ++i){
+    var res = new Array(slice);
+    var result = new Array(slice);
+    for(var i = 0; i < slice; ++i){
         this.step( dt);
         res[i] = this.toGEO();
         var x = new Array(2);

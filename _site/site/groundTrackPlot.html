@@ -37,8 +37,10 @@
             <input type="text" name="iRAAN" id="iRAAN" data-clear-btn="true">
             <label for="iTA">真近点角(°)</label>
             <input type="text" name="iTA" id="iTA" data-clear-btn="true">
-            <label for="iN">绘图的运行周期（可以是小数）</label>
+            <label for="iN">运行周期（可以是小数）</label>
             <input type="text" name="iN" id="iN" data-clear-btn="true">
+            <label for="iNPLOT">绘图的散点数（与精度无关）</label>
+            <input type="text" name="iNPLOT" id="iNPLOT" data-clear-btn="true">
             </div>
 
             <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "plotGroundTrack()">绘制星下点轨迹</button>
@@ -67,6 +69,7 @@ $('#iAOP').val(19.6);
 $('#iRAAN').val(120.671);
 $('#iTA').val(25.325);
 $('#iN').val(1);
+$('#iNPLOT').val(1000);
 
 function plotGroundTrack(){
   var a = Number($('#iSMA').val()) * 1000.0;
