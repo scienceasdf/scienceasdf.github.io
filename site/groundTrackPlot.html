@@ -170,6 +170,9 @@ function plotGroundTrack(){
     echarts.registerMap('world', chinaJson);
     var chart = myChart;
     chart.setOption({
+      tooltip:{
+        formatter: '{a}:</br> {c0}'
+      },
       geo:{
         map:'world'
       },
@@ -179,7 +182,7 @@ function plotGroundTrack(){
         symbolSize: 3,
         type: 'scatter', // series图表类型
         coordinateSystem: 'geo', // series坐标系类型
-        data : allData
+        data : allData,
       }
 	    ]
     });
