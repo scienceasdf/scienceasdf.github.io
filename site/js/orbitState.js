@@ -143,6 +143,13 @@ orbit.prototype.getGroundTrack = function (time){
     var res = new Array(slice);
     var result = new Array(slice);
     for(var i = 0; i < slice; ++i){
+=======
+    dt = time / 1000.0;
+    //var m = 0;
+    var res = new Array(1000);
+    var result = new Array(1000);
+    for(var i = 0; i < 1000; ++i){
+>>>>>>> 32cbd5f4e2f73d3471e607054618bbbc184949bb
         this.step( dt);
         res[i] = this.toGEO();
         var x = new Array(2);
