@@ -140,18 +140,18 @@ orbit.prototype.getGroundTrack = function (time){
     var slice = Number($('#iNPLOT').val());
     dt = time / slice;
     //var m = 0;
-    var res = new Array(slice);
+    var res;
     var result = new Array(slice);
     for(var i = 0; i < slice; ++i){
         this.step( dt);
-        res[i] = this.toGEO();
+        res = this.toGEO();
         var x = new Array(2);
         //res[i].adjust();
-        res[i].long -= i * dt  * earthRot;
+        res.long -= i * dt  * earthRot;
         //m = i * dt * earthRot;
-        res[i].adjust();
-        x[0] = res[i].long;
-        x[1] = res[i].lat;
+        res.adjust();
+        x[0] = res.long;
+        x[1] = res.lat;
         result[i] = x;
     }
     //window.alert(m);
@@ -161,7 +161,7 @@ orbit.prototype.getGroundTrack = function (time){
 
 geo.prototype.adjust = function (){
     //this.long = (Math.cos(this.long * radPerDeg / 2) > 0)?this.long % 180.0 : (-this.long % 180.0);
-    if(this.long > 180 || this.long < 180){
+    if(this.long > 180 || this.long < -180){
         var theta = this.long * radPerDeg;
         var s = Math.sin(theta);
         var c = Math.cos(theta);
