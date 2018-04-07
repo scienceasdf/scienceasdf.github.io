@@ -1,0 +1,199 @@
+
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>在线解析TLE数据绘制星下点轨迹</title>
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+<script src="https://cdn.bootcss.com/satellite.js/2.0.1/satellite.min.js"></script>
+</head>
+
+
+
+<body>
+<div data-role="page">
+    <div data-role="header">
+      <a href="../index.html" data-role="button" data-icon="home" data-ajax="false">首页</a>
+      <h1>在线解析TLE数据绘制星下点轨迹</h1>
+      <a href="#myPopup" data-rel="popup" data-position-to="window" data-role="button" data-icon="info">说明</a>
+    </div>
+
+
+    <div id="pageone" data-role="main" class="ui-content">
+          <label for="areaTLE">请输入TLE2行数据<a href="https://www.celestrak.com/NORAD/elements/" data-ajax="false">TLE数据看这里</a></label>
+          <textarea name="areaTLE" id="areaTLE">
+1 26360U 00025A   18096.39571382 -.00000008  00000-0  00000+0 0  9994
+2 26360  53.1785 142.6563 0040719 110.8320  18.4280  2.00428448131214
+          </textarea>
+            
+            <label for="iNPLOT">绘图点数(无关精度)</label>
+            <input type="text" name="iNPLOT" id="iNPLOT" data-clear-btn="true">
+
+            <label for="datetime3">开始时刻</label>
+            <input type="datetime-local" data-clear-btn="false" name="datetime3" id="datetime3" value="">
+            <label for="datetime4">结束时刻</label>
+            <input type="datetime-local" data-clear-btn="false" name="datetime4" id="datetime4" value="">
+
+            <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "processTLE()">绘制星下点轨迹</button>
+
+
+      <div id="main" style="width: 100%;height:67%"></div>
+      <div data-role="popup" id="myPopup">
+          <p>说明</p> 
+          <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+          1、在电脑上显示效果更好，且Chrome浏览器还支持保存成图片，手机请横屏放置<br>
+          2、地图可能有点问题，数据来自于网上<br>
+          3、这个网页里面卫星预报的算法不是我写的，来源于开源库<a href="https://github.com/shashwatak/satellite-js" data-ajax="false">satellite-js</a>SGP$算法<br>
+          4、欢迎反馈BUG
+        </div>
+    </div>
+
+  <div data-role="footer" style="text-align:center;">
+    <a href="../groundTrackPlot.html" data-rel="popup" data-position-to="window" data-ajax="false">根据轨道六根数<br>绘制星下点轨迹</a>
+  </div>
+</div>
+</body>
+
+<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+
+
+<script type="text/javascript">
+$('#iNPLOT').val(1000);
+plotWorldMap();
+var degPerRad = 180 / 3.141592653589793;
+function clrTLE(){
+  $('#inputTLE1').val('');
+  $('#inputTLE2').val('');
+};
+
+function processTLE(){
+  var worldMapContainer = document.getElementById('main');
+  var inputStr = $('#areaTLE').val();
+  var line = inputStr.split(/[\n]/);
+
+
+  var satrec = satellite.twoline2satrec(line[0].trim(), line[1].trim());
+  var secondLineStr = line[1].split(/\s+/);
+  var T = 1440 / Number(secondLineStr[7].substr(0,10));
+  
+
+  //  Propagate satellite using time since epoch (in minutes).
+  var slices = Number($('#iNPLOT').val());
+  var allData = new Array(slices);
+  var date13 = Date.parse($('#datetime3').val());
+  var date14 = Date.parse($('#datetime4').val());
+  var ddate = (date14 - date13) / slices;
+  var totalTime = ddate * slices / 60000;
+  str = "运行时间为" + totalTime + "分钟，轨道周期为" + T + "分钟，共计" + (totalTime / T) +"个周期！";
+  window.alert(str);
+
+  for(var i = 0; i < slices; ++i){
+    var dt = Date(date13 + i * ddate);
+    var x = new Array(2);
+    var positionAndVelocity = satellite.propagate(satrec, new Date(date13 + i * ddate));
+    var positionEci = positionAndVelocity.position;
+    var gmst = satellite.gstime(new Date(date13 + i * ddate));
+    var positionGd    = satellite.eciToGeodetic(positionEci, gmst);
+    var longitude = positionGd.longitude * degPerRad;
+    var latitude  = positionGd.latitude * degPerRad;
+    x[0] = longitude;
+    x[1] = latitude;
+    allData[i] = x;
+  }
+
+  var resizeWorldMapContainer = function () {
+      worldMapContainer.style.width = window.innerWidth+'px';
+      worldMapContainer.style.height = window.innerHeight+'px';
+  };
+  resizeWorldMapContainer();
+  var myChart = echarts.init(worldMapContainer);
+  window.onresize = function () {
+    resizeWorldMapContainer();
+    myChart.resize();
+  };
+
+  $.get('../world.json', function (chinaJson) {
+    echarts.registerMap('world', chinaJson);
+    var chart = myChart;
+    chart.setOption({
+      tooltip:{
+        formatter: '{a}:</br> {c0}',
+        position: ['40%', '90%']
+      },
+      geo:{
+        map:'world'
+      },
+      series: [
+      {
+        name: '星下点轨迹', 
+        symbolSize: 3,
+        type: 'scatter', 
+        coordinateSystem: 'geo', 
+        data : allData,
+      }
+	    ]
+    });
+  });
+}
+
+function plotWorldMap(){
+  var now = new Date();
+  var day = ("0" + now.getDate()).slice(-2);
+  var month = ("0" + (now.getMonth() + 1)).slice(-2);
+  var today = now.getFullYear()+"-"+(month)+"-"+(day);
+
+  var hh = ("0" + now.getHours()).slice(-2);
+  var mm = ("0" + (now.getMinutes())).slice(-2);
+  var currentTime = (hh)+":"+(mm);
+  var str = today + "T" + currentTime;
+  $('#datetime3').val(str);
+  var date3 = $('#datetime3').val();
+  day = ("0" + (now.getDate()+1)).slice(-2);
+  today = now.getFullYear()+"-"+(month)+"-"+(day);
+  str = today + "T" + currentTime;
+  $('#datetime4').val(str);
+  var worldMapContainer = document.getElementById('main');
+  // get the window's height and width for container's resizing
+  var resizeWorldMapContainer = function () {
+      worldMapContainer.style.width = window.innerWidth+'px';
+      worldMapContainer.style.height = window.innerHeight+'px';
+  };
+  resizeWorldMapContainer();
+  var myChart = echarts.init(worldMapContainer);
+  window.onresize = function () {
+    // resize the container's width and height
+    resizeWorldMapContainer();
+    myChart.resize();
+  };
+
+  $.get('../world.json', function (chinaJson) {
+    echarts.registerMap('world', chinaJson);
+    var chart = myChart;
+    chart.setOption({
+      geo:{
+        map:'world'
+      },
+      series: [
+      {
+        name: '星下点轨迹', 
+        symbolSize: 5,
+        type: 'scatter', 
+        coordinateSystem: 'geo',
+      }
+	    ]
+    });
+  });
+}
+
+
+
+
+   </script>
+
+</html>
