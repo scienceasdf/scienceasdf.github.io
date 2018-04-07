@@ -26,7 +26,7 @@
 
 
     <div id="pageone" data-role="main" class="ui-content">
-          <label for="areaTLE">请输入TLE2行数据<a href="https://www.celestrak.com/NORAD/elements/" data-ajax="false">TLE数据看这里</a></label>
+          <label for="areaTLE">请输入TLE2行数据<a href="https://www.celestrak.com/NORAD/elements/" data-ajax="false">TLE数据看这里</a><a data-role="button" data-inline="true" onclick="tryRandom()">试试手气</a></label>
           <textarea name="areaTLE" id="areaTLE">
 1 26360U 00025A   18096.39571382 -.00000008  00000-0  00000+0 0  9994
 2 26360  53.1785 142.6563 0040719 110.8320  18.4280  2.00428448131214
@@ -52,6 +52,12 @@
           3、这个网页里面卫星预报的算法不是我写的，来源于开源库<a href="https://github.com/shashwatak/satellite-js" data-ajax="false">satellite-js</a>SGP$算法<br>
           4、欢迎反馈BUG
         </div>
+
+        <div data-role="popup" id="myPopup3">
+            <p>没有在网上找到数据</p> 
+            <a data-role="button" data-inline="true" onclick="tryRandom2()">再试一次</a>
+            <a href='#pageone' data-role="button" data-inline="true">算了，不试了</a>
+          </div>
     </div>
 
   <div data-role="footer" style="text-align:center;">
@@ -64,6 +70,53 @@
 
 
 <script type="text/javascript">
+function randomNum(minNum,maxNum){ 
+    switch(arguments.length){ 
+        case 1: 
+            return parseInt(Math.random()*minNum+1,10); 
+        break; 
+        case 2: 
+            return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
+        break; 
+            default: 
+                return 0; 
+            break; 
+    } 
+} 
+
+function tryRandom2(){
+  $( "#myPopup3" ).popup( "close" );
+  tryRandom(); 
+}
+
+function tryRandom(){
+    var rndSat = randomNum(0,42900);
+    $.ajax({ 
+      type: 'GET', 
+      url: 'https://crossorigin.me/https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?' , 
+      cache:false, 
+      dataType: "text", 
+      crossDomain: true, 
+      headers : {'Origin':'http://foo.example'}, 
+      success : function(data){ 
+        var el = document.createElement( 'html' );
+        el.innerHTML = data;
+        var p = el.getElementsByTagName( 'BODY' )[0].getElementsByTagName('PRE')[0].textContent;
+        var eachLine = p.split(/[\n]/);
+        if(eachLine[0] == 'No TLE found'){
+          $( "#myPopup3" ).popup( "open" );   
+        }else{
+          window.alert("随机得到的卫星名字是" + eachLine[0]);
+          $('#areaTLE').val(eachLine[1] + '\n' + eachLine[2]);
+          boolNotGet = false;
+        }
+      }
+    });
+}
+
+
+
+
 $('#iNPLOT').val(1000);
 plotWorldMap();
 var degPerRad = 180 / 3.141592653589793;
