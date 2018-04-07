@@ -1,4 +1,5 @@
 
+
 <!doctype html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
 <script src="https://cdn.bootcss.com/mathjs/4.0.1/math.min.js"></script>
-<script src="./js/orbitState.js"></script>
+<script src="https://cdn.bootcss.com/satellite.js/2.0.1/satellite.min.js"></script>
 </head>
 
 
@@ -21,21 +22,13 @@
     <div data-role="header">
       <a href="./index.html" data-role="button" data-icon="home" data-ajax="false">首页</a>
       <h1>在线绘制星下点轨迹</h1>
-      <a href="#myPopup" data-rel="popup" data-position-to="window" data-role="button" data-icon="info">说明</a>
+      <a href="#myPopup3" data-rel="popup" data-position-to="window" data-role="button" data-icon="info">说明</a>
     </div>
-  
+
 
     <div id="pageone" data-role="main" class="ui-content">
 
-        <fieldset data-role="fieldcontain">
-            <label for="sat">预设数据</label>
-            <select name="sat" id="sat" onchange="loadSat()">
-              <option value="normal">一般的一个卫星</option>
-              <option value="GeoSync">印尼上空的静止同步卫星</option>
-              <option value="eightSat">8字同步卫星</option>
-              <option value="eightSat2">斜8字同步卫星</option>
-            </select>
-          </fieldset>
+          <a href="#myPopup3" data-rel="popup" data-position-to="window" data-role="button" onclick="clrTLE()">直接输入TLE第二行数据</a>
         <div data-role="fieldcontain">
             <label for="iSMA">半长轴(KM)</label>
             <input type="text" name="iSMA" id="iSMA" data-clear-btn="true">
@@ -68,7 +61,7 @@
           1、坐标系是Earth Fixed坐标系<br>
           2、没有考虑J2项摄动、空气阻力、其他天体等等奇奇怪怪的摄动<br>
           3、暂时不支持抛物线与双曲线轨道<br>
-          4、地图有点问题，数据来自网上<br>
+          4、百度提供的地图没有南极，南极不显示不是我的锅<br>
           5、具体计算原理请看<a href="https://scienceasdf.github.io/programming/2018/04/06/groundTrackPlot/" data-ajax="false">博客</a><br>
           6、欢迎反馈BUG
         </div>
@@ -78,6 +71,17 @@
         <p>微信捐助</p> 
         <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
         <img src="QR.png" style="width:100%;">
+    </div>
+
+    <div data-role="popup" id="myPopup3" class="ui-content" style="min-width:250px;">
+        <div>
+          <h3>请输入TLE第二行内容</h3>
+          <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+          <label for="inutTLE">请输入TLE第二行内容，例如<br>2 37737 002.7269 077.1709 0005560 163.9692 123.1215 01.00269182022455</label>
+          <input type="text" name="inputTLE1" id="inputTLE1" >
+          <input type="text" name="inputTLE2" id="inputTLE2" >
+          <a href="#pageone" data-role="button" onclick="processTLE($('#inputTLE').val())">确定</a>
+        </div>
     </div>
 
   <div data-role="footer" style="text-align:center;">
@@ -90,14 +94,35 @@
 
 
 <script type="text/javascript">
-$('#iSMA').val('8576');
-$('#iECC').val(0.241);
-$('#iINC').val(112.228);
-$('#iAOP').val(19.6);
-$('#iRAAN').val(120.671);
-$('#iTA').val(25.325);
-$('#iN').val(1);
-$('#iNPLOT').val(1000);
+var degPerRad = 180.0 / 3.141592653589793;
+
+line1 = '1 22314U 93003B   18096.58194747 -.00000300  00000-0  00000-0 0  9990';
+line2 = '2 22314  14.0920  21.3467 0007453 330.1321   7.0046  1.00270887 92422';
+
+var satrec = satellite.twoline2satrec(line1, line2);
+
+//  Propagate satellite using time since epoch (in minutes).
+//var positionAndVelocity = satellite.sgp4(satrec, timeSinceTleEpochMinutes);
+var positionAndVelocity = satellite.propagate(satrec, new Date());
+
+var positionEci = positionAndVelocity.position,
+    velocityEci = positionAndVelocity.velocity;
+
+
+var gmst = satellite.gstime(new Date());
+
+// You can get ECF, Geodetic, Look Angles, and Doppler Factor.
+var positionGd    = satellite.eciToGeodetic(positionEci, gmst);
+
+
+var longitude = positionGd.longitude * degPerRad;
+var latitude  = positionGd.latitude * degPerRad;
+var height    = positionGd.height;
+
+
+function clrTLE(){
+  $('#inputTLE').val('');
+}
 
 function loadSat(){
   var str = document.getElementById("sat").value;
@@ -166,7 +191,7 @@ function plotGroundTrack(){
     myChart.resize();
   };
 
-  $.get('world.json', function (chinaJson) {
+  $.get('../world.json', function (chinaJson) {
     echarts.registerMap('world', chinaJson);
     var chart = myChart;
     chart.setOption({
@@ -212,7 +237,7 @@ function plotWorldMap(){
     myChart.resize();
   };
 
-  $.get('world.json', function (chinaJson) {
+  $.get('../world.json', function (chinaJson) {
     echarts.registerMap('world', chinaJson);
     var chart = myChart;
     chart.setOption({
@@ -225,7 +250,7 @@ function plotWorldMap(){
         symbolSize: 5,
         type: 'scatter', // series图表类型
         coordinateSystem: 'geo', // series坐标系类型
-        //data : [[0,0],[90,0],[45,45],[180,0],[-45,-45],[200,0]]
+        data : [[longitude,latitude]] //[[0,0],[90,0],[45,45],[180,0],[-45,-45],[200,0]]
       }
 	    ]
     });
