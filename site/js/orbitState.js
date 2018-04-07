@@ -170,5 +170,24 @@ geo.prototype.adjust = function (){
     }
 };
 
+function processTLE(strTLE){
+    arr = strTLE.split(/\s+/);
+    if(arr[0] != '2'){
+        window.alert("请输入TLE第二行数据!");
+    }
+    else{
+        var T = 86400 / Number(arr[7]);
+        var a = Math.pow(mu * T * T / 4.0 / pi / pi, 1.0 / 3.0);
+        $('#iSMA').val(a / 1000.0);
+        $('#iECC').val('0.' + arr[4]);
+        $('#iINC').val(arr[2]);
+        $('#iAOP').val(arr[5]);
+        $('#iRAAN').val(arr[3]);
+        var ecc = Number('0.' + arr[4]);
+        var ma = Number(arr[6]);
+        var ta = MA2TA(ma * radPerDeg, ecc) * degPerRad;
+        $('#iTA').val(ta);
+    }
+}
 
 

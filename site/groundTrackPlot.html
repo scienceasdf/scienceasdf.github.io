@@ -22,9 +22,9 @@
     <div data-role="header">
       <a href="./index.html" data-role="button" data-icon="home" data-ajax="false">首页</a>
       <h1>在线绘制星下点轨迹</h1>
-      <a href="#myPopup" data-rel="popup" data-position-to="window" data-role="button" data-icon="info">说明</a>
+      <a href="#myPopup3" data-rel="popup" data-position-to="window" data-role="button" data-icon="info">说明</a>
     </div>
-  
+
 
     <div id="pageone" data-role="main" class="ui-content">
 
@@ -37,6 +37,7 @@
               <option value="eightSat2">斜8字同步卫星</option>
             </select>
           </fieldset>
+          <a href="#myPopup3" data-rel="popup" data-position-to="window" data-role="button" onclick="clrTLE()">直接输入TLE第二行数据</a>
         <div data-role="fieldcontain">
             <label for="iSMA">半长轴(KM)</label>
             <input type="text" name="iSMA" id="iSMA" data-clear-btn="true">
@@ -81,6 +82,16 @@
         <img src="QR.png" style="width:100%;">
     </div>
 
+    <div data-role="popup" id="myPopup3" class="ui-content" style="min-width:250px;">
+        <div>
+          <h3>请输入TLE第二行内容</h3>
+          <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+          <label for="inutTLE">请输入TLE第二行内容，例如<br>2 37737 002.7269 077.1709 0005560 163.9692 123.1215 01.00269182022455</label>
+          <input type="text" name="inputTLE" id="inputTLE" >
+          <a href="#pageone" data-role="button" onclick="processTLE($('#inputTLE').val())">确定</a>
+        </div>
+    </div>
+
   <div data-role="footer" style="text-align:center;">
     <a href="#myPopup2" data-rel="popup" data-position-to="window">接受捐助，打赏点这里</a>
   </div>
@@ -99,6 +110,10 @@ $('#iRAAN').val(120.671);
 $('#iTA').val(25.325);
 $('#iN').val(1);
 $('#iNPLOT').val(1000);
+
+function clrTLE(){
+  $('#inputTLE').val('');
+}
 
 function loadSat(){
   var str = document.getElementById("sat").value;
