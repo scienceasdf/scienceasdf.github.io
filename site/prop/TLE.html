@@ -30,19 +30,7 @@
 
           <a href="#myPopup3" data-rel="popup" data-position-to="window" data-role="button" onclick="clrTLE()">直接输入TLE第二行数据</a>
         <div data-role="fieldcontain">
-            <label for="iSMA">半长轴(KM)</label>
-            <input type="text" name="iSMA" id="iSMA" data-clear-btn="true">
-            <label for="ECC">离心率</label>
-            <input type="text" name="iECC" id="iECC" data-clear-btn="true">
-            <label for="iINC">轨道倾角(°)</label>
-            <input type="text" name="iINC" id="iINC" data-clear-btn="true">
-            <label for="iAOP">近地点角距(°)</label>
-            <input type="text" name="iAOP" id="iAOP" data-clear-btn="true">
-            <label for="iRAAN">升交点赤经(°)</label>
-            <input type="text" name="iRAAN" id="iRAAN" data-clear-btn="true">
-            <label for="iTA">真近点角(°)</label>
-            <input type="text" name="iTA" id="iTA" data-clear-btn="true">
-            <label for="iN">运行周期（可以是小数）</label>
+            <label for="iN">从现在起运行周期（可以是小数，负数）</label>
             <input type="text" name="iN" id="iN" data-clear-btn="true">
             </div>
 
@@ -77,10 +65,10 @@
         <div>
           <h3>请输入TLE第二行内容</h3>
           <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-          <label for="inutTLE">请输入TLE第二行内容，例如<br>2 37737 002.7269 077.1709 0005560 163.9692 123.1215 01.00269182022455</label>
+          <label for="inutTLE">请输入TLE两行内容，例如<br>1 22314U 93003B   18096.58194747 -.00000300  00000-0  00000-0 0  9990<br>2 22314  14.0920  21.3467 0007453 330.1321   7.0046  1.00270887 92422</label>
           <input type="text" name="inputTLE1" id="inputTLE1" >
           <input type="text" name="inputTLE2" id="inputTLE2" >
-          <a href="#pageone" data-role="button" onclick="processTLE($('#inputTLE').val())">确定</a>
+          <a href="#pageone" data-role="button" onclick="processTLE($('#inputTLE1').val(),$('#inputTLE2'))">确定</a>
         </div>
     </div>
 
@@ -121,7 +109,8 @@ var height    = positionGd.height;
 
 
 function clrTLE(){
-  $('#inputTLE').val('');
+  $('#inputTLE1').val('');
+  $('#inputTLE2').val('');
 }
 
 function loadSat(){
