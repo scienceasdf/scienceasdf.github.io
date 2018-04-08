@@ -12,6 +12,8 @@
 <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
 <script src="https://cdn.bootcss.com/satellite.js/2.0.1/satellite.min.js"></script>
+<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+<script src="../js/echarts-gl.min.js"></script>
 </head>
 
 
@@ -66,7 +68,6 @@
 </div>
 </body>
 
-<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
 
 
 <script type="text/javascript">
@@ -187,7 +188,7 @@ function processTLE(){
       {
         name: '星下点轨迹', 
         symbolSize: 3,
-        type: 'scatter', 
+        type: 'scatterGL', 
         coordinateSystem: 'geo', 
         data : allData,
       }
