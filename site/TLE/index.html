@@ -49,7 +49,7 @@
           <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
           1、在电脑上显示效果更好，且Chrome浏览器还支持保存成图片，手机请横屏放置<br>
           2、地图可能有点问题，数据来自于网上<br>
-          3、这个网页里面卫星预报的算法不是我写的，来源于开源库<a href="https://github.com/shashwatak/satellite-js" data-ajax="false">satellite-js</a>SGP$算法<br>
+          3、这个网页里面卫星预报的算法不是我写的，来源于开源库<a href="https://github.com/shashwatak/satellite-js" data-ajax="false">satellite-js</a>SGP4算法<br>
           4、欢迎反馈BUG
         </div>
 
@@ -106,7 +106,8 @@ function tryRandom(){
         if(eachLine[0] == 'No TLE found'){
           $( "#myPopup3" ).popup( "open" );   
         }else{
-          window.alert("随机得到的卫星名字是" + eachLine[0]);
+          var titleStr = eachLine[0].replace(/[\s]deb/ig, "的碎片");
+          window.alert("随机得到的卫星名字是" + titleStr);
           $('#areaTLE').val(eachLine[1] + '\n' + eachLine[2]);
           boolNotGet = false;
         }
