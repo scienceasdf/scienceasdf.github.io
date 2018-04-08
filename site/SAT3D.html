@@ -57,7 +57,7 @@
             <input type="text" name="iNPLOT" id="iNPLOT" data-clear-btn="true">
 
 
-            <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "plotGroundTrack()">绘制星下点轨迹</button>
+            <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "plotGroundTrack()">绘制卫星空间轨迹</button>
 
 
       <div id="main" style="width: 100%;height:67%"></div>
@@ -172,6 +172,7 @@ function plotGroundTrack(){
   myChart.setOption({
       backgroundColor: '#000',
     globe: {
+      globeRadius: 15,
         baseTexture: "world.topo.bathy.200401.jpg",
         heightTexture: "world.topo.bathy.200401.jpg",
         displacementScale: 0.04,
@@ -194,17 +195,39 @@ function plotGroundTrack(){
             }
         }
     },
-    series: {
+    series: [{
             type: 'scatter3D',
             coordinateSystem: 'globe',
             blendMode: 'lighter',
             symbolSize: 2,
             itemStyle: {
-                color: 'rgb(250, 50, 150)',
+                color: 'rgb(250, 50, 50)',
                 opacity: 1
             },
             data: allData
-        }
+        },
+        {
+            type: 'scatter3D',
+            coordinateSystem: 'globe',
+            blendMode: 'lighter',
+            symbolSize: 2,
+            itemStyle: {
+                color: 'rgb(250, 50, 50)',
+                opacity: 1
+            },
+            data: [0,0,135]
+        },
+        {
+            type: 'scatter3D',
+            coordinateSystem: 'globe',
+            blendMode: 'lighter',
+            symbolSize: 2,
+            itemStyle: {
+                color: 'rgb(250, 50, 50)',
+                opacity: 1
+            },
+            data: [[0,0,0]]
+        }]
     });
 }
 </script>
@@ -233,6 +256,7 @@ function plotWorldMap(){
   myChart.setOption({
       backgroundColor: '#000',
     globe: {
+      globeRadius: 15,
         baseTexture: "world.topo.bathy.200401.jpg",
         heightTexture: "world.topo.bathy.200401.jpg",
         displacementScale: 0.04,

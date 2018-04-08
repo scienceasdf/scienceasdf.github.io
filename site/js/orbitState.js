@@ -133,6 +133,7 @@ orbit.prototype.toGEO = function(){
     var long = Math.atan2(y,x) * degPerRad;
     var lat = Math.asin(z / l) * degPerRad;
     var height = l - 6378100;
+    //window.alert(height);
     var res = new geo(long,lat,height); 
     return res;
 };
@@ -176,7 +177,7 @@ orbit.prototype.orbit3d = function (time){
         res.adjust();
         x[0] = res.long;
         x[1] = res.lat;
-        x[2] = res.height / 1000;
+        x[2] = res.height / 1000 / (6378.1 / 15);
         result[i] = x;
     }
     //window.alert(m);
