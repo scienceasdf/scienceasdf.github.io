@@ -51,6 +51,55 @@ r=\sqrt{x^2+y^2+z^2}
 <p>我是javascript的门外汉，把我以前写的C++代码全部移植到javascript很是费劲。不过运算速度比我想象中快多了。这里直接用的是开普勒运动的轨道外推，如果考虑摄动项那就需要用龙格库塔算法了。整个javascript的代码在<a href="https://scienceasdf.github.io/site/js/orbitState.js">orbitState.js</a>，代码是可读的。</p>
 
 <p>UI还是以前的东西，用jQuery Mobile+ECharts做的。最后，绘图的连接在<a href="https://scienceasdf.github.io/site/groundTrackPlot.html">这里</a>。</p>
+
+<hr />
+<h2 id="更新2018-4-8">更新（2018-4-8）</h2>
+<p>另外自己还做了一个<a href="https://scienceasdf.github.io/site/TLE/index.html">在线解析TLE数据绘制星下点轨迹的网页</a>，这个的算法就不是我写的了，而是用的开源的<a href="https://github.com/shashwatak/satellite-js">satellite.js</a>的SGP4算法，他的代码也写得非常好。网页里面还有试一试功能，就是在NORAD的网站里面按编号随机抓取一个TLE数据，不过再度遇到了跨域访问的问题，这一次的解决方法则是protocol:</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span> 
+  <span class="na">type</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span> 
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://crossorigin.me/https://celestrak.com/cgi-bin/TLE.pl?CATNR='</span> <span class="o">+</span> <span class="nx">rndSat</span> <span class="o">+</span> <span class="s1">'&amp;callback=?'</span> <span class="p">,</span> 
+  <span class="na">cache</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span> 
+  <span class="na">dataType</span><span class="p">:</span> <span class="s2">"text"</span><span class="p">,</span> 
+  <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> 
+  <span class="na">headers</span> <span class="p">:</span> <span class="p">{</span><span class="s1">'Origin'</span><span class="p">:</span><span class="s1">'http://foo.example'</span><span class="p">},</span> 
+  <span class="na">success</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span> 
+    <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span> <span class="s1">'html'</span> <span class="p">);</span>
+    <span class="nx">el</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span> <span class="s1">'BODY'</span> <span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'PRE'</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">textContent</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">eachLine</span> <span class="o">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="sr">/</span><span class="se">[\n]</span><span class="sr">/</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">eachLine</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'No TLE found'</span><span class="p">){</span>
+      <span class="nx">$</span><span class="p">(</span> <span class="s2">"#myPopup3"</span> <span class="p">).</span><span class="nx">popup</span><span class="p">(</span> <span class="s2">"open"</span> <span class="p">);</span>   
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">titleStr</span> <span class="o">=</span> <span class="nx">eachLine</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">[\s]</span><span class="sr">deb/ig</span><span class="p">,</span> <span class="s2">"的碎片"</span><span class="p">);</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s2">"随机得到的卫星名字是"</span> <span class="o">+</span> <span class="nx">titleStr</span><span class="p">);</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">'#areaTLE'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">eachLine</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'</span><span class="err">\</span><span class="s1">n'</span> <span class="o">+</span> <span class="nx">eachLine</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+      <span class="nx">boolNotGet</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+<p>没错，通过一个crossorigin.me的网站来抓数据，这样就可以实现跨域访问了。但是需要注意的是一定要加上Origin的访问头，否则得不到数据。</p>
+
+<h2 id="航天类开源代码一览">航天类开源代码一览</h2>
+<ul>
+  <li><a href="https://sourceforge.net/projects/gmat/">GMAT</a>：这个是对我帮助最大的一个软件，C++的代码，软件设计非常好，无论是数学类算法还是从软件工程上说大量设计模式的运用，能够在一定程度上取代STK，不过遗憾的是GUI是用wxWidgets写的，如果是Qt就好了；</li>
+  <li><a href="https://github.com/shashwatak/satellite-js">satellite.js</a>：就是我网页里用到的开源代码，写得也很好，可以实现在网页中的计算（如果结合three.js这些3D渲染框架，在网页上还能进行动画演示）；</li>
+  <li><a href="http://www.celestrak.com/publications/AIAA/2006-6753/">Vallado的代码</a>：这个Vallodo是天体动力学的祖师级大神，他的代码我虽然没有看过，但是他的代码和学术出版都是对我有很大帮助的，satellite.js的代码就是参考了Vallado的代码的；</li>
+</ul>
+
+<p>下面的这些我不太了解了，仅供参考：</p>
+<ul>
+  <li><a href="http://previsat.sourceforge.net/">PreviSat</a>：还在更新，C++写的，Qt做GUI；</li>
+  <li><a href="http://www.gano.name/shawn/JSatTrak/">JSatTrak</a>：Java写的，更新很慢；</li>
+  <li><a href="http://jat.sourceforge.net/">JAT</a>：Java写的，没更新了；</li>
+  <li><a href="http://odtbx.sourceforge.net/">ODTBX</a>：Java写的，更新很慢；</li>
+  <li><a href="https://www.orekit.org/">Orekit</a>：Java写的，更新很慢；</li>
+  <li><a href="rhodesmill.org/pyephem/">PyEphem</a>：Python库，很久没更新了；</li>
+  <li><a href="https://pypi.python.org/pypi/sgp4/">SGP4</a>：Python库，很久没更新了</li>
+</ul>
+
+<p>这些开源的不知道为什么有不少托管在SourceForge上面，按理说GitHub生态更好啊。不更新也可以理解，毕竟航天这个东西生态圈太小了。<br />
+另外再给两个在网页上渲染轨道运行的网页的例子，托管在GitHub上的：<a href="https://github.com/koansys/isat">SOT</a>    <a href="https://github.com/daoneil/spacemission">spacemission</a></p>
 ]]></content>
       <categories>
         
