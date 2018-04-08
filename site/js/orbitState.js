@@ -19,9 +19,10 @@ var RV = function(r,v){
     this.v = v;
 };
 
-var geo = function(long,lat){
+var geo = function(long,lat,height){
     this.long = long;
     this.lat = lat;
+    this.height = height;
 };
 
 function EA2TA(EA, ecc)
@@ -131,7 +132,8 @@ orbit.prototype.toGEO = function(){
     var l = math.norm(r);
     var long = Math.atan2(y,x) * degPerRad;
     var lat = Math.asin(z / l) * degPerRad;
-    var res = new geo(long,lat); 
+    var height = l - 6378100;
+    var res = new geo(long,lat,height); 
     return res;
 };
 
@@ -152,6 +154,29 @@ orbit.prototype.getGroundTrack = function (time){
         res.adjust();
         x[0] = res.long;
         x[1] = res.lat;
+        result[i] = x;
+    }
+    //window.alert(m);
+    return result;
+};
+
+orbit.prototype.orbit3d = function (time){
+    var slice = Number($('#iNPLOT').val());
+    dt = time / slice;
+    //var m = 0;
+    var res;
+    var result = new Array(slice);
+    for(var i = 0; i < slice; ++i){
+        this.step( dt);
+        res = this.toGEO();
+        var x = new Array(3);
+        //res[i].adjust();
+        res.long -= i * dt  * earthRot;
+        //m = i * dt * earthRot;
+        res.adjust();
+        x[0] = res.long;
+        x[1] = res.lat;
+        x[3] = res.height / 1000;
         result[i] = x;
     }
     //window.alert(m);

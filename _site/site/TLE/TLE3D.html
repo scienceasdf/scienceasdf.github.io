@@ -150,15 +150,17 @@ function processTLE(){
 
   for(var i = 0; i < slices; ++i){
     var dt = Date(date13 + i * ddate);
-    var x = new Array(2);
+    var x = new Array(3);
     var positionAndVelocity = satellite.propagate(satrec, new Date(date13 + i * ddate));
     var positionEci = positionAndVelocity.position;
     var gmst = satellite.gstime(new Date(date13 + i * ddate));
     var positionGd    = satellite.eciToGeodetic(positionEci, gmst);
     var longitude = positionGd.longitude * degPerRad;
     var latitude  = positionGd.latitude * degPerRad;
+    var height    = positionGd.height;
     x[0] = longitude;
     x[1] = latitude;
+    x[2] = height / 1000;
     allData[i] = x;
   }
 
@@ -173,29 +175,46 @@ function processTLE(){
     myChart.resize();
   };
 
-  $.get('../world.json', function (chinaJson) {
-    echarts.registerMap('world', chinaJson);
-    var chart = myChart;
-    chart.setOption({
-      tooltip:{
-        formatter: '{a}:</br> {c0}',
-        position: ['40%', '90%']
-      },
-      geo:{
-        map:'world'
-      },
-      series: [
-      {
-        name: '星下点轨迹', 
-        symbolSize: 3,
-        type: 'scatterGL', 
-        coordinateSystem: 'geo', 
-        data : allData,
-      }
-	    ]
+
+    myChart.setOption({
+      backgroundColor: '#000',
+    globe: {
+        baseTexture: "world.topo.bathy.200401.jpg",
+        heightTexture: "world.topo.bathy.200401.jpg",
+        displacementScale: 0.04,
+        shading: 'realistic',
+        environment: 'starfield.jpg',
+        realisticMaterial: {
+            roughness: 0.9
+        },
+        postEffect: {
+            enable: true
+        },
+        light: {
+            main: {
+                intensity: 5,
+                shadow: true
+            },
+            ambientCubemap: {
+                texture: 'pisa.hdr',
+                diffuseIntensity: 0.2
+            }
+        }
+    },
+    series: {
+            type: 'scatter3D',
+            coordinateSystem: 'globe',
+            blendMode: 'lighter',
+            symbolSize: 2,
+            itemStyle: {
+                color: 'rgb(50, 50, 150)',
+                opacity: 1
+            },
+            data: allData
+        }
     });
-  });
-}
+};
+
 
 function plotWorldMap(){
   var now = new Date();
@@ -227,23 +246,32 @@ function plotWorldMap(){
     myChart.resize();
   };
 
-  $.get('../world.json', function (chinaJson) {
-    echarts.registerMap('world', chinaJson);
-    var chart = myChart;
-    chart.setOption({
-      geo:{
-        map:'world'
-      },
-      series: [
-      {
-        name: '星下点轨迹', 
-        symbolSize: 5,
-        type: 'scatter', 
-        coordinateSystem: 'geo',
-      }
-	    ]
+    myChart.setOption({
+      backgroundColor: '#000',
+    globe: {
+        baseTexture: "world.topo.bathy.200401.jpg",
+        heightTexture: "world.topo.bathy.200401.jpg",
+        displacementScale: 0.04,
+        shading: 'realistic',
+        environment: 'starfield.jpg',
+        realisticMaterial: {
+            roughness: 0.9
+        },
+        postEffect: {
+            enable: true
+        },
+        light: {
+            main: {
+                intensity: 5,
+                shadow: true
+            },
+            ambientCubemap: {
+                texture: 'pisa.hdr',
+                diffuseIntensity: 0.2
+            }
+        }
+    },
     });
-  });
 }
 
 
