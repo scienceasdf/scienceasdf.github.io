@@ -12,6 +12,8 @@
 <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
 <script src="https://cdn.bootcss.com/mathjs/4.0.1/math.min.js"></script>
 <script src="./js/orbitState.js"></script>
+<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+<script src="./js/echarts-gl.min.js"></script>
 </head>
 
 
@@ -71,6 +73,9 @@
           4、地图可能有点问题，数据来自网上<br>
           5、具体计算原理请看<a href="https://scienceasdf.github.io/programming/2018/04/06/groundTrackPlot/" data-ajax="false">博客</a><br>
           6、欢迎反馈BUG
+          <a href="./SAT3D.html"data-role="button" data-ajax="false">根据轨道六根数绘制卫星空间轨迹</a>
+          <a href="./TLE/index.html"data-role="button" data-ajax="false">根据TLE数据绘制星下点轨迹</a>
+          <a href="./TLE/TLE3D.html"data-role="button" data-ajax="false">根据TLE数据绘制卫星空间轨迹</a>
         </div>
     </div>
 
@@ -82,12 +87,11 @@
 
   <div data-role="footer" style="text-align:center;">
     <a href="#myPopup2" data-rel="popup" data-position-to="window">接受捐助，打赏点这里</a><br>
-    <a href="./TLE/index.html"data-position-to="window" data-ajax="false">根据TLE数据绘制星下点轨迹</a>
   </div>
 </div>
 </body>
 
-<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+
 
 
 <script type="text/javascript">
@@ -182,7 +186,7 @@ function plotGroundTrack(){
       {
         name: '星下点轨迹', // series名称
         symbolSize: 3,
-        type: 'scatter', // series图表类型
+        type: 'scatterGL', // series图表类型
         coordinateSystem: 'geo', // series坐标系类型
         data : allData,
       }

@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>在线解析TLE数据绘制星下点轨迹</title>
+  <title>在线解析TLE数据绘制卫星空间轨迹</title>
 <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
 <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
@@ -22,7 +22,7 @@
 <div data-role="page">
     <div data-role="header">
       <a href="../index.html" data-role="button" data-icon="home" data-ajax="false">首页</a>
-      <h1>在线解析TLE数据绘制星下点轨迹</h1>
+      <h1>在线解析TLE数据绘制卫星空间轨迹</h1>
       <a href="#myPopup" data-rel="popup" data-position-to="window" data-role="button" data-icon="info">说明</a>
     </div>
 
@@ -42,7 +42,7 @@
             <label for="datetime4">结束时刻</label>
             <input type="datetime-local" data-clear-btn="false" name="datetime4" id="datetime4" value="">
 
-            <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "processTLE()">绘制星下点轨迹</button>
+            <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "processTLE()">绘制立体轨迹</button>
 
 
       <div id="main" style="width: 100%;height:67%"></div>
@@ -53,6 +53,9 @@
           2、地图可能有点问题，数据来自于网上<br>
           3、这个网页里面卫星预报的算法不是我写的，来源于开源库<a href="https://github.com/shashwatak/satellite-js" data-ajax="false">satellite-js</a>SGP4算法<br>
           4、欢迎反馈BUG
+          <a href="./index.html"data-role="button" data-ajax="false">根据TLE数据绘制星下点轨迹</a>
+          <a href="../groundTrackPlot.html"data-role="button" data-ajax="false">根据轨道六根数绘制星下点轨迹</a>
+          <a href="../SAT3D.html"data-role="button" data-ajax="false">根据轨道六根数绘制卫星空间轨迹</a>
         </div>
 
         <div data-role="popup" id="myPopup3">
@@ -63,7 +66,6 @@
     </div>
 
   <div data-role="footer" style="text-align:center;">
-    <a href="../groundTrackPlot.html" data-rel="popup" data-position-to="window" data-ajax="false">根据轨道六根数绘制星下点轨迹</a>
   </div>
 </div>
 </body>
@@ -161,6 +163,7 @@ function processTLE(){
     x[0] = longitude;
     x[1] = latitude;
     x[2] = height / 1000;
+    //window.alert(x[2]);
     allData[i] = x;
   }
 
@@ -207,7 +210,7 @@ function processTLE(){
             blendMode: 'lighter',
             symbolSize: 2,
             itemStyle: {
-                color: 'rgb(50, 50, 150)',
+                color: 'rgb(250, 50, 150)',
                 opacity: 1
             },
             data: allData

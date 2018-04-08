@@ -6,21 +6,21 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>在线绘制星下点轨迹</title>
+  <title>在线绘制卫星空间轨迹</title>
 <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
 <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
 <script src="https://cdn.bootcss.com/mathjs/4.0.1/math.min.js"></script>
 <script src="./js/orbitState.js"></script>
+<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+<script src="./js/echarts-gl.min.js"></script>
 </head>
-
-
 
 <body>
 <div data-role="page">
     <div data-role="header">
       <a href="./index.html" data-role="button" data-icon="home" data-ajax="false">首页</a>
-      <h1>在线绘制星下点轨迹</h1>
+      <h1>在线绘制卫星空间轨迹</h1>
       <a href="#myPopup" data-rel="popup" data-position-to="window" data-role="button" data-icon="info">说明</a>
     </div>
   
@@ -64,14 +64,18 @@
       <div data-role="popup" id="myPopup">
           <p>说明</p> 
           <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-          0、在电脑上显示效果更好，且Chrome浏览器还支持保存成图片，手机请横屏放置<br>
+          0、在某些设备和某些浏览器上不会显示时，请换设备或者换浏览器<br>
           1、坐标系是Earth Fixed坐标系<br>
           2、没有考虑J2项摄动、空气阻力、其他天体等等奇奇怪怪的摄动<br>
           3、暂时不支持抛物线与双曲线轨道<br>
           4、地图可能有点问题，数据来自网上<br>
           5、具体计算原理请看<a href="https://scienceasdf.github.io/programming/2018/04/06/groundTrackPlot/" data-ajax="false">博客</a><br>
           6、欢迎反馈BUG
+          <a href="./groundTrackPlot.html"data-role="button" data-ajax="false">根据轨道六根数绘制星下点轨迹</a>
+          <a href="./TLE/index.html"data-role="button" data-ajax="false">根据TLE数据绘制星下点轨迹</a>
+          <a href="./TLE/TLE3D.html"data-role="button" data-ajax="false">根据TLE数据绘制卫星空间轨迹</a>
         </div>
+        
     </div>
 
     <div data-role="popup" id="myPopup2">
@@ -82,12 +86,10 @@
 
   <div data-role="footer" style="text-align:center;">
     <a href="#myPopup2" data-rel="popup" data-position-to="window">接受捐助，打赏点这里</a><br>
-    <a href="./TLE/index.html"data-position-to="window" data-ajax="false">根据TLE数据绘制星下点轨迹</a>
   </div>
 </div>
 </body>
 
-<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
 
 
 <script type="text/javascript">
@@ -152,7 +154,7 @@ function plotGroundTrack(){
                      Number($('#iTA').val()) * radPerDeg);
   var worldMapContainer = document.getElementById('main');
 
-  var allData = orbit1.getGroundTrack(time);
+  var allData = orbit1.orbit3d(time);
   
   //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
   var resizeWorldMapContainer = function () {
@@ -167,28 +169,43 @@ function plotGroundTrack(){
     myChart.resize();
   };
 
-  $.get('world.json', function (chinaJson) {
-    echarts.registerMap('world', chinaJson);
-    var chart = myChart;
-    chart.setOption({
-      tooltip:{
-        formatter: '{a}:</br> {c0}',
-        position: ['40%', '90%']
-      },
-      geo:{
-        map:'world'
-      },
-      series: [
-      {
-        name: '星下点轨迹', // series名称
-        symbolSize: 3,
-        type: 'scatter', // series图表类型
-        coordinateSystem: 'geo', // series坐标系类型
-        data : allData,
-      }
-	    ]
+  myChart.setOption({
+      backgroundColor: '#000',
+    globe: {
+        baseTexture: "world.topo.bathy.200401.jpg",
+        heightTexture: "world.topo.bathy.200401.jpg",
+        displacementScale: 0.04,
+        shading: 'realistic',
+        environment: 'starfield.jpg',
+        realisticMaterial: {
+            roughness: 0.9
+        },
+        postEffect: {
+            enable: true
+        },
+        light: {
+            main: {
+                intensity: 5,
+                shadow: true
+            },
+            ambientCubemap: {
+                texture: 'pisa.hdr',
+                diffuseIntensity: 0.2
+            }
+        }
+    },
+    series: {
+            type: 'scatter3D',
+            coordinateSystem: 'globe',
+            blendMode: 'lighter',
+            symbolSize: 2,
+            itemStyle: {
+                color: 'rgb(250, 50, 150)',
+                opacity: 1
+            },
+            data: allData
+        }
     });
-  });
 }
 </script>
 
@@ -213,24 +230,32 @@ function plotWorldMap(){
     myChart.resize();
   };
 
-  $.get('world.json', function (chinaJson) {
-    echarts.registerMap('world', chinaJson);
-    var chart = myChart;
-    chart.setOption({
-      geo:{
-        map:'world'
-      },
-      series: [
-      {
-        name: '星下点轨迹', // series名称
-        symbolSize: 5,
-        type: 'scatter', // series图表类型
-        coordinateSystem: 'geo', // series坐标系类型
-        //data : [[0,0],[90,0],[45,45],[180,0],[-45,-45],[200,0]]
-      }
-	    ]
+  myChart.setOption({
+      backgroundColor: '#000',
+    globe: {
+        baseTexture: "world.topo.bathy.200401.jpg",
+        heightTexture: "world.topo.bathy.200401.jpg",
+        displacementScale: 0.04,
+        shading: 'realistic',
+        environment: 'starfield.jpg',
+        realisticMaterial: {
+            roughness: 0.9
+        },
+        postEffect: {
+            enable: true
+        },
+        light: {
+            main: {
+                intensity: 5,
+                shadow: true
+            },
+            ambientCubemap: {
+                texture: 'pisa.hdr',
+                diffuseIntensity: 0.2
+            }
+        }
+    },
     });
-  });
 }
   //myChart.setOption(option);
 

@@ -176,7 +176,7 @@ orbit.prototype.orbit3d = function (time){
         res.adjust();
         x[0] = res.long;
         x[1] = res.lat;
-        x[3] = res.height / 1000;
+        x[2] = res.height / 1000;
         result[i] = x;
     }
     //window.alert(m);
