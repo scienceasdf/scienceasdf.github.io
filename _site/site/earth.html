@@ -1,0 +1,109 @@
+
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>地球仪</title>
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+<script src="https://cdn.bootcss.com/satellite.js/2.0.1/satellite.min.js"></script>
+<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+<script src="./js/echarts-gl.min.js"></script>
+</head>
+
+<body><div id="main" style="width: 100%;height:67%"></div></body>
+
+<script type="text/javascript">
+    plotWorldMap();
+    function plotWorldMap(){
+
+    var worldMapContainer = document.getElementById('main');
+
+    var resizeWorldMapContainer = function () {
+        worldMapContainer.style.width = window.innerWidth+'px';
+        worldMapContainer.style.height = window.innerHeight+'px';
+    };
+    resizeWorldMapContainer();
+    var myChart = echarts.init(worldMapContainer);
+    window.onresize = function () {
+      resizeWorldMapContainer();
+      myChart.resize();
+    };
+    
+    $.get('world.json', function (chinaJson) {
+        echarts.registerMap('world', chinaJson);
+        var canvas = document.createElement('canvas');
+        var mapChart = echarts.init(canvas, null, {
+            width: 2048,
+            height: 1024
+        });
+        mapChart.setOption({
+            backgroundColor: 'rgb(250, 50, 50)',
+            geo: {
+                type: 'map',
+                map: 'world',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                boundingCoords: [[-180, 90], [180, -90]],
+                // silent: true,
+                itemStyle: {
+                    normal: {
+                        borderColor: '#000'
+                    }
+                },
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 40
+                        }
+                    }
+                }
+            }
+        });
+        option = {
+            globe: {
+                environment: 'starfield.jpg',
+                baseTexture: 'world.topo.bathy.200401.jpg',
+                heightTexture: './TLE/elev_bump.jpg',
+                displacementScale: 0.0,
+                shading: 'lambert',
+                light: {
+                    ambient: {
+                        intensity: 0
+                    },
+                    main: {
+                        intensity: 1,
+                        shadow: true
+                    },
+                    ambientCubemap: {
+                        texture: './pisa.hdr',
+                        exposure: 1,
+                        diffuseIntensity: 0.2
+                    }
+                },
+                viewControl: {
+                    autoRotate: true
+                },
+                layers: [{
+                        type: 'blending',
+                        blendTo: 'lambert',
+                        texture: mapChart,
+                    }]
+            },
+            series: []
+        };
+        myChart.setOption(option);
+    });
+};
+    
+       </script>
+    
+    </html>
