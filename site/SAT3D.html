@@ -93,6 +93,39 @@
 
 
 <script type="text/javascript">
+var globeOptions = {
+          globeRadius:15,
+                    baseTexture: "world.topo.bathy.200401.jpg",
+        heightTexture: "world.topo.bathy.200401.jpg",
+
+
+                    displacementScale: 0.04,
+                    displacementQuality: 'low',
+
+                    shading: 'lambert',
+        light: {
+            main: {
+                intensity: 5,
+                shadow: true
+            },
+            ambientCubemap: {
+                texture: 'pisa.hdr',
+                diffuseIntensity: 0.2
+            }
+        },
+                   environment: 'starfield.jpg',
+                    
+                    viewControl: {
+                        autoRotate: true
+                    },
+                    silent: true,
+                    layers: [{
+                        type: 'overlay',
+                        blendTo: 'lambert',
+                        texture: 'clouds.png',
+                        distance: 0
+                    }]
+                };
 $('#iSMA').val('8576');
 $('#iECC').val(0.241);
 $('#iINC').val(112.228);
@@ -171,30 +204,7 @@ function plotGroundTrack(){
 
   myChart.setOption({
       backgroundColor: '#000',
-    globe: {
-      globeRadius: 15,
-        baseTexture: "world.topo.bathy.200401.jpg",
-        heightTexture: "world.topo.bathy.200401.jpg",
-        displacementScale: 0.04,
-        shading: 'realistic',
-        environment: 'starfield.jpg',
-        realisticMaterial: {
-            roughness: 0.9
-        },
-        postEffect: {
-            enable: true
-        },
-        light: {
-            main: {
-                intensity: 5,
-                shadow: true
-            },
-            ambientCubemap: {
-                texture: 'pisa.hdr',
-                diffuseIntensity: 0.2
-            }
-        }
-    },
+      globe: globeOptions,
     series: [{
             type: 'scatter3D',
             coordinateSystem: 'globe',
@@ -255,30 +265,7 @@ function plotWorldMap(){
 
   myChart.setOption({
       backgroundColor: '#000',
-    globe: {
-      globeRadius: 15,
-        baseTexture: "world.topo.bathy.200401.jpg",
-        heightTexture: "world.topo.bathy.200401.jpg",
-        displacementScale: 0.04,
-        shading: 'realistic',
-        environment: 'starfield.jpg',
-        realisticMaterial: {
-            roughness: 0.9
-        },
-        postEffect: {
-            enable: true
-        },
-        light: {
-            main: {
-                intensity: 5,
-                shadow: true
-            },
-            ambientCubemap: {
-                texture: 'pisa.hdr',
-                diffuseIntensity: 0.2
-            }
-        }
-    },
+      globe:globeOptions,
     });
 }
   //myChart.setOption(option);
