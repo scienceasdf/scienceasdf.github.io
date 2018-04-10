@@ -198,7 +198,21 @@
             type: 'scatterGL',
             coordinateSystem: 'geo',
             data: allData,
-          }
+          },{
+            symbol: 'image://../gps.svg',
+            name: '星下点轨迹', 
+            symbolSize: 10,
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            data: [[allData[0][0],allData[0][1]]],
+          },{
+            symbol: 'image://../gps.svg',
+            name: '星下点轨迹',
+            symbolSize: 10,
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            data: [[allData[allData.length-1][0],allData[allData.length-1][1]]],
+          },
         ]
       });
     });
