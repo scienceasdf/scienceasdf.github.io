@@ -1,247 +1,249 @@
-
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf8">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>在线绘制星下点轨迹</title>
-<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
-<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
-<script src="https://cdn.bootcss.com/mathjs/4.0.1/math.min.js"></script>
-<script src="./js/orbitState.js"></script>
-<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
-<script src="./js/echarts-gl.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
+  <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+  <script src="https://cdn.bootcss.com/mathjs/4.0.1/math.min.js"></script>
+  <script src="./js/orbitState.js"></script>
+  <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+  <script src="./js/echarts-gl.min.js"></script>
 </head>
 
 
 
 <body>
-<div data-role="page">
+  <div data-role="page">
     <div data-role="header">
       <a href="./index.html" data-role="button" data-icon="home" data-ajax="false">首页</a>
       <h1>在线绘制星下点轨迹</h1>
       <a href="#myPopup" data-rel="popup" data-position-to="window" data-role="button" data-icon="info">说明</a>
     </div>
-  
+
 
     <div id="pageone" data-role="main" class="ui-content">
 
-        <fieldset data-role="fieldcontain">
-            <label for="sat">预设数据</label>
-            <select name="sat" id="sat" onchange="loadSat()">
-              <option value="normal">一般的一个卫星</option>
-              <option value="GeoSync">印尼上空的静止同步卫星</option>
-              <option value="eightSat">8字同步卫星</option>
-              <option value="eightSat2">斜8字同步卫星</option>
-            </select>
-          </fieldset>
-        <div data-role="fieldcontain">
-            <label for="iSMA">半长轴(KM)</label>
-            <input type="text" name="iSMA" id="iSMA" data-clear-btn="true">
-            <label for="ECC">离心率</label>
-            <input type="text" name="iECC" id="iECC" data-clear-btn="true">
-            <label for="iINC">轨道倾角(°)</label>
-            <input type="text" name="iINC" id="iINC" data-clear-btn="true">
-            <label for="iAOP">近地点角距(°)</label>
-            <input type="text" name="iAOP" id="iAOP" data-clear-btn="true">
-            <label for="iRAAN">升交点赤经(°)</label>
-            <input type="text" name="iRAAN" id="iRAAN" data-clear-btn="true">
-            <label for="iTA">真近点角(°)</label>
-            <input type="text" name="iTA" id="iTA" data-clear-btn="true">
-            <label for="iN">运行周期数（可以是小数）</label>
-            <input type="text" name="iN" id="iN" data-clear-btn="true">
-            </div>
+      <fieldset data-role="fieldcontain">
+        <label for="sat">预设数据</label>
+        <select name="sat" id="sat" onchange="loadSat()">
+          <option value="normal">一般的一个卫星</option>
+          <option value="GeoSync">印尼上空的静止同步卫星</option>
+          <option value="eightSat">8字同步卫星</option>
+          <option value="eightSat2">斜8字同步卫星</option>
+        </select>
+      </fieldset>
+      <div data-role="fieldcontain">
+        <label for="iSMA">半长轴(KM)</label>
+        <input type="text" name="iSMA" id="iSMA" data-clear-btn="true">
+        <label for="ECC">离心率</label>
+        <input type="text" name="iECC" id="iECC" data-clear-btn="true">
+        <label for="iINC">轨道倾角(°)</label>
+        <input type="text" name="iINC" id="iINC" data-clear-btn="true">
+        <label for="iAOP">近地点角距(°)</label>
+        <input type="text" name="iAOP" id="iAOP" data-clear-btn="true">
+        <label for="iRAAN">升交点赤经(°)</label>
+        <input type="text" name="iRAAN" id="iRAAN" data-clear-btn="true">
+        <label for="iTA">真近点角(°)</label>
+        <input type="text" name="iTA" id="iTA" data-clear-btn="true">
+        <label for="iN">运行周期数（可以是小数）</label>
+        <input type="text" name="iN" id="iN" data-clear-btn="true">
+      </div>
 
-            <label for="iNPLOT">绘图点数(无关精度)</label>
-            <input type="text" name="iNPLOT" id="iNPLOT" data-clear-btn="true">
+      <label for="iNPLOT">绘图点数(无关精度)</label>
+      <input type="text" name="iNPLOT" id="iNPLOT" data-clear-btn="true">
 
 
-            <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "plotGroundTrack()">绘制星下点轨迹</button>
+      <button cols="60" rows="10" type="button" class="btn btn-default" onclick="plotGroundTrack()">绘制星下点轨迹</button>
 
 
       <div id="main" style="width: 100%;height:67%"></div>
       <div data-role="popup" id="myPopup">
-          <p>说明</p> 
-          <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-          0、在电脑上显示效果更好，且Chrome浏览器还支持保存成图片，手机请横屏放置<br>
-          1、坐标系是Earth Fixed坐标系<br>
-          2、没有考虑J2项摄动、空气阻力、其他天体等等奇奇怪怪的摄动<br>
-          3、暂时不支持抛物线与双曲线轨道<br>
-          4、地图可能有点问题，数据来自网上<br>
-          5、具体计算原理请看<a href="https://scienceasdf.github.io/programming/2018/04/06/groundTrackPlot/" data-ajax="false">博客</a><br>
-          6、欢迎反馈BUG
-          <a href="./SAT3D.html"data-role="button" data-ajax="false">根据轨道六根数绘制卫星空间轨迹</a>
-          <a href="./TLE/index.html"data-role="button" data-ajax="false">根据TLE数据绘制星下点轨迹</a>
-          <a href="./TLE/TLE3D.html"data-role="button" data-ajax="false">根据TLE数据绘制卫星空间轨迹</a>
-        </div>
+        <p>说明</p>
+        <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        0、在电脑上显示效果更好，且Chrome浏览器还支持保存成图片，手机请横屏放置
+        <br> 1、坐标系是Earth Fixed坐标系
+        <br> 2、没有考虑J2项摄动、空气阻力、其他天体等等奇奇怪怪的摄动
+        <br> 3、暂时不支持抛物线与双曲线轨道
+        <br> 4、地图可能有点问题，数据来自网上
+        <br> 5、具体计算原理请看
+        <a href="https://scienceasdf.github.io/programming/2018/04/06/groundTrackPlot/" data-ajax="false">博客</a>
+        <br> 6、欢迎反馈BUG
+        <a href="./SAT3D.html" data-role="button" data-ajax="false">根据轨道六根数绘制卫星空间轨迹</a>
+        <a href="./TLE/index.html" data-role="button" data-ajax="false">根据TLE数据绘制星下点轨迹</a>
+        <a href="./TLE/TLE3D.html" data-role="button" data-ajax="false">根据TLE数据绘制卫星空间轨迹</a>
+      </div>
     </div>
 
     <div data-role="popup" id="myPopup2">
-        <p>微信捐助</p> 
-        <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-        <img src="QR.png" style="width:100%;">
+      <p>微信捐助</p>
+      <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+      <img src="QR.png" style="width:100%;">
     </div>
 
-  <div data-role="footer" style="text-align:center;">
-    <a href="#myPopup2" data-rel="popup" data-position-to="window">接受捐助，打赏点这里</a><br>
+    <div data-role="footer" style="text-align:center;">
+      <a href="#myPopup2" data-rel="popup" data-position-to="window">接受捐助，打赏点这里</a>
+      <br>
+    </div>
   </div>
-</div>
 </body>
 
 
 
 
 <script type="text/javascript">
-$('#iSMA').val('8576');
-$('#iECC').val(0.241);
-$('#iINC').val(112.228);
-$('#iAOP').val(19.6);
-$('#iRAAN').val(120.671);
-$('#iTA').val(25.325);
-$('#iN').val(1);
-$('#iNPLOT').val(1000);
+  $('#iSMA').val('8576');
+  $('#iECC').val(0.241);
+  $('#iINC').val(112.228);
+  $('#iAOP').val(19.6);
+  $('#iRAAN').val(120.671);
+  $('#iTA').val(25.325);
+  $('#iN').val(1);
+  $('#iNPLOT').val(1000);
 
-function loadSat(){
-  var str = document.getElementById("sat").value;
-  if(str == 'GeoSync'){
-    $('#iSMA').val(42164);
-    $('#iECC').val(0);
-    $('#iINC').val(0);
-    $('#iAOP').val(19.6);
-    $('#iRAAN').val(70);
-    $('#iTA').val(25.325);
-    $('#iN').val(1);
-    $('#iNPLOT').val(1000);
-  }else if(str == 'eightSat'){
-    $('#iSMA').val(42164);
-    $('#iECC').val(0);
-    $('#iINC').val(50);
-    $('#iAOP').val(19.6);
-    $('#iRAAN').val(80);
-    $('#iTA').val(25.325);
-    $('#iN').val(1);
-    $('#iNPLOT').val(1000);
-  }else if(str == 'normal'){
-    $('#iSMA').val('8576');
-    $('#iECC').val(0.241);
-    $('#iINC').val(112.228);
-    $('#iAOP').val(19.6);
-    $('#iRAAN').val(120.671);
-    $('#iTA').val(25.325);
-    $('#iN').val(1);
-    $('#iNPLOT').val(1000);
-  }else if(str == 'eightSat2'){
-    $('#iSMA').val(42164);
-    $('#iECC').val(0.4);
-    $('#iINC').val(50);
-    $('#iAOP').val(19.6);
-    $('#iRAAN').val(80);
-    $('#iTA').val(25.325);
-    $('#iN').val(1);
-    $('#iNPLOT').val(1000);
+  function loadSat() {
+    var str = document.getElementById("sat").value;
+    if (str == 'GeoSync') {
+      $('#iSMA').val(42164);
+      $('#iECC').val(0);
+      $('#iINC').val(0);
+      $('#iAOP').val(19.6);
+      $('#iRAAN').val(70);
+      $('#iTA').val(25.325);
+      $('#iN').val(1);
+      $('#iNPLOT').val(1000);
+    } else if (str == 'eightSat') {
+      $('#iSMA').val(42164);
+      $('#iECC').val(0);
+      $('#iINC').val(50);
+      $('#iAOP').val(19.6);
+      $('#iRAAN').val(80);
+      $('#iTA').val(25.325);
+      $('#iN').val(1);
+      $('#iNPLOT').val(1000);
+    } else if (str == 'normal') {
+      $('#iSMA').val('8576');
+      $('#iECC').val(0.241);
+      $('#iINC').val(112.228);
+      $('#iAOP').val(19.6);
+      $('#iRAAN').val(120.671);
+      $('#iTA').val(25.325);
+      $('#iN').val(1);
+      $('#iNPLOT').val(1000);
+    } else if (str == 'eightSat2') {
+      $('#iSMA').val(42164);
+      $('#iECC').val(0.4);
+      $('#iINC').val(50);
+      $('#iAOP').val(19.6);
+      $('#iRAAN').val(80);
+      $('#iTA').val(25.325);
+      $('#iN').val(1);
+      $('#iNPLOT').val(1000);
+    }
   }
-}
 
-function plotGroundTrack(){
-  var a = Number($('#iSMA').val()) * 1000.0;
-  var time = 2 * pi * Math.pow(a*a*a/mu,0.5) * Number($('#iN').val())
-  var orbit1 = new orbit(Number($('#iSMA').val() * 1000.0),
-                     Number($('#iECC').val()),
-                     Number($('#iINC').val() * radPerDeg),
-                     Number($('#iAOP').val() * radPerDeg),
-                     Number($('#iRAAN').val() * radPerDeg),
-                     Number($('#iTA').val()) * radPerDeg);
-  var worldMapContainer = document.getElementById('main');
+  function plotGroundTrack() {
+    var a = Number($('#iSMA').val()) * 1000.0;
+    var time = 2 * pi * Math.pow(a * a * a / mu, 0.5) * Number($('#iN').val())
+    var orbit1 = new orbit(Number($('#iSMA').val() * 1000.0),
+      Number($('#iECC').val()),
+      Number($('#iINC').val() * radPerDeg),
+      Number($('#iAOP').val() * radPerDeg),
+      Number($('#iRAAN').val() * radPerDeg),
+      Number($('#iTA').val()) * radPerDeg);
+    var worldMapContainer = document.getElementById('main');
 
-  var allData = orbit1.getGroundTrack(time);
-  
-  //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
-  var resizeWorldMapContainer = function () {
-      worldMapContainer.style.width = window.innerWidth+'px';
-      worldMapContainer.style.height = window.innerHeight+'px';
-  };
-  resizeWorldMapContainer();
-  var myChart = echarts.init(worldMapContainer);
-  window.onresize = function () {
-    //重置容器高宽
+    var allData = orbit1.getGroundTrack(time);
+
+    //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
+    var resizeWorldMapContainer = function () {
+      worldMapContainer.style.width = window.innerWidth + 'px';
+      worldMapContainer.style.height = window.innerHeight + 'px';
+    };
     resizeWorldMapContainer();
-    myChart.resize();
-  };
+    var myChart = echarts.init(worldMapContainer);
+    window.onresize = function () {
+      //重置容器高宽
+      resizeWorldMapContainer();
+      myChart.resize();
+    };
 
-  $.get('world.json', function (chinaJson) {
-    echarts.registerMap('world', chinaJson);
-    var chart = myChart;
-    chart.setOption({
-      tooltip:{
-        formatter: '{a}:</br> {c0}',
-        position: ['40%', '90%']
-      },
-      geo:{
-        map:'world'
-      },
-      series: [
-      {
-        symbol: 'circle',
-        name: '星下点轨迹', // series名称
-        symbolSize: 3,
-        type: 'scatterGL', // series图表类型
-        coordinateSystem: 'geo', // series坐标系类型
-        data : allData,
-      }
-	    ]
+    $.get('world.json', function (chinaJson) {
+      echarts.registerMap('world', chinaJson);
+      var chart = myChart;
+      chart.setOption({
+        tooltip: {
+          formatter: '{a}:</br> {c0}',
+          position: ['40%', '90%']
+        },
+        geo: {
+          map: 'world'
+        },
+        series: [
+          {
+            symbol: 'circle',
+            name: '星下点轨迹', // series名称
+            symbolSize: 3,
+            type: 'scatterGL', // series图表类型
+            coordinateSystem: 'geo', // series坐标系类型
+            data: allData,
+          }
+        ]
+      });
     });
-  });
-}
+  }
 </script>
 
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    
+
 <script type="text/javascript">
-plotWorldMap();
-function plotWorldMap(){
-  var worldMapContainer = document.getElementById('main');
-  
+  plotWorldMap();
+  function plotWorldMap() {
+    var worldMapContainer = document.getElementById('main');
 
-  //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
-  var resizeWorldMapContainer = function () {
-      worldMapContainer.style.width = window.innerWidth+'px';
-      worldMapContainer.style.height = window.innerHeight+'px';
-  };
-  resizeWorldMapContainer();
-  var myChart = echarts.init(worldMapContainer);
-  window.onresize = function () {
-    //重置容器高宽
+
+    //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
+    var resizeWorldMapContainer = function () {
+      worldMapContainer.style.width = window.innerWidth + 'px';
+      worldMapContainer.style.height = window.innerHeight + 'px';
+    };
     resizeWorldMapContainer();
-    myChart.resize();
-  };
+    var myChart = echarts.init(worldMapContainer);
+    window.onresize = function () {
+      //重置容器高宽
+      resizeWorldMapContainer();
+      myChart.resize();
+    };
 
-  $.get('world.json', function (chinaJson) {
-    echarts.registerMap('world', chinaJson);
-    var chart = myChart;
-    chart.setOption({
-      geo:{
-        map:'world'
-      },
-      series: [
-      {
-        symbol: 'circle',
-        name: '星下点轨迹', // series名称
-        symbolSize: 5,
-        type: 'scatter', // series图表类型
-        coordinateSystem: 'geo', // series坐标系类型
-        //data : [[0,0],[90,0],[45,45],[180,0],[-45,-45],[200,0]]
-      }
-	    ]
+    $.get('world.json', function (chinaJson) {
+      echarts.registerMap('world', chinaJson);
+      var chart = myChart;
+      chart.setOption({
+        geo: {
+          map: 'world'
+        },
+        series: [
+          {
+            symbol: 'circle',
+            name: '星下点轨迹', // series名称
+            symbolSize: 5,
+            type: 'scatter', // series图表类型
+            coordinateSystem: 'geo', // series坐标系类型
+            //data : [[0,0],[90,0],[45,45],[180,0],[-45,-45],[200,0]]
+          }
+        ]
+      });
     });
-  });
-}
+  }
   //myChart.setOption(option);
 
 
 
-   </script>
+</script>
 
 </html>
