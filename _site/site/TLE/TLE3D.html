@@ -1,39 +1,42 @@
-
-
 <!doctype html>
+
 <html>
+
 <head>
-  <meta charset="utf8">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>在线解析TLE数据绘制卫星空间轨迹</title>
-<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
-<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
-<script src="https://cdn.bootcss.com/satellite.js/2.0.1/satellite.min.js"></script>
-<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
-<script src="../js/echarts-gl.min.js"></script>
+    <meta charset="utf8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>在线解析TLE数据绘制卫星空间轨迹</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+    <script src="https://cdn.bootcss.com/satellite.js/2.0.1/satellite.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <script src="../js/echarts-gl.min.js"></script>
 </head>
 
 
 
 <body>
-<div data-role="page">
-    <div data-role="header">
-      <a href="../index.html" data-role="button" data-icon="home" data-ajax="false">首页</a>
-      <h1>在线解析TLE数据绘制卫星空间轨迹</h1>
-      <a href="#myPopup" data-rel="popup" data-position-to="window" data-role="button" data-icon="info">说明</a>
-    </div>
+    <div data-role="page">
+        <div data-role="header">
+            <a href="../index.html" data-role="button" data-icon="home" data-ajax="false">首页</a>
+            <h1>在线解析TLE数据绘制卫星空间轨迹</h1>
+            <a href="#myPopup" data-rel="popup" data-position-to="window" data-role="button" data-icon="info">说明</a>
+        </div>
 
 
-    <div id="pageone" data-role="main" class="ui-content">
-          <label for="areaTLE">请输入TLE2行数据<a href="https://www.celestrak.com/NORAD/elements/" data-ajax="false">TLE数据看这里</a><a data-role="button" data-inline="true" onclick="tryRandom()">试试手气</a></label>
-          <textarea name="areaTLE" id="areaTLE">
+        <div id="pageone" data-role="main" class="ui-content">
+            <label for="areaTLE">请输入TLE2行数据
+                <a href="https://www.celestrak.com/NORAD/elements/" data-ajax="false">TLE数据看这里</a>
+                <a data-role="button" data-inline="true" onclick="tryRandom()">试试手气</a>
+            </label>
+            <textarea name="areaTLE" id="areaTLE">
 1 26360U 00025A   18096.39571382 -.00000008  00000-0  00000+0 0  9994
 2 26360  53.1785 142.6563 0040719 110.8320  18.4280  2.00428448131214
           </textarea>
-            
+
             <label for="iNPLOT">绘图点数(无关精度)</label>
             <input type="text" name="iNPLOT" id="iNPLOT" data-clear-btn="true">
 
@@ -42,46 +45,57 @@
             <label for="datetime4">结束时刻</label>
             <input type="datetime-local" data-clear-btn="false" name="datetime4" id="datetime4" value="">
 
-            <button cols="60" rows="10" type="button" class="btn btn-default"  onclick = "processTLE()">绘制卫星空间轨迹</button>
+            <button cols="60" rows="10" type="button" class="btn btn-default" onclick="processTLE()">绘制卫星空间轨迹</button>
 
 
-      <div id="main" style="width: 100%;height:67%"></div>
-      <div data-role="popup" id="myPopup">
-          <p>说明</p> 
-          <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-          1、在某些设备和某些浏览器上不会显示时，请换设备或者换浏览器<br>
-          2、这个网页里面卫星预报的算法来源于开源库<a href="https://github.com/shashwatak/satellite-js" data-ajax="false">satellite-js</a>SGP4算法<br>
-          3、欢迎反馈BUG
-          <a href="./index.html"data-role="button" data-ajax="false">根据TLE数据绘制星下点轨迹</a>
-          <a href="../groundTrackPlot.html"data-role="button" data-ajax="false">根据轨道六根数绘制星下点轨迹</a>
-          <a href="../SAT3D.html"data-role="button" data-ajax="false">根据轨道六根数绘制卫星空间轨迹</a>
+            <div id="main" style="width: 100%;height:67%"></div>
+            <div data-role="popup" id="myPopup">
+                <p>说明</p>
+                <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                1、在某些设备和某些浏览器上不会显示时，请换设备或者换浏览器
+                <br> 2、这个网页里面卫星预报的算法来源于开源库
+                <a href="https://github.com/shashwatak/satellite-js" data-ajax="false">satellite-js</a>SGP4算法
+                <br> 3、欢迎反馈BUG
+                <a href="./index.html" data-role="button" data-ajax="false">根据TLE数据绘制星下点轨迹</a>
+                <a href="../groundTrackPlot.html" data-role="button" data-ajax="false">根据轨道六根数绘制星下点轨迹</a>
+                <a href="../SAT3D.html" data-role="button" data-ajax="false">根据轨道六根数绘制卫星空间轨迹</a>
+            </div>
+
+            <div data-role="popup" id="myPopup3">
+                <p>没有在网上找到数据</p>
+                <a data-role="button" data-inline="true" onclick="tryRandom2()">再试一次</a>
+                <a href='#pageone' data-role="button" data-inline="true">算了，不试了</a>
+            </div>
         </div>
 
-        <div data-role="popup" id="myPopup3">
-            <p>没有在网上找到数据</p> 
-            <a data-role="button" data-inline="true" onclick="tryRandom2()">再试一次</a>
-            <a href='#pageone' data-role="button" data-inline="true">算了，不试了</a>
-          </div>
+        <div data-role="footer" style="text-align:center;">
+        </div>
     </div>
-
-  <div data-role="footer" style="text-align:center;">
-  </div>
-</div>
 </body>
 
 
 
 <script type="text/javascript">
-var globeOptions = {
-          globeRadius:15,
-                    baseTexture: "world.topo.bathy.200401.jpg",
+    function fetchTwo(data3) {
+        var leng = data3.length;
+        var res = new Array(length);
+        for (var i = 0; i < leng; ++i) {
+            res[i] = [data3[i][0], data3[i][1]];
+        }
+        return res;
+    };
+
+
+    var globeOptions = {
+        globeRadius: 15,
+        baseTexture: "world.topo.bathy.200401.jpg",
         heightTexture: "elev_bump.jpg",
 
 
-                    displacementScale: 0.04,
-                    displacementQuality: 'low',
+        displacementScale: 0.04,
+        displacementQuality: 'low',
 
-                    shading: 'lambert',
+        shading: 'lambert',
         light: {
             main: {
                 intensity: 3,
@@ -92,206 +106,218 @@ var globeOptions = {
                 diffuseIntensity: 0.2
             }
         },
-                   environment: 'starfield.jpg',
-                    
-                    viewControl: {
-                        autoRotate: true
-                    },
-                    silent: true,
-                    layers: [{
-                        type: 'overlay',
-                        blendTo: 'lambert',
-                        texture: 'clouds.png',
-                        distance: 0.12,
-                    }]
-                };
-function randomNum(minNum,maxNum){ 
-    switch(arguments.length){ 
-        case 1: 
-            return parseInt(Math.random()*minNum+1,10); 
-        break; 
-        case 2: 
-            return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
-        break; 
-            default: 
-                return 0; 
-            break; 
-    } 
-} 
+        environment: 'starfield.jpg',
 
-function tryRandom2(){
-  $( "#myPopup3" ).popup( "close" );
-  tryRandom(); 
-}
-
-function tryRandom(){
-    var rndSat = randomNum(0,43274);
-    $.ajax({ 
-      type: 'GET', 
-      url: 'https://crossorigin.me/https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?' , 
-      cache:false, 
-      dataType: "text", 
-      crossDomain: true, 
-      headers : {'Origin':'http://foo.example'}, 
-      success : function(data){ 
-        var el = document.createElement( 'html' );
-        el.innerHTML = data;
-        var p = el.getElementsByTagName( 'BODY' )[0].getElementsByTagName('PRE')[0].textContent;
-        var eachLine = p.split(/[\n]/);
-        if(eachLine[0] == 'No TLE found'){
-          $( "#myPopup3" ).popup( "open" );   
-        }else{
-          var titleStr = eachLine[0].replace(/[\s]deb/ig, "的碎片");
-          window.alert("随机得到的卫星名字是" + titleStr);
-          $('#areaTLE').val(eachLine[1] + '\n' + eachLine[2]);
-          boolNotGet = false;
-        }
-      }
-    });
-}
-
-
-
-
-$('#iNPLOT').val(1000);
-plotWorldMap();
-var degPerRad = 180 / 3.141592653589793;
-function clrTLE(){
-  $('#inputTLE1').val('');
-  $('#inputTLE2').val('');
-};
-
-function processTLE(){
-  var worldMapContainer = document.getElementById('main');
-  var inputStr = $('#areaTLE').val();
-  var line = inputStr.split(/[\n]/);
-
-
-  var satrec = satellite.twoline2satrec(line[0].trim(), line[1].trim());
-  var secondLineStr = line[1].split(/\s+/);
-  var T = 1440 / Number(secondLineStr[7].substr(0,10));
-  
-
-  //  Propagate satellite using time since epoch (in minutes).
-  var slices = Number($('#iNPLOT').val());
-  var allData = new Array(slices);
-  var date13 = Date.parse($('#datetime3').val());
-  var date14 = Date.parse($('#datetime4').val());
-  var ddate = (date14 - date13) / slices;
-  var totalTime = ddate * slices / 60000;
-  str = "运行时间为" + totalTime + "分钟，轨道周期为" + T + "分钟，共计" + (totalTime / T) +"个周期！";
-  window.alert(str);
-
-  for(var i = 0; i < slices; ++i){
-    var dt = Date(date13 + i * ddate);
-    var x = new Array(3);
-    var positionAndVelocity = satellite.propagate(satrec, new Date(date13 + i * ddate));
-    var positionEci = positionAndVelocity.position;
-    var gmst = satellite.gstime(new Date(date13 + i * ddate));
-    var positionGd    = satellite.eciToGeodetic(positionEci, gmst);
-    var longitude = positionGd.longitude * degPerRad;
-    var latitude  = positionGd.latitude * degPerRad;
-    var height    = positionGd.height;
-    //window.alert(height);
-    x[0] = longitude;
-    x[1] = latitude;
-    x[2] = height /  (6378.1 / 15);
-    //window.alert(x[2]);
-    allData[i] = x;
-  }
- 
-
-  var resizeWorldMapContainer = function () {
-      worldMapContainer.style.width = window.innerWidth+'px';
-      worldMapContainer.style.height = window.innerHeight+'px';
-  };
-  resizeWorldMapContainer();
-  var myChart = echarts.init(worldMapContainer);
-  window.onresize = function () {
-    resizeWorldMapContainer();
-    myChart.resize();
-  };
-
-
-    myChart.setOption({
-      backgroundColor: '#000',
-    globe: globeOptions,
-    series: [{
-            type: 'scatter3D',
-            coordinateSystem: 'globe',
-            blendMode: 'lighter',
-            symbolSize: 2,
-            itemStyle: {
-                color: 'rgb(250, 50, 50)',
-                opacity: 1
-            },
-            data: allData
+        viewControl: {
+            autoRotate: true
         },
-        {
-            type: 'scatter3D',
-            coordinateSystem: 'globe',
-            blendMode: 'lighter',
-            symbolSize: 2,
-            itemStyle: {
-                color: 'rgb(250, 50, 50)',
-                opacity: 1
-            },
-            data: [0,0,135]
-        },
-        {
-            type: 'scatter3D',
-            coordinateSystem: 'globe',
-            blendMode: 'lighter',
-            symbolSize: 2,
-            itemStyle: {
-                color: 'rgb(250, 50, 50)',
-                opacity: 1
-            },
-            data: [[0,0,0]]
+        silent: true,
+        layers: [{
+            type: 'overlay',
+            blendTo: 'lambert',
+            texture: 'clouds.png',
+            distance: 0.12,
         }]
-    });
-};
+    };
+    function randomNum(minNum, maxNum) {
+        switch (arguments.length) {
+            case 1:
+                return parseInt(Math.random() * minNum + 1, 10);
+                break;
+            case 2:
+                return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+                break;
+            default:
+                return 0;
+                break;
+        }
+    }
+
+    function tryRandom2() {
+        $("#myPopup3").popup("close");
+        tryRandom();
+    }
+
+    function tryRandom() {
+        var rndSat = randomNum(0, 43274);
+        $.ajax({
+            type: 'GET',
+            url: 'https://crossorigin.me/https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?',
+            cache: false,
+            dataType: "text",
+            crossDomain: true,
+            headers: { 'Origin': 'http://foo.example' },
+            success: function (data) {
+                var el = document.createElement('html');
+                el.innerHTML = data;
+                var p = el.getElementsByTagName('BODY')[0].getElementsByTagName('PRE')[0].textContent;
+                var eachLine = p.split(/[\n]/);
+                if (eachLine[0] == 'No TLE found') {
+                    $("#myPopup3").popup("open");
+                } else {
+                    var titleStr = eachLine[0].replace(/[\s]deb/ig, "的碎片");
+                    window.alert("随机得到的卫星名字是" + titleStr);
+                    $('#areaTLE').val(eachLine[1] + '\n' + eachLine[2]);
+                    boolNotGet = false;
+                }
+            }
+        });
+    }
 
 
-function plotWorldMap(){
-  var now = new Date();
-  var day = ("0" + now.getDate()).slice(-2);
-  var month = ("0" + (now.getMonth() + 1)).slice(-2);
-  var today = now.getFullYear()+"-"+(month)+"-"+(day);
-
-  var hh = ("0" + now.getHours()).slice(-2);
-  var mm = ("0" + (now.getMinutes())).slice(-2);
-  var currentTime = (hh)+":"+(mm);
-  var str = today + "T" + currentTime;
-  $('#datetime3').val(str);
-  var date3 = $('#datetime3').val();
-  day = ("0" + (now.getDate()+1)).slice(-2);
-  today = now.getFullYear()+"-"+(month)+"-"+(day);
-  str = today + "T" + currentTime;
-  $('#datetime4').val(str);
-  var worldMapContainer = document.getElementById('main');
-  // get the window's height and width for container's resizing
-  var resizeWorldMapContainer = function () {
-      worldMapContainer.style.width = window.innerWidth+'px';
-      worldMapContainer.style.height = window.innerHeight+'px';
-  };
-  resizeWorldMapContainer();
-  var myChart = echarts.init(worldMapContainer);
-  window.onresize = function () {
-    // resize the container's width and height
-    resizeWorldMapContainer();
-    myChart.resize();
-  };
-
-    myChart.setOption({
-      backgroundColor: '#000',
-    globe: globeOptions,
-    });
-}
 
 
+    $('#iNPLOT').val(1000);
+    plotWorldMap();
+    var degPerRad = 180 / 3.141592653589793;
+    function clrTLE() {
+        $('#inputTLE1').val('');
+        $('#inputTLE2').val('');
+    };
+
+    function processTLE() {
+        var worldMapContainer = document.getElementById('main');
+        var inputStr = $('#areaTLE').val();
+        var line = inputStr.split(/[\n]/);
 
 
-   </script>
+        var satrec = satellite.twoline2satrec(line[0].trim(), line[1].trim());
+        var secondLineStr = line[1].split(/\s+/);
+        var T = 1440 / Number(secondLineStr[7].substr(0, 10));
+
+
+        //  Propagate satellite using time since epoch (in minutes).
+        var slices = Number($('#iNPLOT').val());
+        var allData = new Array(slices);
+        var date13 = Date.parse($('#datetime3').val());
+        var date14 = Date.parse($('#datetime4').val());
+        var ddate = (date14 - date13) / slices;
+        var totalTime = ddate * slices / 60000;
+        str = "运行时间为" + totalTime + "分钟，轨道周期为" + T + "分钟，共计" + (totalTime / T) + "个周期！";
+        window.alert(str);
+
+        for (var i = 0; i < slices; ++i) {
+            var dt = Date(date13 + i * ddate);
+            var x = new Array(3);
+            var positionAndVelocity = satellite.propagate(satrec, new Date(date13 + i * ddate));
+            var positionEci = positionAndVelocity.position;
+            var gmst = satellite.gstime(new Date(date13 + i * ddate));
+            var positionGd = satellite.eciToGeodetic(positionEci, gmst);
+            var longitude = positionGd.longitude * degPerRad;
+            var latitude = positionGd.latitude * degPerRad;
+            var height = positionGd.height;
+            //window.alert(height);
+            x[0] = longitude;
+            x[1] = latitude;
+            x[2] = height / (6378.1 / 15);
+            //window.alert(x[2]);
+            allData[i] = x;
+        }
+
+
+        var resizeWorldMapContainer = function () {
+            worldMapContainer.style.width = window.innerWidth + 'px';
+            worldMapContainer.style.height = window.innerHeight + 'px';
+        };
+        resizeWorldMapContainer();
+        var myChart = echarts.init(worldMapContainer);
+        window.onresize = function () {
+            resizeWorldMapContainer();
+            myChart.resize();
+        };
+
+        var data2 = fetchTwo(allData);
+        myChart.setOption({
+            backgroundColor: '#000',
+            globe: globeOptions,
+            series: [{
+                type: 'scatter3D',
+                coordinateSystem: 'globe',
+                blendMode: 'lighter',
+                symbolSize: 2,
+                itemStyle: {
+                    color: 'rgb(250, 50, 50)',
+                    opacity: 1
+                },
+                data: allData
+            },
+            {
+                type: 'scatter3D',
+                coordinateSystem: 'globe',
+                blendMode: 'lighter',
+                symbolSize: 2,
+                itemStyle: {
+                    color: 'rgb(250, 50, 50)',
+                    opacity: 1
+                },
+                data: [0, 0, 135]
+            },
+            {
+                type: 'scatter3D',
+                coordinateSystem: 'globe',
+                blendMode: 'lighter',
+                symbolSize: 2,
+                itemStyle: {
+                    color: 'rgb(250, 50, 50)',
+                    opacity: 1
+                },
+                data: [[0, 0, 0]]
+            },
+            {
+                type: 'scatter3D',
+                coordinateSystem: 'globe',
+                blendMode: 'lighter',
+                symbolSize: 2,
+                itemStyle: {
+                    color: 'rgb(250, 50, 50)',
+                    opacity: 1
+                },
+                data: data2,
+            },
+            ]
+        });
+    };
+
+
+    function plotWorldMap() {
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+        var hh = ("0" + now.getHours()).slice(-2);
+        var mm = ("0" + (now.getMinutes())).slice(-2);
+        var currentTime = (hh) + ":" + (mm);
+        var str = today + "T" + currentTime;
+        $('#datetime3').val(str);
+        var date3 = $('#datetime3').val();
+        day = ("0" + (now.getDate() + 1)).slice(-2);
+        today = now.getFullYear() + "-" + (month) + "-" + (day);
+        str = today + "T" + currentTime;
+        $('#datetime4').val(str);
+        var worldMapContainer = document.getElementById('main');
+        // get the window's height and width for container's resizing
+        var resizeWorldMapContainer = function () {
+            worldMapContainer.style.width = window.innerWidth + 'px';
+            worldMapContainer.style.height = window.innerHeight + 'px';
+        };
+        resizeWorldMapContainer();
+        var myChart = echarts.init(worldMapContainer);
+        window.onresize = function () {
+            // resize the container's width and height
+            resizeWorldMapContainer();
+            myChart.resize();
+        };
+
+        myChart.setOption({
+            backgroundColor: '#000',
+            globe: globeOptions,
+        });
+    }
+
+
+
+
+</script>
 
 </html>
