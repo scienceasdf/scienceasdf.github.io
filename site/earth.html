@@ -43,7 +43,7 @@
             height: 1024
         });
         mapChart.setOption({
-            backgroundColor: 'rgb(250, 50, 50)',
+            backgroundColor: 'none',
             geo: {
                 type: 'map',
                 map: 'world',
@@ -55,6 +55,7 @@
                 // silent: true,
                 itemStyle: {
                     normal: {
+                        areaColor:'none',
                         borderColor: '#000'
                     }
                 },
@@ -66,7 +67,14 @@
                         }
                     }
                 }
-            }
+            },
+            series:[{
+            name: 'categoryA',
+            type: 'map',
+            geoIndex: 0,
+            // tooltip: {show: false},
+            data:'none'
+            }]
         });
         option = {
             globe: {
@@ -77,10 +85,10 @@
                 shading: 'lambert',
                 light: {
                     ambient: {
-                        intensity: 0
+                        intensity: 0.4
                     },
                     main: {
-                        intensity: 1,
+                        intensity: 1.4,
                         shadow: true
                     },
                     ambientCubemap: {
@@ -93,9 +101,10 @@
                     autoRotate: true
                 },
                 layers: [{
-                        type: 'blending',
-                        blendTo: 'lambert',
+                        type: 'overlay',
+                        shading: 'lambert',
                         texture: mapChart,
+                        distance: 0
                     }]
             },
             series: []
