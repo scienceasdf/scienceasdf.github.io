@@ -98,16 +98,16 @@
 
 
 <script type="text/javascript">
-    var theOrbitMap = getOrbitMap();
-    setSatlelliteSetsOnGui(theOrbitMap.get('normal'));
-    $('#iN').val(1);
-    $('#iNPLOT').val(1000);
+  var theOrbitMap = getOrbitMap();
+  setSatlelliteSetsOnGui(theOrbitMap.get('normal'));
+  $('#iN').val(1);
+  $('#iNPLOT').val(1000);
 
-    function loadSat() {
-        var theOrbitMap = getOrbitMap();
-        var str = document.getElementById("sat").value;
-        setSatlelliteSetsOnGui(theOrbitMap.get(str));
-    }
+  function loadSat() {
+    var theOrbitMap = getOrbitMap();
+    var str = document.getElementById("sat").value;
+    setSatlelliteSetsOnGui(theOrbitMap.get(str));
+  }
   function plotGroundTrack() {
     var orbit1 = getOrbitStateOnGui();
     var time = getRunTimeOnGui();
@@ -145,20 +145,20 @@
             type: 'scatterGL', // series图表类型
             coordinateSystem: 'geo', // series坐标系类型
             data: allData,
-          },{
-            symbol: 'image://gps.svg',
-            name: '星下点轨迹', 
-            symbolSize: 10,
-            type: 'effectScatter',
-            coordinateSystem: 'geo',
-            data: [[allData[0][0],allData[0][1]]],
-          },{
+          }, {
             symbol: 'image://gps.svg',
             name: '星下点轨迹',
             symbolSize: 10,
             type: 'effectScatter',
             coordinateSystem: 'geo',
-            data: [[allData[allData.length-1][0],allData[allData.length-1][1]]],
+            data: [[allData[0][0], allData[0][1]]],
+          }, {
+            symbol: 'image://gps.svg',
+            name: '星下点轨迹',
+            symbolSize: 10,
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            data: [[allData[allData.length - 1][0], allData[allData.length - 1][1]]],
           },
         ]
       });
