@@ -83,21 +83,19 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
 ```c++
 double MA2EA(double MA, double ecc)
 {
-
-    if(ecc<1.0){
-        //elliptic orbit case
+    if (ecc < 1.0) {
+        // elliptic orbit case
         double E;
-        if((MA<.0 && MA>-pi)||(MA>pi))
-            E=MA-ecc;
+        if ((MA < .0 && MA > -pi) || (MA > pi))
+            E = MA - ecc;
         else
-            E=MA+ecc;
+            E = MA + ecc;
 
-        double E_=MA;
-        while(fabs(E-E_)>1e-8){
-            E_=E;
-            E=E+(MA-E+ecc*sin(E))/(1-ecc*cos(E));
+        double E_ = MA;
+        while (fabs(E - E_) > 1e-8) {
+            E_ = E;
+            E = E + (MA - E + ecc * sin(E)) / (1 - ecc * cos(E));
         }
-
         return E;
     }
 }
@@ -106,25 +104,27 @@ double MA2EA(double MA, double ecc)
 ## 轨道外推的算法
 根据上面各个角之间的转换关系，就可以实现轨道外推。写一个类，封装轨道六根数：
 ```c++
-class KeplerianState
-{
+class KeplerianState {
 public:
-    double SMA;     //semimajor axis, a
-    double ECC;     //eccentricity, e
-    double INC;     //inclination, i
-    double AOP;     //argument of periapsis, \omega
-    double RAAN;    //right ascension of the ascending node, \Omega
-    double TA;      //true anomaly, \phi
+    double SMA; // semimajor axis, a
+    double ECC; // eccentricity, e
+    double INC; // inclination, i
+    double AOP; // argument of periapsis, \omega
+    double RAAN; // right ascension of the ascending node, \Omega
+    double TA; // true anomaly, \phi
 
-    KeplerianState(){}
-    KeplerianState(double a, double e, double i, double omega, double Omega, double phi, double mu=3.986004415e14)
-        : SMA(a), ECC(e), INC(i), AOP(omega), RAAN(Omega), TA(phi), gravityConst(mu) {}
-    ~KeplerianState(){}
+    KeplerianState() {}
+    KeplerianState(double a, double e, double i, double omega, double Omega,
+                   double phi, double mu = 3.986004415e14)
+        : SMA(a), ECC(e), INC(i), AOP(omega), RAAN(Omega), TA(phi),
+          gravityConst(mu) {}
+    ~KeplerianState() {}
 
-    void toCartesian(vec3* r, vec3* vel);
+    void toCartesian(vec3 *r, vec3 *vel);
     void step(double t);
 
-    static KeplerianState fromR_V(const vec3& r, const vec3& v, double mu=3.98600445e14);
+    static KeplerianState fromR_V(const vec3 &r, const vec3 &v,
+                                  double mu = 3.98600445e14);
 
 public:
     double gravityConst;
@@ -132,12 +132,12 @@ public:
 ```
 轨道外推就是用平均角速度乘时间得到平近点角，然后再转化至真近点角：
 ```c++
-void KeplerianState::step(double t)
+void KeplerianState::step(double t) 
 {
-    double MA=TA2MA(TA,ECC);
-    double n=pow(gravityConst/SMA/SMA/SMA,.5);
-    MA+=n*t;    // t seconds later
-    TA=MA2TA(MA,ECC);
+    double MA = TA2MA(TA, ECC);
+    double n = pow(gravityConst / SMA / SMA / SMA, .5);
+    MA += n * t; // t seconds later
+    TA = MA2TA(MA, ECC);
 }
 ```
 

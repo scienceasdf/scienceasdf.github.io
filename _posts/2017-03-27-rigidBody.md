@@ -153,102 +153,103 @@ $$
 对于姿态动力学问题，还是需要求解微分方程，需要用到龙格库塔算法。  
 定义一个简单的，但以后还可以扩展的刚体类
 ```c++
-class rigidBody
-{
+class rigidBody {
 public:
     rigidBody();
-    rigidBody(double Ix, double Iy, double Iz, mat33& cosineMat, vec3& omega,std::function<vec3(vec3&,mat33&,double)> mome):
-        m_Ix(Ix),m_Iy(Iy),m_Iz(Iz), m_inertia(mat33::fromDiag(Ix,Iy,Iz)),
-        m_cosMat(cosineMat), m_omega(omega),m_time(.0), moment(mome) {}
+    rigidBody(double Ix, double Iy, double Iz, mat33 &cosineMat, vec3 &omega,
+              std::function<vec3(vec3 &, mat33 &, double)> mome)
+        : m_Ix(Ix), m_Iy(Iy), m_Iz(Iz), m_inertia(mat33::fromDiag(Ix, Iy, Iz)),
+          m_cosMat(cosineMat), m_omega(omega), m_time(.0), moment(mome) {}
     ~rigidBody() {}
 
-    void do_step(double dt);    //calculate the state after time dt
+    void do_step(double dt); // calculate the state after time dt
 
     double getRotKineticEnergy();
-    vec3 getAngularMomentum();     //expressed in the inertial frame
-    vec3 getOmega();            //expressed in the inertial frame
-    mat33 getInertiaTensor();   //expressed in the inertial frame
+    vec3 getAngularMomentum(); // expressed in the inertial frame
+    vec3 getOmega();           // expressed in the inertial frame
+    mat33 getInertiaTensor();  // expressed in the inertial frame
     mat33 getCosineMat();
 
 private:
-    //double m_mass;
-    double m_Ix,m_Iy,m_Iz;
-    mat33 m_inertia;    //expressed in the body frame
+    // double m_mass;
+    double m_Ix, m_Iy, m_Iz;
+    mat33 m_inertia; // expressed in the body frame
     mat33 m_cosMat;
-    //vec3 m_pos;
-    vec3 m_omega;       //expressed in the body frame
-    //vec3 m_speed;
+    // vec3 m_pos;
+    vec3 m_omega; // expressed in the body frame
+    // vec3 m_speed;
     double m_time;
-    std::function<vec3(vec3&,mat33&,double)> moment; 
-    //suppose M=M(omega,cosineMatrix,t), expressed in the body frame
-    //vec3 force(parameters);
+    std::function<vec3(vec3 &, mat33 &, double)> moment;
+    // suppose M=M(omega,cosineMatrix,t), expressed in the body frame
+    // vec3 force(parameters);
 
-    void func(double t, vec3& omega, mat33& cosMat, vec3& resVec, mat33& resMat);
+    void func(double t, vec3 &omega, mat33 &cosMat, vec3 &resVec,
+              mat33 &resMat);
     // get the diff format of the moment dynamics
-
 };
+
+
 ```
 代码中都有具体的注释解释。我实现的动力学的时间步进代码如下：
 ```c++
-void rigidBody::func(double t, vec3& vec, mat33& cosMat, vec3& resVec, mat33& resMat)
-{
-    vec3 M=moment(vec,cosMat,t);
-    double dwx=M.getX()/m_Ix+vec.getY()*vec.getZ()/m_Ix*(m_Iz-m_Iy);
-    double dwy=M.getY()/m_Iy+vec.getX()*vec.getZ()/m_Iy*(m_Ix-m_Iz);
-    double dwz=M.getZ()/m_Iz+vec.getX()*vec.getY()/m_Iz*(m_Iy-m_Ix);
-    resVec=vec3(dwx,dwy,dwz);
+void rigidBody::func(double t, vec3 &vec, mat33 &cosMat, vec3 &resVec,
+                     mat33 &resMat) {
+    vec3 M = moment(vec, cosMat, t);
+    double dwx =
+        M.getX() / m_Ix + vec.getY() * vec.getZ() / m_Ix * (m_Iz - m_Iy);
+    double dwy =
+        M.getY() / m_Iy + vec.getX() * vec.getZ() / m_Iy * (m_Ix - m_Iz);
+    double dwz =
+        M.getZ() / m_Iz + vec.getX() * vec.getY() / m_Iz * (m_Iy - m_Ix);
+    resVec = vec3(dwx, dwy, dwz);
 
-    resMat=crossProductMat3(vec)*cosMat;
-
+    resMat = crossProductMat3(vec) * cosMat;
 }
 
-void rigidBody::do_step(double dt)
-{
-    //using RK4 algorithm
+void rigidBody::do_step(double dt) {
+    // using RK4 algorithm
 
-    static vec3 vk1,vk2,vk3,vk4;
-    static mat33 mk1,mk2,mk3,mk4;
+    static vec3 vk1, vk2, vk3, vk4;
+    static mat33 mk1, mk2, mk3, mk4;
     static vec3 resV;
     static mat33 resM;
 
-    double t=m_time;
+    double t = m_time;
 
-    func(t,m_omega,m_cosMat,vk1,mk1);
-    mk1*=dt;
-    vk1*=dt;
-    resV=m_omega+.5*vk1;
-    resM=m_cosMat+.5*mk1;
+    func(t, m_omega, m_cosMat, vk1, mk1);
+    mk1 *= dt;
+    vk1 *= dt;
+    resV = m_omega + .5 * vk1;
+    resM = m_cosMat + .5 * mk1;
 
-    func(t+.5*dt,resV,resM,vk2,mk2);
-    mk2*=dt;
-    vk2*=dt;
-    resV=m_omega+.5*vk2;
-    resM=m_cosMat+.5*mk2;
+    func(t + .5 * dt, resV, resM, vk2, mk2);
+    mk2 *= dt;
+    vk2 *= dt;
+    resV = m_omega + .5 * vk2;
+    resM = m_cosMat + .5 * mk2;
 
-    func(t+.5*dt,resV,resM,vk3,mk3);
-    mk3*=dt;
-    vk3*=dt;
-    resV=m_omega+vk3;
-    resM=m_cosMat+mk3;
+    func(t + .5 * dt, resV, resM, vk3, mk3);
+    mk3 *= dt;
+    vk3 *= dt;
+    resV = m_omega + vk3;
+    resM = m_cosMat + mk3;
 
-    func(t+dt,resV,resM,vk4,mk4);
-    mk4*=dt;
-    vk4*=dt;
+    func(t + dt, resV, resM, vk4, mk4);
+    mk4 *= dt;
+    vk4 *= dt;
 
-    m_time+=dt;
-    m_omega+=(.16666666666666666666666666666666666666666666666666666666666
-        *(vk1+2.0*vk2+2.0*vk3+vk4));
-    m_cosMat+=(.16666666666666666666666666666666666666666666666666666666666
-        *(mk1+2.0*mk2+2.0*mk3+mk4));
-
+    m_time += dt;
+    m_omega += (.16666666666666666666666666666666666666666666666666666666666 *
+                (vk1 + 2.0 * vk2 + 2.0 * vk3 + vk4));
+    m_cosMat += (.16666666666666666666666666666666666666666666666666666666666 *
+                 (mk1 + 2.0 * mk2 + 2.0 * mk3 + mk4));
 }
 ```
 
 然后需要绘制3维的动画，这一点也很麻烦。首先需要写一个sceneModifier来显示三维模型：
 ```c++
 SceneModifier::SceneModifier(Qt3DCore::QEntity *rootEntity)
-    : m_rootEntity(rootEntity)
-{
+    : m_rootEntity(rootEntity) {
     // Cylinder shape data
     Qt3DExtras::QCylinderMesh *cylinder = new Qt3DExtras::QCylinderMesh();
     cylinder->setRadius(1);
@@ -259,10 +260,12 @@ SceneModifier::SceneModifier(Qt3DCore::QEntity *rootEntity)
     // CylinderMesh Transform
     Qt3DCore::QTransform *cylinderTransform = new Qt3DCore::QTransform();
     cylinderTransform->setScale(1.5f);
-    cylinderTransform->setRotation(QQuaternion::fromAxisAndAngle(QVector3D(1.0f, 0.0f, 0.0f), 20.0f));
+    cylinderTransform->setRotation(
+        QQuaternion::fromAxisAndAngle(QVector3D(1.0f, 0.0f, 0.0f), 20.0f));
     cylinderTransform->setTranslation(QVector3D(-5.0f, 4.0f, -1.5));
 
-    Qt3DExtras::QPhongMaterial *cylinderMaterial = new Qt3DExtras::QPhongMaterial();
+    Qt3DExtras::QPhongMaterial *cylinderMaterial =
+        new Qt3DExtras::QPhongMaterial();
     cylinderMaterial->setDiffuse(QColor(QRgb(0x928327)));
 
     // Cylinder
@@ -274,12 +277,11 @@ SceneModifier::SceneModifier(Qt3DCore::QEntity *rootEntity)
 ```
 这个例子是从Qt3D的一个example改过来的，Qt3D可以让我们更加方便地绘制3D模型。具体的调用方法很简单，其中光线、材质渲染与这里讨论的主题关系不大，可以不用管。主要是需要对动画涉及的刚体的transform需要制作动画。  
 ```c++
-void SceneModifier::setSome(int type)
-{
+void SceneModifier::setSome(int type) {
     delete m_satEntity;
     m_satEntity = new Qt3DCore::QEntity(m_rootEntity);
 
-    Qt3DExtras::QPhongMaterial *satMaterial=new Qt3DExtras::QPhongMaterial();
+    Qt3DExtras::QPhongMaterial *satMaterial = new Qt3DExtras::QPhongMaterial();
     satMaterial->setDiffuse(QColor(QRgb(0x928327)));
 
     // satMesh Transform
@@ -287,12 +289,12 @@ void SceneModifier::setSome(int type)
     satTransform->setScale(1.5f);
 
     satTransform->setTranslation(QVector3D(-5.0f, 4.0f, -1.5));
-    TransformController *ctrl=new TransformController(satTransform);
+    TransformController *ctrl = new TransformController(satTransform);
     ctrl->setType(type);
     ctrl->setTarget(satTransform);
     ctrl->setTime(.0f);
 
-    QPropertyAnimation *animation=new QPropertyAnimation(satTransform);
+    QPropertyAnimation *animation = new QPropertyAnimation(satTransform);
     animation->setTargetObject(ctrl);
     animation->setPropertyName("time");
     animation->setDuration(100000);
@@ -304,15 +306,15 @@ void SceneModifier::setSome(int type)
     // sat
     m_satEntity->addComponent(satTransform);
     m_satEntity->addComponent(satMaterial);
-
 }
+
 ```
 因此我们需要定义一个TransformController的类：
 ```c++
-class TransformController: public QObject
-{
+class TransformController : public QObject {
     Q_OBJECT
-    Q_PROPERTY(Qt3DCore::QTransform* target READ target WRITE setTarget NOTIFY targetChanged)
+    Q_PROPERTY(Qt3DCore::QTransform *target READ target WRITE setTarget NOTIFY
+                   targetChanged)
     Q_PROPERTY(float time READ time WRITE setTime NOTIFY timeChanged)
 
 public:
@@ -323,7 +325,6 @@ public:
 
     void setTime(float time);
     float time() const;
-
 
 signals:
     void targetChanged();
@@ -344,58 +345,46 @@ private:
     vec3 omega;
     vec3 angularM;
     mat33 cosineMat;*/
-
 };
 ```
 TransformController中比较关键的几个代码如下：
 ```c++
-void TransformController::setTarget(Qt3DCore::QTransform *target)
-{
+void TransformController::setTarget(Qt3DCore::QTransform *target) {
     if (m_target != target) {
         m_target = target;
         emit targetChanged();
     }
 }
 
-Qt3DCore::QTransform *TransformController::target() const
-{
-    return m_target;
-}
+Qt3DCore::QTransform *TransformController::target() const { return m_target; }
 
-void TransformController::setTime(float time)
-{
+void TransformController::setTime(float time) {
     if (!qFuzzyCompare(time, m_time)) {
-        dt=(time-m_time)/12000000.0;//1000.0;
-        //dt=.01;
-        m_time=time;
+        dt = (time - m_time) / 12000000.0; // 1000.0;
+        // dt=.01;
+        m_time = time;
         updateQuat();
         emit timeChanged();
     }
 }
 
-float TransformController::time() const
-{
-    return m_time;
-}
+float TransformController::time() const { return m_time; }
 
-void TransformController::updateQuat()
-{
+void TransformController::updateQuat() {
     m_body.do_step(dt);
-    m_quat=fromMat33(m_body.getCosineMat());
+    m_quat = fromMat33(m_body.getCosineMat());
     m_target->setRotation(m_quat);
 
+    static vec3 am, omega, z_;
+    static vec3 z(.0, 1.0, .0);
+    z_ = m_body.getCosineMat().transpose() * z;
+    // express the vector in the inertial frame
+    am = m_body.getAngularMomentum();
 
-    static vec3 am,omega,z_;
-    static vec3 z(.0,1.0,.0);
-    z_=m_body.getCosineMat().transpose()*z;     
-    //express the vector in the inertial frame
-    am=m_body.getAngularMomentum();
-
-    //omega=m_body.getOmega();
-    omega=m_body.m_omega;
-    double T=m_body.getRotKineticEnergy(),theta=angle(z,z_)*degPerRad;  
-    //theta is called the nutation angle
-
+    // omega=m_body.getOmega();
+    omega = m_body.m_omega;
+    double T = m_body.getRotKineticEnergy(), theta = angle(z, z_) * degPerRad;
+    // theta is called the nutation angle
 }
 ```
 由于TransformController的类定义有这样一条语句：``Q_PROPERTY(float time READ time WRITE setTime NOTIFY timeChanged)``,因此如果时间变化，就会调用setTime函数，setTime函数会调用updateQuat函数，在updateQuat函数中进行动力学的时间步进求解，而m_target就保存的是刚体的旋转四元数信息，更新之后就会用新的旋转四元数渲染三维模型。

@@ -489,21 +489,19 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
 <p>就是一个牛顿迭代法，这里直接给出实现的代码</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf">MA2EA</span><span class="p">(</span><span class="kt">double</span> <span class="n">MA</span><span class="p">,</span> <span class="kt">double</span> <span class="n">ecc</span><span class="p">)</span>
 <span class="p">{</span>
-
-    <span class="k">if</span><span class="p">(</span><span class="n">ecc</span><span class="o">&lt;</span><span class="mf">1.0</span><span class="p">){</span>
-        <span class="c1">//elliptic orbit case
+    <span class="k">if</span> <span class="p">(</span><span class="n">ecc</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// elliptic orbit case
 </span>        <span class="kt">double</span> <span class="n">E</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">((</span><span class="n">MA</span><span class="o">&lt;</span><span class="mf">.0</span> <span class="o">&amp;&amp;</span> <span class="n">MA</span><span class="o">&gt;-</span><span class="n">pi</span><span class="p">)</span><span class="o">||</span><span class="p">(</span><span class="n">MA</span><span class="o">&gt;</span><span class="n">pi</span><span class="p">))</span>
-            <span class="n">E</span><span class="o">=</span><span class="n">MA</span><span class="o">-</span><span class="n">ecc</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">MA</span> <span class="o">&lt;</span> <span class="mf">.0</span> <span class="o">&amp;&amp;</span> <span class="n">MA</span> <span class="o">&gt;</span> <span class="o">-</span><span class="n">pi</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">MA</span> <span class="o">&gt;</span> <span class="n">pi</span><span class="p">))</span>
+            <span class="n">E</span> <span class="o">=</span> <span class="n">MA</span> <span class="o">-</span> <span class="n">ecc</span><span class="p">;</span>
         <span class="k">else</span>
-            <span class="n">E</span><span class="o">=</span><span class="n">MA</span><span class="o">+</span><span class="n">ecc</span><span class="p">;</span>
+            <span class="n">E</span> <span class="o">=</span> <span class="n">MA</span> <span class="o">+</span> <span class="n">ecc</span><span class="p">;</span>
 
-        <span class="kt">double</span> <span class="n">E_</span><span class="o">=</span><span class="n">MA</span><span class="p">;</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">E</span><span class="o">-</span><span class="n">E_</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">1e-8</span><span class="p">){</span>
-            <span class="n">E_</span><span class="o">=</span><span class="n">E</span><span class="p">;</span>
-            <span class="n">E</span><span class="o">=</span><span class="n">E</span><span class="o">+</span><span class="p">(</span><span class="n">MA</span><span class="o">-</span><span class="n">E</span><span class="o">+</span><span class="n">ecc</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">E</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ecc</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">E</span><span class="p">));</span>
+        <span class="kt">double</span> <span class="n">E_</span> <span class="o">=</span> <span class="n">MA</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">E</span> <span class="o">-</span> <span class="n">E_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-8</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">E_</span> <span class="o">=</span> <span class="n">E</span><span class="p">;</span>
+            <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">+</span> <span class="p">(</span><span class="n">MA</span> <span class="o">-</span> <span class="n">E</span> <span class="o">+</span> <span class="n">ecc</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">E</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ecc</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">E</span><span class="p">));</span>
         <span class="p">}</span>
-
         <span class="k">return</span> <span class="n">E</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -511,37 +509,39 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
 
 <h2 id="轨道外推的算法">轨道外推的算法</h2>
 <p>根据上面各个角之间的转换关系，就可以实现轨道外推。写一个类，封装轨道六根数：</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">KeplerianState</span>
-<span class="p">{</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">KeplerianState</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-    <span class="kt">double</span> <span class="n">SMA</span><span class="p">;</span>     <span class="c1">//semimajor axis, a
-</span>    <span class="kt">double</span> <span class="n">ECC</span><span class="p">;</span>     <span class="c1">//eccentricity, e
-</span>    <span class="kt">double</span> <span class="n">INC</span><span class="p">;</span>     <span class="c1">//inclination, i
-</span>    <span class="kt">double</span> <span class="n">AOP</span><span class="p">;</span>     <span class="c1">//argument of periapsis, \omega
-</span>    <span class="kt">double</span> <span class="n">RAAN</span><span class="p">;</span>    <span class="c1">//right ascension of the ascending node, \Omega
-</span>    <span class="kt">double</span> <span class="n">TA</span><span class="p">;</span>      <span class="c1">//true anomaly, \phi
+    <span class="kt">double</span> <span class="n">SMA</span><span class="p">;</span> <span class="c1">// semimajor axis, a
+</span>    <span class="kt">double</span> <span class="n">ECC</span><span class="p">;</span> <span class="c1">// eccentricity, e
+</span>    <span class="kt">double</span> <span class="n">INC</span><span class="p">;</span> <span class="c1">// inclination, i
+</span>    <span class="kt">double</span> <span class="n">AOP</span><span class="p">;</span> <span class="c1">// argument of periapsis, \omega
+</span>    <span class="kt">double</span> <span class="n">RAAN</span><span class="p">;</span> <span class="c1">// right ascension of the ascending node, \Omega
+</span>    <span class="kt">double</span> <span class="n">TA</span><span class="p">;</span> <span class="c1">// true anomaly, \phi
 </span>
-    <span class="n">KeplerianState</span><span class="p">(){}</span>
-    <span class="n">KeplerianState</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">,</span> <span class="kt">double</span> <span class="n">e</span><span class="p">,</span> <span class="kt">double</span> <span class="n">i</span><span class="p">,</span> <span class="kt">double</span> <span class="n">omega</span><span class="p">,</span> <span class="kt">double</span> <span class="n">Omega</span><span class="p">,</span> <span class="kt">double</span> <span class="n">phi</span><span class="p">,</span> <span class="kt">double</span> <span class="n">mu</span><span class="o">=</span><span class="mf">3.986004415e14</span><span class="p">)</span>
-        <span class="o">:</span> <span class="n">SMA</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">ECC</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">INC</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">AOP</span><span class="p">(</span><span class="n">omega</span><span class="p">),</span> <span class="n">RAAN</span><span class="p">(</span><span class="n">Omega</span><span class="p">),</span> <span class="n">TA</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span> <span class="n">gravityConst</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="p">{}</span>
-    <span class="o">~</span><span class="n">KeplerianState</span><span class="p">(){}</span>
+    <span class="n">KeplerianState</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="n">KeplerianState</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">,</span> <span class="kt">double</span> <span class="n">e</span><span class="p">,</span> <span class="kt">double</span> <span class="n">i</span><span class="p">,</span> <span class="kt">double</span> <span class="n">omega</span><span class="p">,</span> <span class="kt">double</span> <span class="n">Omega</span><span class="p">,</span>
+                   <span class="kt">double</span> <span class="n">phi</span><span class="p">,</span> <span class="kt">double</span> <span class="n">mu</span> <span class="o">=</span> <span class="mf">3.986004415e14</span><span class="p">)</span>
+        <span class="o">:</span> <span class="n">SMA</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">ECC</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">INC</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">AOP</span><span class="p">(</span><span class="n">omega</span><span class="p">),</span> <span class="n">RAAN</span><span class="p">(</span><span class="n">Omega</span><span class="p">),</span> <span class="n">TA</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span>
+          <span class="n">gravityConst</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="o">~</span><span class="n">KeplerianState</span><span class="p">()</span> <span class="p">{}</span>
 
-    <span class="kt">void</span> <span class="n">toCartesian</span><span class="p">(</span><span class="n">vec3</span><span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="n">vec3</span><span class="o">*</span> <span class="n">vel</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="n">toCartesian</span><span class="p">(</span><span class="n">vec3</span> <span class="o">*</span><span class="n">r</span><span class="p">,</span> <span class="n">vec3</span> <span class="o">*</span><span class="n">vel</span><span class="p">);</span>
     <span class="kt">void</span> <span class="n">step</span><span class="p">(</span><span class="kt">double</span> <span class="n">t</span><span class="p">);</span>
 
-    <span class="k">static</span> <span class="n">KeplerianState</span> <span class="n">fromR_V</span><span class="p">(</span><span class="k">const</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">r</span><span class="p">,</span> <span class="k">const</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="kt">double</span> <span class="n">mu</span><span class="o">=</span><span class="mf">3.98600445e14</span><span class="p">);</span>
+    <span class="k">static</span> <span class="n">KeplerianState</span> <span class="n">fromR_V</span><span class="p">(</span><span class="k">const</span> <span class="n">vec3</span> <span class="o">&amp;</span><span class="n">r</span><span class="p">,</span> <span class="k">const</span> <span class="n">vec3</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">,</span>
+                                  <span class="kt">double</span> <span class="n">mu</span> <span class="o">=</span> <span class="mf">3.98600445e14</span><span class="p">);</span>
 
 <span class="k">public</span><span class="o">:</span>
     <span class="kt">double</span> <span class="n">gravityConst</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div></div>
 <p>轨道外推就是用平均角速度乘时间得到平近点角，然后再转化至真近点角：</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">KeplerianState</span><span class="o">::</span><span class="n">step</span><span class="p">(</span><span class="kt">double</span> <span class="n">t</span><span class="p">)</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">KeplerianState</span><span class="o">::</span><span class="n">step</span><span class="p">(</span><span class="kt">double</span> <span class="n">t</span><span class="p">)</span> 
 <span class="p">{</span>
-    <span class="kt">double</span> <span class="n">MA</span><span class="o">=</span><span class="n">TA2MA</span><span class="p">(</span><span class="n">TA</span><span class="p">,</span><span class="n">ECC</span><span class="p">);</span>
-    <span class="kt">double</span> <span class="n">n</span><span class="o">=</span><span class="n">pow</span><span class="p">(</span><span class="n">gravityConst</span><span class="o">/</span><span class="n">SMA</span><span class="o">/</span><span class="n">SMA</span><span class="o">/</span><span class="n">SMA</span><span class="p">,</span><span class="mf">.5</span><span class="p">);</span>
-    <span class="n">MA</span><span class="o">+=</span><span class="n">n</span><span class="o">*</span><span class="n">t</span><span class="p">;</span>    <span class="c1">// t seconds later
-</span>    <span class="n">TA</span><span class="o">=</span><span class="n">MA2TA</span><span class="p">(</span><span class="n">MA</span><span class="p">,</span><span class="n">ECC</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">MA</span> <span class="o">=</span> <span class="n">TA2MA</span><span class="p">(</span><span class="n">TA</span><span class="p">,</span> <span class="n">ECC</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">n</span> <span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="n">gravityConst</span> <span class="o">/</span> <span class="n">SMA</span> <span class="o">/</span> <span class="n">SMA</span> <span class="o">/</span> <span class="n">SMA</span><span class="p">,</span> <span class="mf">.5</span><span class="p">);</span>
+    <span class="n">MA</span> <span class="o">+=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">t</span><span class="p">;</span> <span class="c1">// t seconds later
+</span>    <span class="n">TA</span> <span class="o">=</span> <span class="n">MA2TA</span><span class="p">(</span><span class="n">MA</span><span class="p">,</span> <span class="n">ECC</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 

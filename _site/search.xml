@@ -1672,27 +1672,31 @@ C(p)=\begin{bmatrix}
  之间的分隔符，表示的多项式就是(s<sup>2</sup>+2s+3)(-3s+1)(2s-1)(2s<sup>2</sup>-s).于是采用Boost::tokenizer将字符串进行两层分割：第一层是乘法运算符*，第二层则是空格和英文逗号。</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cp">#include &lt;boost/tokenizer.hpp&gt;
 </span>
- <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">poly</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">myString</span><span class="p">)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">poly</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">myString</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
     <span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span> <span class="n">sep</span><span class="p">(</span><span class="s">" ,"</span><span class="p">);</span>
-    <span class="n">boost</span><span class="o">::</span><span class="n">tokenizer</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">tok</span><span class="p">(</span><span class="n">myString</span><span class="p">,</span><span class="n">sep</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">tokenizer</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;::</span><span class="n">iterator</span> <span class="n">beg</span><span class="o">=</span><span class="n">tok</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">beg</span><span class="o">!=</span><span class="n">tok</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="o">++</span><span class="n">beg</span><span class="p">){</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">tokenizer</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">tok</span><span class="p">(</span><span class="n">myString</span><span class="p">,</span> <span class="n">sep</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">tokenizer</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;::</span><span class="n">iterator</span> <span class="n">beg</span> <span class="o">=</span>
+             <span class="n">tok</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+         <span class="n">beg</span> <span class="o">!=</span> <span class="n">tok</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">beg</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">stod</span><span class="p">(</span><span class="o">*</span><span class="n">beg</span><span class="p">));</span>
     <span class="p">}</span>
 
-    <span class="n">std</span><span class="o">::</span><span class="n">reverse</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">reverse</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
     <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 <span class="p">}</span>
 
- <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">polyFromRawText</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">rawText</span><span class="p">)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">polyFromRawText</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">rawText</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">res</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">};</span>
     <span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span> <span class="n">sep</span><span class="p">(</span><span class="s">"*"</span><span class="p">);</span>
-    <span class="n">boost</span><span class="o">::</span><span class="n">tokenizer</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">tok</span><span class="p">(</span><span class="n">rawText</span><span class="p">,</span><span class="n">sep</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">tokenizer</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;::</span><span class="n">iterator</span> <span class="n">beg</span><span class="o">=</span><span class="n">tok</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">beg</span><span class="o">!=</span><span class="n">tok</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="o">++</span><span class="n">beg</span><span class="p">){</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">tokenizer</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">tok</span><span class="p">(</span><span class="n">rawText</span><span class="p">,</span> <span class="n">sep</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">tokenizer</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">char_separator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;::</span><span class="n">iterator</span> <span class="n">beg</span> <span class="o">=</span>
+             <span class="n">tok</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+         <span class="n">beg</span> <span class="o">!=</span> <span class="n">tok</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">beg</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">auto</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">poly</span><span class="p">(</span><span class="o">*</span><span class="n">beg</span><span class="p">);</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">convolution</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">vec</span><span class="p">);</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">convolution</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">vec</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
@@ -1797,9 +1801,9 @@ QtCharts，发现这个模块优点很多，而且在手机上显示的效果很
     <span class="c1">// assume in the eastern semi-sphere
 </span>    <span class="c1">// expressed in UTC+8 time
 </span>    <span class="c1">// longtitude expressed in degrees
-</span>    <span class="kt">int</span> <span class="n">dt</span><span class="o">=</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="mf">120.0</span><span class="o">-</span><span class="n">longitude</span><span class="p">));</span>
-    <span class="n">timeType</span> <span class="n">t1</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-    <span class="n">t1</span><span class="o">+=</span><span class="n">dt</span><span class="p">;</span>
+</span>    <span class="kt">int</span> <span class="n">dt</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="mf">120.0</span> <span class="o">-</span> <span class="n">longitude</span><span class="p">));</span>
+    <span class="n">timeType</span> <span class="n">t1</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">t1</span> <span class="o">+=</span> <span class="n">dt</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">t1</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -1809,13 +1813,13 @@ QtCharts，发现这个模块优点很多，而且在手机上显示的效果很
 h=15\times (ST-12)
 \end{equation}
 $ST$为真太阳时。然而平常我们通常都使用北京时间，因此太阳时角的计算公式如下：（还是感觉代码比公式更直观）</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf">getHourAngle</span><span class="p">(</span><span class="kt">double</span> <span class="n">longitude</span><span class="p">,</span> <span class="k">const</span> <span class="n">timeType</span><span class="o">&amp;</span> <span class="n">t1</span><span class="p">)</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf">getHourAngle</span><span class="p">(</span><span class="kt">double</span> <span class="n">longitude</span><span class="p">,</span> <span class="k">const</span> <span class="n">timeType</span> <span class="o">&amp;</span><span class="n">t1</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="c1">// The results return the angle expressed in degrees
 </span>    <span class="c1">// also UTC+8
-</span>    <span class="n">timeType</span> <span class="n">t2</span><span class="o">=</span><span class="n">getNoonTime</span><span class="p">(</span><span class="n">longitude</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">dt</span><span class="o">=</span><span class="n">t1</span><span class="o">-</span><span class="n">t2</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mf">.25</span><span class="o">*</span><span class="n">dt</span><span class="p">;</span>
+</span>    <span class="n">timeType</span> <span class="n">t2</span> <span class="o">=</span> <span class="n">getNoonTime</span><span class="p">(</span><span class="n">longitude</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">dt</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t2</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mf">.25</span> <span class="o">*</span> <span class="n">dt</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
 <h3 id="太阳赤纬">太阳赤纬</h3>
@@ -1855,8 +1859,7 @@ $ST$为真太阳时。然而平常我们通常都使用北京时间，因此太�
 <h2 id="程序相关">程序相关</h2>
 <p>前面的代码也可以看出，这个问题需要自己实现时间类timeType和日期类dateType，包括一些基本的运算操作，不过也可以用Boost库的或者用Qt的。编程的时候需要特别小心角度与弧度的换算。在安卓程序中需要实现对设备的经纬度定位，还是要感谢Qt，让一切变得十分方便。<br />
 类Widget作为主窗体，定义如下：</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Widget</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QWidget</span>
-<span class="p">{</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Widget</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QWidget</span> <span class="p">{</span>
     <span class="n">Q_OBJECT</span>
 
 <span class="k">public</span><span class="o">:</span>
@@ -1875,21 +1878,21 @@ $ST$为真太阳时。然而平常我们通常都使用北京时间，因此太�
 <span class="p">};</span>
 </code></pre></div></div>
 <p>具体定位的代码如下：</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Widget</span><span class="o">::</span><span class="n">Widget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span> <span class="o">:</span>
-    <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span>
-    <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui</span><span class="o">::</span><span class="n">Widget</span><span class="p">)</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Widget</span><span class="o">::</span><span class="n">Widget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span> <span class="o">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui</span><span class="o">::</span><span class="n">Widget</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">QGeoPositionInfoSource</span><span class="o">*</span> <span class="n">source2</span> <span class="o">=</span> <span class="n">QGeoPositionInfoSource</span><span class="o">::</span><span class="n">createDefaultSource</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">source2</span><span class="p">){</span>
+    <span class="n">QGeoPositionInfoSource</span> <span class="o">*</span><span class="n">source2</span> <span class="o">=</span>
+        <span class="n">QGeoPositionInfoSource</span><span class="o">::</span><span class="n">createDefaultSource</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">source2</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">source2</span><span class="o">-&gt;</span><span class="n">setUpdateInterval</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
-        <span class="n">connect</span><span class="p">(</span><span class="n">source2</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">positionUpdated</span><span class="p">(</span><span class="n">QGeoPositionInfo</span><span class="p">)),</span><span class="k">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">realtimeUpdated</span><span class="p">(</span><span class="n">QGeoPositionInfo</span><span class="p">)));</span>
+        <span class="n">connect</span><span class="p">(</span><span class="n">source2</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">positionUpdated</span><span class="p">(</span><span class="n">QGeoPositionInfo</span><span class="p">)),</span> <span class="k">this</span><span class="p">,</span>
+                <span class="n">SLOT</span><span class="p">(</span><span class="n">realtimeUpdated</span><span class="p">(</span><span class="n">QGeoPositionInfo</span><span class="p">)));</span>
         <span class="n">source2</span><span class="o">-&gt;</span><span class="n">startUpdates</span><span class="p">();</span>
     <span class="p">}</span>
-    <span class="k">else</span><span class="p">{</span>
+    <span class="k">else</span> <span class="p">{</span>
         <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
     <span class="p">}</span>
-	<span class="c1">// ...
+    <span class="c1">// ...
 </span><span class="p">}</span>
 
 <span class="kt">void</span> <span class="n">Widget</span><span class="o">::</span><span class="n">realtimeUpdated</span><span class="p">(</span><span class="n">QGeoPositionInfo</span> <span class="n">info</span><span class="p">)</span>
@@ -1898,14 +1901,16 @@ $ST$为真太阳时。然而平常我们通常都使用北京时间，因此太�
     <span class="kt">double</span> <span class="n">longitude</span> <span class="o">=</span> <span class="n">info</span><span class="p">.</span><span class="n">coordinate</span><span class="p">().</span><span class="n">longitude</span><span class="p">();</span>
 
     <span class="n">QTime</span> <span class="n">time1</span> <span class="o">=</span> <span class="n">QTime</span><span class="o">::</span><span class="n">currentTime</span><span class="p">();</span>
-    <span class="n">timeType</span> <span class="n">td1</span><span class="p">(</span><span class="n">time1</span><span class="p">.</span><span class="n">hour</span><span class="p">(),</span><span class="n">time1</span><span class="p">.</span><span class="n">minute</span><span class="p">());</span>
+    <span class="n">timeType</span> <span class="n">td1</span><span class="p">(</span><span class="n">time1</span><span class="p">.</span><span class="n">hour</span><span class="p">(),</span> <span class="n">time1</span><span class="p">.</span><span class="n">minute</span><span class="p">());</span>
 
     <span class="n">QDate</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">QDate</span><span class="o">::</span><span class="n">currentDate</span><span class="p">();</span>
 
-    <span class="kt">double</span> <span class="n">timeAngle</span><span class="o">=</span><span class="n">getHourAngle</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span><span class="n">td1</span><span class="p">);</span>
-    <span class="kt">double</span> <span class="n">elevAngle</span><span class="o">=</span><span class="n">getSolarElevationAngle</span><span class="p">(</span><span class="n">getSolarDeclination</span><span class="p">(</span><span class="n">d1</span><span class="p">),</span><span class="n">latitude</span><span class="p">,</span><span class="n">timeAngle</span><span class="p">);</span>
-    <span class="kt">double</span> <span class="n">azimuth</span><span class="o">=</span><span class="n">getSolarAzimuthAngle</span><span class="p">(</span><span class="n">getSolarDeclination</span><span class="p">(</span><span class="n">d1</span><span class="p">),</span><span class="n">latitude</span><span class="p">,</span><span class="n">timeAngle</span><span class="p">,</span><span class="n">elevAngle</span><span class="p">);</span>
-	<span class="c1">// ...
+    <span class="kt">double</span> <span class="n">timeAngle</span> <span class="o">=</span> <span class="n">getHourAngle</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">td1</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">elevAngle</span> <span class="o">=</span>
+        <span class="n">getSolarElevationAngle</span><span class="p">(</span><span class="n">getSolarDeclination</span><span class="p">(</span><span class="n">d1</span><span class="p">),</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">timeAngle</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">azimuth</span> <span class="o">=</span> <span class="n">getSolarAzimuthAngle</span><span class="p">(</span><span class="n">getSolarDeclination</span><span class="p">(</span><span class="n">d1</span><span class="p">),</span> <span class="n">latitude</span><span class="p">,</span>
+                                          <span class="n">timeAngle</span><span class="p">,</span> <span class="n">elevAngle</span><span class="p">);</span>
+    <span class="c1">// ...
 </span><span class="p">}</span>
 </code></pre></div></div>
 
@@ -2387,21 +2392,19 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
 <p>就是一个牛顿迭代法，这里直接给出实现的代码</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nf">MA2EA</span><span class="p">(</span><span class="kt">double</span> <span class="n">MA</span><span class="p">,</span> <span class="kt">double</span> <span class="n">ecc</span><span class="p">)</span>
 <span class="p">{</span>
-
-    <span class="k">if</span><span class="p">(</span><span class="n">ecc</span><span class="o">&lt;</span><span class="mf">1.0</span><span class="p">){</span>
-        <span class="c1">//elliptic orbit case
+    <span class="k">if</span> <span class="p">(</span><span class="n">ecc</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// elliptic orbit case
 </span>        <span class="kt">double</span> <span class="n">E</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">((</span><span class="n">MA</span><span class="o">&lt;</span><span class="mf">.0</span> <span class="o">&amp;&amp;</span> <span class="n">MA</span><span class="o">&gt;-</span><span class="n">pi</span><span class="p">)</span><span class="o">||</span><span class="p">(</span><span class="n">MA</span><span class="o">&gt;</span><span class="n">pi</span><span class="p">))</span>
-            <span class="n">E</span><span class="o">=</span><span class="n">MA</span><span class="o">-</span><span class="n">ecc</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">MA</span> <span class="o">&lt;</span> <span class="mf">.0</span> <span class="o">&amp;&amp;</span> <span class="n">MA</span> <span class="o">&gt;</span> <span class="o">-</span><span class="n">pi</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">MA</span> <span class="o">&gt;</span> <span class="n">pi</span><span class="p">))</span>
+            <span class="n">E</span> <span class="o">=</span> <span class="n">MA</span> <span class="o">-</span> <span class="n">ecc</span><span class="p">;</span>
         <span class="k">else</span>
-            <span class="n">E</span><span class="o">=</span><span class="n">MA</span><span class="o">+</span><span class="n">ecc</span><span class="p">;</span>
+            <span class="n">E</span> <span class="o">=</span> <span class="n">MA</span> <span class="o">+</span> <span class="n">ecc</span><span class="p">;</span>
 
-        <span class="kt">double</span> <span class="n">E_</span><span class="o">=</span><span class="n">MA</span><span class="p">;</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">E</span><span class="o">-</span><span class="n">E_</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">1e-8</span><span class="p">){</span>
-            <span class="n">E_</span><span class="o">=</span><span class="n">E</span><span class="p">;</span>
-            <span class="n">E</span><span class="o">=</span><span class="n">E</span><span class="o">+</span><span class="p">(</span><span class="n">MA</span><span class="o">-</span><span class="n">E</span><span class="o">+</span><span class="n">ecc</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">E</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ecc</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">E</span><span class="p">));</span>
+        <span class="kt">double</span> <span class="n">E_</span> <span class="o">=</span> <span class="n">MA</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">E</span> <span class="o">-</span> <span class="n">E_</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-8</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">E_</span> <span class="o">=</span> <span class="n">E</span><span class="p">;</span>
+            <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">+</span> <span class="p">(</span><span class="n">MA</span> <span class="o">-</span> <span class="n">E</span> <span class="o">+</span> <span class="n">ecc</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">E</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ecc</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">E</span><span class="p">));</span>
         <span class="p">}</span>
-
         <span class="k">return</span> <span class="n">E</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -2409,37 +2412,39 @@ n=\sqrt{\frac{\mu}{\pm a^3}}\end{equation}
 
 <h2 id="轨道外推的算法">轨道外推的算法</h2>
 <p>根据上面各个角之间的转换关系，就可以实现轨道外推。写一个类，封装轨道六根数：</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">KeplerianState</span>
-<span class="p">{</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">KeplerianState</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-    <span class="kt">double</span> <span class="n">SMA</span><span class="p">;</span>     <span class="c1">//semimajor axis, a
-</span>    <span class="kt">double</span> <span class="n">ECC</span><span class="p">;</span>     <span class="c1">//eccentricity, e
-</span>    <span class="kt">double</span> <span class="n">INC</span><span class="p">;</span>     <span class="c1">//inclination, i
-</span>    <span class="kt">double</span> <span class="n">AOP</span><span class="p">;</span>     <span class="c1">//argument of periapsis, \omega
-</span>    <span class="kt">double</span> <span class="n">RAAN</span><span class="p">;</span>    <span class="c1">//right ascension of the ascending node, \Omega
-</span>    <span class="kt">double</span> <span class="n">TA</span><span class="p">;</span>      <span class="c1">//true anomaly, \phi
+    <span class="kt">double</span> <span class="n">SMA</span><span class="p">;</span> <span class="c1">// semimajor axis, a
+</span>    <span class="kt">double</span> <span class="n">ECC</span><span class="p">;</span> <span class="c1">// eccentricity, e
+</span>    <span class="kt">double</span> <span class="n">INC</span><span class="p">;</span> <span class="c1">// inclination, i
+</span>    <span class="kt">double</span> <span class="n">AOP</span><span class="p">;</span> <span class="c1">// argument of periapsis, \omega
+</span>    <span class="kt">double</span> <span class="n">RAAN</span><span class="p">;</span> <span class="c1">// right ascension of the ascending node, \Omega
+</span>    <span class="kt">double</span> <span class="n">TA</span><span class="p">;</span> <span class="c1">// true anomaly, \phi
 </span>
-    <span class="n">KeplerianState</span><span class="p">(){}</span>
-    <span class="n">KeplerianState</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">,</span> <span class="kt">double</span> <span class="n">e</span><span class="p">,</span> <span class="kt">double</span> <span class="n">i</span><span class="p">,</span> <span class="kt">double</span> <span class="n">omega</span><span class="p">,</span> <span class="kt">double</span> <span class="n">Omega</span><span class="p">,</span> <span class="kt">double</span> <span class="n">phi</span><span class="p">,</span> <span class="kt">double</span> <span class="n">mu</span><span class="o">=</span><span class="mf">3.986004415e14</span><span class="p">)</span>
-        <span class="o">:</span> <span class="n">SMA</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">ECC</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">INC</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">AOP</span><span class="p">(</span><span class="n">omega</span><span class="p">),</span> <span class="n">RAAN</span><span class="p">(</span><span class="n">Omega</span><span class="p">),</span> <span class="n">TA</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span> <span class="n">gravityConst</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="p">{}</span>
-    <span class="o">~</span><span class="n">KeplerianState</span><span class="p">(){}</span>
+    <span class="n">KeplerianState</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="n">KeplerianState</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">,</span> <span class="kt">double</span> <span class="n">e</span><span class="p">,</span> <span class="kt">double</span> <span class="n">i</span><span class="p">,</span> <span class="kt">double</span> <span class="n">omega</span><span class="p">,</span> <span class="kt">double</span> <span class="n">Omega</span><span class="p">,</span>
+                   <span class="kt">double</span> <span class="n">phi</span><span class="p">,</span> <span class="kt">double</span> <span class="n">mu</span> <span class="o">=</span> <span class="mf">3.986004415e14</span><span class="p">)</span>
+        <span class="o">:</span> <span class="n">SMA</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">ECC</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">INC</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">AOP</span><span class="p">(</span><span class="n">omega</span><span class="p">),</span> <span class="n">RAAN</span><span class="p">(</span><span class="n">Omega</span><span class="p">),</span> <span class="n">TA</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span>
+          <span class="n">gravityConst</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="o">~</span><span class="n">KeplerianState</span><span class="p">()</span> <span class="p">{}</span>
 
-    <span class="kt">void</span> <span class="n">toCartesian</span><span class="p">(</span><span class="n">vec3</span><span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="n">vec3</span><span class="o">*</span> <span class="n">vel</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="n">toCartesian</span><span class="p">(</span><span class="n">vec3</span> <span class="o">*</span><span class="n">r</span><span class="p">,</span> <span class="n">vec3</span> <span class="o">*</span><span class="n">vel</span><span class="p">);</span>
     <span class="kt">void</span> <span class="n">step</span><span class="p">(</span><span class="kt">double</span> <span class="n">t</span><span class="p">);</span>
 
-    <span class="k">static</span> <span class="n">KeplerianState</span> <span class="n">fromR_V</span><span class="p">(</span><span class="k">const</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">r</span><span class="p">,</span> <span class="k">const</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="kt">double</span> <span class="n">mu</span><span class="o">=</span><span class="mf">3.98600445e14</span><span class="p">);</span>
+    <span class="k">static</span> <span class="n">KeplerianState</span> <span class="n">fromR_V</span><span class="p">(</span><span class="k">const</span> <span class="n">vec3</span> <span class="o">&amp;</span><span class="n">r</span><span class="p">,</span> <span class="k">const</span> <span class="n">vec3</span> <span class="o">&amp;</span><span class="n">v</span><span class="p">,</span>
+                                  <span class="kt">double</span> <span class="n">mu</span> <span class="o">=</span> <span class="mf">3.98600445e14</span><span class="p">);</span>
 
 <span class="k">public</span><span class="o">:</span>
     <span class="kt">double</span> <span class="n">gravityConst</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div></div>
 <p>轨道外推就是用平均角速度乘时间得到平近点角，然后再转化至真近点角：</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">KeplerianState</span><span class="o">::</span><span class="n">step</span><span class="p">(</span><span class="kt">double</span> <span class="n">t</span><span class="p">)</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">KeplerianState</span><span class="o">::</span><span class="n">step</span><span class="p">(</span><span class="kt">double</span> <span class="n">t</span><span class="p">)</span> 
 <span class="p">{</span>
-    <span class="kt">double</span> <span class="n">MA</span><span class="o">=</span><span class="n">TA2MA</span><span class="p">(</span><span class="n">TA</span><span class="p">,</span><span class="n">ECC</span><span class="p">);</span>
-    <span class="kt">double</span> <span class="n">n</span><span class="o">=</span><span class="n">pow</span><span class="p">(</span><span class="n">gravityConst</span><span class="o">/</span><span class="n">SMA</span><span class="o">/</span><span class="n">SMA</span><span class="o">/</span><span class="n">SMA</span><span class="p">,</span><span class="mf">.5</span><span class="p">);</span>
-    <span class="n">MA</span><span class="o">+=</span><span class="n">n</span><span class="o">*</span><span class="n">t</span><span class="p">;</span>    <span class="c1">// t seconds later
-</span>    <span class="n">TA</span><span class="o">=</span><span class="n">MA2TA</span><span class="p">(</span><span class="n">MA</span><span class="p">,</span><span class="n">ECC</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">MA</span> <span class="o">=</span> <span class="n">TA2MA</span><span class="p">(</span><span class="n">TA</span><span class="p">,</span> <span class="n">ECC</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">n</span> <span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="n">gravityConst</span> <span class="o">/</span> <span class="n">SMA</span> <span class="o">/</span> <span class="n">SMA</span> <span class="o">/</span> <span class="n">SMA</span><span class="p">,</span> <span class="mf">.5</span><span class="p">);</span>
+    <span class="n">MA</span> <span class="o">+=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">t</span><span class="p">;</span> <span class="c1">// t seconds later
+</span>    <span class="n">TA</span> <span class="o">=</span> <span class="n">MA2TA</span><span class="p">(</span><span class="n">MA</span><span class="p">,</span> <span class="n">ECC</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -2750,100 +2755,101 @@ $q$是定向四元数，表示刚体的定向，$\omega$是角速度四元数。
 <h2 id="编写程序">编写程序</h2>
 <p>对于姿态动力学问题，还是需要求解微分方程，需要用到龙格库塔算法。<br />
 定义一个简单的，但以后还可以扩展的刚体类</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">rigidBody</span>
-<span class="p">{</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">rigidBody</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">rigidBody</span><span class="p">();</span>
-    <span class="n">rigidBody</span><span class="p">(</span><span class="kt">double</span> <span class="n">Ix</span><span class="p">,</span> <span class="kt">double</span> <span class="n">Iy</span><span class="p">,</span> <span class="kt">double</span> <span class="n">Iz</span><span class="p">,</span> <span class="n">mat33</span><span class="o">&amp;</span> <span class="n">cosineMat</span><span class="p">,</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">omega</span><span class="p">,</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">vec3</span><span class="p">(</span><span class="n">vec3</span><span class="o">&amp;</span><span class="p">,</span><span class="n">mat33</span><span class="o">&amp;</span><span class="p">,</span><span class="kt">double</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">mome</span><span class="p">)</span><span class="o">:</span>
-        <span class="n">m_Ix</span><span class="p">(</span><span class="n">Ix</span><span class="p">),</span><span class="n">m_Iy</span><span class="p">(</span><span class="n">Iy</span><span class="p">),</span><span class="n">m_Iz</span><span class="p">(</span><span class="n">Iz</span><span class="p">),</span> <span class="n">m_inertia</span><span class="p">(</span><span class="n">mat33</span><span class="o">::</span><span class="n">fromDiag</span><span class="p">(</span><span class="n">Ix</span><span class="p">,</span><span class="n">Iy</span><span class="p">,</span><span class="n">Iz</span><span class="p">)),</span>
-        <span class="n">m_cosMat</span><span class="p">(</span><span class="n">cosineMat</span><span class="p">),</span> <span class="n">m_omega</span><span class="p">(</span><span class="n">omega</span><span class="p">),</span><span class="n">m_time</span><span class="p">(</span><span class="mf">.0</span><span class="p">),</span> <span class="n">moment</span><span class="p">(</span><span class="n">mome</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="n">rigidBody</span><span class="p">(</span><span class="kt">double</span> <span class="n">Ix</span><span class="p">,</span> <span class="kt">double</span> <span class="n">Iy</span><span class="p">,</span> <span class="kt">double</span> <span class="n">Iz</span><span class="p">,</span> <span class="n">mat33</span> <span class="o">&amp;</span><span class="n">cosineMat</span><span class="p">,</span> <span class="n">vec3</span> <span class="o">&amp;</span><span class="n">omega</span><span class="p">,</span>
+              <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">vec3</span><span class="p">(</span><span class="n">vec3</span> <span class="o">&amp;</span><span class="p">,</span> <span class="n">mat33</span> <span class="o">&amp;</span><span class="p">,</span> <span class="kt">double</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">mome</span><span class="p">)</span>
+        <span class="o">:</span> <span class="n">m_Ix</span><span class="p">(</span><span class="n">Ix</span><span class="p">),</span> <span class="n">m_Iy</span><span class="p">(</span><span class="n">Iy</span><span class="p">),</span> <span class="n">m_Iz</span><span class="p">(</span><span class="n">Iz</span><span class="p">),</span> <span class="n">m_inertia</span><span class="p">(</span><span class="n">mat33</span><span class="o">::</span><span class="n">fromDiag</span><span class="p">(</span><span class="n">Ix</span><span class="p">,</span> <span class="n">Iy</span><span class="p">,</span> <span class="n">Iz</span><span class="p">)),</span>
+          <span class="n">m_cosMat</span><span class="p">(</span><span class="n">cosineMat</span><span class="p">),</span> <span class="n">m_omega</span><span class="p">(</span><span class="n">omega</span><span class="p">),</span> <span class="n">m_time</span><span class="p">(</span><span class="mf">.0</span><span class="p">),</span> <span class="n">moment</span><span class="p">(</span><span class="n">mome</span><span class="p">)</span> <span class="p">{}</span>
     <span class="o">~</span><span class="n">rigidBody</span><span class="p">()</span> <span class="p">{}</span>
 
-    <span class="kt">void</span> <span class="n">do_step</span><span class="p">(</span><span class="kt">double</span> <span class="n">dt</span><span class="p">);</span>    <span class="c1">//calculate the state after time dt
+    <span class="kt">void</span> <span class="n">do_step</span><span class="p">(</span><span class="kt">double</span> <span class="n">dt</span><span class="p">);</span> <span class="c1">// calculate the state after time dt
 </span>
     <span class="kt">double</span> <span class="n">getRotKineticEnergy</span><span class="p">();</span>
-    <span class="n">vec3</span> <span class="n">getAngularMomentum</span><span class="p">();</span>     <span class="c1">//expressed in the inertial frame
-</span>    <span class="n">vec3</span> <span class="n">getOmega</span><span class="p">();</span>            <span class="c1">//expressed in the inertial frame
-</span>    <span class="n">mat33</span> <span class="n">getInertiaTensor</span><span class="p">();</span>   <span class="c1">//expressed in the inertial frame
+    <span class="n">vec3</span> <span class="n">getAngularMomentum</span><span class="p">();</span> <span class="c1">// expressed in the inertial frame
+</span>    <span class="n">vec3</span> <span class="n">getOmega</span><span class="p">();</span>           <span class="c1">// expressed in the inertial frame
+</span>    <span class="n">mat33</span> <span class="n">getInertiaTensor</span><span class="p">();</span>  <span class="c1">// expressed in the inertial frame
 </span>    <span class="n">mat33</span> <span class="n">getCosineMat</span><span class="p">();</span>
 
 <span class="k">private</span><span class="o">:</span>
-    <span class="c1">//double m_mass;
-</span>    <span class="kt">double</span> <span class="n">m_Ix</span><span class="p">,</span><span class="n">m_Iy</span><span class="p">,</span><span class="n">m_Iz</span><span class="p">;</span>
-    <span class="n">mat33</span> <span class="n">m_inertia</span><span class="p">;</span>    <span class="c1">//expressed in the body frame
+    <span class="c1">// double m_mass;
+</span>    <span class="kt">double</span> <span class="n">m_Ix</span><span class="p">,</span> <span class="n">m_Iy</span><span class="p">,</span> <span class="n">m_Iz</span><span class="p">;</span>
+    <span class="n">mat33</span> <span class="n">m_inertia</span><span class="p">;</span> <span class="c1">// expressed in the body frame
 </span>    <span class="n">mat33</span> <span class="n">m_cosMat</span><span class="p">;</span>
-    <span class="c1">//vec3 m_pos;
-</span>    <span class="n">vec3</span> <span class="n">m_omega</span><span class="p">;</span>       <span class="c1">//expressed in the body frame
-</span>    <span class="c1">//vec3 m_speed;
+    <span class="c1">// vec3 m_pos;
+</span>    <span class="n">vec3</span> <span class="n">m_omega</span><span class="p">;</span> <span class="c1">// expressed in the body frame
+</span>    <span class="c1">// vec3 m_speed;
 </span>    <span class="kt">double</span> <span class="n">m_time</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">vec3</span><span class="p">(</span><span class="n">vec3</span><span class="o">&amp;</span><span class="p">,</span><span class="n">mat33</span><span class="o">&amp;</span><span class="p">,</span><span class="kt">double</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">moment</span><span class="p">;</span> 
-    <span class="c1">//suppose M=M(omega,cosineMatrix,t), expressed in the body frame
-</span>    <span class="c1">//vec3 force(parameters);
+    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">vec3</span><span class="p">(</span><span class="n">vec3</span> <span class="o">&amp;</span><span class="p">,</span> <span class="n">mat33</span> <span class="o">&amp;</span><span class="p">,</span> <span class="kt">double</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">moment</span><span class="p">;</span>
+    <span class="c1">// suppose M=M(omega,cosineMatrix,t), expressed in the body frame
+</span>    <span class="c1">// vec3 force(parameters);
 </span>
-    <span class="kt">void</span> <span class="n">func</span><span class="p">(</span><span class="kt">double</span> <span class="n">t</span><span class="p">,</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">omega</span><span class="p">,</span> <span class="n">mat33</span><span class="o">&amp;</span> <span class="n">cosMat</span><span class="p">,</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">resVec</span><span class="p">,</span> <span class="n">mat33</span><span class="o">&amp;</span> <span class="n">resMat</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="n">func</span><span class="p">(</span><span class="kt">double</span> <span class="n">t</span><span class="p">,</span> <span class="n">vec3</span> <span class="o">&amp;</span><span class="n">omega</span><span class="p">,</span> <span class="n">mat33</span> <span class="o">&amp;</span><span class="n">cosMat</span><span class="p">,</span> <span class="n">vec3</span> <span class="o">&amp;</span><span class="n">resVec</span><span class="p">,</span>
+              <span class="n">mat33</span> <span class="o">&amp;</span><span class="n">resMat</span><span class="p">);</span>
     <span class="c1">// get the diff format of the moment dynamics
-</span>
-<span class="p">};</span>
+</span><span class="p">};</span>
+
+
 </code></pre></div></div>
 <p>代码中都有具体的注释解释。我实现的动力学的时间步进代码如下：</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">rigidBody</span><span class="o">::</span><span class="n">func</span><span class="p">(</span><span class="kt">double</span> <span class="n">t</span><span class="p">,</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">vec</span><span class="p">,</span> <span class="n">mat33</span><span class="o">&amp;</span> <span class="n">cosMat</span><span class="p">,</span> <span class="n">vec3</span><span class="o">&amp;</span> <span class="n">resVec</span><span class="p">,</span> <span class="n">mat33</span><span class="o">&amp;</span> <span class="n">resMat</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">vec3</span> <span class="n">M</span><span class="o">=</span><span class="n">moment</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span><span class="n">cosMat</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
-    <span class="kt">double</span> <span class="n">dwx</span><span class="o">=</span><span class="n">M</span><span class="p">.</span><span class="n">getX</span><span class="p">()</span><span class="o">/</span><span class="n">m_Ix</span><span class="o">+</span><span class="n">vec</span><span class="p">.</span><span class="n">getY</span><span class="p">()</span><span class="o">*</span><span class="n">vec</span><span class="p">.</span><span class="n">getZ</span><span class="p">()</span><span class="o">/</span><span class="n">m_Ix</span><span class="o">*</span><span class="p">(</span><span class="n">m_Iz</span><span class="o">-</span><span class="n">m_Iy</span><span class="p">);</span>
-    <span class="kt">double</span> <span class="n">dwy</span><span class="o">=</span><span class="n">M</span><span class="p">.</span><span class="n">getY</span><span class="p">()</span><span class="o">/</span><span class="n">m_Iy</span><span class="o">+</span><span class="n">vec</span><span class="p">.</span><span class="n">getX</span><span class="p">()</span><span class="o">*</span><span class="n">vec</span><span class="p">.</span><span class="n">getZ</span><span class="p">()</span><span class="o">/</span><span class="n">m_Iy</span><span class="o">*</span><span class="p">(</span><span class="n">m_Ix</span><span class="o">-</span><span class="n">m_Iz</span><span class="p">);</span>
-    <span class="kt">double</span> <span class="n">dwz</span><span class="o">=</span><span class="n">M</span><span class="p">.</span><span class="n">getZ</span><span class="p">()</span><span class="o">/</span><span class="n">m_Iz</span><span class="o">+</span><span class="n">vec</span><span class="p">.</span><span class="n">getX</span><span class="p">()</span><span class="o">*</span><span class="n">vec</span><span class="p">.</span><span class="n">getY</span><span class="p">()</span><span class="o">/</span><span class="n">m_Iz</span><span class="o">*</span><span class="p">(</span><span class="n">m_Iy</span><span class="o">-</span><span class="n">m_Ix</span><span class="p">);</span>
-    <span class="n">resVec</span><span class="o">=</span><span class="n">vec3</span><span class="p">(</span><span class="n">dwx</span><span class="p">,</span><span class="n">dwy</span><span class="p">,</span><span class="n">dwz</span><span class="p">);</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">rigidBody</span><span class="o">::</span><span class="n">func</span><span class="p">(</span><span class="kt">double</span> <span class="n">t</span><span class="p">,</span> <span class="n">vec3</span> <span class="o">&amp;</span><span class="n">vec</span><span class="p">,</span> <span class="n">mat33</span> <span class="o">&amp;</span><span class="n">cosMat</span><span class="p">,</span> <span class="n">vec3</span> <span class="o">&amp;</span><span class="n">resVec</span><span class="p">,</span>
+                     <span class="n">mat33</span> <span class="o">&amp;</span><span class="n">resMat</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vec3</span> <span class="n">M</span> <span class="o">=</span> <span class="n">moment</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">cosMat</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">dwx</span> <span class="o">=</span>
+        <span class="n">M</span><span class="p">.</span><span class="n">getX</span><span class="p">()</span> <span class="o">/</span> <span class="n">m_Ix</span> <span class="o">+</span> <span class="n">vec</span><span class="p">.</span><span class="n">getY</span><span class="p">()</span> <span class="o">*</span> <span class="n">vec</span><span class="p">.</span><span class="n">getZ</span><span class="p">()</span> <span class="o">/</span> <span class="n">m_Ix</span> <span class="o">*</span> <span class="p">(</span><span class="n">m_Iz</span> <span class="o">-</span> <span class="n">m_Iy</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">dwy</span> <span class="o">=</span>
+        <span class="n">M</span><span class="p">.</span><span class="n">getY</span><span class="p">()</span> <span class="o">/</span> <span class="n">m_Iy</span> <span class="o">+</span> <span class="n">vec</span><span class="p">.</span><span class="n">getX</span><span class="p">()</span> <span class="o">*</span> <span class="n">vec</span><span class="p">.</span><span class="n">getZ</span><span class="p">()</span> <span class="o">/</span> <span class="n">m_Iy</span> <span class="o">*</span> <span class="p">(</span><span class="n">m_Ix</span> <span class="o">-</span> <span class="n">m_Iz</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">dwz</span> <span class="o">=</span>
+        <span class="n">M</span><span class="p">.</span><span class="n">getZ</span><span class="p">()</span> <span class="o">/</span> <span class="n">m_Iz</span> <span class="o">+</span> <span class="n">vec</span><span class="p">.</span><span class="n">getX</span><span class="p">()</span> <span class="o">*</span> <span class="n">vec</span><span class="p">.</span><span class="n">getY</span><span class="p">()</span> <span class="o">/</span> <span class="n">m_Iz</span> <span class="o">*</span> <span class="p">(</span><span class="n">m_Iy</span> <span class="o">-</span> <span class="n">m_Ix</span><span class="p">);</span>
+    <span class="n">resVec</span> <span class="o">=</span> <span class="n">vec3</span><span class="p">(</span><span class="n">dwx</span><span class="p">,</span> <span class="n">dwy</span><span class="p">,</span> <span class="n">dwz</span><span class="p">);</span>
 
-    <span class="n">resMat</span><span class="o">=</span><span class="n">crossProductMat3</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span><span class="o">*</span><span class="n">cosMat</span><span class="p">;</span>
-
+    <span class="n">resMat</span> <span class="o">=</span> <span class="n">crossProductMat3</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span> <span class="o">*</span> <span class="n">cosMat</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="n">rigidBody</span><span class="o">::</span><span class="n">do_step</span><span class="p">(</span><span class="kt">double</span> <span class="n">dt</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">//using RK4 algorithm
+<span class="kt">void</span> <span class="n">rigidBody</span><span class="o">::</span><span class="n">do_step</span><span class="p">(</span><span class="kt">double</span> <span class="n">dt</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// using RK4 algorithm
 </span>
-    <span class="k">static</span> <span class="n">vec3</span> <span class="n">vk1</span><span class="p">,</span><span class="n">vk2</span><span class="p">,</span><span class="n">vk3</span><span class="p">,</span><span class="n">vk4</span><span class="p">;</span>
-    <span class="k">static</span> <span class="n">mat33</span> <span class="n">mk1</span><span class="p">,</span><span class="n">mk2</span><span class="p">,</span><span class="n">mk3</span><span class="p">,</span><span class="n">mk4</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">vec3</span> <span class="n">vk1</span><span class="p">,</span> <span class="n">vk2</span><span class="p">,</span> <span class="n">vk3</span><span class="p">,</span> <span class="n">vk4</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">mat33</span> <span class="n">mk1</span><span class="p">,</span> <span class="n">mk2</span><span class="p">,</span> <span class="n">mk3</span><span class="p">,</span> <span class="n">mk4</span><span class="p">;</span>
     <span class="k">static</span> <span class="n">vec3</span> <span class="n">resV</span><span class="p">;</span>
     <span class="k">static</span> <span class="n">mat33</span> <span class="n">resM</span><span class="p">;</span>
 
-    <span class="kt">double</span> <span class="n">t</span><span class="o">=</span><span class="n">m_time</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">t</span> <span class="o">=</span> <span class="n">m_time</span><span class="p">;</span>
 
-    <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">m_omega</span><span class="p">,</span><span class="n">m_cosMat</span><span class="p">,</span><span class="n">vk1</span><span class="p">,</span><span class="n">mk1</span><span class="p">);</span>
-    <span class="n">mk1</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
-    <span class="n">vk1</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
-    <span class="n">resV</span><span class="o">=</span><span class="n">m_omega</span><span class="o">+</span><span class="mf">.5</span><span class="o">*</span><span class="n">vk1</span><span class="p">;</span>
-    <span class="n">resM</span><span class="o">=</span><span class="n">m_cosMat</span><span class="o">+</span><span class="mf">.5</span><span class="o">*</span><span class="n">mk1</span><span class="p">;</span>
+    <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">m_omega</span><span class="p">,</span> <span class="n">m_cosMat</span><span class="p">,</span> <span class="n">vk1</span><span class="p">,</span> <span class="n">mk1</span><span class="p">);</span>
+    <span class="n">mk1</span> <span class="o">*=</span> <span class="n">dt</span><span class="p">;</span>
+    <span class="n">vk1</span> <span class="o">*=</span> <span class="n">dt</span><span class="p">;</span>
+    <span class="n">resV</span> <span class="o">=</span> <span class="n">m_omega</span> <span class="o">+</span> <span class="mf">.5</span> <span class="o">*</span> <span class="n">vk1</span><span class="p">;</span>
+    <span class="n">resM</span> <span class="o">=</span> <span class="n">m_cosMat</span> <span class="o">+</span> <span class="mf">.5</span> <span class="o">*</span> <span class="n">mk1</span><span class="p">;</span>
 
-    <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mf">.5</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span><span class="n">resV</span><span class="p">,</span><span class="n">resM</span><span class="p">,</span><span class="n">vk2</span><span class="p">,</span><span class="n">mk2</span><span class="p">);</span>
-    <span class="n">mk2</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
-    <span class="n">vk2</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
-    <span class="n">resV</span><span class="o">=</span><span class="n">m_omega</span><span class="o">+</span><span class="mf">.5</span><span class="o">*</span><span class="n">vk2</span><span class="p">;</span>
-    <span class="n">resM</span><span class="o">=</span><span class="n">m_cosMat</span><span class="o">+</span><span class="mf">.5</span><span class="o">*</span><span class="n">mk2</span><span class="p">;</span>
+    <span class="n">func</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mf">.5</span> <span class="o">*</span> <span class="n">dt</span><span class="p">,</span> <span class="n">resV</span><span class="p">,</span> <span class="n">resM</span><span class="p">,</span> <span class="n">vk2</span><span class="p">,</span> <span class="n">mk2</span><span class="p">);</span>
+    <span class="n">mk2</span> <span class="o">*=</span> <span class="n">dt</span><span class="p">;</span>
+    <span class="n">vk2</span> <span class="o">*=</span> <span class="n">dt</span><span class="p">;</span>
+    <span class="n">resV</span> <span class="o">=</span> <span class="n">m_omega</span> <span class="o">+</span> <span class="mf">.5</span> <span class="o">*</span> <span class="n">vk2</span><span class="p">;</span>
+    <span class="n">resM</span> <span class="o">=</span> <span class="n">m_cosMat</span> <span class="o">+</span> <span class="mf">.5</span> <span class="o">*</span> <span class="n">mk2</span><span class="p">;</span>
 
-    <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mf">.5</span><span class="o">*</span><span class="n">dt</span><span class="p">,</span><span class="n">resV</span><span class="p">,</span><span class="n">resM</span><span class="p">,</span><span class="n">vk3</span><span class="p">,</span><span class="n">mk3</span><span class="p">);</span>
-    <span class="n">mk3</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
-    <span class="n">vk3</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
-    <span class="n">resV</span><span class="o">=</span><span class="n">m_omega</span><span class="o">+</span><span class="n">vk3</span><span class="p">;</span>
-    <span class="n">resM</span><span class="o">=</span><span class="n">m_cosMat</span><span class="o">+</span><span class="n">mk3</span><span class="p">;</span>
+    <span class="n">func</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mf">.5</span> <span class="o">*</span> <span class="n">dt</span><span class="p">,</span> <span class="n">resV</span><span class="p">,</span> <span class="n">resM</span><span class="p">,</span> <span class="n">vk3</span><span class="p">,</span> <span class="n">mk3</span><span class="p">);</span>
+    <span class="n">mk3</span> <span class="o">*=</span> <span class="n">dt</span><span class="p">;</span>
+    <span class="n">vk3</span> <span class="o">*=</span> <span class="n">dt</span><span class="p">;</span>
+    <span class="n">resV</span> <span class="o">=</span> <span class="n">m_omega</span> <span class="o">+</span> <span class="n">vk3</span><span class="p">;</span>
+    <span class="n">resM</span> <span class="o">=</span> <span class="n">m_cosMat</span> <span class="o">+</span> <span class="n">mk3</span><span class="p">;</span>
 
-    <span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">dt</span><span class="p">,</span><span class="n">resV</span><span class="p">,</span><span class="n">resM</span><span class="p">,</span><span class="n">vk4</span><span class="p">,</span><span class="n">mk4</span><span class="p">);</span>
-    <span class="n">mk4</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
-    <span class="n">vk4</span><span class="o">*=</span><span class="n">dt</span><span class="p">;</span>
+    <span class="n">func</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">dt</span><span class="p">,</span> <span class="n">resV</span><span class="p">,</span> <span class="n">resM</span><span class="p">,</span> <span class="n">vk4</span><span class="p">,</span> <span class="n">mk4</span><span class="p">);</span>
+    <span class="n">mk4</span> <span class="o">*=</span> <span class="n">dt</span><span class="p">;</span>
+    <span class="n">vk4</span> <span class="o">*=</span> <span class="n">dt</span><span class="p">;</span>
 
-    <span class="n">m_time</span><span class="o">+=</span><span class="n">dt</span><span class="p">;</span>
-    <span class="n">m_omega</span><span class="o">+=</span><span class="p">(</span><span class="mf">.16666666666666666666666666666666666666666666666666666666666</span>
-        <span class="o">*</span><span class="p">(</span><span class="n">vk1</span><span class="o">+</span><span class="mf">2.0</span><span class="o">*</span><span class="n">vk2</span><span class="o">+</span><span class="mf">2.0</span><span class="o">*</span><span class="n">vk3</span><span class="o">+</span><span class="n">vk4</span><span class="p">));</span>
-    <span class="n">m_cosMat</span><span class="o">+=</span><span class="p">(</span><span class="mf">.16666666666666666666666666666666666666666666666666666666666</span>
-        <span class="o">*</span><span class="p">(</span><span class="n">mk1</span><span class="o">+</span><span class="mf">2.0</span><span class="o">*</span><span class="n">mk2</span><span class="o">+</span><span class="mf">2.0</span><span class="o">*</span><span class="n">mk3</span><span class="o">+</span><span class="n">mk4</span><span class="p">));</span>
-
+    <span class="n">m_time</span> <span class="o">+=</span> <span class="n">dt</span><span class="p">;</span>
+    <span class="n">m_omega</span> <span class="o">+=</span> <span class="p">(</span><span class="mf">.16666666666666666666666666666666666666666666666666666666666</span> <span class="o">*</span>
+                <span class="p">(</span><span class="n">vk1</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">vk2</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">vk3</span> <span class="o">+</span> <span class="n">vk4</span><span class="p">));</span>
+    <span class="n">m_cosMat</span> <span class="o">+=</span> <span class="p">(</span><span class="mf">.16666666666666666666666666666666666666666666666666666666666</span> <span class="o">*</span>
+                 <span class="p">(</span><span class="n">mk1</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">mk2</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">mk3</span> <span class="o">+</span> <span class="n">mk4</span><span class="p">));</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <p>然后需要绘制3维的动画，这一点也很麻烦。首先需要写一个sceneModifier来显示三维模型：</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SceneModifier</span><span class="o">::</span><span class="n">SceneModifier</span><span class="p">(</span><span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QEntity</span> <span class="o">*</span><span class="n">rootEntity</span><span class="p">)</span>
-    <span class="o">:</span> <span class="n">m_rootEntity</span><span class="p">(</span><span class="n">rootEntity</span><span class="p">)</span>
-<span class="p">{</span>
+    <span class="o">:</span> <span class="n">m_rootEntity</span><span class="p">(</span><span class="n">rootEntity</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Cylinder shape data
 </span>    <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QCylinderMesh</span> <span class="o">*</span><span class="n">cylinder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QCylinderMesh</span><span class="p">();</span>
     <span class="n">cylinder</span><span class="o">-&gt;</span><span class="n">setRadius</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
@@ -2854,10 +2860,12 @@ $q$是定向四元数，表示刚体的定向，$\omega$是角速度四元数。
     <span class="c1">// CylinderMesh Transform
 </span>    <span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span> <span class="o">*</span><span class="n">cylinderTransform</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span><span class="p">();</span>
     <span class="n">cylinderTransform</span><span class="o">-&gt;</span><span class="n">setScale</span><span class="p">(</span><span class="mf">1.5</span><span class="n">f</span><span class="p">);</span>
-    <span class="n">cylinderTransform</span><span class="o">-&gt;</span><span class="n">setRotation</span><span class="p">(</span><span class="n">QQuaternion</span><span class="o">::</span><span class="n">fromAxisAndAngle</span><span class="p">(</span><span class="n">QVector3D</span><span class="p">(</span><span class="mf">1.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">0.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">0.0</span><span class="n">f</span><span class="p">),</span> <span class="mf">20.0</span><span class="n">f</span><span class="p">));</span>
+    <span class="n">cylinderTransform</span><span class="o">-&gt;</span><span class="n">setRotation</span><span class="p">(</span>
+        <span class="n">QQuaternion</span><span class="o">::</span><span class="n">fromAxisAndAngle</span><span class="p">(</span><span class="n">QVector3D</span><span class="p">(</span><span class="mf">1.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">0.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">0.0</span><span class="n">f</span><span class="p">),</span> <span class="mf">20.0</span><span class="n">f</span><span class="p">));</span>
     <span class="n">cylinderTransform</span><span class="o">-&gt;</span><span class="n">setTranslation</span><span class="p">(</span><span class="n">QVector3D</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">4.0</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">));</span>
 
-    <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QPhongMaterial</span> <span class="o">*</span><span class="n">cylinderMaterial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QPhongMaterial</span><span class="p">();</span>
+    <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QPhongMaterial</span> <span class="o">*</span><span class="n">cylinderMaterial</span> <span class="o">=</span>
+        <span class="k">new</span> <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QPhongMaterial</span><span class="p">();</span>
     <span class="n">cylinderMaterial</span><span class="o">-&gt;</span><span class="n">setDiffuse</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="n">QRgb</span><span class="p">(</span><span class="mh">0x928327</span><span class="p">)));</span>
 
     <span class="c1">// Cylinder
@@ -2868,12 +2876,11 @@ $q$是定向四元数，表示刚体的定向，$\omega$是角速度四元数。
 <span class="p">}</span>
 </code></pre></div></div>
 <p>这个例子是从Qt3D的一个example改过来的，Qt3D可以让我们更加方便地绘制3D模型。具体的调用方法很简单，其中光线、材质渲染与这里讨论的主题关系不大，可以不用管。主要是需要对动画涉及的刚体的transform需要制作动画。</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">SceneModifier</span><span class="o">::</span><span class="n">setSome</span><span class="p">(</span><span class="kt">int</span> <span class="n">type</span><span class="p">)</span>
-<span class="p">{</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">SceneModifier</span><span class="o">::</span><span class="n">setSome</span><span class="p">(</span><span class="kt">int</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">delete</span> <span class="n">m_satEntity</span><span class="p">;</span>
     <span class="n">m_satEntity</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QEntity</span><span class="p">(</span><span class="n">m_rootEntity</span><span class="p">);</span>
 
-    <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QPhongMaterial</span> <span class="o">*</span><span class="n">satMaterial</span><span class="o">=</span><span class="k">new</span> <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QPhongMaterial</span><span class="p">();</span>
+    <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QPhongMaterial</span> <span class="o">*</span><span class="n">satMaterial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Qt3DExtras</span><span class="o">::</span><span class="n">QPhongMaterial</span><span class="p">();</span>
     <span class="n">satMaterial</span><span class="o">-&gt;</span><span class="n">setDiffuse</span><span class="p">(</span><span class="n">QColor</span><span class="p">(</span><span class="n">QRgb</span><span class="p">(</span><span class="mh">0x928327</span><span class="p">)));</span>
 
     <span class="c1">// satMesh Transform
@@ -2881,12 +2888,12 @@ $q$是定向四元数，表示刚体的定向，$\omega$是角速度四元数。
     <span class="n">satTransform</span><span class="o">-&gt;</span><span class="n">setScale</span><span class="p">(</span><span class="mf">1.5</span><span class="n">f</span><span class="p">);</span>
 
     <span class="n">satTransform</span><span class="o">-&gt;</span><span class="n">setTranslation</span><span class="p">(</span><span class="n">QVector3D</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="n">f</span><span class="p">,</span> <span class="mf">4.0</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">));</span>
-    <span class="n">TransformController</span> <span class="o">*</span><span class="n">ctrl</span><span class="o">=</span><span class="k">new</span> <span class="n">TransformController</span><span class="p">(</span><span class="n">satTransform</span><span class="p">);</span>
+    <span class="n">TransformController</span> <span class="o">*</span><span class="n">ctrl</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TransformController</span><span class="p">(</span><span class="n">satTransform</span><span class="p">);</span>
     <span class="n">ctrl</span><span class="o">-&gt;</span><span class="n">setType</span><span class="p">(</span><span class="n">type</span><span class="p">);</span>
     <span class="n">ctrl</span><span class="o">-&gt;</span><span class="n">setTarget</span><span class="p">(</span><span class="n">satTransform</span><span class="p">);</span>
     <span class="n">ctrl</span><span class="o">-&gt;</span><span class="n">setTime</span><span class="p">(</span><span class="mf">.0</span><span class="n">f</span><span class="p">);</span>
 
-    <span class="n">QPropertyAnimation</span> <span class="o">*</span><span class="n">animation</span><span class="o">=</span><span class="k">new</span> <span class="n">QPropertyAnimation</span><span class="p">(</span><span class="n">satTransform</span><span class="p">);</span>
+    <span class="n">QPropertyAnimation</span> <span class="o">*</span><span class="n">animation</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QPropertyAnimation</span><span class="p">(</span><span class="n">satTransform</span><span class="p">);</span>
     <span class="n">animation</span><span class="o">-&gt;</span><span class="n">setTargetObject</span><span class="p">(</span><span class="n">ctrl</span><span class="p">);</span>
     <span class="n">animation</span><span class="o">-&gt;</span><span class="n">setPropertyName</span><span class="p">(</span><span class="s">"time"</span><span class="p">);</span>
     <span class="n">animation</span><span class="o">-&gt;</span><span class="n">setDuration</span><span class="p">(</span><span class="mi">100000</span><span class="p">);</span>
@@ -2898,14 +2905,14 @@ $q$是定向四元数，表示刚体的定向，$\omega$是角速度四元数。
     <span class="c1">// sat
 </span>    <span class="n">m_satEntity</span><span class="o">-&gt;</span><span class="n">addComponent</span><span class="p">(</span><span class="n">satTransform</span><span class="p">);</span>
     <span class="n">m_satEntity</span><span class="o">-&gt;</span><span class="n">addComponent</span><span class="p">(</span><span class="n">satMaterial</span><span class="p">);</span>
-
 <span class="p">}</span>
+
 </code></pre></div></div>
 <p>因此我们需要定义一个TransformController的类：</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TransformController</span><span class="o">:</span> <span class="k">public</span> <span class="n">QObject</span>
-<span class="p">{</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TransformController</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QObject</span> <span class="p">{</span>
     <span class="n">Q_OBJECT</span>
-    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span><span class="o">*</span> <span class="n">target</span> <span class="n">READ</span> <span class="n">target</span> <span class="n">WRITE</span> <span class="n">setTarget</span> <span class="n">NOTIFY</span> <span class="n">targetChanged</span><span class="p">)</span>
+    <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span> <span class="o">*</span><span class="n">target</span> <span class="n">READ</span> <span class="n">target</span> <span class="n">WRITE</span> <span class="n">setTarget</span> <span class="n">NOTIFY</span>
+                   <span class="n">targetChanged</span><span class="p">)</span>
     <span class="n">Q_PROPERTY</span><span class="p">(</span><span class="kt">float</span> <span class="n">time</span> <span class="n">READ</span> <span class="n">time</span> <span class="n">WRITE</span> <span class="n">setTime</span> <span class="n">NOTIFY</span> <span class="n">timeChanged</span><span class="p">)</span>
 
 <span class="k">public</span><span class="o">:</span>
@@ -2916,7 +2923,6 @@ $q$是定向四元数，表示刚体的定向，$\omega$是角速度四元数。
 
     <span class="kt">void</span> <span class="n">setTime</span><span class="p">(</span><span class="kt">float</span> <span class="n">time</span><span class="p">);</span>
     <span class="kt">float</span> <span class="n">time</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
-
 
 <span class="n">signals</span><span class="o">:</span>
     <span class="kt">void</span> <span class="n">targetChanged</span><span class="p">();</span>
@@ -2937,58 +2943,46 @@ $q$是定向四元数，表示刚体的定向，$\omega$是角速度四元数。
     vec3 omega;
     vec3 angularM;
     mat33 cosineMat;*/</span>
-
 <span class="p">};</span>
 </code></pre></div></div>
 <p>TransformController中比较关键的几个代码如下：</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">TransformController</span><span class="o">::</span><span class="n">setTarget</span><span class="p">(</span><span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span> <span class="o">*</span><span class="n">target</span><span class="p">)</span>
-<span class="p">{</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">TransformController</span><span class="o">::</span><span class="n">setTarget</span><span class="p">(</span><span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span> <span class="o">*</span><span class="n">target</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">m_target</span> <span class="o">!=</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">m_target</span> <span class="o">=</span> <span class="n">target</span><span class="p">;</span>
         <span class="n">emit</span> <span class="n">targetChanged</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span> <span class="o">*</span><span class="n">TransformController</span><span class="o">::</span><span class="n">target</span><span class="p">()</span> <span class="k">const</span>
-<span class="p">{</span>
-    <span class="k">return</span> <span class="n">m_target</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="n">Qt3DCore</span><span class="o">::</span><span class="n">QTransform</span> <span class="o">*</span><span class="n">TransformController</span><span class="o">::</span><span class="n">target</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m_target</span><span class="p">;</span> <span class="p">}</span>
 
-<span class="kt">void</span> <span class="n">TransformController</span><span class="o">::</span><span class="n">setTime</span><span class="p">(</span><span class="kt">float</span> <span class="n">time</span><span class="p">)</span>
-<span class="p">{</span>
+<span class="kt">void</span> <span class="n">TransformController</span><span class="o">::</span><span class="n">setTime</span><span class="p">(</span><span class="kt">float</span> <span class="n">time</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">qFuzzyCompare</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">m_time</span><span class="p">))</span> <span class="p">{</span>
-        <span class="n">dt</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="o">-</span><span class="n">m_time</span><span class="p">)</span><span class="o">/</span><span class="mf">12000000.0</span><span class="p">;</span><span class="c1">//1000.0;
-</span>        <span class="c1">//dt=.01;
-</span>        <span class="n">m_time</span><span class="o">=</span><span class="n">time</span><span class="p">;</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span> <span class="o">-</span> <span class="n">m_time</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12000000.0</span><span class="p">;</span> <span class="c1">// 1000.0;
+</span>        <span class="c1">// dt=.01;
+</span>        <span class="n">m_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">;</span>
         <span class="n">updateQuat</span><span class="p">();</span>
         <span class="n">emit</span> <span class="n">timeChanged</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kt">float</span> <span class="n">TransformController</span><span class="o">::</span><span class="n">time</span><span class="p">()</span> <span class="k">const</span>
-<span class="p">{</span>
-    <span class="k">return</span> <span class="n">m_time</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="kt">float</span> <span class="n">TransformController</span><span class="o">::</span><span class="n">time</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">m_time</span><span class="p">;</span> <span class="p">}</span>
 
-<span class="kt">void</span> <span class="n">TransformController</span><span class="o">::</span><span class="n">updateQuat</span><span class="p">()</span>
-<span class="p">{</span>
+<span class="kt">void</span> <span class="n">TransformController</span><span class="o">::</span><span class="n">updateQuat</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">m_body</span><span class="p">.</span><span class="n">do_step</span><span class="p">(</span><span class="n">dt</span><span class="p">);</span>
-    <span class="n">m_quat</span><span class="o">=</span><span class="n">fromMat33</span><span class="p">(</span><span class="n">m_body</span><span class="p">.</span><span class="n">getCosineMat</span><span class="p">());</span>
+    <span class="n">m_quat</span> <span class="o">=</span> <span class="n">fromMat33</span><span class="p">(</span><span class="n">m_body</span><span class="p">.</span><span class="n">getCosineMat</span><span class="p">());</span>
     <span class="n">m_target</span><span class="o">-&gt;</span><span class="n">setRotation</span><span class="p">(</span><span class="n">m_quat</span><span class="p">);</span>
 
+    <span class="k">static</span> <span class="n">vec3</span> <span class="n">am</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">z_</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">vec3</span> <span class="n">z</span><span class="p">(</span><span class="mf">.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">.0</span><span class="p">);</span>
+    <span class="n">z_</span> <span class="o">=</span> <span class="n">m_body</span><span class="p">.</span><span class="n">getCosineMat</span><span class="p">().</span><span class="n">transpose</span><span class="p">()</span> <span class="o">*</span> <span class="n">z</span><span class="p">;</span>
+    <span class="c1">// express the vector in the inertial frame
+</span>    <span class="n">am</span> <span class="o">=</span> <span class="n">m_body</span><span class="p">.</span><span class="n">getAngularMomentum</span><span class="p">();</span>
 
-    <span class="k">static</span> <span class="n">vec3</span> <span class="n">am</span><span class="p">,</span><span class="n">omega</span><span class="p">,</span><span class="n">z_</span><span class="p">;</span>
-    <span class="k">static</span> <span class="n">vec3</span> <span class="n">z</span><span class="p">(</span><span class="mf">.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">.0</span><span class="p">);</span>
-    <span class="n">z_</span><span class="o">=</span><span class="n">m_body</span><span class="p">.</span><span class="n">getCosineMat</span><span class="p">().</span><span class="n">transpose</span><span class="p">()</span><span class="o">*</span><span class="n">z</span><span class="p">;</span>     
-    <span class="c1">//express the vector in the inertial frame
-</span>    <span class="n">am</span><span class="o">=</span><span class="n">m_body</span><span class="p">.</span><span class="n">getAngularMomentum</span><span class="p">();</span>
-
-    <span class="c1">//omega=m_body.getOmega();
-</span>    <span class="n">omega</span><span class="o">=</span><span class="n">m_body</span><span class="p">.</span><span class="n">m_omega</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">T</span><span class="o">=</span><span class="n">m_body</span><span class="p">.</span><span class="n">getRotKineticEnergy</span><span class="p">(),</span><span class="n">theta</span><span class="o">=</span><span class="n">angle</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">z_</span><span class="p">)</span><span class="o">*</span><span class="n">degPerRad</span><span class="p">;</span>  
-    <span class="c1">//theta is called the nutation angle
-</span>
-<span class="p">}</span>
+    <span class="c1">// omega=m_body.getOmega();
+</span>    <span class="n">omega</span> <span class="o">=</span> <span class="n">m_body</span><span class="p">.</span><span class="n">m_omega</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">T</span> <span class="o">=</span> <span class="n">m_body</span><span class="p">.</span><span class="n">getRotKineticEnergy</span><span class="p">(),</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">angle</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">z_</span><span class="p">)</span> <span class="o">*</span> <span class="n">degPerRad</span><span class="p">;</span>
+    <span class="c1">// theta is called the nutation angle
+</span><span class="p">}</span>
 </code></pre></div></div>
 <p>由于TransformController的类定义有这样一条语句：<code class="highlighter-rouge">Q_PROPERTY(float time READ time WRITE setTime NOTIFY timeChanged)</code>,因此如果时间变化，就会调用setTime函数，setTime函数会调用updateQuat函数，在updateQuat函数中进行动力学的时间步进求解，而m_target就保存的是刚体的旋转四元数信息，更新之后就会用新的旋转四元数渲染三维模型。</p>
 ]]></content>
