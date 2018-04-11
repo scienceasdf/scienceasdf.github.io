@@ -12,6 +12,7 @@
   <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
   <script src="https://cdn.bootcss.com/mathjs/4.0.1/math.min.js"></script>
   <script src="./js/orbitState.js"></script>
+  <script src="./js/orbitElementGui.js"></script>
   <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
   <script src="./js/echarts-gl.min.js"></script>
 </head>
@@ -97,70 +98,23 @@
 
 
 <script type="text/javascript">
-  $('#iSMA').val('8576');
-  $('#iECC').val(0.241);
-  $('#iINC').val(112.228);
-  $('#iAOP').val(19.6);
-  $('#iRAAN').val(120.671);
-  $('#iTA').val(25.325);
-  $('#iN').val(1);
-  $('#iNPLOT').val(1000);
+    var theOrbitMap = getOrbitMap();
+    setSatlelliteSetsOnGui(theOrbitMap.get('normal'));
+    $('#iN').val(1);
+    $('#iNPLOT').val(1000);
 
-  function loadSat() {
-    var str = document.getElementById("sat").value;
-    if (str == 'GeoSync') {
-      $('#iSMA').val(42164);
-      $('#iECC').val(0);
-      $('#iINC').val(0);
-      $('#iAOP').val(19.6);
-      $('#iRAAN').val(70);
-      $('#iTA').val(25.325);
-      $('#iN').val(1);
-      $('#iNPLOT').val(1000);
-    } else if (str == 'eightSat') {
-      $('#iSMA').val(42164);
-      $('#iECC').val(0);
-      $('#iINC').val(50);
-      $('#iAOP').val(19.6);
-      $('#iRAAN').val(80);
-      $('#iTA').val(25.325);
-      $('#iN').val(1);
-      $('#iNPLOT').val(1000);
-    } else if (str == 'normal') {
-      $('#iSMA').val('8576');
-      $('#iECC').val(0.241);
-      $('#iINC').val(112.228);
-      $('#iAOP').val(19.6);
-      $('#iRAAN').val(120.671);
-      $('#iTA').val(25.325);
-      $('#iN').val(1);
-      $('#iNPLOT').val(1000);
-    } else if (str == 'eightSat2') {
-      $('#iSMA').val(42164);
-      $('#iECC').val(0.4);
-      $('#iINC').val(50);
-      $('#iAOP').val(19.6);
-      $('#iRAAN').val(80);
-      $('#iTA').val(25.325);
-      $('#iN').val(1);
-      $('#iNPLOT').val(1000);
+    function loadSat() {
+        var theOrbitMap = getOrbitMap();
+        var str = document.getElementById("sat").value;
+        setSatlelliteSetsOnGui(theOrbitMap.get(str));
     }
-  }
-
   function plotGroundTrack() {
-    var a = Number($('#iSMA').val()) * 1000.0;
-    var time = 2 * pi * Math.pow(a * a * a / mu, 0.5) * Number($('#iN').val())
-    var orbit1 = new orbit(Number($('#iSMA').val() * 1000.0),
-      Number($('#iECC').val()),
-      Number($('#iINC').val() * radPerDeg),
-      Number($('#iAOP').val() * radPerDeg),
-      Number($('#iRAAN').val() * radPerDeg),
-      Number($('#iTA').val()) * radPerDeg);
+    var orbit1 = getOrbitStateOnGui();
+    var time = getRunTimeOnGui();
     var worldMapContainer = document.getElementById('main');
 
     var allData = orbit1.getGroundTrack(time);
 
-    //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
     var resizeWorldMapContainer = function () {
       worldMapContainer.style.width = window.innerWidth + 'px';
       worldMapContainer.style.height = window.innerHeight + 'px';
@@ -168,7 +122,6 @@
     resizeWorldMapContainer();
     var myChart = echarts.init(worldMapContainer);
     window.onresize = function () {
-      //重置容器高宽
       resizeWorldMapContainer();
       myChart.resize();
     };
@@ -192,22 +145,32 @@
             type: 'scatterGL', // series图表类型
             coordinateSystem: 'geo', // series坐标系类型
             data: allData,
-          }
+          },{
+            symbol: 'image://gps.svg',
+            name: '星下点轨迹', 
+            symbolSize: 10,
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            data: [[allData[0][0],allData[0][1]]],
+          },{
+            symbol: 'image://gps.svg',
+            name: '星下点轨迹',
+            symbolSize: 10,
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            data: [[allData[allData.length-1][0],allData[allData.length-1][1]]],
+          },
         ]
       });
     });
   }
 </script>
 
-<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-
 <script type="text/javascript">
   plotWorldMap();
   function plotWorldMap() {
     var worldMapContainer = document.getElementById('main');
 
-
-    //用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
     var resizeWorldMapContainer = function () {
       worldMapContainer.style.width = window.innerWidth + 'px';
       worldMapContainer.style.height = window.innerHeight + 'px';
@@ -215,7 +178,6 @@
     resizeWorldMapContainer();
     var myChart = echarts.init(worldMapContainer);
     window.onresize = function () {
-      //重置容器高宽
       resizeWorldMapContainer();
       myChart.resize();
     };
@@ -227,23 +189,9 @@
         geo: {
           map: 'world'
         },
-        series: [
-          {
-            symbol: 'circle',
-            name: '星下点轨迹', // series名称
-            symbolSize: 5,
-            type: 'scatter', // series图表类型
-            coordinateSystem: 'geo', // series坐标系类型
-            //data : [[0,0],[90,0],[45,45],[180,0],[-45,-45],[200,0]]
-          }
-        ]
       });
     });
   }
-  //myChart.setOption(option);
-
-
-
 </script>
 
 </html>
