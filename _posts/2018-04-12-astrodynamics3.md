@@ -152,7 +152,7 @@ $$
 &=-2w^{-1}(\bar w)^{-3}[|\dot w|^2+C|w|^2]
 \end{align}
 $$
-现在令$E_w=\frac{1}{2}(|\dot w|^2+C|w|^2)，可以得到
+现在令$E_w=\frac{1}{2}(|\dot w|^2+C|w|^2)$，可以得到
 \begin{equation}
 \frac{d^2 z}{d\tau^2}=-4E_ww^{-1}\bar w^{-3}=-$E_w\frac{z}{|z|^3}
 \end{equation}
