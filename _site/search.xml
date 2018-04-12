@@ -3,7 +3,7 @@
   
     <entry>
       <title><![CDATA[初窥牛顿平方反比定律和胡克定律的对偶性]]></title>
-      <url>/dynamics/2018/04/12/astrodynamics2/</url>
+      <url>/dynamics/2018/04/12/astrodynamics3/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">
   		MathJax.Hub.Config({
             tex2jax: {
@@ -2489,7 +2489,7 @@ $next$<span class="nt">&lt;/snippet&gt;</span>
   
     <entry>
       <title><![CDATA[轨道动力学中常用的计算机算法（二）]]></title>
-      <url>/programming/2017/04/14/astrodynamics3/</url>
+      <url>/programming/2017/04/14/astrodynamics2/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">
   		MathJax.Hub.Config({
             tex2jax: {
