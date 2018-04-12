@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>在线螺旋桨性能查询</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+</head>
+
+<body>
+    <div data-role="page">
+        <div data-role="header">
+            <a href="../index.html" data-role="button" data-icon="home" data-ajax="false">首页</a>
+            <h1>在线螺旋桨性能查询</h1>
+        </div>
+
+        <div id="pageone" data-role="main" class="ui-content">
+            <a id="main" style=" width: 500px;height:500px;"></a>
+            <a id="main2" style="width: 500px;height:500px;"></a>
+            </label>
+        </div>
+
+    
+    </div
+</body>
+
+<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+<script src="https://cdn.bootcss.com/mathjs/4.1.0/math.min.js"></script>
+<script type="text/javascript">
+var pi = 3.141592653589793;
+var slices = 1000;
+var radius = 1.75;
+var dataBeforeMap = new Array(slices);
+var dataAfterMap = new Array(slices);
+for(var i = 0; i < slices; ++i){
+    dataBeforeMap[i] = [radius * Math.cos(i * 2 * pi / slices), 0.6 * radius * Math.sin(i * 2 * pi / slices)];
+    var z = math.complex(dataBeforeMap[i][0], dataBeforeMap[i][1]);
+    var f = math.multiply(z,z);//math.add(z,math.divide(1,z));
+    dataAfterMap[i] = [f.re, f.im];
+}
+plot();
+
+    function plot() {
+        var worldMapContainer = document.getElementById('main');
+        var myChart = echarts.init(worldMapContainer);
+
+
+        var option = {
+            title: {
+                text: ""
+            },
+            tooltip: {},
+            xAxis: {
+                max: 3,
+                min: -3,
+                axisLabel: {
+                    formatter: '{value}'
+                }
+            },
+            yAxis: {
+                max: 3,
+                min: -3,
+                axisLabel: {
+                    formatter: '{value} ',
+                },
+                position: 'right'
+            },
+            series: [{
+                data: dataBeforeMap,
+                type: 'scatter',
+                symbolSize: 1,
+            }]
+        };
+        myChart.setOption(option);
+
+
+        var worldMapContainer2 = document.getElementById('main2');
+
+        var myChart2 = echarts.init(worldMapContainer2);
+
+
+        var option2 = {
+            title: {
+                text: ""
+            },
+            tooltip: {},
+            legend: {
+                data: ['拉力']
+            },
+            xAxis: {
+                max: 3,
+                min: -3,
+                axisLabel: {
+                    formatter: '{value}'
+                }
+            },
+            yAxis: {
+                max: 3,
+                min: -3,
+                axisLabel: {
+                    formatter: '{value} ',
+                },
+                position: 'right'
+            },
+            series: [{
+                data: dataAfterMap,
+                type: 'scatter',
+                symbolSize: 1,
+                //smooth : true
+            }]
+        };
+        myChart2.setOption(option2);
+    };
+
+
+</script>
+
+</html>
