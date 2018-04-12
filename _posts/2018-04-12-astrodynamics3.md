@@ -148,7 +148,7 @@ $$
 \frac{d^2z}{d\tau^2}&=\frac{1}{|w|^2}\frac{d}{dt}(\frac{1}{|w|^2}\frac{dw^2}{dt})\\
 &=\frac{2}{w\bar w}\frac{d}{dt}(\frac{1}{\bar w}\frac{dw}{dt})\\
 &=\frac{2}{w\bar w^3}\frac{dw}{dt}\frac{d\bar w}{dt}+\frac{2}{w\bar w^2}\frac{d^2w}{dt^2}\\
--\frac{2}{w\bar w}[\bar w^{-2}\frac{dw}{dt}\bar{\frac{dw}{dt}}+C\frac{w}{\bar w}]\\
+&=-\frac{2}{w\bar w}[\bar w^{-2}\frac{dw}{dt}\bar{\frac{dw}{dt}}+C\frac{w}{\bar w}]\\
 &=-2w^{-1}(\bar w)^{-3}[|\dot w|^2+C|w|^2]
 \end{align}
 $$
