@@ -66,7 +66,7 @@ $$
 $$a=R+\frac{1}{R}$$  
 $$b=R-\frac{1}{R}$$  
 $$c=\sqrt{a^2-b^2}=2$$  
-<img src="{{ site.url }}/assets//blog_images/Jukowsky.PNG" width="500px"/>
+<img src="{{ site.url }}/assets//blog_images/Jukowsky.png" width="500px"/>
 
 ### 平方函数
 \begin{equation}
