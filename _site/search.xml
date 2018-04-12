@@ -63,7 +63,7 @@ f(z)&=z+\frac{1}{z}\\
 <script type="math/tex">a=R+\frac{1}{R}</script><br />
 <script type="math/tex">b=R-\frac{1}{R}</script><br />
 <script type="math/tex">c=\sqrt{a^2-b^2}=2</script><br />
-<img src="http://localhost:4000/assets//blog_images/Jukowsky.PNG" width="500px" /></p>
+<img src="http://localhost:4000/assets//blog_images/Jukowsky.png" width="500px" /></p>
 
 <h3 id="平方函数">平方函数</h3>
 <p>\begin{equation}

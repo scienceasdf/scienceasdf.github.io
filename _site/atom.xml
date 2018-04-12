@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-04-12T15:54:29+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">初窥牛顿平方反比定律和胡克定律的对偶性</title><link href="http://localhost:4000/dynamics/2018/04/12/astrodynamics3/" rel="alternate" type="text/html" title="初窥牛顿平方反比定律和胡克定律的对偶性" /><published>2018-04-12T00:00:00+08:00</published><updated>2018-04-12T00:00:00+08:00</updated><id>http://localhost:4000/dynamics/2018/04/12/astrodynamics3</id><content type="html" xml:base="http://localhost:4000/dynamics/2018/04/12/astrodynamics3/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-04-12T15:57:09+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">初窥牛顿平方反比定律和胡克定律的对偶性</title><link href="http://localhost:4000/dynamics/2018/04/12/astrodynamics3/" rel="alternate" type="text/html" title="初窥牛顿平方反比定律和胡克定律的对偶性" /><published>2018-04-12T00:00:00+08:00</published><updated>2018-04-12T00:00:00+08:00</updated><id>http://localhost:4000/dynamics/2018/04/12/astrodynamics3</id><content type="html" xml:base="http://localhost:4000/dynamics/2018/04/12/astrodynamics3/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({
             tex2jax: {
                 inlineMath: [['$','$'], ['\\(','\\)']]
@@ -57,7 +57,7 @@ f(z)&amp;=z+\frac{1}{z}\\
 &lt;script type=&quot;math/tex&quot;&gt;a=R+\frac{1}{R}&lt;/script&gt;&lt;br /&gt;
 &lt;script type=&quot;math/tex&quot;&gt;b=R-\frac{1}{R}&lt;/script&gt;&lt;br /&gt;
 &lt;script type=&quot;math/tex&quot;&gt;c=\sqrt{a^2-b^2}=2&lt;/script&gt;&lt;br /&gt;
-&lt;img src=&quot;http://localhost:4000/assets//blog_images/Jukowsky.PNG&quot; width=&quot;500px&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://localhost:4000/assets//blog_images/Jukowsky.png&quot; width=&quot;500px&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;平方函数&quot;&gt;平方函数&lt;/h3&gt;
 &lt;p&gt;\begin{equation}
