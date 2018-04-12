@@ -85,7 +85,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="网络,安卓开发,Qt," />
+  <meta name="keywords" content="天文,动力学,数值算法,boost," />
 
 
 
@@ -113,20 +113,18 @@
 
 
 
-<meta name="description" content="利用GitHub提供的API,实现程序的新版本检查功能。">
-<meta name="keywords" content="网络, 安卓开发, Qt">
+<meta name="description" content="">
+<meta name="keywords" content="天文, 动力学, 数值算法, boost">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实现Qt程序的新版本检查">
-<meta property="og:url" content="http://localhost:4000/programming/2017/12/17/updateCheck/">
+<meta property="og:title" content="初窥含太阳系动力系统在内的几类动力系统">
+<meta property="og:url" content="http://localhost:4000/dynamics/2018/04/12/dynamics/">
 <meta property="og:site_name" content="scienceasdf">
-<meta property="og:description" content="利用GitHub提供的API,实现程序的新版本检查功能。">
+<meta property="og:description" content="">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://localhost:4000/assets//blog_images/release.png">
-<meta property="og:updated_time" content="2018-12-17T00:00:00+08:00">
+<meta property="og:updated_time" content="2018-04-12T00:00:00+08:00">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="实现Qt程序的新版本检查">
-<meta name="twitter:description" content="利用GitHub提供的API,实现程序的新版本检查功能。">
-<meta name="twitter:image" content="http://localhost:4000/assets//blog_images/release.png">
+<meta name="twitter:title" content="初窥含太阳系动力系统在内的几类动力系统">
+<meta name="twitter:description" content="">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -159,7 +157,7 @@
 
 
 
-  <title>实现Qt程序的新版本检查</title>
+  <title>初窥含太阳系动力系统在内的几类动力系统</title>
   
 
 
@@ -307,7 +305,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/programming/2017/12/17/updateCheck/">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/dynamics/2018/04/12/dynamics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="scienceasdf">
@@ -327,7 +325,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            实现Qt程序的新版本检查
+            初窥含太阳系动力系统在内的几类动力系统
           
         </h1>
         
@@ -341,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-17T00:00:00+08:00">
-                2017-12-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-12T00:00:00+08:00">
+                2018-04-12
               </time>
             
 
@@ -365,8 +363,8 @@
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/Programming" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
+                  <a href="/category/#/Dynamics" itemprop="url" rel="index">
+                    <span itemprop="name">Dynamics</span>
                   </a>
                 </span>
 
@@ -406,91 +404,101 @@
 
       
         <script type="text/x-mathjax-config">
-  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
-  							TeX: { equationNumbers: {  autoNumber: "AMS"  },
-     							   extensions: ["AMSmath.js"]}
+  		MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']]
+            },
+  			TeX: { 
+                equationNumbers: {  
+                    autoNumber: "AMS"  
+                },
+     		    extensions: ["AMSmath.js"]
+            },
+            CommonHTML: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            "HTML-CSS": { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            SVG: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            }
   		});
 		</script>
 
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<p><strong>利用GitHub提供的API,实现程序的新版本检查功能。</strong></p>
+<p><strong>初步认识一些动力系统，如太阳系系统，混沌系统等，并研究其数值解法</strong></p>
 
 <hr />
+<p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
 
-<h2 id="github的开发者api">GitHub的开发者API</h2>
-<p>对于GitHub上的仓库，我们可以发布Release，每个Release除了源代码以外还可以附加编译后的二进制文件。发布Release之后便可以通过API获取一些有用的信息。不过需要注意的是，如下图所示，发布的Release是不能勾选“This is a pre-release”选项的。
-<img src="http://localhost:4000/assets//blog_images/release.png" width="450px" height="200px" />
-例如对于我的easyAuto仓库，那么API是<a href="https://api.github.com/repos/scienceasdf/accoutAssist/releases/latest">https://api.github.com/repos/scienceasdf/accoutAssist/releases/latest</a>。在浏览器中打开，可以看出这里提供json格式的许多信息。当然，如果是pre-release版本的话，就会得到下面的结果：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
-  "message": "Not Found",
-  "documentation_url": "https://developer.github.com/v3/repos/releases/#get-the-latest-release"
-}
-</code></pre></div></div>
-<h2 id="qt的https请求与处理">Qt的HTTPS请求与处理</h2>
-<p>首先需要在.pro文件中加上这两句，分别是加上网络模块和版本号的宏定义：</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">QT</span>      <span class="o">+=</span> <span class="p">...</span> <span class="n">network</span>
-<span class="n">DEFINES</span> <span class="o">+=</span> <span class="s">"VERSION=2.2"</span>
-</code></pre></div></div>
-<p>接下来就是具体实现的代码：</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;QtNetwork&gt;
-</span><span class="c1">// ...
-</span><span class="kt">void</span> <span class="n">accountAssit</span><span class="o">::</span><span class="n">on_checkUpdate_clicked</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">QNetworkAccessManager</span> <span class="n">networkManager</span><span class="p">;</span>
+<hr />
+<p>最近看boost::numeric::odeint的文档，发现了一些很有趣的动力系统。</p>
+<h2 id="太阳系系统">太阳系系统</h2>
+<p>这个看起来简单，无非就是万有引力的动力学，但是深入探究并不简单。这里我们想考虑太阳、木星、土星、天王星、海王星等天体的运动以及他们的相互作用。</p>
 
+<hr />
+<p><strong>NOTE</strong></p>
 
-    <span class="n">QUrl</span> <span class="n">url</span><span class="p">(</span><span class="s">"https://api.github.com/repos/scienceasdf/accoutAssist/releases/latest"</span><span class="p">);</span>
-    <span class="n">QNetworkRequest</span> <span class="n">request</span><span class="p">;</span>
-    <span class="n">request</span><span class="p">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+<p>一个简单的物理史：二体问题是可积的，可以理论分析得到解析解，而三体问题则不存在解析解。在19世纪末，庞加莱发现了这个问题，并成为混沌理论的始祖。</p>
 
-    <span class="n">m_currentReply</span> <span class="o">=</span> <span class="n">networkManager</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>  <span class="c1">// GET
-</span>    <span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">networkManager</span><span class="p">,</span> <span class="n">SIGNAL</span><span class="p">(</span><span class="n">finished</span><span class="p">(</span><span class="n">QNetworkReply</span><span class="o">*</span><span class="p">)),</span> <span class="k">this</span><span class="p">,</span> <span class="n">SLOT</span><span class="p">(</span><span class="n">onResultUpdate</span><span class="p">(</span><span class="n">QNetworkReply</span><span class="o">*</span><span class="p">)));</span>
-    <span class="n">QEventLoop</span> <span class="n">eventLoop</span><span class="p">;</span>
-    <span class="n">QObject</span><span class="o">::</span><span class="n">connect</span><span class="p">(</span><span class="o">&amp;</span><span class="n">networkManager</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QNetworkAccessManager</span><span class="o">::</span><span class="n">finished</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">eventLoop</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QEventLoop</span><span class="o">::</span><span class="n">quit</span><span class="p">);</span>
-    <span class="n">eventLoop</span><span class="p">.</span><span class="n">exec</span><span class="p">();</span>
-<span class="p">}</span>
+<hr />
+<p>理想的天体运动都是保守场，因此可以列出哈密顿方程。首先是动量的表达式（当然这里的动量的量纲是速度的量纲，但是物理含义是动量）
+\begin{equation}
+\frac{dq_i}{dt}=pi
+\end{equation}
+\begin{equation}
+\frac{dp_i}{dt}=\frac{1}{m_i\sum_{i\neq j} F_{ij}}
+\end{equation}
+那么哈密顿函数的表达式为
+\begin{equation}
+H=\sum_i \frac{p_i^2}{2m_i}+\sum_j V(q_i,q_j)
+\end{equation}
+$V(q_i,q_j)$是$i,j$相互的势能。哈密顿方程的动力学方程为
+<script type="math/tex">% <![CDATA[
+\begin{align}
+\frac{dq_i}{dt}&=\frac{dH}{dp_i}\\
+\frac{dp_i}{dt}&=-\frac{dH}{dq_i}
+\end{align} %]]></script>
+在boost库中求解这个动力系统，有专门的辛算法：Runge-Kutta-Nystroem算法，在boost库中是一个叫symplectic_rkn_sb3a_mclachlan的步进器。事实上，对于很多实际生活中的动力系统，只要它有惯性，不耗散，就能够写出哈密顿函数，从而写出正则方程组，用这个算法求解。三体问题就是混沌的了，因此在这个世纪太阳系问题的求解中，必须要选择符合实际的初始条件，否则得不到想要的结果。<br />
+而对于一个实际的航天器，考虑的动力学方程通常如下：
+<script type="math/tex">\begin{align}\label{eqs_force}
+\frac{d^2\mathbf{r}}{dt^2}=-\frac{\mu}{r^3}\mathbf{r}+\nabla \phi_{sj}^o+G\sum_{k\neq j}^{n_b}m_k(\frac{\mathbf{r_{ks}}}{r^3_{ks}}-\frac{\mathbf{r_{kj}}}{r^3_{kj}})+\frac{\dot m_s}{m}\frac{d\mathbf{r}}{dt}-\frac{1}{2}\rho v_{rel}^2\frac{C_dA}{m_s}\hat{\mathbf{v}}_{rel}+\frac{P_{SR}C_RA_{sun}}{m_s}\hat{\mathbf{r}}_{sun}+\frac{\mu}{c^2r^3}((4\frac{\mu}{r}-v^2)\mathbf{r}+4(\mathbf{r\cdot v})\mathbf{v})+2(\mathbf{\Omega}\times\mathbf{v})+2\frac{\mu}{c^2r^3}(\frac{3}{r^2}(\mathbf{r\times v})(\mathbf{r \cdot J})+(\mathbf{v\times J}))
+\end{align}</script>
+这里某几个项的含义是（不一一赘述了）：</p>
+<ul>
+  <li>$\nabla \phi_{sj}^o$ 中心天体非圆带来的扰动项</li>
+  <li><script type="math/tex">G\sum_{k\neq j}^{n_b}m_k(\frac{\mathbf{r_{ks}}}{r^3_{ks}}-\frac{\mathbf{r_{kj}}}{r^3_{kj}})</script>其它天体的引力扰动项</li>
+  <li>$\frac{\dot m_s}{m}\frac{d\mathbf{r}}{dt}$发动机推力</li>
+  <li><script type="math/tex">\frac{1}{2}\rho v_{rel}^2\frac{C_dA}{m_s}\hat{\mathbf{v}}_{rel}</script>大气阻力</li>
+  <li>$\frac{P_{SR}C_RA_{sun}}{m_s}\hat{\mathbf{r}}_{sun}$是太阳辐射光压</li>
+  <li>$\frac{\mu}{c^2r^3}((4\frac{\mu}{r}-v^2)\mathbf{r}+4(\mathbf{r\cdot v})\mathbf{v})$为<a href="https://en.wikipedia.org/wiki/Schwarzschild_metric">史瓦西解（Schwarzsehild solution)</a></li>
+  <li>$2(\mathbf{\Omega}\times\mathbf{v})$是<a href="https://en.wikipedia.org/wiki/Geodetic_effect">测地线精度(广义相对论造成的空间扭曲形成的误差)</a></li>
+  <li>$2\frac{\mu}{c^2r^3}(\frac{3}{r^2}(\mathbf{r\times v})(\mathbf{r \cdot J})+(\mathbf{v\times J}))$是<a href="https://en.wikipedia.org/wiki/Lense%E2%80%93Thirring_precession">兰斯-蒂林效应(Lens-Thirring Precession)</a><br />
+广义相对论对受力的修正作用就是式(\ref{eqs_force})的最后三项，即
+<script type="math/tex">\begin{align}
+\mathbf{a}_r=\frac{\mu}{c^2r^3}((4\frac{\mu}{r}-v^2)\mathbf{r}+4(\mathbf{r\cdot v})\mathbf{v})+2(\mathbf{\Omega}\times\mathbf{v})+2\frac{\mu}{c^2r^3}(\frac{3}{r^2}(\mathbf{r\times v})(\mathbf{r \cdot J})+(\mathbf{v\times J}))
+\end{align}</script>
+如果在J2000坐标系下，那么</li>
+  <li>
+    <script type="math/tex; mode=display">\mathbf{\Omega}=\frac{3}{2}\mathbf{v}_{B/S}\times(\frac{-\mu\mathbf{r}_{B/S}}{c^2r^3_{B_S}})</script>
+  </li>
+  <li>$c$是光速</li>
+  <li>$\mathbf{r}$是在J2000坐标系下的位置矢量</li>
+  <li>$\mathbf{v}$是在J2000坐标系下的速度矢量</li>
+  <li>$\mathbf{r}_{B/S}$是中心天体相对于太阳的位置矢量</li>
+  <li>$\mathbf{v}_{B/S}$是中心天体相对于太阳的速度矢量</li>
+  <li>$\mathbf{J}$是中心天体的单位质量角动量，有$\mathbf{J}=\mathbf{R}^{I/F}_B[0\quad 0\quad \frac{2}{5}R_B^2\omega_B]^T$，而$\mathbf{R}^{I/F}_B$是体坐标系到惯性系的旋转矩阵，$R_B$是中心天体的平均赤道半径，$\omega_B$是自旋速度。</li>
+</ul>
 
-<span class="kt">void</span> <span class="n">accountAssit</span><span class="o">::</span><span class="n">onResultUpdate</span><span class="p">(</span><span class="n">QNetworkReply</span> <span class="o">*</span> <span class="n">reply</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">m_currentReply</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">()</span> <span class="o">!=</span> <span class="n">QNetworkReply</span><span class="o">::</span><span class="n">NoError</span><span class="p">){</span>
-        <span class="c1">//qDebug()&lt;&lt;"ERROR!";
-</span>        <span class="k">return</span><span class="p">;</span>  <span class="c1">// ...only in a blog post
-</span>    <span class="p">}</span>
-
-    <span class="n">QString</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">QString</span><span class="p">)</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">readAll</span><span class="p">();</span>
-    <span class="n">qDebug</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">data</span><span class="p">;</span>
-    <span class="n">QJsonDocument</span> <span class="n">d</span> <span class="o">=</span> <span class="n">QJsonDocument</span><span class="o">::</span><span class="n">fromJson</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">toUtf8</span><span class="p">());</span>
-    <span class="n">QJsonObject</span> <span class="n">sett2</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">object</span><span class="p">();</span>
-    <span class="n">QJsonValue</span> <span class="n">value</span> <span class="o">=</span> <span class="n">sett2</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="n">QString</span><span class="p">(</span><span class="s">"tag_name"</span><span class="p">));</span>
-    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">value</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">toDouble</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">VERSION</span><span class="p">){</span>
-        <span class="n">QMessageBox</span><span class="o">::</span><span class="n">StandardButton</span> <span class="n">button</span><span class="p">;</span>
-        <span class="n">button</span> <span class="o">=</span> <span class="n">QMessageBox</span><span class="o">::</span><span class="n">question</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s">"有新的版本"</span><span class="p">),</span>
-                <span class="n">QString</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="s">"是否下载新的版本？"</span><span class="p">)),</span>
-                <span class="n">QMessageBox</span><span class="o">::</span><span class="n">Yes</span> <span class="o">|</span> <span class="n">QMessageBox</span><span class="o">::</span><span class="n">No</span><span class="p">);</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="n">button</span> <span class="o">==</span> <span class="n">QMessageBox</span><span class="o">::</span><span class="n">Yes</span><span class="p">){</span>
-
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">else</span><span class="p">{</span>
-        <span class="n">QMessageBox</span><span class="o">::</span><span class="n">information</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">"更新检查"</span><span class="p">,</span><span class="s">"此版本已经是最新发布版本"</span><span class="p">,</span> <span class="n">QMessageBox</span><span class="o">::</span><span class="n">Yes</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>在代码中，accountAssist是一个窗体，里面有一个类型为QNetworkReply*的重要成员：m_currentReply，用来保存网络是否正常的状态。当在获取HTTPS内容时，使用QEventLoop不阻塞GUI线程。当全文获取之后，转到槽函数onResultUpdate，对收到的所有内容进行处理。Qt自带了QJson的处理，非常的方便。如果发现最新版的release版本号大于宏定义的版本号，那么就提示有新的版本。不过这个也太简单粗暴了，如果版本号是从2.1更新到了2.10，这种方法就不奏效。解决方法也很简单，定义大版本号和小版本号，分别比较。比如“2.10”，QString自带了split函数，其实之前做easyAuto还可以用这个方法</p>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">QStringList</span> <span class="n">list</span> <span class="o">=</span> <span class="n">QString</span><span class="p">(</span><span class="s">"2.10"</span><span class="p">).</span><span class="n">split</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-<span class="n">foreach</span><span class="p">(</span><span class="n">QString</span> <span class="n">str</span><span class="p">,</span> <span class="n">list</span><span class="p">){</span>
-	<span class="c1">//...
-</span><span class="p">}</span>
-</code></pre></div></div>
-<p>最后值得注意的是，在安卓程序里，必须要SSL连接，所以需要在网上下载libcrypto.so和libssl.so，并在.pro文件里加上</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>android {
-  ANDROID_EXTRA_LIBS += $$PWD/libcrypto.so
-  ANDROID_EXTRA_LIBS += $$PWD/libssl.so
-}
-</code></pre></div></div>
+<p>式(\ref{eqs_force})数值求解通常的方法是广义的龙格库塔法，见<a href="https://scienceasdf.github.io/programming/2017/03/27/rigidBody/">我之前的讨论</a>。</p>
 
       
     </div>
@@ -521,13 +529,16 @@
         <div class="post-tags">
           
             
-            <a href="/tag/#/%E7%BD%91%E7%BB%9C" rel="tag"># 网络</a>
+            <a href="/tag/#/%E5%A4%A9%E6%96%87" rel="tag"># 天文</a>
           
             
-            <a href="/tag/#/%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91" rel="tag"># 安卓开发</a>
+            <a href="/tag/#/%E5%8A%A8%E5%8A%9B%E5%AD%A6" rel="tag"># 动力学</a>
           
             
-            <a href="/tag/#/Qt" rel="tag"># Qt</a>
+            <a href="/tag/#/%E6%95%B0%E5%80%BC%E7%AE%97%E6%B3%95" rel="tag"># 数值算法</a>
+          
+            
+            <a href="/tag/#/boost" rel="tag"># boost</a>
           
         </div>
       
@@ -543,18 +554,14 @@
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/programming/2018/03/24/penaltyShootout/" rel="next" title="一个点球大战游戏的开发">
-                <i class="fa fa-chevron-left"></i> 一个点球大战游戏的开发
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/programming/2017/12/16/swipeGesture/" rel="prev" title="实现Qt程序的滑动手势">
-                实现Qt程序的滑动手势 <i class="fa fa-chevron-right"></i>
+              <a href="/dynamics/2018/04/12/astrodynamics3/" rel="prev" title="初窥牛顿平方反比定律和胡克定律的对偶性">
+                初窥牛顿平方反比定律和胡克定律的对偶性 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -743,7 +750,7 @@
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#github的开发者api"> <span class="nav-number">1</span> <span class="nav-text">GitHub的开发者API</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#qt的https请求与处理"> <span class="nav-number">2</span> <span class="nav-text">Qt的HTTPS请求与处理</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#太阳系系统"> <span class="nav-number">1</span> <span class="nav-text">太阳系系统</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
     </ol>
   </div>
             
