@@ -121,7 +121,7 @@
 <meta property="og:site_name" content="scienceasdf">
 <meta property="og:description" content="">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-12T00:00:00+08:00">
+<meta property="og:updated_time" content="2018-04-13T00:00:00+08:00">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初窥含太阳系动力系统在内的几类动力系统">
 <meta name="twitter:description" content="">
@@ -452,10 +452,10 @@
 <hr />
 <p>理想的天体运动都是保守场，因此可以列出哈密顿方程。首先是动量的表达式（当然这里的动量的量纲是速度的量纲，但是物理含义是动量）
 \begin{equation}
-\frac{dq_i}{dt}=pi
+\frac{dq_i}{dt}=p_i
 \end{equation}
 \begin{equation}
-\frac{dp_i}{dt}=\frac{1}{m_i\sum_{i\neq j} F_{ij}}
+\frac{dp_i}{dt}=\frac{1}{m_i} \sum_{i\neq j}F_{ij}
 \end{equation}
 那么哈密顿函数的表达式为
 \begin{equation}
@@ -481,15 +481,16 @@ $V(q_i,q_j)$是$i,j$相互的势能。哈密顿方程的动力学方程为
   <li>$\frac{P_{SR}C_RA_{sun}}{m_s}\hat{\mathbf{r}}_{sun}$是太阳辐射光压</li>
   <li>$\frac{\mu}{c^2r^3}((4\frac{\mu}{r}-v^2)\mathbf{r}+4(\mathbf{r\cdot v})\mathbf{v})$为<a href="https://en.wikipedia.org/wiki/Schwarzschild_metric">史瓦西解（Schwarzsehild solution)</a></li>
   <li>$2(\mathbf{\Omega}\times\mathbf{v})$是<a href="https://en.wikipedia.org/wiki/Geodetic_effect">测地线精度(广义相对论造成的空间扭曲形成的误差)</a></li>
-  <li>$2\frac{\mu}{c^2r^3}(\frac{3}{r^2}(\mathbf{r\times v})(\mathbf{r \cdot J})+(\mathbf{v\times J}))$是<a href="https://en.wikipedia.org/wiki/Lense%E2%80%93Thirring_precession">兰斯-蒂林效应(Lens-Thirring Precession)</a><br />
-广义相对论对受力的修正作用就是式(\ref{eqs_force})的最后三项，即[1]
+  <li>$2\frac{\mu}{c^2r^3}(\frac{3}{r^2}(\mathbf{r\times v})(\mathbf{r \cdot J})+(\mathbf{v\times J}))$是<a href="https://en.wikipedia.org/wiki/Lense%E2%80%93Thirring_precession">兰斯-蒂林效应(Lens-Thirring Precession)</a></li>
+</ul>
+
+<p>广义相对论对受力的修正作用就是式(\ref{eqs_force})的最后三项，即[1]
 <script type="math/tex">\begin{align}
 \mathbf{a}_r=\frac{\mu}{c^2r^3}((4\frac{\mu}{r}-v^2)\mathbf{r}+4(\mathbf{r\cdot v})\mathbf{v})+2(\mathbf{\Omega}\times\mathbf{v})+2\frac{\mu}{c^2r^3}(\frac{3}{r^2}(\mathbf{r\times v})(\mathbf{r \cdot J})+(\mathbf{v\times J}))
 \end{align}</script>
-如果在J2000坐标系下，那么</li>
-  <li>
-    <script type="math/tex; mode=display">\mathbf{\Omega}=\frac{3}{2}\mathbf{v}_{B/S}\times(\frac{-\mu\mathbf{r}_{B/S}}{c^2r^3_{B_S}})</script>
-  </li>
+如果在J2000坐标系下，那么</p>
+<ul>
+  <li><script type="math/tex">\mathbf{\Omega}=\frac{3}{2}\mathbf{v}_{B/S}\times(\frac{-\mu\mathbf{r}_{B/S}}{c^2r^3_{B_S}})</script>是一个近似</li>
   <li>$c$是光速</li>
   <li>$\mathbf{r}$是在J2000坐标系下的位置矢量</li>
   <li>$\mathbf{v}$是在J2000坐标系下的速度矢量</li>
@@ -499,6 +500,48 @@ $V(q_i,q_j)$是$i,j$相互的势能。哈密顿方程的动力学方程为
 </ul>
 
 <p>式(\ref{eqs_force})数值求解通常的方法是广义的龙格库塔法，见<a href="https://scienceasdf.github.io/programming/2017/03/27/rigidBody/">我之前的讨论</a>。</p>
+
+<h2 id="混沌系统与李雅普诺夫指数">混沌系统与李雅普诺夫指数</h2>
+<p>这个系统我是没怎么看懂。。。设$x$是自变量，$\delta x$是扰动量。扰动量满足线性微分方程，但是是时间相关的：
+\begin{equation}
+\frac{d\delta x}{dt}=J(x)\delta x
+\end{equation}
+<a href="https://en.wikipedia.org/wiki/Lyapunov_exponent">李雅普诺夫指数</a>被定义为扰动随指数形式增长的那个对数。如果存在一个李雅普诺夫指数大于0那么扰动会发散，形成混沌。如果所有李雅普诺夫指数都小于0，那么扰动将收敛至一个点。<br />
+为了计算李雅普诺夫指数，需要首先求解扰动动力学方程，每过k步后将结果正交化，李雅普诺夫指数可以用取对数的方法得到，再多次计算取平均值。boost::numeric::odeint的test有相关代码。这个东西我是真的没搞明白是什么……</p>
+
+<h2 id="刚性方程">刚性方程</h2>
+<p>在数学领域中，<a href="https://en.wikipedia.org/wiki/Stiff_equation">刚性方程</a>是指一个微分方程，其数值分析的解只有在时间间隔很小时才会稳定，只要时间间隔略大，其解就会不稳定。特点是特征值的实部均为负数并且实部最大的的特征值的实部与实部最小的的特征值的实部的比值远大于1。化学反应的动力学方程可能会是这样的方程，如果各个子反应的速率相差非常大。
+<script type="math/tex">\begin{align}
+\left\{
+    \begin{array}{l}
+    \frac{dS_1}{dt}=-101S_2-100S_1\\
+    \frac{dS_2}{dt}=-S_1 
+    \end{array}
+\right.
+\end{align}</script>
+刚性系统需要用Rosenbrock method来求解。boost::numeric::odeint提供了这个算法，然而坑的是必须和boost::ublas一起用。。。odeint的文档提供了一个对比，如果用Rosenbrock算法，只需要71步迭代，而龙格库塔算法，准确说是Dormand-Prince 5算法需要1531次迭代。</p>
+
+<h2 id="stuart-landau振子">Stuart-Landau振子</h2>
+<p>微分方程也可以是复数的形式，如下面这个例子，Stuart-Landau oscillator:
+\begin{equation}
+\frac{d\Psi}{dt}=(1=i\eta)\Psi+(1+i\alpha)|\Psi|^2\Psi 
+\end{equation}
+这个系统表示了什么，我也不知道。从数值求解来说，这个系统虽然数域是复数域，不过依然可以用4阶龙格库塔算法求解。</p>
+
+<h2 id="网格动力系统">网格动力系统</h2>
+<p>一个突出的例子是<a href="https://en.wikipedia.org/wiki/Fermi%E2%80%93Pasta%E2%80%93Ulam%E2%80%93Tsingou_problem">Fermi-Pasta-Ulam系统</a>，这是一个非线性的哈密顿系统，哈密顿函数为
+\begin{equation}
+H=\sum_i \frac{p_i^2}{2}+\frac{1}{2}(q_{i+1}-q_i)^2+\frac{\beta}{4}(q_{i+1}-q_i)^4
+\end{equation}
+和太阳系动力系统一样，这个系统也适合用辛求解算法，但是更为简单，因为$\frac{dq_i}{dt}=p_i$.<br />
+有纪念意义的是，FPU系统的求解是世界上最早的计算机上的数值实验。在1953年，洛斯阿拉莫斯，在世界上最早的计算机之一（MANIAC I）进行了这项研究，并触发了一个数学物理学的新领域。</p>
+
+<h2 id="振子集合">振子集合</h2>
+<p>N-N耦合相位振子（N all-to all coupled phase oscillator）定义为
+\begin{equation}
+\frac{d\phi_k}{dt}=\omega_k+\frac{\epsilon}{N}\sin(\phi_i-\phi_k)
+\end{equation}
+各个振子的自然频率满足某种分布，$\epsilon$是耦合强度。如果我们取$\omega_i$的分布为洛伦兹分布（其实就是<a href="https://en.wikipedia.org/wiki/Cauchy_distribution">柯西分布</a>，物理学上一般叫做洛伦兹分布），那么我们会观察到一个有趣的现象：当耦合强度超过某个临界值后，振子间会发生相位转移，伺候振子会以共同的频率运动。这种转移被称为<a href="https://en.wikipedia.org/wiki/Kuramoto_model">Kuramoto transition</a>。这个动力学系统本身的数值求解直接用4阶龙格库塔就行。</p>
 
 <hr />
 <h2 id="参考文献">参考文献</h2>
@@ -754,7 +797,7 @@ $V(q_i,q_j)$是$i,j$相互的势能。哈密顿方程的动力学方程为
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#太阳系系统"> <span class="nav-number">1</span> <span class="nav-text">太阳系系统</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#参考文献"> <span class="nav-number">2</span> <span class="nav-text">参考文献</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#太阳系系统"> <span class="nav-number">1</span> <span class="nav-text">太阳系系统</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#混沌系统与李雅普诺夫指数"> <span class="nav-number">2</span> <span class="nav-text">混沌系统与李雅普诺夫指数</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#刚性方程"> <span class="nav-number">3</span> <span class="nav-text">刚性方程</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#stuart-landau振子"> <span class="nav-number">4</span> <span class="nav-text">Stuart-Landau振子</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#网格动力系统"> <span class="nav-number">5</span> <span class="nav-text">网格动力系统</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#振子集合"> <span class="nav-number">6</span> <span class="nav-text">振子集合</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#参考文献"> <span class="nav-number">7</span> <span class="nav-text">参考文献</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
     </ol>
   </div>
             
