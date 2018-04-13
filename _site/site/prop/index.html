@@ -34,7 +34,7 @@
         <input type="radio" name="figureType" id="Thrust" value="推力-转速曲线" checked="checked" />  
         <label for="Thrust" data-theme="b" >推力-转速曲线</label>  
 
-        <input type="radio" name="figureType" id="PWR" value="功率转速曲线"  />  
+        <input type="radio" name="figureType" id="PWR" value="功率-转速曲线"  />  
         <label for="PWR" data-theme="b" >功率-转速曲线</label>  
       </fieldset>  
   
@@ -46,7 +46,7 @@
     </div>
 
   <div data-role="footer" style="text-align:center;">
-    <h1>为了减少您的流量消耗，并提高访问速度，<br>仅提供静拉力和功率的的查询。</h1>
+    <a href="dynamic.html" data-rel="popup" data-position-to="window" data-ajax="false">动螺旋桨性能点这里</a>
     <a href="#myPopup" data-rel="popup" data-position-to="window">专业版程序点这里</a>
   </div>
 </div>
@@ -87,7 +87,6 @@ function searchProp(){
 }
 </script>
 
-<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
     
 <script type="text/javascript">
 $("input[name=figureType]").bind( "change", function(event, ui) {
