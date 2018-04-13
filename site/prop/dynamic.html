@@ -32,19 +32,19 @@
       <select cols="60" rows="10" name="mySelect" id="mySelect" onchange="plot()" placeholder="所有查询结果"></select>
       <legend style="text-align:center;">转速选择</legend> 
       <select cols="60" rows="10" name="rpmSelect" id="rpmSelect" onchange="plot()" placeholder="转速选择"></select>
-      <fieldset data-role="controlgroup" data-type="horizontal" style="text-align:center;">  
+      <fieldset data-role="controlgroup" data-type="vertical" style="text-align:center;">  
         <legend style="text-align:center;">输出曲线选择</legend>  
         <input type="radio" name="figureType" id="Thrust" value="推力-转速曲线" checked="checked" />  
-        <label for="Thrust" data-theme="b" >推力-速度</label>  
+        <label for="Thrust" data-theme="b" >推力-速度曲线</label>  
 
         <input type="radio" name="figureType" id="PWR" value="功率-速度曲线"  />  
-        <label for="PWR" data-theme="b" >功率-速度</label>
+        <label for="PWR" data-theme="b" >功率-速度曲线</label>
         
         <input type="radio" name="figureType" id="Pe" value="效率-速度曲线"  />  
-        <label for="Pe" data-theme="b" >效率-速度</label>  
+        <label for="Pe" data-theme="b" >效率-速度曲线</label>  
 
         <input type="radio" name="figureType" id="Torque" value="转矩-速度曲线"  />  
-        <label for="Torque" data-theme="b" >转矩-速度</label>  
+        <label for="Torque" data-theme="b" >转矩-速度曲线</label>  
       </fieldset>  
   
       <div id="main" style="width: 100%;height:400%; text-align:center;"></div>
