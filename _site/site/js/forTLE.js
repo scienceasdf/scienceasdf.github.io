@@ -1,3 +1,4 @@
+
 function randomNum(minNum, maxNum) {
     switch (arguments.length) {
         case 1:
@@ -21,7 +22,7 @@ function tryRandom() {
     var rndSat = randomNum(0, 43287);
     $.ajax({
         type: 'GET',
-        url: 'http://crossorigin.me/https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?',
+        url: 'https://cors-anywhere.herokuapp.com/https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?',
         cache: false,
         dataType: "text",
         crossDomain: true,
