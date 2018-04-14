@@ -21,7 +21,7 @@ function tryRandom() {
     var rndSat = randomNum(0, 43287);
     $.ajax({
         type: 'GET',
-        url: 'https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?',
+        url: 'http://crossorigin.me/https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?',
         cache: false,
         dataType: "text",
         crossDomain: true,
