@@ -21,7 +21,7 @@ function tryRandom() {
     var rndSat = randomNum(0, 43287);
     $.ajax({
         type: 'GET',
-        url: 'https://crossorigin.me/https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?',
+        url: 'http://crossorigin.me/https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?',
         cache: false,
         dataType: "text",
         crossDomain: true,
@@ -29,6 +29,7 @@ function tryRandom() {
         success: function (data) {
             var el = document.createElement('html');
             el.innerHTML = data;
+            window.alert(data);
             var p = el.getElementsByTagName('BODY')[0].getElementsByTagName('PRE')[0].textContent;
             var eachLine = p.split(/[\n]/);
             if (eachLine[0] == 'No TLE found') {
