@@ -78,7 +78,7 @@ function plot(){
   //data: JSON.strigify({key:value}), 
   //data : ""
   //添加额外的请求头 
-  headers : {'Access-Control-Allow-Origin':'*'}, 
+  //headers : {'Access-Control-Allow-Origin':'*'}, 
   //请求成功的回调函数 success: 
   success : function(data){  
     document.getElementById("res").src = data.queryresult.pods[0].subpods[0].img.src;
