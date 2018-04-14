@@ -8,13 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>在线绘制卫星空间轨迹</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
-    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
-    <script src="https://cdn.bootcss.com/mathjs/4.0.1/math.min.js"></script>
-    <script src="./js/orbitState.js"></script>
-    <script src="./js/orbitElementGui.js"></script>
-    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
-    <script src="./js/echarts-gl.min.js"></script>
 </head>
 
 <body>
@@ -95,6 +88,13 @@
 
 
 
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+<script src="https://cdn.bootcss.com/mathjs/4.0.1/math.min.js"></script>
+<script src="./js/orbitState.js"></script>
+<script src="./js/orbitElementGui.js"></script>
+<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+<script src="./js/echarts-gl.min.js"></script>
 <script type="text/javascript">
 
     function fetchTwo(data3) {
@@ -163,7 +163,7 @@
             resizeWorldMapContainer();
             myChart.resize();
         };
-        
+
         var data2 = fetchTwo(allData);
         myChart.setOption({
             backgroundColor: '#000',
