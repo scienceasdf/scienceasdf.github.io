@@ -29,7 +29,6 @@ function tryRandom() {
         success: function (data) {
             var el = document.createElement('html');
             el.innerHTML = data;
-            window.alert(data);
             var p = el.getElementsByTagName('BODY')[0].getElementsByTagName('PRE')[0].textContent;
             var eachLine = p.split(/[\n]/);
             if (eachLine[0] == 'No TLE found') {
