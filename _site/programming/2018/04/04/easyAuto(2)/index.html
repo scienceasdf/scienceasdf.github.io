@@ -509,8 +509,6 @@
   <span class="c1">//必要的时候需要用JSON.stringify() 将JSON对象转换成字符串 </span>
   <span class="c1">//data: JSON.strigify({key:value}), </span>
   <span class="c1">//data : ""</span>
-  <span class="c1">//添加额外的请求头 </span>
-  <span class="na">headers</span> <span class="p">:</span> <span class="p">{</span><span class="s1">'Access-Control-Allow-Origin'</span><span class="p">:</span><span class="s1">'*'</span><span class="p">},</span> 
   <span class="c1">//请求成功的回调函数 success: </span>
   <span class="na">success</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>  
     <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"res1"</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">queryresult</span><span class="p">.</span><span class="nx">pods</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">subpods</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">img</span><span class="p">.</span><span class="nx">src</span><span class="p">;</span>
@@ -518,7 +516,8 @@
   <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div></div>
-<p>不知道实现了跨域访问的原因到底是在URL里面加了”&amp;callback=?”还是加了请求头的原因<img class="emoji" title=":cold_sweat:" alt=":cold_sweat:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f630.png" height="20" width="20">。这样就实现了在网页上绘制根轨迹。不过这个网页的使用体验肯定没有安卓版的easyAuto好，一个是输入格式更为严格，第二个是速度太慢。就这个访问速度，我相信即使是javascript代码也能做到更快把图画出来，不过我是真的不想再去用javascript写数值的代码了。</p>
+<p>不知道实现了跨域访问的原因到底是在URL里面加了”&amp;callback=?”还是设置了crossDomain为true的原因<img class="emoji" title=":cold_sweat:" alt=":cold_sweat:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f630.png" height="20" width="20">。这样就实现了在网页上绘制根轨迹。不过这个网页的使用体验肯定没有安卓版的easyAuto好，一个是输入格式更为严格，第二个是速度太慢。就这个访问速度，我相信即使是javascript代码也能做到更快把图画出来，不过我是真的不想再去用javascript写数值的代码了。</p>
+
 <h2 id="螺旋桨性能查询网页">螺旋桨性能查询网页</h2>
 
 <p>做这个的原因和上一个一样，想实现彻底的跨平台。之前把demoProp的所有数据全部导入到了一个sqlite文件中，加上索引一共40+MB，正好在网上看到了sql.js项目，这个是emscripten把sqlite直接翻译过来的结果，想试一试，于是把数据库和网页挂在网上，试了试发现访问速度太慢了。而且一不注意，手机用了200+MB的流量，血淋淋的教训啊。我明白这个的意思了：用http请求把url的数据库先下载下来，然后再在内存中运行sql语句。这个代价相比PHP+MySQL的代价的确太大了。我把索引全部删除，数据库的大小还是20+MB，没办法，想了想一般在无人机我们关注的是静拉力，于是删除了所有动拉力数据，仅保留静拉力数据，这下只有600+KB了。再把一些无关的字段删去，sqlite对sql的支持太差，删除字段还需要这样写：</p>

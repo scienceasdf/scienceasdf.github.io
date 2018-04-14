@@ -5,7 +5,7 @@ categories:
 tags:
 - JavaScript
 - 天文
-updated: 2018-04-08
+updated: 2018-04-14
 ---
 <script type="text/x-mathjax-config">
   		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
@@ -82,6 +82,8 @@ $.ajax({
 });
 ```
 没错，通过一个crossorigin.me的网站来抓数据，这样就可以实现跨域访问了。但是需要注意的是一定要加上Origin的访问头，否则得不到数据。
+### 2018-4-14更新
+https://crossorigin.me访问不了了，只能登陆http://crossorigin，又是费了很大劲找解决方案。最终找到了一个替代的网站：https://cors-anywhere.herokuapp.com，和crossorigin的使用没什么区别。还有一些不支持https的站点，以及一些用不了的站点，我就不列举在这里了。
   
 ## 航天类开源代码一览
 * [GMAT](https://sourceforge.net/projects/gmat/)：这个是对我帮助最大的一个软件，C++的代码，软件设计非常好，无论是数学类算法还是从软件工程上说大量设计模式的运用，能够在一定程度上取代STK，不过遗憾的是GUI是用wxWidgets写的，如果是Qt就好了；
