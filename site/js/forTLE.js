@@ -21,11 +21,11 @@ function tryRandom() {
     var rndSat = randomNum(0, 43287);
     $.ajax({
         type: 'GET',
-        url: 'http://crossorigin.me/https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?',
+        url: 'https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?',
         cache: false,
         dataType: "text",
         crossDomain: true,
-        headers: { 'Origin': 'http://foo.example' },
+        headers: {'Origin':'https://foo.example.com'},
         success: function (data) {
             var el = document.createElement('html');
             el.innerHTML = data;

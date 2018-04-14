@@ -21,11 +21,11 @@ function tryRandom() {
     var rndSat = randomNum(0, 43287);
     $.ajax({
         type: 'GET',
-        url: 'https://crossorigin.me/https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?',
+        url: 'https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?',
         cache: false,
         dataType: "text",
         crossDomain: true,
-        headers: { 'Origin': 'http://foo.example' },
+        headers: {'Origin':'https://foo.example.com'},
         success: function (data) {
             var el = document.createElement('html');
             el.innerHTML = data;
@@ -35,7 +35,8 @@ function tryRandom() {
                 $("#myPopup3").popup("open");
             } else {
                 var titleStr = eachLine[0].replace(/[\s]deb/ig, "的碎片");
-                window.alert("随机得到的卫星名字是" + titleStr);
+                //window.alert("随机得到的卫星名字是" + titleStr);
+                swal("随机得到的卫星名字是", titleStr,"success");
                 $('#areaTLE').val(eachLine[1] + '\n' + eachLine[2]);
                 boolNotGet = false;
             }
@@ -60,7 +61,7 @@ function propagateFromGuiInput() {
     var ddate = (date14 - date13) / slices;
     var totalTime = ddate * slices / 60000;
     str = "运行时间为" + totalTime + "分钟，轨道周期为" + T + "分钟，共计" + (totalTime / T) + "个周期！";
-    window.alert(str);
+    swal("",str);
 
     for (var i = 0; i < slices; ++i) {
         var dt = Date(date13 + i * ddate);
