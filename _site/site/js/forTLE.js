@@ -20,9 +20,6 @@ function tryRandom2() {
 
 function tryRandom() {
     var rndSat = randomNum(0, 43287);
-    $.getJSON('http://anyorigin.com/go?url=https%3A//celestrak.com/cgi-bin/TLE.pl%3FCATNR%3D21532&callback=?', function(data){
-	    window.alert(data.contents);
-    });
     $.ajax({
         type: 'GET',
         url: 'https://cors-anywhere.herokuapp.com/https://celestrak.com/cgi-bin/TLE.pl?CATNR=' + rndSat + '&callback=?',
