@@ -33,7 +33,20 @@ function tryRandom() {
             var p = el.getElementsByTagName('BODY')[0].getElementsByTagName('PRE')[0].textContent;
             var eachLine = p.split(/[\n]/);
             if (eachLine[0] == 'No TLE found') {
-                $("#myPopup3").popup("open");
+                swal({ 
+                    title: "没有在网上找到数据", 
+                    text: "再试一次说不定就能爬到数据了", 
+                    type: "warning",
+                    showCancelButton: true, 
+                    confirmButtonText: "再试一次", 
+                    cancelButtonText: "算了，不试了",
+                  },
+                  function(isConfirm){ 
+                    if (isConfirm) { 
+                      tryRandom();
+                    } else { 
+                    } 
+                  });
             } else {
                 var titleStr = eachLine[0].replace(/[\s]deb/ig, "的碎片");
                 //window.alert("随机得到的卫星名字是" + titleStr);
