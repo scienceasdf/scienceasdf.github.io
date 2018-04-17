@@ -2,6 +2,181 @@
 <search>
   
     <entry>
+      <title><![CDATA[在Windows下编译deal.ii]]></title>
+      <url>/programming/2018/04/17/buildDealii/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']]
+            },
+  			TeX: { 
+                equationNumbers: {  
+                    autoNumber: "AMS"  
+                },
+     		    extensions: ["AMSmath.js"]
+            },
+            CommonHTML: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            "HTML-CSS": { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            SVG: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            }
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>在Windows下用MSVC2017编译deal.ii</strong></p>
+
+<hr />
+<p>最近由于一些原因需要学习开源有限元的程序。在Github上找了一下，C++的还算有三位数stars的有deal.ii,libMesh和mFem（按照stars数目由多到少排列）。libMesh的代码下载下来居然不支持cmake，编译只能用msys来make，似乎也不能用MSVC编译。而deal.ii只能支持MSVC而不支持mingw.权衡了一下，选择deal.ii来学习，一个是它stars数多，知名度更高，另一个是mingw的编译器编译出来的程序通常比MSVC编译出来的更慢，这个在科学计算中比较头疼。</p>
+
+<p>CMake里面configure的过程要设置一大堆flag，我都没有管，毕竟windows什么都特别不方便。像LAPACK库，GSL库我觉得还是有必要去链接的。希望这个东西的矩阵运算效率至少能够达到Eigen的水平。Configure第一次不对劲，原因竟然是我设置的build目录里面有’-‘减号。重新设置了build目录以后，生成了sln文件，感觉似乎有点希望了。不过不敢乐观，以前cmake成功但是sln最后还是编译不了的例子也有。</p>
+
+<p>打开MSVC后，开始编译。很神奇的是，编译到一半出错了，说cmd停止运行，然后打开目录里面却发现已经deal_II.g.lib和deal_II.lib生成了。这个时候我相信它是编译成功了，但是打开别的test目录里却发现没有编译，examples也没有。有些失落，直接试试这个库到底能不能用。</p>
+
+<p>直接把官网的第一个例子复制过来，用QMake编译：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* ---------------------------------------------------------------------
+ *
+ * Copyright (C) 1999 - 2016 by the deal.II authors
+ *
+ * This file is part of the deal.II library.
+ *
+ * The deal.II library is free software; you can use it, redistribute
+ * it, and/or modify it under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * The full text of the license can be found in the file LICENSE at
+ * the top level of the deal.II distribution.
+ *
+ * ---------------------------------------------------------------------
+
+ */</span>
+
+
+<span class="cp">#include &lt;deal.II/grid/tria.h&gt;
+#include &lt;deal.II/grid/tria_accessor.h&gt;
+#include &lt;deal.II/grid/tria_iterator.h&gt;
+#include &lt;deal.II/grid/grid_generator.h&gt;
+#include &lt;deal.II/grid/manifold_lib.h&gt;
+#include &lt;deal.II/grid/grid_out.h&gt;
+</span>
+<span class="cp">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;cmath&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">dealii</span><span class="p">;</span>
+
+
+<span class="kt">void</span> <span class="nf">first_grid</span> <span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">Triangulation</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span> <span class="n">triangulation</span><span class="p">;</span>
+
+  <span class="n">GridGenerator</span><span class="o">::</span><span class="n">hyper_cube</span> <span class="p">(</span><span class="n">triangulation</span><span class="p">);</span>
+  <span class="n">triangulation</span><span class="p">.</span><span class="n">refine_global</span> <span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">out</span> <span class="p">(</span><span class="s">"grid-1.eps"</span><span class="p">);</span>
+  <span class="n">GridOut</span> <span class="n">grid_out</span><span class="p">;</span>
+  <span class="n">grid_out</span><span class="p">.</span><span class="n">write_eps</span> <span class="p">(</span><span class="n">triangulation</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Grid written to grid-1.eps"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+
+
+<span class="kt">void</span> <span class="nf">second_grid</span> <span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">Triangulation</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span> <span class="n">triangulation</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="n">Point</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span> <span class="n">center</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+  <span class="k">const</span> <span class="kt">double</span> <span class="n">inner_radius</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+               <span class="n">outer_radius</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+  <span class="n">GridGenerator</span><span class="o">::</span><span class="n">hyper_shell</span> <span class="p">(</span><span class="n">triangulation</span><span class="p">,</span>
+                              <span class="n">center</span><span class="p">,</span> <span class="n">inner_radius</span><span class="p">,</span> <span class="n">outer_radius</span><span class="p">,</span>
+                              <span class="mi">10</span><span class="p">);</span>
+  <span class="k">const</span> <span class="n">SphericalManifold</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span> <span class="n">manifold_description</span><span class="p">(</span><span class="n">center</span><span class="p">);</span>
+  <span class="n">triangulation</span><span class="p">.</span><span class="n">set_manifold</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">manifold_description</span><span class="p">);</span>
+  <span class="n">triangulation</span><span class="p">.</span><span class="n">set_all_manifold_ids</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">step</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">step</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">;</span> <span class="o">++</span><span class="n">step</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">Triangulation</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;::</span><span class="n">active_cell_iterator</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">triangulation</span><span class="p">.</span><span class="n">begin_active</span><span class="p">();</span>
+      <span class="n">Triangulation</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;::</span><span class="n">active_cell_iterator</span> <span class="n">endc</span> <span class="o">=</span> <span class="n">triangulation</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+      <span class="k">for</span> <span class="p">(;</span> <span class="n">cell</span><span class="o">!=</span><span class="n">endc</span><span class="p">;</span> <span class="o">++</span><span class="n">cell</span><span class="p">)</span>
+        <span class="p">{</span>
+          <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">v</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+               <span class="n">v</span> <span class="o">&lt;</span> <span class="n">GeometryInfo</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;::</span><span class="n">vertices_per_cell</span><span class="p">;</span>
+               <span class="o">++</span><span class="n">v</span><span class="p">)</span>
+            <span class="p">{</span>
+              <span class="k">const</span> <span class="kt">double</span> <span class="n">distance_from_center</span>
+                <span class="o">=</span> <span class="n">center</span><span class="p">.</span><span class="n">distance</span> <span class="p">(</span><span class="n">cell</span><span class="o">-&gt;</span><span class="n">vertex</span><span class="p">(</span><span class="n">v</span><span class="p">));</span>
+
+              <span class="k">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">fabs</span><span class="p">(</span><span class="n">distance_from_center</span> <span class="o">-</span> <span class="n">inner_radius</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">)</span>
+                <span class="p">{</span>
+                  <span class="n">cell</span><span class="o">-&gt;</span><span class="n">set_refine_flag</span> <span class="p">();</span>
+                  <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+      <span class="n">triangulation</span><span class="p">.</span><span class="n">execute_coarsening_and_refinement</span> <span class="p">();</span>
+    <span class="p">}</span>
+
+
+  <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">out</span> <span class="p">(</span><span class="s">"grid-2.eps"</span><span class="p">);</span>
+  <span class="n">GridOut</span> <span class="n">grid_out</span><span class="p">;</span>
+  <span class="n">grid_out</span><span class="p">.</span><span class="n">write_eps</span> <span class="p">(</span><span class="n">triangulation</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Grid written to grid-2.eps"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="n">triangulation</span><span class="p">.</span><span class="n">set_manifold</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">first_grid</span> <span class="p">();</span>
+  <span class="n">second_grid</span> <span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>编译的时候也是坑，又提示需要include boost，我在QMAKE加了boost目录，还是没有包含，干脆把所有的boost文件全部复制到deal.ii的include路径下。而且deal.iibuild目录下的include和deal.ii源代码下的include还要合并。然后又说不对，还需要链接boost::serialization库，接着又是链接这个库。还是不对，说<code class="highlighter-rouge">triangulation.set_manifold (0);</code>没有这个方法。把这一行注释掉，运行又有问题，不过倒是输出了eps图片。到底编译成功没有还是个未知数。</p>
+
+<p>接着是第二个例子，用刚才的QMAKE配置一次成功。第三个例子的一句话是<code class="highlighter-rouge">Functions::ZeroFunction&lt;2&gt;</code>，又不对了，需要自己包含<code class="highlighter-rouge">#include &lt;deal.II/base/function.h&gt;</code>，然后还不对，进头文件一看，ZeroFunction继承于Functions类，这个官网的例子实在有点扯。最后编译成功了。但是出的gpl图居然又不能在GNU PLOT里面打开，说有语法错误。</p>
+
+<p>用release又编译了第四个例子，一次成功了，但是又费劲地用three.js渲染vtk文件，没有显示出来，不知道是什么毛病。只能说姑且认为这个编译成功了，但是坑还很大。</p>
+
+<hr />
+<p>第二个例子生成了svg图片，不小心发现了我的win10电脑上居然还有IE,版本是11，果断试试<a href="https://scienceasdf.github.io">我的网站</a>在IE11上的兼容性，好像很差（主要是sql.js和echarts）。非常无奈，中国还有许多人用IE，现在移动端对html5的支持居然都比IE好。不过edge长得太像IE了，微软改名部啊:Grin:</p>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 有限元 </tag>
+        
+          <tag> 数值算法 </tag>
+        
+          <tag> boost </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[初窥含太阳系动力系统在内的几类动力系统]]></title>
       <url>/dynamics/2018/04/12/dynamics/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">

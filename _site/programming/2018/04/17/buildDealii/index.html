@@ -85,7 +85,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="天文,动力学," />
+  <meta name="keywords" content="有限元,数值算法,boost," />
 
 
 
@@ -114,20 +114,17 @@
 
 
 <meta name="description" content="">
-<meta name="keywords" content="天文, 动力学">
+<meta name="keywords" content="有限元, 数值算法, boost">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初窥牛顿平方反比定律和胡克定律的对偶性">
-<meta property="og:url" content="http://localhost:4000/dynamics/2018/04/12/astrodynamics3/">
+<meta property="og:title" content="在Windows下编译deal.ii">
+<meta property="og:url" content="http://localhost:4000/programming/2018/04/17/buildDealii/">
 <meta property="og:site_name" content="scienceasdf">
 <meta property="og:description" content="">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://localhost:4000/assets//blog_images/Jukowsky.png">
-<meta property="og:image" content="http://localhost:4000/assets//blog_images/square.PNG">
-<meta property="og:updated_time" content="2018-04-12T00:00:00+08:00">
+<meta property="og:updated_time" content="2018-04-17T00:00:00+08:00">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初窥牛顿平方反比定律和胡克定律的对偶性">
+<meta name="twitter:title" content="在Windows下编译deal.ii">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="http://localhost:4000/assets//blog_images/Jukowsky.png">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -160,7 +157,7 @@
 
 
 
-  <title>初窥牛顿平方反比定律和胡克定律的对偶性</title>
+  <title>在Windows下编译deal.ii</title>
   
 
 
@@ -308,7 +305,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/dynamics/2018/04/12/astrodynamics3/">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/programming/2018/04/17/buildDealii/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="scienceasdf">
@@ -328,7 +325,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            初窥牛顿平方反比定律和胡克定律的对偶性
+            在Windows下编译deal.ii
           
         </h1>
         
@@ -342,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-12T00:00:00+08:00">
-                2018-04-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T00:00:00+08:00">
+                2018-04-17
               </time>
             
 
@@ -366,8 +363,8 @@
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/Dynamics" itemprop="url" rel="index">
-                    <span itemprop="name">Dynamics</span>
+                  <a href="/category/#/Programming" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
                   </a>
                 </span>
 
@@ -437,138 +434,129 @@
 
 <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<p><strong>探讨牛顿平方反比定律与胡克定律的对偶性，研究相关的动力学系统以及共形映射。本文的大多数结论来自于Arnold等人的著作。</strong></p>
+<p><strong>在Windows下用MSVC2017编译deal.ii</strong></p>
 
 <hr />
-<p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
+<p>最近由于一些原因需要学习开源有限元的程序。在Github上找了一下，C++的还算有三位数stars的有deal.ii,libMesh和mFem（按照stars数目由多到少排列）。libMesh的代码下载下来居然不支持cmake，编译只能用msys来make，似乎也不能用MSVC编译。而deal.ii只能支持MSVC而不支持mingw.权衡了一下，选择deal.ii来学习，一个是它stars数多，知名度更高，另一个是mingw的编译器编译出来的程序通常比MSVC编译出来的更慢，这个在科学计算中比较头疼。</p>
+
+<p>CMake里面configure的过程要设置一大堆flag，我都没有管，毕竟windows什么都特别不方便。像LAPACK库，GSL库我觉得还是有必要去链接的。希望这个东西的矩阵运算效率至少能够达到Eigen的水平。Configure第一次不对劲，原因竟然是我设置的build目录里面有’-‘减号。重新设置了build目录以后，生成了sln文件，感觉似乎有点希望了。不过不敢乐观，以前cmake成功但是sln最后还是编译不了的例子也有。</p>
+
+<p>打开MSVC后，开始编译。很神奇的是，编译到一半出错了，说cmd停止运行，然后打开目录里面却发现已经deal_II.g.lib和deal_II.lib生成了。这个时候我相信它是编译成功了，但是打开别的test目录里却发现没有编译，examples也没有。有些失落，直接试试这个库到底能不能用。</p>
+
+<p>直接把官网的第一个例子复制过来，用QMake编译：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* ---------------------------------------------------------------------
+ *
+ * Copyright (C) 1999 - 2016 by the deal.II authors
+ *
+ * This file is part of the deal.II library.
+ *
+ * The deal.II library is free software; you can use it, redistribute
+ * it, and/or modify it under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * The full text of the license can be found in the file LICENSE at
+ * the top level of the deal.II distribution.
+ *
+ * ---------------------------------------------------------------------
+
+ */</span>
+
+
+<span class="cp">#include &lt;deal.II/grid/tria.h&gt;
+#include &lt;deal.II/grid/tria_accessor.h&gt;
+#include &lt;deal.II/grid/tria_iterator.h&gt;
+#include &lt;deal.II/grid/grid_generator.h&gt;
+#include &lt;deal.II/grid/manifold_lib.h&gt;
+#include &lt;deal.II/grid/grid_out.h&gt;
+</span>
+<span class="cp">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;cmath&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">dealii</span><span class="p">;</span>
+
+
+<span class="kt">void</span> <span class="nf">first_grid</span> <span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">Triangulation</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span> <span class="n">triangulation</span><span class="p">;</span>
+
+  <span class="n">GridGenerator</span><span class="o">::</span><span class="n">hyper_cube</span> <span class="p">(</span><span class="n">triangulation</span><span class="p">);</span>
+  <span class="n">triangulation</span><span class="p">.</span><span class="n">refine_global</span> <span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">out</span> <span class="p">(</span><span class="s">"grid-1.eps"</span><span class="p">);</span>
+  <span class="n">GridOut</span> <span class="n">grid_out</span><span class="p">;</span>
+  <span class="n">grid_out</span><span class="p">.</span><span class="n">write_eps</span> <span class="p">(</span><span class="n">triangulation</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Grid written to grid-1.eps"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+
+
+<span class="kt">void</span> <span class="nf">second_grid</span> <span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">Triangulation</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span> <span class="n">triangulation</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="n">Point</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span> <span class="n">center</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+  <span class="k">const</span> <span class="kt">double</span> <span class="n">inner_radius</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+               <span class="n">outer_radius</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+  <span class="n">GridGenerator</span><span class="o">::</span><span class="n">hyper_shell</span> <span class="p">(</span><span class="n">triangulation</span><span class="p">,</span>
+                              <span class="n">center</span><span class="p">,</span> <span class="n">inner_radius</span><span class="p">,</span> <span class="n">outer_radius</span><span class="p">,</span>
+                              <span class="mi">10</span><span class="p">);</span>
+  <span class="k">const</span> <span class="n">SphericalManifold</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span> <span class="n">manifold_description</span><span class="p">(</span><span class="n">center</span><span class="p">);</span>
+  <span class="n">triangulation</span><span class="p">.</span><span class="n">set_manifold</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">manifold_description</span><span class="p">);</span>
+  <span class="n">triangulation</span><span class="p">.</span><span class="n">set_all_manifold_ids</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">step</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">step</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">;</span> <span class="o">++</span><span class="n">step</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">Triangulation</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;::</span><span class="n">active_cell_iterator</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">triangulation</span><span class="p">.</span><span class="n">begin_active</span><span class="p">();</span>
+      <span class="n">Triangulation</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;::</span><span class="n">active_cell_iterator</span> <span class="n">endc</span> <span class="o">=</span> <span class="n">triangulation</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+      <span class="k">for</span> <span class="p">(;</span> <span class="n">cell</span><span class="o">!=</span><span class="n">endc</span><span class="p">;</span> <span class="o">++</span><span class="n">cell</span><span class="p">)</span>
+        <span class="p">{</span>
+          <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">v</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+               <span class="n">v</span> <span class="o">&lt;</span> <span class="n">GeometryInfo</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;::</span><span class="n">vertices_per_cell</span><span class="p">;</span>
+               <span class="o">++</span><span class="n">v</span><span class="p">)</span>
+            <span class="p">{</span>
+              <span class="k">const</span> <span class="kt">double</span> <span class="n">distance_from_center</span>
+                <span class="o">=</span> <span class="n">center</span><span class="p">.</span><span class="n">distance</span> <span class="p">(</span><span class="n">cell</span><span class="o">-&gt;</span><span class="n">vertex</span><span class="p">(</span><span class="n">v</span><span class="p">));</span>
+
+              <span class="k">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">fabs</span><span class="p">(</span><span class="n">distance_from_center</span> <span class="o">-</span> <span class="n">inner_radius</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">)</span>
+                <span class="p">{</span>
+                  <span class="n">cell</span><span class="o">-&gt;</span><span class="n">set_refine_flag</span> <span class="p">();</span>
+                  <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+      <span class="n">triangulation</span><span class="p">.</span><span class="n">execute_coarsening_and_refinement</span> <span class="p">();</span>
+    <span class="p">}</span>
+
+
+  <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">out</span> <span class="p">(</span><span class="s">"grid-2.eps"</span><span class="p">);</span>
+  <span class="n">GridOut</span> <span class="n">grid_out</span><span class="p">;</span>
+  <span class="n">grid_out</span><span class="p">.</span><span class="n">write_eps</span> <span class="p">(</span><span class="n">triangulation</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Grid written to grid-2.eps"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="n">triangulation</span><span class="p">.</span><span class="n">set_manifold</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">first_grid</span> <span class="p">();</span>
+  <span class="n">second_grid</span> <span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>编译的时候也是坑，又提示需要include boost，我在QMAKE加了boost目录，还是没有包含，干脆把所有的boost文件全部复制到deal.ii的include路径下。而且deal.iibuild目录下的include和deal.ii源代码下的include还要合并。然后又说不对，还需要链接boost::serialization库，接着又是链接这个库。还是不对，说<code class="highlighter-rouge">triangulation.set_manifold (0);</code>没有这个方法。把这一行注释掉，运行又有问题，不过倒是输出了eps图片。到底编译成功没有还是个未知数。</p>
+
+<p>接着是第二个例子，用刚才的QMAKE配置一次成功。第三个例子的一句话是<code class="highlighter-rouge">Functions::ZeroFunction&lt;2&gt;</code>，又不对了，需要自己包含<code class="highlighter-rouge">#include &lt;deal.II/base/function.h&gt;</code>，然后还不对，进头文件一看，ZeroFunction继承于Functions类，这个官网的例子实在有点扯。最后编译成功了。但是出的gpl图居然又不能在GNU PLOT里面打开，说有语法错误。</p>
+
+<p>用release又编译了第四个例子，一次成功了，但是又费劲地用three.js渲染vtk文件，没有显示出来，不知道是什么毛病。只能说姑且认为这个编译成功了，但是坑还很大。</p>
 
 <hr />
-<h2 id="共形映射">共形映射</h2>
-<p>这个是复变函数论的一个重要工具，在这里我们需要以下两个共形映射函数。（吐槽一下，百度的ECharts实在不适合绘制数学函数）</p>
-<h3 id="茹科夫斯基函数">茹科夫斯基函数</h3>
-<p>\begin{equation}
-f(z) = z+\frac{1}{z}
-\end{equation}
-若$z=|R|&gt;1$，则得到的是焦点为$\pm 2$的椭圆，证明如下：
-\begin{equation}
-z=R(\cos\theta+i\sin\theta)
-\end{equation}
-那么有
-<script type="math/tex">% <![CDATA[
-\begin{align}
-f(z)&=z+\frac{1}{z}\\
-&=R(\cos\theta+i\sin\theta)+\frac{1}{R(\cos\theta+i\sin\theta)}\\
-&=R(\cos\theta+i\sin\theta)+\frac{1}{R}(\cos\theta-i\sin\theta)\\
-&=(R+\frac{1}{R})\cos\theta+i(R-\frac{1}{R})\sin\theta
-\end{align} %]]></script>
-很显然可以得到：<br />
-<script type="math/tex">a=R+\frac{1}{R}</script><br />
-<script type="math/tex">b=R-\frac{1}{R}</script><br />
-<script type="math/tex">c=\sqrt{a^2-b^2}=2</script><br />
-<img src="http://localhost:4000/assets//blog_images/Jukowsky.png" width="500px" /></p>
-
-<h3 id="平方函数">平方函数</h3>
-<p>\begin{equation}
-f(z)=z^2
-\end{equation}
-设$z$为一个椭圆，$z=a\cos\theta+ib\sin\theta$
-则有：
-<script type="math/tex">% <![CDATA[
-\begin{align}
-f(z)&=a^2\cos^2\theta-b^2\sin^2\theta+2ab\cos\theta\sin\theta i\\
-&=\frac{a^2(1+\cos 2\theta)}{2}-\frac{b^2(1-\cos{2\theta})}{2}+ab\sin{2\theta}i\\
-&=\frac{a^2-b^2}{2}+\frac{a^2+b^2}{2}\cos{2\theta}+ab\sin{2\theta}i
-\end{align} %]]></script>
-可以得到映射后的图形是其中一个焦点在原点的椭圆<br />
-<script type="math/tex">A=\frac{a^2+b^2}{2}</script><br />
-<script type="math/tex">B=ab</script><br />
-<script type="math/tex">C=\frac{a^2-b^2}{2}</script><br />
-<img src="http://localhost:4000/assets//blog_images/square.PNG" width="500px" /></p>
-
-<h2 id="胡克定律">胡克定律</h2>
-<p>胡克定律
-\begin{equation}
-\mathbf{F}=-k\mathbf{x}
-\end{equation}
-这个东西与椭圆也大有关系。首先，在一维问题中，如果一个小球和弹簧相连，那么会形成简谐振动，而简谐振动的相平面就是椭圆（能量守恒易得）。我们考虑更加复杂的情况：一个弹簧连着一个小球进行二维平面运动，也会得到椭圆的运动轨迹，证明如下<a href="http://www.physics.hmc.edu/~saeta/courses/p111/uploads/Y2011/HSChapter6.pdf">[1]</a>：<br />
-将平面运动分解为径向和周向的速度分量，角动量方程为：
-\begin{equation}
-L=mr^2\dot\theta
-\end{equation}
-能量方程为：
-\begin{equation}
-E=\frac{1}{2}m\dot r^2+\frac{L^2}{2mr^2}+U(r)
-\end{equation}
-根据以上两个方程，可以分别求出$r,\theta$对时间的导数，因此可以得到
-\begin{equation}
-\frac{dr}{d\theta}=\frac{dr/dt}{d\theta/dt}=\pm\sqrt{\frac{2m}{l^2}}r^2\sqrt{E-l^2/2mr^2-U(r)}
-\end{equation}
-\begin{equation}
-\theta=\int d\theta=\pm\frac{l}{\sqrt{2m}}\int^r\frac{dr/r^2}{\sqrt{E-l^2/2mr^2-U(r)}}
-\end{equation}
-势能的表达式
-\begin{equation}
-U=0.5kr^2
-\end{equation}
-因此可以得到
-\begin{equation}
-\theta(r)=\pm\frac{i}{\sqrt{2m}}\int^r\frac{dr/r^2}{\sqrt{E-l^2/2mr^2-0.5kr^2}}
-\end{equation}
-令$z=r^2$，有
-\begin{equation}
-\theta(z)=\pm\frac{l}{2\sqrt{2m}}\int^z\frac{dz/z}{\sqrt{-l^2/2m+Ez-(k/2)z^2}}
-\end{equation}
-因为
-\begin{equation}
-\int^z\frac{dz/z}{\sqrt{a+bz+cz^2}}=\frac{1}{-a}\mathrm{asin}(\frac{bz+2a}{z\sqrt{b^2-4ac}})
-\end{equation}
-所以有
-\begin{equation}
-\theta-\theta_0=\pm\frac{1}{2}\mathrm{asin}(\frac{Er^2-l^2/m}{r^2\sqrt{E^2-kl^2/m}})
-\end{equation}
-反解$r$得到
-\begin{equation}
-r^2(\theta)=\frac{l^2/m}{E\mp(\sqrt{E^2-kl^2/m})\sin{2(\theta-\theta_0)}}
-\end{equation}
-显然，这个轨道是闭合的（因为$r^2(\theta+2\pi)=r^2(\theta)$），也可以证明表示的是一个椭圆（把分母有理化）。不过如果我们知道比如长轴的位置速度信息，求短轴就不必这么麻烦，一个角动量守恒方程一个能量守恒方程就可以得到短轴的位置速度。</p>
-
-<h2 id="牛顿平方反比定律与胡克定律的对偶性">牛顿平方反比定律与胡克定律的对偶性</h2>
-<p>参考文献为<a href="https://www.researchgate.net/publication/228571130_Planetary_Motion_and_the_Duality_of_Force_Laws">[2]</a>(W. Hall, Rachel &amp; Josic, Kresimir. (2000). Planetary Motion and the Duality of Force Laws. Society for Industrial and Applied Mathematics. 42. 115-124. 10.1137/S0036144598346005. )</p>
-
-<p>考虑胡克定律的动力学形式为复数形式：
-\begin{equation}
-\ddot w = -Cw
-\end{equation}
-这里的时间自变量为$t$，假设另一个时间变量$\tau$满足$\tau=\tau(t)$，另外一个运动$z=z(\tau)$，我们会得到$\frac{d^2z}{d\tau^2}=-\tilde{C}\frac{z}{|z|^3}$.<br />
-事实上，只要做变换$z=w^2$，并令$\frac{d\tau}{dt}=|w|^2$，就可以得到平方反比的形式，证明如下：
-<script type="math/tex">% <![CDATA[
-\begin{align}
-\frac{d^2z}{d\tau^2}&=\frac{1}{|w|^2}\frac{d}{dt}(\frac{1}{|w|^2}\frac{dw^2}{dt})\\
-&=\frac{2}{w\bar w}\frac{d}{dt}(\frac{1}{\bar w}\frac{dw}{dt})\\
-&=\frac{2}{w\bar w^3}\frac{dw}{dt}\frac{d\bar w}{dt}+\frac{2}{w\bar w^2}\frac{d^2w}{dt^2}\\
-&=-\frac{2}{w\bar w}[\bar w^{-2}\frac{dw}{dt}\bar{\frac{dw}{dt}}+C\frac{w}{\bar w}]\\
-&=-2w^{-1}(\bar w)^{-3}[|\dot w|^2+C|w|^2]
-\end{align} %]]></script>
-现在令$E_w=\frac{1}{2}(|\dot w|^2+C|w|^2)$，可以得到
-\begin{equation}
-\frac{d^2 z}{d\tau^2}=-4E_ww^{-1}\bar w^{-3}=-4E_w\frac{z}{|z|^3}
-\end{equation}
-这就是我们想要得到的形式。不得不说，Arnold等人的想法太意识流了，这也能想到。<br />
-其实核心就在于上面的那个平方关系的共形映射，让中心在原点的椭圆映射到焦点在原点的椭圆。而那个$\tau,t$的关系是如何得到的呢？事实上，由于角动量守恒，胡克椭圆和开普勒椭圆都会满足面积率。我们记$A_1,A_2$分别是$w(t),z(\tau)$所扫过的面积。$w(t)=(r,\theta)$，而$z=w^2(t)=(r^2,2\theta)$.可以得到
-<script type="math/tex">% <![CDATA[
-\begin{align}
-\mathrm{const}&=\frac{\frac{dA_1}{dt}}{\frac{dA_2}{dt}}\\
-&=\frac{r\theta\frac{dr}{dt}+0.5r^2\frac{d\theta}{dt}}{2r^3\theta\frac{dr}{dt}+r^4\frac{d\theta}{dt}}\\
-&=\frac{1}{2}\frac{d\tau}{dt}\frac{1}{r^2}\\
-&=\frac{1}{2}\frac{d\tau}{dt}\frac{1}{|w|^2}
-\end{align} %]]></script>
-这样想到的取$\frac{d\tau}{dt}=|w|^2$……<br />
-上面这个东西还可以进一步推论：点在幂为$a$的力场中的轨道，在经过适当的变换$w=z^\beta$后变成幂为A的力场中的轨道，则有$A,a,\beta$满足：<br />
-<script type="math/tex">(a+3)(A+4)=4,\quad \beta=\frac{a+3}{2}</script><br />
-证明过程与刚才类似，不过需要注意的是要选择的$\tau$要满足关系
-\begin{equation}
-\frac{d\tau}{dt}=\frac{|z(\tau(t))|^2}{|w(t)|^2}=|w(t)|^{2(\beta-1)}
-\end{equation}</p>
+<p>第二个例子生成了svg图片，不小心发现了我的win10电脑上居然还有IE,版本是11，果断试试<a href="https://scienceasdf.github.io">我的网站</a>在IE11上的兼容性，好像很差（主要是sql.js和echarts）。非常无奈，中国还有许多人用IE，现在移动端对html5的支持居然都比IE好。不过edge长得太像IE了，微软改名部啊:Grin:</p>
 
       
     </div>
@@ -599,10 +587,13 @@ r^2(\theta)=\frac{l^2/m}{E\mp(\sqrt{E^2-kl^2/m})\sin{2(\theta-\theta_0)}}
         <div class="post-tags">
           
             
-            <a href="/tag/#/%E5%A4%A9%E6%96%87" rel="tag"># 天文</a>
+            <a href="/tag/#/%E6%9C%89%E9%99%90%E5%85%83" rel="tag"># 有限元</a>
           
             
-            <a href="/tag/#/%E5%8A%A8%E5%8A%9B%E5%AD%A6" rel="tag"># 动力学</a>
+            <a href="/tag/#/%E6%95%B0%E5%80%BC%E7%AE%97%E6%B3%95" rel="tag"># 数值算法</a>
+          
+            
+            <a href="/tag/#/boost" rel="tag"># boost</a>
           
         </div>
       
@@ -618,18 +609,14 @@ r^2(\theta)=\frac{l^2/m}{E\mp(\sqrt{E^2-kl^2/m})\sin{2(\theta-\theta_0)}}
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/dynamics/2018/04/12/dynamics/" rel="next" title="初窥含太阳系动力系统在内的几类动力系统">
-                <i class="fa fa-chevron-left"></i> 初窥含太阳系动力系统在内的几类动力系统
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/programming/2018/04/06/groundTrackPlot/" rel="prev" title="在线绘制星下点轨迹">
-                在线绘制星下点轨迹 <i class="fa fa-chevron-right"></i>
+              <a href="/dynamics/2018/04/12/dynamics/" rel="prev" title="初窥含太阳系动力系统在内的几类动力系统">
+                初窥含太阳系动力系统在内的几类动力系统 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -683,17 +670,8 @@ r^2(\theta)=\frac{l^2/m}{E\mp(\sqrt{E^2-kl^2/m})\sin{2(\theta-\theta_0)}}
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/avatar.png"
@@ -801,31 +779,6 @@ r^2(\theta)=\frac{l^2/m}{E\mp(\sqrt{E^2-kl^2/m})\sin{2(\theta-\theta_0)}}
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-
-
-
-
-            
-              <div class="post-toc-content">
-    <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#共形映射"> <span class="nav-number">1</span> <span class="nav-text">共形映射</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#茹科夫斯基函数"> <span class="nav-number">1.1</span> <span class="nav-text">茹科夫斯基函数</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#平方函数"> <span class="nav-number">1.2</span> <span class="nav-text">平方函数</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#胡克定律"> <span class="nav-number">2</span> <span class="nav-text">胡克定律</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#牛顿平方反比定律与胡克定律的对偶性"> <span class="nav-number">3</span> <span class="nav-text">牛顿平方反比定律与胡克定律的对偶性</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
-    </ol>
-  </div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
