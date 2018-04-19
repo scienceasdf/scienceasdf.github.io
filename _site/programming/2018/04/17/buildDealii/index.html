@@ -113,18 +113,18 @@
 
 
 
-<meta name="description" content="在Windows下用MSVC2017编译deal.ii">
+<meta name="description" content="">
 <meta name="keywords" content="有限元, 数值算法, boost">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Windows下编译deal.ii">
 <meta property="og:url" content="http://localhost:4000/programming/2018/04/17/buildDealii/">
 <meta property="og:site_name" content="scienceasdf">
-<meta property="og:description" content="在Windows下用MSVC2017编译deal.ii">
+<meta property="og:description" content="">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-04-17T00:00:00+08:00">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Windows下编译deal.ii">
-<meta name="twitter:description" content="在Windows下用MSVC2017编译deal.ii">
+<meta name="twitter:description" content="">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -403,7 +403,38 @@
       
 
       
-        <p><strong>在Windows下用MSVC2017编译deal.ii</strong></p>
+        <script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']]
+            },
+  			TeX: { 
+                equationNumbers: {  
+                    autoNumber: "AMS"  
+                },
+     		    extensions: ["AMSmath.js"]
+            },
+            CommonHTML: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            "HTML-CSS": { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            SVG: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            }
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>在Windows下用MSVC2017编译deal.ii</strong></p>
 
 <hr />
 <p>最近由于一些原因需要学习开源有限元的程序。在Github上找了一下，C++的还算有三位数stars的有deal.ii,libMesh和mFem（按照stars数目由多到少排列）。libMesh的代码下载下来居然不支持cmake，编译只能用msys来make，似乎也不能用MSVC编译。而deal.ii只能支持MSVC而不支持mingw.权衡了一下，选择deal.ii来学习，一个是它stars数多，知名度更高，另一个是mingw的编译器编译出来的程序通常比MSVC编译出来的更慢，这个在科学计算中比较头疼。</p>
@@ -578,10 +609,6 @@
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/math/2018/04/18/TrigonometricFormula/" rel="next" title="一个三角恒等式的证明">
-                <i class="fa fa-chevron-left"></i> 一个三角恒等式的证明
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
@@ -659,7 +686,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -670,7 +697,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
