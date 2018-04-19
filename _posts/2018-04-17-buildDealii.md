@@ -8,36 +8,6 @@ tags:
 - boost
 updated: 2018-4-17 
 ---
-<script type="text/x-mathjax-config">
-  		MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [['$','$'], ['\\(','\\)']]
-            },
-  			TeX: { 
-                equationNumbers: {  
-                    autoNumber: "AMS"  
-                },
-     		    extensions: ["AMSmath.js"]
-            },
-            CommonHTML: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            "HTML-CSS": { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            SVG: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            }
-  		});
-		</script>
-
- <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 **在Windows下用MSVC2017编译deal.ii**
 
 ---
