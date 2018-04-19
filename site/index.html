@@ -7,38 +7,36 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link href="https://cdn.bootcss.com/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/semantic-ui/2.3.1/semantic.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
 </head>
 <body>
   <div data-role="page" id="pageone">
-  <a href="eqs/index.html" class="fluid ui button">在线LaTeX公式预览</a>
+  <button href="eqs/index.html" class="btn btn-default" data-ajax="false">在线LaTeX公式预览</button>
 
-  <a href="./rootLocus/index.html" class="fluid ui button">在线绘制根轨迹</a>
+  <button href="./rootLocus/index.html" class="btn btn-default" data-ajax="false">在线绘制根轨迹</button>
 
-  <a href = "prop/index.html" class="fluid ui button">在线螺旋桨性能查询</a>
+  <button href = "prop/index.html" class="btn btn-default" data-ajax="false">在线螺旋桨性能查询</button>
 
-  <a href = "prop/dynamic.html" class="fluid ui button">在线动螺旋桨性能查询</a>
+  <button href = "prop/dynamic.html" class="btn btn-default" data-ajax="false">在线动螺旋桨性能查询</button>
 
-  <a href = "solarAngle.html" class="fluid ui button">在线计算太阳高度角与方位角</a> 
+  <button href = "solarAngle.html" class="btn btn-default" data-ajax="false">在线计算太阳高度角与方位角</button> 
 
-  <a href = "./groundTrackPlot.html" class="fluid ui button">根据轨道六根数绘制星下点轨迹</a> 
+  <button href = "./groundTrackPlot.html" class="btn btn-default" data-ajax="false">根据轨道六根数绘制星下点轨迹</button> 
 
-  <a href = "./SAT3D.html" class="fluid ui button">根据轨道六根数绘制卫星空间轨迹</a> 
+  <button href = "./SAT3D.html" class="btn btn-default" data-ajax="false">根据轨道六根数绘制卫星空间轨迹</button> 
 
-  <a href = "./TLE/index.html" class="fluid ui button">根据TLE数据绘制星下点轨迹</a> 
+  <button href = "./TLE/index.html" class="btn btn-default" data-ajax="false">根据TLE数据绘制星下点轨迹</button> 
 
-  <a href = "./TLE/TLE3D.html" class="fluid ui button">根据TLE数据绘制卫星空间轨迹</a> 
+  <button href = "./TLE/TLE3D.html" class="btn btn-default" data-ajax="false">根据TLE数据绘制卫星空间轨迹</button> 
 
-  <a href = "https://scienceasdf.github.io" class="fluid ui button">博客主页</a>
+  <button href = "https://scienceasdf.github.io" class="btn btn-default" data-ajax="false">博客主页</button>
   </div>
 
   
   
 </body>
-
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
 <script>
   function toEqs(){
     window.location.href='eqs.html';
