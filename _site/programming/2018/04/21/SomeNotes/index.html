@@ -84,7 +84,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="" />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -112,18 +112,18 @@
 
 
 
-<meta name="description" content="Fork or download the theme here on GitHub.">
-<meta name="keywords" content="Jekyll, NexT">
+<meta name="description" content="总结一些最近编程遇到的坑（C++）">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Download this Theme">
-<meta property="og:url" content="http://localhost:4000/2015/06/24/download-this-theme/">
+<meta property="og:title" content="最近写程序遇到的一些坑的总结">
+<meta property="og:url" content="http://localhost:4000/programming/2018/04/21/SomeNotes/">
 <meta property="og:site_name" content="scienceasdf">
-<meta property="og:description" content="Fork or download the theme here on GitHub.">
+<meta property="og:description" content="总结一些最近编程遇到的坑（C++）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2015-09-09T10:38:00+08:00">
+<meta property="og:updated_time" content="2018-04-21T00:00:00+08:00">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Download this Theme">
-<meta name="twitter:description" content="Fork or download the theme here on GitHub.">
+<meta name="twitter:title" content="最近写程序遇到的一些坑的总结">
+<meta name="twitter:description" content="总结一些最近编程遇到的坑（C++）">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -156,7 +156,7 @@
 
 
 
-  <title>Download this Theme</title>
+  <title>最近写程序遇到的一些坑的总结</title>
   
 
 
@@ -304,7 +304,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/2015/06/24/download-this-theme/">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/programming/2018/04/21/SomeNotes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="scienceasdf">
@@ -324,7 +324,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            Download this Theme
+            最近写程序遇到的一些坑的总结
           
         </h1>
         
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-24T00:00:00+08:00">
-                2015-06-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-21T00:00:00+08:00">
+                2018-04-21
               </time>
             
 
@@ -348,6 +348,29 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/Programming" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -379,7 +402,70 @@
       
 
       
-        <p><strong><em>Fork</em></strong> or <strong><em>download</em></strong> the theme <a href="https://github.com/Jackpon/Jackpon.github.io">here on GitHub</a>.</p>
+        <p><strong>总结一些最近编程遇到的坑（C++）</strong></p>
+
+<hr />
+<h2 id="使用eigen时的一个报错">使用Eigen时的一个报错：</h2>
+<p>在使用Eigen库时，有时会报错：</p>
+<blockquote>
+  <p>my_program: path/to/eigen/Eigen/src/Core/DenseStorage.h:44:
+Eigen::internal::matrix_array&lt;T, Size, MatrixOptions, Align&gt;::internal::matrix_array()
+[with T = double, int Size = 2, int MatrixOptions = 2, bool Align = true]:
+Assertion `(reinterpret_cast<size_t>(array) &amp; (sizemask)) == 0 &amp;&amp; "this assertion
+is explained here: http://eigen.tuxfamily.org/dox-devel/group__TopicUnalignedArrayAssert.html
+    READ THIS WEB PAGE !!! ****"' failed.</size_t></p>
+</blockquote>
+
+<p>这里Eigen已经把解决问题的网页贴出来了。进去一看，给出了可能的原因，我这里遇到的是因为一个类里面的成员为Eigen的类，比如</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Foo</span>
+<span class="p">{</span>
+  <span class="c1">//...
+</span>  <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span> <span class="n">v</span><span class="p">;</span>
+  <span class="c1">//...
+</span><span class="p">};</span>
+<span class="c1">//...
+</span><span class="n">Foo</span> <span class="o">*</span><span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">;</span>
+</code></pre></div></div>
+<p>需要加上一个宏<code class="highlighter-rouge">EIGEN_MAKE_ALIGNED_OPERATOR_NEW</code>，如下</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Foo</span>
+<span class="p">{</span>
+  <span class="c1">//...
+</span>  <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span> <span class="n">v</span><span class="p">;</span>
+  <span class="c1">//...
+</span><span class="nl">public:</span>
+  <span class="n">EIGEN_MAKE_ALIGNED_OPERATOR_NEW</span>
+<span class="p">};</span>
+<span class="c1">//...
+</span><span class="n">Foo</span> <span class="o">*</span><span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">;</span>
+</code></pre></div></div>
+<p>就不会报错了。这个是对于固定维数的矩阵（向量）会出现的错误，动态维数的矩阵（向量）不存在这样的问题。其它的情况包括按值传递矩阵（向量、或者带矩阵成员的类），需要改成按引用传递。这个问题的根本原因是Eigen为了提高运算速度，采取了128位内存对齐，以让编译器进行向量化优化。而如果自己的new就不会有内存对已，因此需要加上一个宏，重新实现内存对齐的new.</p>
+
+<h2 id="一个在析构函数中需要注意的问题">一个在析构函数中需要注意的问题</h2>
+<p>为了减少头文件包含，我们有时会这样写</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">bar</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">foo</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">foo</span><span class="p">();</span>
+    <span class="o">~</span><span class="n">foo</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">delete</span> <span class="n">m_bar</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">bar</span><span class="o">*</span> <span class="n">m_bar</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>这个时候编译器会给出警告，因为没有bar的析构函数。正确的还是应该把析构函数放进cpp文件里面。</p>
+
+<h2 id="eigen的矩阵判断相等">Eigen的矩阵判断相等</h2>
+<p>Eigen库有一个用于判断矩阵是否大致相等的函数，可以这样用</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">typename</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Dynamic</span><span class="p">,</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Dynamic</span><span class="o">&gt;</span> <span class="n">EigenMatrix</span><span class="p">;</span>
+ 
+<span class="n">EigenMatrix</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+ 
+<span class="c1">// True if equal
+</span><span class="kt">bool</span> <span class="n">r</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">isApprox</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">);</span>
+</code></pre></div></div>
+<p>原理是两个矩阵相减并求Frobenius范数。</p>
 
       
     </div>
@@ -407,6 +493,13 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            
+            <a href="/tag/#/C%2B%2B" rel="tag"># C++</a>
+          
+        </div>
+      
 
       
       
@@ -419,15 +512,15 @@
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/programming/2015/11/02/tank/" rel="next" title="红警坦克作战效能模拟平台">
-                <i class="fa fa-chevron-left"></i> 红警坦克作战效能模拟平台
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/math/2018/04/18/TrigonometricFormula/" rel="prev" title="一个三角恒等式的证明">
+                一个三角恒等式的证明 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -480,8 +573,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/avatar.png"
@@ -589,6 +691,31 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#使用eigen时的一个报错"> <span class="nav-number">1</span> <span class="nav-text">使用Eigen时的一个报错：</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#一个在析构函数中需要注意的问题"> <span class="nav-number">2</span> <span class="nav-text">一个在析构函数中需要注意的问题</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#eigen的矩阵判断相等"> <span class="nav-number">3</span> <span class="nav-text">Eigen的矩阵判断相等</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -3,7 +3,7 @@ title: 一个三角恒等式的证明
 categories:
 - Math
 tags:
-updated: 2018-4-17 
+updated: 2018-4-18 
 ---
 <script type="text/x-mathjax-config">
   		MathJax.Hub.Config({
