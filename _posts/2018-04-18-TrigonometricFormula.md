@@ -2,7 +2,7 @@
 title: 一个三角恒等式的证明
 categories:
 - Math
-tags:
+tags: 
 updated: 2018-4-18 
 ---
 <script type="text/x-mathjax-config">
@@ -35,8 +35,8 @@ updated: 2018-4-18
 		</script>
 
  <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-**一道神奇的三角恒等式的证明（非原创）**
-  
+**一道神奇的三角恒等式的证明（非原创）**  
+
 ---
 **本文公式较多，在浏览器中将会花较长时间用于渲染公式。**  
 

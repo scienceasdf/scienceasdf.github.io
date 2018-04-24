@@ -3,7 +3,7 @@ title: 将VS code和Sublime Text3的VIM改成behave-mswin-like
 categories:
 - Programming
 tags:
-- Editor
+- 编辑器
 - Vim
 updated: 2018-03-31
 ---
@@ -16,7 +16,6 @@ updated: 2018-03-31
  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 **修改sublime和VS code的keymap配置，使其能够有mswin.vim的操作方式。**
 
----
 
 ---
 
