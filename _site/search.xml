@@ -9,11 +9,11 @@
 <hr />
 <p>Qt要在移动端写浏览器只能用一些比较牵强的方案（如果不自己造轮子的话），就是QtWebView.然而QtWebView提供的接口太少，不方便C++与html交互，如果是写web应用就比较劣势，毕竟cordova，react native等的方案非常流行，如果无法前后端交互，纯一个静态页面实在不好玩，还不如把网页挂在互联网上用浏览器直接访问网页。在安卓上有一种可行的方案：C++通过jni与java交互，再与js对象交互。这个也有弊端，一个是不是跨平台的方案，第二个是我不会java，只会c++和js.在网上查到的另一种解决方法是搭建一个local server，通过http请求进行交互。</p>
 
-<p>在GitHub上找到了一些用Qt搭建http server的代码（当然用boost也可以），例如<a href="http://stefanfrings.de/qtwebapp/index-en.html">QtWEbApp</a>，<a href="https://github.com/fffaraz/QtWebApp">QtWebApp</a>。我最终用的是[https://github.com/nikhilm/qhttpserver]，star数目很多，比较可惜的是有一阵没有更新了，但是还是很好的一个东西。</p>
+<p>在GitHub上找到了一些用Qt搭建http server的代码（当然用boost也可以），例如<a href="http://stefanfrings.de/qtwebapp/index-en.html">QtWEbApp</a>，<a href="https://github.com/fffaraz/QtWebApp">QtWebApp</a>。我最终用的是<a href="https://github.com/nikhilm/qhttpserver">qhttpserver</a>，star数目很多，比较可惜的是有一阵没有更新了，但是还是很好的一个东西。</p>
 
 <p>这个程序按照GitHub直接下载下来的项目把代码编译，例子可以直接运行在安卓机上。例如运行例子Helloworld，那么在手机浏览器上打开http://localhost:8080，可以看到helloworld字样。按照release模式编译得到libqhttpserver.so，然后按照文档在自己的项目里面添加头文件包含和需要链接的库就可以了。</p>
 
-<p>在Qt构建移动web应用有两种方案：网页资源放在qrc文件里面，运行时把qrc里面的内容全部复制到存储中，或者直接放在assets目录下（安卓的url格式为：file:///android_asset/site/groundTrackPlot.html，不能直接用assets目录访问，这个需要注意）。由于QtWebView只是一个原生浏览器的wrapper，因此不能直接访问qrc里面的文件。现在一种可行的解决方案是后端直接用QFile读取qrc文件，作为http请求的响应返回给前端：</p>
+<p>在Qt构建移动web应用有两种方案：网页资源放在qrc文件里面，运行时把qrc里面的内容全部复制到存储中，或者直接放在assets目录下（<strong>安卓的url格式为：file:///android_asset/site/groundTrackPlot.html，不能直接用assets目录访问，这个需要注意</strong>）。由于QtWebView只是一个原生浏览器的wrapper，因此不能直接访问qrc里面的文件。现在一种可行的解决方案是后端直接用QFile读取qrc文件，作为http请求的响应返回给前端：</p>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">HelloWorld</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QObject</span>
 <span class="p">{</span>
     <span class="n">Q_OBJECT</span>
