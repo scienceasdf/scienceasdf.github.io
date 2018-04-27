@@ -84,7 +84,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="天文,数值算法," />
+  <meta name="keywords" content="C++,Qt,安卓开发,网络,javascript," />
 
 
 
@@ -112,20 +112,18 @@
 
 
 
-<meta name="description" content="">
-<meta name="keywords" content="天文, 数值算法">
+<meta name="description" content="实现了一个B/S架构的在线请假申请系统。路子十分野，所以只是用于这种极为特殊的个人项目里面。">
+<meta name="keywords" content="C++, Qt, 安卓开发, 网络, javascript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="轨道动力学中常用的计算机算法">
-<meta property="og:url" content="http://localhost:4000/programming/2017/04/07/astrodynamics1/">
+<meta property="og:title" content="实现一个简单的在线请假系统">
+<meta property="og:url" content="http://localhost:4000/programming/2018/04/26/serverSystem/">
 <meta property="og:site_name" content="scienceasdf">
-<meta property="og:description" content="">
+<meta property="og:description" content="实现了一个B/S架构的在线请假申请系统。路子十分野，所以只是用于这种极为特殊的个人项目里面。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://localhost:4000/assets//blog_images/Keplerian.png">
-<meta property="og:updated_time" content="2017-04-07T00:00:00+08:00">
+<meta property="og:updated_time" content="2018-04-23T00:00:00+08:00">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="轨道动力学中常用的计算机算法">
-<meta name="twitter:description" content="">
-<meta name="twitter:image" content="http://localhost:4000/assets//blog_images/Keplerian.png">
+<meta name="twitter:title" content="实现一个简单的在线请假系统">
+<meta name="twitter:description" content="实现了一个B/S架构的在线请假申请系统。路子十分野，所以只是用于这种极为特殊的个人项目里面。">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -158,7 +156,7 @@
 
 
 
-  <title>轨道动力学中常用的计算机算法</title>
+  <title>实现一个简单的在线请假系统</title>
   
 
 
@@ -306,7 +304,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/programming/2017/04/07/astrodynamics1/">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/programming/2018/04/26/serverSystem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="scienceasdf">
@@ -326,7 +324,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            轨道动力学中常用的计算机算法
+            实现一个简单的在线请假系统
           
         </h1>
         
@@ -340,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-07T00:00:00+08:00">
-                2017-04-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T00:00:00+08:00">
+                2018-04-26
               </time>
             
 
@@ -404,118 +402,78 @@
       
 
       
-        <script type="text/x-mathjax-config">
-  		MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [['$','$'], ['\\(','\\)']]
-            },
-  			TeX: { 
-                equationNumbers: {  
-                    autoNumber: "AMS"  
-                },
-     		    extensions: ["AMSmath.js"]
-            },
-            CommonHTML: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            "HTML-CSS": { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            SVG: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            }
-  		});
-		</script>
-
-<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p><strong>这里是一些轨道动力学中常见物理量的计算机算法的总结。</strong></p>
+        <p><strong>实现了一个B/S架构的在线请假申请系统。路子十分野，所以只是用于这种极为特殊的个人项目里面。</strong></p>
 
 <hr />
-<p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
+<p>自从上次发现了qhttpserver之后，便增加了很多可以玩的东西。以前有个同学找我希望我做一个在线的请假申请系统，当时我还比较弱，只会C++/Qt和sqlite开发，想的架构是C/S架构的，我想了想，这个不能跨平台，不便于产品更新，而且即使这样我也做不出来。现在写过网页，写过http server的程序，这个东西我想了想，还是能够实现的。</p>
 
-<hr />
+<h2 id="基本需求">基本需求</h2>
+<p>用户访问页面，填写相关信息，并且需要附上说明请假情况的图片，通过post请求发送到服务器。</p>
 
-<p>最近专业课又是轨道动力学又是姿态动力学什么的，非常有意思。在航天器动力学里面有太多的算法可以讲，从时间转换、坐标系的转换到轨道外推这些，刚体动力学其实还可以借鉴游戏引擎的一些思路。自己最近借学习这些课程的机会，自己实现了3维向量、3阶方阵、四元数的轮子。关于刚体动力学，在航天中也就是姿态动力学的探讨不在本文。这篇文章总结一些轨道动力学常见物理量的算法。</p>
+<h2 id="用户选择图片并在预览">用户选择图片并在预览</h2>
+<p>首先需要一个文件输入框<code class="highlighter-rouge">&lt;input type="file" id="take-picture" accept="image/*"&gt;</code>，用户点击按钮可以通过调用摄像头或者选择存储空间中的图片。选择了图片之后还需要预览，预览的相关代码如下：</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">takePicture</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">"#take-picture"</span><span class="p">),</span>
+        <span class="nx">showPicture</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">"#show-picture"</span><span class="p">);</span>
 
-<h2 id="笛卡尔坐标系转换到轨道六根数">笛卡尔坐标系转换到轨道六根数</h2>
-<p><img src="http://localhost:4000/assets//blog_images/Keplerian.png" width="600px" height="400px" /></p>
-<ul>
-  <li>已知：$\mathbf{r},\mathbf{v}$和引力常数$\mu$</li>
-  <li>求：$a,e,i,\omega,\Omega,\nu$</li>
-</ul>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">takePicture</span> <span class="o">&amp;&amp;</span> <span class="nx">showPicture</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Set events</span>
+        <span class="nx">takePicture</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Get a reference to the taken picture or chosen file</span>
+            <span class="kd">var</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">,</span>
+                <span class="nx">file</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">files</span> <span class="o">&amp;&amp;</span> <span class="nx">files</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">file</span> <span class="o">=</span> <span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+                <span class="k">try</span> <span class="p">{</span>
+                    <span class="c1">// Get window.URL object</span>
+                    <span class="kd">var</span> <span class="nx">fileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
+                    <span class="nx">fileReader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">showPicture</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+                    <span class="p">};</span>
+                    <span class="nx">fileReader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+                    <span class="nx">imageFlag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">try</span> <span class="p">{</span>
+                        <span class="c1">// Fallback if createObjectURL is not supported</span>
+                        <span class="kd">var</span> <span class="nx">fileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
+                        <span class="nx">fileReader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">showPicture</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+                        <span class="p">};</span>
+                        <span class="nx">fileReader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+                    <span class="p">}</span>
+                    <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="c1">//</span>
+                        <span class="nb">window</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s2">"ca)"</span><span class="p">);</span>
+                        <span class="kd">var</span> <span class="nx">error</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">"#error"</span><span class="p">);</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">error</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">"Neither createObjectURL or FileReader are supported"</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="p">})();</span>
+</code></pre></div></div>
+<p>我经过实际的测试，发现本来预览图片应该有两种方法的，但是实际上在手机上获取window.URL既不抛出异常，也不能加载图片，因此就直接用<code class="highlighter-rouge">readAsDataURL</code>的方法。</p>
 
-<p>\begin{equation} \mathbf{h} = \mathbf{r}\times\mathbf{v}\end{equation}
-\begin{equation} h = ||\mathbf{h}||\end{equation}
-升交线方向的矢量是
-\begin{equation} \mathbf{n}=[0,0,1]^T\times\mathbf{h}\end{equation}
-\begin{equation} n = ||\mathbf{n}||\end{equation}
-轨道的离心率和能量通过以下式子计算
-\begin{equation} \mathbf{e} = \frac{(v^2-\frac{\mu}{r})\mathbf{r}-(\mathbf{r}\cdot\mathbf{v})\mathbf{v}}{\mu}\end{equation}
-\begin{equation}e=||\mathbf{e}||\end{equation}
-\begin{equation}\xi = \frac{v^2}{2}-\frac{\mu}{r}\end{equation}
-对于抛物线轨道，半长轴是正无穷而能量是0.这里要做的工作是检查轨道是否是近抛物线轨道。如果$|1-e|&lt;10^{-7}$，就要另外讨论了。<br />
-半长轴的计算公式为
-\begin{equation}a=-\frac{\mu}{2\xi}\end{equation}
-轨道倾角：
-\begin{equation}i=\arccos(\frac{h_z}{h})\end{equation}
-计算升交点赤经，近地点角距，真近点角需要分四种情况处理<br />
-<strong><em>情况1：对于非圆，非赤道平面的轨道</em></strong><br />
-如果$(e \geq 10^{−11}),(10^{−11} \leq i \leq \pi − 10^{−11})$,升交点赤经
-\begin{equation}\Omega=\arccos(\frac{n_x}{n})\end{equation}
-但是如果$n_y&lt;0$，那么$\Omega = 2\pi-\Omega$<br />
-近地点角距
-\begin{equation}\omega=\arccos(\frac{\mathbf{n}\cdot\mathbf{e}}{ne})\end{equation}
-如果$e_z&lt;0$，那么$\omega = 2\pi-\omega$ <br />
-真近点角
-\begin{equation}\nu=\arccos(\frac{\mathbf{e}\cdot\mathbf{r}}{er})\end{equation}
-如果$\mathbf{r}\cdot\mathbf{v}&lt;0$，那么$\nu=2\pi-\nu$<br />
-<strong><em>情况2：对于非圆，在赤道平面的轨道</em></strong> <br />
-如果$(e \geq 10^{−11}),(10^{−11} \geq i)|(i \geq \pi − 10^{−11})$，那么
-\begin{equation}\Omega=0\end{equation}
-\begin{equation}\omega=\arccos(\frac{\mathbf{n}\cdot\mathbf{e}}{ne})\end{equation}
-但是如果$e_y&lt;0$，那么$\omega = 2\pi-\omega$ <br />
-\begin{equation}\nu=\arccos(\frac{\mathbf{e}\cdot\mathbf{r}}{er})\end{equation}
-如果$\mathbf{r}\cdot\mathbf{v}&lt;0$，那么$\nu=2\pi-\nu$<br />
-<strong><em>情况3：对于圆，非赤道平面的轨道</em></strong><br />
-如果$(e \leq 10^{−11}),(10^{−11} \leq i \leq \pi − 10^{−11})$，那么
-\begin{equation}\Omega=\arccos(\frac{n_x}{n})\end{equation}
-但是如果$n_y&lt;0$，那么$\Omega = 2\pi-\Omega$ <br />
-\begin{equation}\omega=0\end{equation}
-\begin{equation}\nu=\arccos(\frac{\mathbf{e}\cdot\mathbf{r}}{er})\end{equation}
-如果$r_z&lt;0$，那么$\nu=2\pi-\nu$<br />
-<strong><em>情况4：对于圆，在赤道平面的轨道</em></strong><br />
-如果$(e \leq 10^{−11}),(10^{−11} \geq i)|(i \geq \pi − 10^{−11})$，那么
-\begin{equation}\Omega=0\end{equation}
-\begin{equation}\omega=0\end{equation}
-\begin{equation}\nu=\arccos(\frac{r_x}{r})\end{equation}
-如果$r_y&lt;0$，那么$\nu=2\pi-\nu$</p>
-
-<h2 id="轨道六根数转换到笛卡尔坐标系">轨道六根数转换到笛卡尔坐标系</h2>
-<ul>
-  <li>已知：$a,e,i,\omega,\Omega,\nu$ 和引力常数$\mu$</li>
-  <li>求： $\mathbf{r},\mathbf{v}$</li>
-</ul>
-
-<p>首先是焦准距
-\begin{equation}p=a(1-e^2)\end{equation}
-\begin{equation}r=\frac{p}{1+e\cos\nu}\end{equation}
-\begin{equation}x=r(\cos(\omega+\nu)\cos\Omega-\cos i\sin(\omega+\nu)\sin\Omega)\end{equation}
-\begin{equation}y=r(\cos(\omega+\nu)\sin\Omega+\cos i\sin(\omega+\nu)\cos\Omega)\end{equation}
-\begin{equation}z=r[\sin(\omega+\nu)\sin i]\end{equation}
-这个算法计算计算速度向量的前提是非抛物线轨道，也就是当($||\mathbf{p}||\geq1e-30$)，有
-\begin{equation}\dot x=\sqrt\frac{\mu}{p}(\cos\nu+e)(-\sin\omega\cos\Omega-\cos i\sin\Omega\cos\omega)-\sqrt\frac{\mu}{p}\sin{\nu}(\cos\omega\cos\Omega-\cos  i\sin\Omega\sin\omega)\end{equation}
-\begin{equation}\dot y=\sqrt\frac{\mu}{p}(\cos\nu+e)(-\sin\omega\sin\Omega+\cos i\cos\Omega\cos\omega)-\sqrt\frac{\mu}{p}\sin{\nu}(\cos\omega\sin\Omega+\cos i \cos\Omega\sin\omega)\end{equation}
-\begin{equation}\dot z=\sqrt\frac{\mu}{p}[(\cos\nu+e)\sin i\cos\omega-\sin\nu\sin i\sin\omega]\end{equation}</p>
-
-<hr />
-<p><strong>注意这些公式带入运算时都是要化成弧度的！！！</strong></p>
+<h2 id="关于信息的上传">关于信息的上传</h2>
+<p>这里我用的是野得不能再野得路子了。通常的解决方案是生成multipart/form-data数据，但是这个方法我不用的原因是服务器端我没有使用任何PHP（目前还没有学习PHP的必要），C++来parse这个东西又需要另外写代码，比较麻烦，因此直接将单独的图片数据post到服务器。图片的post也是个大麻烦，理论上xhr可以直接send类型为file的对象的，但是实际上却在我的手机上不支持。因此，还是需要用下面的办法，就是<code class="highlighter-rouge">readAsArrayBuffer</code>，然后调用回调函数发送请求。</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fileReader2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
+<span class="nx">fileReader2</span><span class="p">.</span><span class="nx">readAsArrayBuffer</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"take-picture"</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="nx">fileReader2</span><span class="p">.</span><span class="nx">onloadend</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">xhr2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+    <span class="nx">xhr2</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">xhr2</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">==</span> <span class="nx">XMLHttpRequest</span><span class="p">.</span><span class="nx">DONE</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">swal</span><span class="p">(</span><span class="nx">xhr2</span><span class="p">.</span><span class="nx">response</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">xhr2</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"POST"</span><span class="p">,</span>  <span class="nb">encodeURI</span><span class="p">(</span><span class="nx">queryStr</span><span class="p">));</span>
+    <span class="nx">xhr2</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>接下来的问题就是其他信息的上传。本来想用header来发送的，不过却发现手机上连header都发不了（我感觉这里很有可能是我自己代码的问题，手机浏览器怎么可能不能发送请求头</p>
 
       
     </div>
@@ -546,10 +504,19 @@
         <div class="post-tags">
           
             
-            <a href="/tag/#/%E5%A4%A9%E6%96%87" rel="tag"># 天文</a>
+            <a href="/tag/#/C%2B%2B" rel="tag"># C++</a>
           
             
-            <a href="/tag/#/%E6%95%B0%E5%80%BC%E7%AE%97%E6%B3%95" rel="tag"># 数值算法</a>
+            <a href="/tag/#/Qt" rel="tag"># Qt</a>
+          
+            
+            <a href="/tag/#/%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91" rel="tag"># 安卓开发</a>
+          
+            
+            <a href="/tag/#/%E7%BD%91%E7%BB%9C" rel="tag"># 网络</a>
+          
+            
+            <a href="/tag/#/javascript" rel="tag"># javascript</a>
           
         </div>
       
@@ -565,8 +532,8 @@
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/programming/2017/04/14/astrodynamics2/" rel="next" title="轨道动力学中常用的计算机算法（二）">
-                <i class="fa fa-chevron-left"></i> 轨道动力学中常用的计算机算法（二）
+              <a href="/math/2018/04/27/poinsonFEM/" rel="next" title="泊松方程的有限元求解（理论）">
+                <i class="fa fa-chevron-left"></i> 泊松方程的有限元求解（理论）
               </a>
             
           </div>
@@ -575,8 +542,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/programming/2017/03/27/rigidBody/" rel="prev" title="姿态动力学仿真系统">
-                姿态动力学仿真系统 <i class="fa fa-chevron-right"></i>
+              <a href="/programming/2018/04/23/QtLocalHost/" rel="prev" title="Qt for Android实现与webview的交互">
+                Qt for Android实现与webview的交互 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -765,7 +732,7 @@
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#笛卡尔坐标系转换到轨道六根数"> <span class="nav-number">1</span> <span class="nav-text">笛卡尔坐标系转换到轨道六根数</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#轨道六根数转换到笛卡尔坐标系"> <span class="nav-number">2</span> <span class="nav-text">轨道六根数转换到笛卡尔坐标系</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#基本需求"> <span class="nav-number">1</span> <span class="nav-text">基本需求</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#用户选择图片并在预览"> <span class="nav-number">2</span> <span class="nav-text">用户选择图片并在预览</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#关于信息的上传"> <span class="nav-number">3</span> <span class="nav-text">关于信息的上传</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
     </ol>
   </div>
             

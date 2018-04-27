@@ -2,6 +2,204 @@
 <search>
   
     <entry>
+      <title><![CDATA[泊松方程的有限元求解（理论）]]></title>
+      <url>/math/2018/04/27/poinsonFEM/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']]
+            },
+  			TeX: { 
+                equationNumbers: {  
+                    autoNumber: "AMS"  
+                },
+     		    extensions: ["AMSmath.js"]
+            },
+            CommonHTML: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            "HTML-CSS": { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            SVG: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            }
+  		});
+</script>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>从泊松方程入手，谈论有限元的一些基本知识。</strong></p>
+
+<hr />
+<p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
+
+<hr />
+<h2 id="泊松方程">泊松方程</h2>
+<p>泊松方程为
+\begin{equation}
+\Delta u = f
+\end{equation}
+在这里$ \Delta $代表的是拉普拉斯算子，而 $ f$和$\varphi $可以是在流形上的实数或复数值的方程。当流形属于欧几里得空间，而拉普拉斯算子通常表示为 ${\nabla}^2$，因此泊松方程通常写成
+\begin{equation}
+\left( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2} \right)\varphi(x,y,z) = f(x,y,z)
+\end{equation}</p>
+
+<h2 id="具体的问题及求解">具体的问题及求解</h2>
+<p>我们提出如下的带有边界条件的问题<br />
+<script type="math/tex">% <![CDATA[
+\begin{align*} -\Delta u &= f \qquad\qquad & \text{in}\ \Omega, \\ u &= 0 \qquad\qquad & \text{on}\ \partial\Omega. \end{align*} %]]></script><br />
+求解的区域为平面单位正方形，$\Omega=[0,1]^2$。我们假设一个测试函数$\varphi$，并在上式的左边乘上这个函数，对整个区域$\Omega$积分，可以得到
+\begin{equation}
+-\int_\Omega \varphi \Delta u = \int_\Omega \varphi f
+\end{equation}
+由<a href="https://en.wikipedia.org/wiki/Divergence_theorem">高斯散度定理（奥斯特罗格拉斯基公式）</a>可以得到：
+\begin{equation}
+\int_\Omega \nabla\varphi \cdot \nabla u - \int_{\partial\Omega} \varphi \mathbf{n}\cdot \nabla u = \int_\Omega \varphi f
+\end{equation}
+我们需要让$\varphi$也同样满足边界条件（用数学属于描述就是需要让测试函数$\varphi$来自方程解的切空间），因此上式可以写成
+\begin{equation}
+(\nabla\varphi, \nabla u) = (\varphi, f)
+\end{equation}
+这里我们使用通用的内积符号$(a,b)=\int_\Omega a\; b$.我们现在的思路就是找到一个解的近似$u_h(\mathbf x)=\sum_j U_j \varphi_j(\mathbf x)$，而$U_j$是我们需要求的系数，$\varphi_i$是我们用的形函数。因此可以得到
+\begin{equation}
+(\nabla\varphi_i, \nabla u_h) = (\varphi_i, f), \qquad\qquad i=0\ldots N-1.
+\end{equation}
+现在需要求解一个矩阵代数方程
+\begin{equation}
+\mathbf{AU}=\mathbf{F}
+\end{equation}
+矩阵$\mathbf{A},\mathbf{F}$定义为<br />
+<script type="math/tex">% <![CDATA[
+\begin{align*} A_{ij} &= (\nabla\varphi_i, \nabla \varphi_j), \\ F_i &= (\varphi_i, f). \end{align*} %]]></script><br />
+显然，这样就有$\sum_j \mathbf{A}_{ij}\mathbf{U}_j=\mathbf{F}_i$。前面看到我们是左乘$\varphi$，对于对称矩阵（自伴随的），问题是以一样的，不过对于非对称的$\mathbf{A}$，那么经验表明这样会在计算中产生更大的误差。现在整理一下：</p>
+<ul>
+  <li>$\mathbf{A,U,F}$都是稀疏矩阵</li>
+  <li>积分的计算采用高斯积分算法</li>
+</ul>
+
+<p>这样就是全部思路。</p>
+
+]]></content>
+      <categories>
+        
+          <category> Math </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 有限元 </tag>
+        
+          <tag> 数值算法 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[实现一个简单的在线请假系统]]></title>
+      <url>/programming/2018/04/26/serverSystem/</url>
+      <content type="html"><![CDATA[<p><strong>实现了一个B/S架构的在线请假申请系统。路子十分野，所以只是用于这种极为特殊的个人项目里面。</strong></p>
+
+<hr />
+<p>自从上次发现了qhttpserver之后，便增加了很多可以玩的东西。以前有个同学找我希望我做一个在线的请假申请系统，当时我还比较弱，只会C++/Qt和sqlite开发，想的架构是C/S架构的，我想了想，这个不能跨平台，不便于产品更新，而且即使这样我也做不出来。现在写过网页，写过http server的程序，这个东西我想了想，还是能够实现的。</p>
+
+<h2 id="基本需求">基本需求</h2>
+<p>用户访问页面，填写相关信息，并且需要附上说明请假情况的图片，通过post请求发送到服务器。</p>
+
+<h2 id="用户选择图片并在预览">用户选择图片并在预览</h2>
+<p>首先需要一个文件输入框<code class="highlighter-rouge">&lt;input type="file" id="take-picture" accept="image/*"&gt;</code>，用户点击按钮可以通过调用摄像头或者选择存储空间中的图片。选择了图片之后还需要预览，预览的相关代码如下：</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">takePicture</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">"#take-picture"</span><span class="p">),</span>
+        <span class="nx">showPicture</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">"#show-picture"</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">takePicture</span> <span class="o">&amp;&amp;</span> <span class="nx">showPicture</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Set events</span>
+        <span class="nx">takePicture</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Get a reference to the taken picture or chosen file</span>
+            <span class="kd">var</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">,</span>
+                <span class="nx">file</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">files</span> <span class="o">&amp;&amp;</span> <span class="nx">files</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">file</span> <span class="o">=</span> <span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+                <span class="k">try</span> <span class="p">{</span>
+                    <span class="c1">// Get window.URL object</span>
+                    <span class="kd">var</span> <span class="nx">fileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
+                    <span class="nx">fileReader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">showPicture</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+                    <span class="p">};</span>
+                    <span class="nx">fileReader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+                    <span class="nx">imageFlag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">try</span> <span class="p">{</span>
+                        <span class="c1">// Fallback if createObjectURL is not supported</span>
+                        <span class="kd">var</span> <span class="nx">fileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
+                        <span class="nx">fileReader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">showPicture</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+                        <span class="p">};</span>
+                        <span class="nx">fileReader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+                    <span class="p">}</span>
+                    <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="c1">//</span>
+                        <span class="nb">window</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s2">"ca)"</span><span class="p">);</span>
+                        <span class="kd">var</span> <span class="nx">error</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">"#error"</span><span class="p">);</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">error</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">"Neither createObjectURL or FileReader are supported"</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="p">})();</span>
+</code></pre></div></div>
+<p>我经过实际的测试，发现本来预览图片应该有两种方法的，但是实际上在手机上获取window.URL既不抛出异常，也不能加载图片，因此就直接用<code class="highlighter-rouge">readAsDataURL</code>的方法。</p>
+
+<h2 id="关于信息的上传">关于信息的上传</h2>
+<p>这里我用的是野得不能再野得路子了。通常的解决方案是生成multipart/form-data数据，但是这个方法我不用的原因是服务器端我没有使用任何PHP（目前还没有学习PHP的必要），C++来parse这个东西又需要另外写代码，比较麻烦，因此直接将单独的图片数据post到服务器。图片的post也是个大麻烦，理论上xhr可以直接send类型为file的对象的，但是实际上却在我的手机上不支持。因此，还是需要用下面的办法，就是<code class="highlighter-rouge">readAsArrayBuffer</code>，然后调用回调函数发送请求。</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fileReader2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
+<span class="nx">fileReader2</span><span class="p">.</span><span class="nx">readAsArrayBuffer</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"take-picture"</span><span class="p">).</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="nx">fileReader2</span><span class="p">.</span><span class="nx">onloadend</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">xhr2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+    <span class="nx">xhr2</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">xhr2</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">==</span> <span class="nx">XMLHttpRequest</span><span class="p">.</span><span class="nx">DONE</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">swal</span><span class="p">(</span><span class="nx">xhr2</span><span class="p">.</span><span class="nx">response</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">xhr2</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"POST"</span><span class="p">,</span>  <span class="nb">encodeURI</span><span class="p">(</span><span class="nx">queryStr</span><span class="p">));</span>
+    <span class="nx">xhr2</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>接下来的问题就是其他信息的上传。本来想用header来发送的，不过却发现手机上连header都发不了（我感觉这里很有可能是我自己代码的问题，手机浏览器怎么可能不能发送请求头</p>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> C++ </tag>
+        
+          <tag> Qt </tag>
+        
+          <tag> 安卓开发 </tag>
+        
+          <tag> 网络 </tag>
+        
+          <tag> javascript </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[Qt for Android实现与webview的交互]]></title>
       <url>/programming/2018/04/23/QtLocalHost/</url>
       <content type="html"><![CDATA[<p><strong>在Qt的程序里搭建一个localhost，实现前端webview+html+js和后端C++的交互，该解决方案能够跨平台。</strong></p>

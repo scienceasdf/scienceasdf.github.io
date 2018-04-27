@@ -84,7 +84,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Jekyll, NexT" />
+  <meta name="keywords" content="有限元,数值算法," />
 
 
 
@@ -112,19 +112,18 @@
 
 
 
-<meta name="description" content="# Lazy Load Plugin for jQuery Lazy Load delays loading of images in long web pages. Images outside of viewport wont be loaded before user scrolls to them. This is opposite of image preloading. Using Lazy Load on long web pages containing many large images makes the page load faster. Browser will be in ready state after loading visible images. In some cases it can also help to reduce server load. Lazy Load is inspired by [YUI ImageLoader](http://developer.yahoo.com/yui/imageloader/) Utility by Matt Mlinac. ## How to Use? Lazy Load depends on jQuery. Include them both in end of your HTML code: ```html ``` You must alter your HTML code. URL of the real image must be put into data-original attribute. It is good idea to give Lazy Loaded image a specific class. This way you can easily control which images plugin is binded to. Note that you should have width and height attributes in your image tag. ```html ``` then in your code do: ```js $(&quot;img.lazy&quot;).lazyload(); ``` This causes all images of class lazy to be lazy loaded. More information on [Lazy Load](http://www.appelsiini.net/projects/lazyload) project page. ## Install You can install with [bower](http://bower.io/) or [npm](https://www.npmjs.com/). ```sh $ bower install jquery.lazyload $ npm install jquery-lazyload ``` # License All code licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php). All images licensed under [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/deed.en_US). In other words you are basically free to do whatever you want. Just don&apos;t remove my name from the source.">
-<meta name="keywords" content="Jekyll, NexT">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lazy Load Plugin for jQuery">
-<meta property="og:url" content="http://localhost:4000/assets/lib/jquery_lazyload/">
+<meta name="description" content="">
+<meta name="keywords" content="有限元, 数值算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="泊松方程的有限元求解（理论）">
+<meta property="og:url" content="http://localhost:4000/math/2018/04/27/poinsonFEM/">
 <meta property="og:site_name" content="scienceasdf">
-<meta property="og:description" content="# Lazy Load Plugin for jQuery Lazy Load delays loading of images in long web pages. Images outside of viewport wont be loaded before user scrolls to them. This is opposite of image preloading. Using Lazy Load on long web pages containing many large images makes the page load faster. Browser will be in ready state after loading visible images. In some cases it can also help to reduce server load. Lazy Load is inspired by [YUI ImageLoader](http://developer.yahoo.com/yui/imageloader/) Utility by Matt Mlinac. ## How to Use? Lazy Load depends on jQuery. Include them both in end of your HTML code: ```html ``` You must alter your HTML code. URL of the real image must be put into data-original attribute. It is good idea to give Lazy Loaded image a specific class. This way you can easily control which images plugin is binded to. Note that you should have width and height attributes in your image tag. ```html ``` then in your code do: ```js $(&quot;img.lazy&quot;).lazyload(); ``` This causes all images of class lazy to be lazy loaded. More information on [Lazy Load](http://www.appelsiini.net/projects/lazyload) project page. ## Install You can install with [bower](http://bower.io/) or [npm](https://www.npmjs.com/). ```sh $ bower install jquery.lazyload $ npm install jquery-lazyload ``` # License All code licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php). All images licensed under [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/deed.en_US). In other words you are basically free to do whatever you want. Just don&apos;t remove my name from the source.">
+<meta property="og:description" content="">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="lazy">
+<meta property="og:updated_time" content="2018-04-27T00:00:00+08:00">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lazy Load Plugin for jQuery">
-<meta name="twitter:description" content="# Lazy Load Plugin for jQuery Lazy Load delays loading of images in long web pages. Images outside of viewport wont be loaded before user scrolls to them. This is opposite of image preloading. Using Lazy Load on long web pages containing many large images makes the page load faster. Browser will be in ready state after loading visible images. In some cases it can also help to reduce server load. Lazy Load is inspired by [YUI ImageLoader](http://developer.yahoo.com/yui/imageloader/) Utility by Matt Mlinac. ## How to Use? Lazy Load depends on jQuery. Include them both in end of your HTML code: ```html ``` You must alter your HTML code. URL of the real image must be put into data-original attribute. It is good idea to give Lazy Loaded image a specific class. This way you can easily control which images plugin is binded to. Note that you should have width and height attributes in your image tag. ```html ``` then in your code do: ```js $(&quot;img.lazy&quot;).lazyload(); ``` This causes all images of class lazy to be lazy loaded. More information on [Lazy Load](http://www.appelsiini.net/projects/lazyload) project page. ## Install You can install with [bower](http://bower.io/) or [npm](https://www.npmjs.com/). ```sh $ bower install jquery.lazyload $ npm install jquery-lazyload ``` # License All code licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php). All images licensed under [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/deed.en_US). In other words you are basically free to do whatever you want. Just don&apos;t remove my name from the source.">
-<meta name="twitter:image" content="lazy">
+<meta name="twitter:title" content="泊松方程的有限元求解（理论）">
+<meta name="twitter:description" content="">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -157,7 +156,7 @@
 
 
 
-  <title>Lazy Load Plugin for jQuery</title>
+  <title>泊松方程的有限元求解（理论）</title>
   
 
 
@@ -293,61 +292,269 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+
 <div id="posts" class="posts-expand">
-<header class="post-header">
+  
+  
 
-	<h1 class="post-title" itemprop="name headline">Lazy Load Plugin for jQuery</h1>
-
-
-
-</header>
+  
 
   
   
-    <h1 id="lazy-load-plugin-for-jquery">Lazy Load Plugin for jQuery</h1>
-
-<p>Lazy Load delays loading of images in long web pages. Images outside of viewport wont be loaded before user scrolls to them. This is opposite of image preloading.</p>
-
-<p>Using Lazy Load on long web pages containing many large images makes the page load faster. Browser will be in ready state after loading visible images. In some cases it can also help to reduce server load.</p>
-
-<p>Lazy Load is inspired by <a href="http://developer.yahoo.com/yui/imageloader/">YUI ImageLoader</a> Utility by Matt Mlinac.</p>
-
-<h2 id="how-to-use">How to Use?</h2>
-
-<p>Lazy Load depends on jQuery. Include them both in end of your HTML code:</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.lazyload.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre></div></div>
-
-<p>You must alter your HTML code. URL of the real image must be put into data-original attribute. It is good idea to give Lazy Loaded image a specific class. This way you can easily control which images plugin is binded to. Note that you should have width and height attributes in your image tag.</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">class=</span><span class="s">"lazy"</span> <span class="na">data-original=</span><span class="s">"img/example.jpg"</span> <span class="na">width=</span><span class="s">"640"</span> <span class="na">height=</span><span class="s">"480"</span><span class="nt">&gt;</span>
-</code></pre></div></div>
-
-<p>then in your code do:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="s2">"img.lazy"</span><span class="p">).</span><span class="nx">lazyload</span><span class="p">();</span>
-</code></pre></div></div>
-
-<p>This causes all images of class lazy to be lazy loaded.</p>
-
-<p>More information on <a href="http://www.appelsiini.net/projects/lazyload">Lazy Load</a> project page.</p>
-
-<h2 id="install">Install</h2>
-
-<p>You can install with <a href="http://bower.io/">bower</a> or <a href="https://www.npmjs.com/">npm</a>.</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bower install jquery.lazyload
-<span class="nv">$ </span>npm install jquery-lazyload
-</code></pre></div></div>
-
-<h1 id="license">License</h1>
-
-<p>All code licensed under the <a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>. All images licensed under <a href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>. In other words you are basically free to do whatever you want. Just don’t remove my name from the source.</p>
-
-
   
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/math/2018/04/27/poinsonFEM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="scienceasdf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="scienceasdf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            泊松方程的有限元求解（理论）
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-27T00:00:00+08:00">
+                2018-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/Math" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            
+                <div class="post-description">
+                    
+                </div>
+            
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']]
+            },
+  			TeX: { 
+                equationNumbers: {  
+                    autoNumber: "AMS"  
+                },
+     		    extensions: ["AMSmath.js"]
+            },
+            CommonHTML: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            "HTML-CSS": { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            SVG: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            }
+  		});
+</script>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>从泊松方程入手，谈论有限元的一些基本知识。</strong></p>
+
+<hr />
+<p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
+
+<hr />
+<h2 id="泊松方程">泊松方程</h2>
+<p>泊松方程为
+\begin{equation}
+\Delta u = f
+\end{equation}
+在这里$ \Delta $代表的是拉普拉斯算子，而 $ f$和$\varphi $可以是在流形上的实数或复数值的方程。当流形属于欧几里得空间，而拉普拉斯算子通常表示为 ${\nabla}^2$，因此泊松方程通常写成
+\begin{equation}
+\left( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2} \right)\varphi(x,y,z) = f(x,y,z)
+\end{equation}</p>
+
+<h2 id="具体的问题及求解">具体的问题及求解</h2>
+<p>我们提出如下的带有边界条件的问题<br />
+<script type="math/tex">% <![CDATA[
+\begin{align*} -\Delta u &= f \qquad\qquad & \text{in}\ \Omega, \\ u &= 0 \qquad\qquad & \text{on}\ \partial\Omega. \end{align*} %]]></script><br />
+求解的区域为平面单位正方形，$\Omega=[0,1]^2$。我们假设一个测试函数$\varphi$，并在上式的左边乘上这个函数，对整个区域$\Omega$积分，可以得到
+\begin{equation}
+-\int_\Omega \varphi \Delta u = \int_\Omega \varphi f
+\end{equation}
+由<a href="https://en.wikipedia.org/wiki/Divergence_theorem">高斯散度定理（奥斯特罗格拉斯基公式）</a>可以得到：
+\begin{equation}
+\int_\Omega \nabla\varphi \cdot \nabla u - \int_{\partial\Omega} \varphi \mathbf{n}\cdot \nabla u = \int_\Omega \varphi f
+\end{equation}
+我们需要让$\varphi$也同样满足边界条件（用数学属于描述就是需要让测试函数$\varphi$来自方程解的切空间），因此上式可以写成
+\begin{equation}
+(\nabla\varphi, \nabla u) = (\varphi, f)
+\end{equation}
+这里我们使用通用的内积符号$(a,b)=\int_\Omega a\; b$.我们现在的思路就是找到一个解的近似$u_h(\mathbf x)=\sum_j U_j \varphi_j(\mathbf x)$，而$U_j$是我们需要求的系数，$\varphi_i$是我们用的形函数。因此可以得到
+\begin{equation}
+(\nabla\varphi_i, \nabla u_h) = (\varphi_i, f), \qquad\qquad i=0\ldots N-1.
+\end{equation}
+现在需要求解一个矩阵代数方程
+\begin{equation}
+\mathbf{AU}=\mathbf{F}
+\end{equation}
+矩阵$\mathbf{A},\mathbf{F}$定义为<br />
+<script type="math/tex">% <![CDATA[
+\begin{align*} A_{ij} &= (\nabla\varphi_i, \nabla \varphi_j), \\ F_i &= (\varphi_i, f). \end{align*} %]]></script><br />
+显然，这样就有$\sum_j \mathbf{A}_{ij}\mathbf{U}_j=\mathbf{F}_i$。前面看到我们是左乘$\varphi$，对于对称矩阵（自伴随的），问题是以一样的，不过对于非对称的$\mathbf{A}$，那么经验表明这样会在计算中产生更大的误差。现在整理一下：</p>
+<ul>
+  <li>$\mathbf{A,U,F}$都是稀疏矩阵</li>
+  <li>积分的计算采用高斯积分算法</li>
+</ul>
+
+<p>这样就是全部思路。</p>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            
+            <a href="/tag/#/%E6%9C%89%E9%99%90%E5%85%83" rel="tag"># 有限元</a>
+          
+            
+            <a href="/tag/#/%E6%95%B0%E5%80%BC%E7%AE%97%E6%B3%95" rel="tag"># 数值算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+        <div class="post-nav" id="post-nav-id">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/programming/2018/04/26/serverSystem/" rel="prev" title="实现一个简单的在线请假系统">
+                实现一个简单的在线请假系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+      
+
+      
+    </footer>
+  </article>
+
+  <div class="post-spread">
+    
+  </div>
 </div>
 
 
@@ -356,6 +563,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -373,10 +584,27 @@
     <div class="sidebar-inner">
 
       
+        
+        
+        
+
+
+
 
       
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/avatar.png"
@@ -484,6 +712,31 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#泊松方程"> <span class="nav-number">1</span> <span class="nav-text">泊松方程</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#具体的问题及求解"> <span class="nav-number">2</span> <span class="nav-text">具体的问题及求解</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
