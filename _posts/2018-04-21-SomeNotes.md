@@ -4,7 +4,7 @@ categories:
 - Programming
 tags:
 - C++
-updated: 2018-4-21 
+updated: 2018-04-21 
 ---
 
 **总结一些最近编程遇到的坑（C++）**

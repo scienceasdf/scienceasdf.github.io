@@ -2,6 +2,36 @@
 <search>
   
     <entry>
+      <title><![CDATA[最近使用Ubuntu的一些总结]]></title>
+      <url>/programming/2018/06/02/ubuntu/</url>
+      <content type="html"><![CDATA[<h2 id="编译最新cmake">编译最新CMake</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://cmake.org/files/v3.11/cmake-3.11.0.tar.gz
+
+tar -xzf cmake-3.11.0.tar.gz
+cd cmake-3.11.0/
+</code></pre></div></div>
+
+<h2 id="创建快捷方式">创建快捷方式</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install --no-install-recommends gnome-panel
+gnome-desktop-item-edit --create-new ~/桌面
+</code></pre></div></div>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Ubuntu </tag>
+        
+          <tag> Linux </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[泊松方程的有限元求解（理论）]]></title>
       <url>/math/2018/04/27/poinsonFEM/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">
