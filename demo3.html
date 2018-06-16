@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>reveal.js – The HTML Presentation Framework</title>
+
+	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	<meta name="author" content="Hakim El Hattab">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link href="https://cdn.bootcss.com/reveal.js/3.6.0/css/reveal.min.css" rel="stylesheet">
+	<link href="https://cdn.bootcss.com/reveal.js/3.6.0/css/theme/sky.min.css" rel="stylesheet">
+
+	<style type="text/css">
+		p {
+			text-align: left;
+		}
+	</style>
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link href="https://cdn.bootcss.com/reveal.js/3.6.0/lib/css/zenburn.min.css" rel="stylesheet">
+	<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  tex2jax: {
+				  inlineMath: [['$','$'], ['\\(','\\)']]
+			  },
+				TeX: { 
+				  equationNumbers: {  
+					  autoNumber: "AMS"  
+				  },
+				   extensions: ["AMSmath.js"],
+				   Macros: {
+					bm: ["\\boldsymbol{#1}",1]
+				  }
+			  },
+			  CommonHTML: { 
+				  linebreaks: { 
+					  automatic: true 
+				  } 
+			  },
+			  "HTML-CSS": { 
+				  linebreaks: { 
+					  automatic: true 
+				  } 
+			  },
+			  SVG: { 
+				  linebreaks: { 
+					  automatic: true 
+				  } 
+			  }
+			});
+		  </script>
+
+
+	<script src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS_HTML-full"></script>
+	<script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+	<script src="./js/echarts-gl.min.js"></script>
+
+
+	<!-- Printing and PDF exports --
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+		<div class="reveal">
+			<div style="display:none">
+				\( \def\
+				<#1>{\left
+					<#1\right>} \newcommand{\CC}{\bm{C}} \newcommand{\dydx}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}} \newcommand{\pypx}[2]{\frac{\partial
+						#1}{\partial #2}} \newcommand{\pyypxx}[2]{\frac{\partial^2 #1}{\partial #2^2}} \newcommand{\dyydxx}[2]{\frac{\mathrm{d}^2
+						#1}{\mathrm{d} #2^2}} \)
+			</div>
+	
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+	
+				<section style="text-align: left;">
+					有限元方法：
+					<small>
+						这里以泊松方程为例子，介绍有限元的理论和思想，泊松方程为：
+						\begin{equation}
+	\Delta u = f
+	\end{equation}
+	在这里$ \Delta $代表的是拉普拉斯算子，而 $ f$和$\varphi $可以是在流形上的实数或复数值的方程。当流形属于欧几里得空间，而拉普拉斯算子通常表示为 ${\nabla}^2$，因此泊松方程通常写成
+	\begin{equation}
+	\left( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2} \right)\varphi(x,y,z) = f(x,y,z)
+	\end{equation}
+	我们提出如下的带有边界条件的问题 
+	$$
+	\begin{align*} -\Delta u &= f \qquad\qquad & \text{in}\quad\Omega, \\ u &= 0 \qquad\qquad & \text{on}\quad \partial\Omega. \end{align*}
+	$$  
+	求解的区域为平面单位正方形，$\Omega=[0,1]^2$。我们假设一个测试函数$\varphi$，并在上式的左边乘上这个函数，对整个区域$\Omega$积分，可以得到
+	\begin{equation}
+	-\int_\Omega \varphi \Delta u = \int_\Omega \varphi f
+	\end{equation}
+	 
+					</small>
+				</section>
+	
+				<section style="text-align: left;">
+						<small>
+								由高斯散度定理（奥斯特罗格拉斯基公式）可以得到：
+								\begin{equation}
+								\int_\Omega \nabla\varphi \cdot \nabla u - \int_{\partial\Omega} \varphi \mathbf{n}\cdot \nabla u = \int_\Omega \varphi f
+								\end{equation}
+								我们需要让$\varphi$也同样满足边界条件（用数学属于描述就是需要让测试函数$\varphi$来自方程解的切空间），因此上式可以写成
+								\begin{equation}
+								(\nabla\varphi, \nabla u) = (\varphi, f)
+								\end{equation}
+								这里我们使用通用的内积符号$(a,b)=\int_\Omega a\; b$.我们现在的思路就是找到一个解的近似$u_h(\mathbf x)=\sum_j U_j \varphi_j(\mathbf x)$，而$U_j$是我们需要求的系数，$\varphi_i$是我们用的形函数。因此可以得到
+								\begin{equation}
+								(\nabla\varphi_i, \nabla u_h) = (\varphi_i, f), \qquad\qquad i=0\ldots N-1.
+								\end{equation}
+								现在需要求解一个矩阵代数方程
+								\begin{equation}
+								\mathbf{AU}=\mathbf{F}
+								\end{equation}
+								矩阵$\mathbf{A},\mathbf{F}$定义为  
+								$$
+								\begin{align*} A_{ij} &= (\nabla\varphi_i, \nabla \varphi_j), \\ F_i &= (\varphi_i, f). \end{align*}
+								$$  
+								显然，这样就有$\sum_j \mathbf{A}_{ij}\mathbf{U}_j=\mathbf{F}_i$。前面看到我们是左乘$\varphi$，对于对称矩阵（自伴随的），问题是以一样的，不过对于非对称的$\mathbf{A}$，那么经验表明这样会在计算中产生更大的误差。现在整理一下：$\mathbf{A,U,F}$都是稀疏矩阵,积分的计算采用高斯积分算法,这样就是全部思路。 
+						</small>
+					</section>
+	
+					<section>
+						拉普拉斯方程的解为：<br>
+							<img src="figures/fem_solution.png" width="50%"/>
+					</section>
+					
+	
+				<section>
+					<small>
+						<table class="manual">
+							<tr>
+								<th>Decomposition </th>
+								<th>Requirements
+									<br /> on the matrix </th>
+								<th>Speed
+									<br /> (small-to-medium) </th>
+								<th>Speed
+									<br /> (large) </th>
+								<th>Accuracy </th>
+							</tr>
+							<tr>
+								<td>
+									<a class="el" href="classEigen_1_1PartialPivLU.html" title="LU decomposition of a matrix with partial pivoting, and related features. ">PartialPivLU</a>
+								</td>
+								<td>Invertible </td>
+								<td>++ </td>
+								<td>++ </td>
+								<td>+ </td>
+							</tr>
+							<tr class="alt">
+								<td>
+									<a class="el" href="classEigen_1_1FullPivLU.html" title="LU decomposition of a matrix with complete pivoting, and related features. ">FullPivLU</a>
+									<td>None </td>
+									<td>- </td>
+									<td>- - </td>
+									<td>+++ </td>
+							</tr>
+							<tr>
+								<td>
+									<a class="el" href="classEigen_1_1HouseholderQR.html" title="Householder QR decomposition of a matrix. ">HouseholderQR</a>
+								</td>
+								<td>None </td>
+								<td>++ </td>
+								<td>++ </td>
+								<td>+ </td>
+							</tr>
+							<tr class="alt">
+								<td>
+									<a class="el" href="classEigen_1_1ColPivHouseholderQR.html" title="Householder rank-revealing QR decomposition of a matrix with column-pivoting. ">ColPivHouseholderQR</a>
+								</td>
+								<td>None </td>
+								<td>+ </td>
+								<td>- </td>
+								<td>+++ </td>
+							</tr>
+							<tr>
+								<td>
+									<a class="el" href="classEigen_1_1FullPivHouseholderQR.html" title="Householder rank-revealing QR decomposition of a matrix with full pivoting. ">FullPivHouseholderQR</a>
+								</td>
+								<td>None </td>
+								<td>- </td>
+								<td>- - </td>
+								<td>+++ </td>
+							</tr>
+							<tr class="alt">
+								<td>
+									<a class="el" href="classEigen_1_1CompleteOrthogonalDecomposition.html" title="Complete orthogonal decomposition (COD) of a matrix. ">CompleteOrthogonalDecomposition</a>
+								</td>
+								<td>None </td>
+								<td>+ </td>
+								<td>- </td>
+								<td>+++ </td>
+							</tr>
+							<tr class="alt">
+								<td>
+									<a class="el" href="classEigen_1_1LLT.html" title="Standard Cholesky decomposition (LL^T) of a matrix and associated features. ">LLT</a>
+								</td>
+								<td>Positive definite </td>
+								<td>+++ </td>
+								<td>+++ </td>
+								<td>+ </td>
+							</tr>
+							<tr>
+								<td>
+									<a class="el" href="classEigen_1_1LDLT.html" title="Robust Cholesky decomposition of a matrix with pivoting. ">LDLT</a>
+								</td>
+								<td>Positive or negative
+									<br /> semidefinite </td>
+								<td>+++ </td>
+								<td>+ </td>
+								<td>++ </td>
+							</tr>
+							<tr class="alt">
+								<td>
+									<a class="el" href="classEigen_1_1BDCSVD.html" title="class Bidiagonal Divide and Conquer SVD ">BDCSVD</a>
+								</td>
+								<td>None </td>
+								<td>- </td>
+								<td>- </td>
+								<td>+++ </td>
+							</tr>
+							<tr class="alt">
+								<td>
+									<a class="el" href="classEigen_1_1JacobiSVD.html" title="Two-sided Jacobi SVD decomposition of a rectangular matrix. ">JacobiSVD</a>
+								</td>
+								<td>None </td>
+								<td>- </td>
+								<td>- - - </td>
+								<td>+++ </td>
+							</tr>
+						</table>
+					</small>
+				</section>
+	
+				<section style="text-align: left;">
+					现在研究的优化问题：
+					<br> 设半翼展的机翼，梁为圆形截面，与压心不重合。采用片条理论计算气动力，机翼的弦长一定，气动力对梁同时产生弯曲和扭转作用。通过设计梁的 各个截面的半径，最小化目标函数$\frac{W}{L}$，并满足应力不超过强度极限应力的约束条件。
+					<br> 现在已经完成了流固耦合求解静气弹的程序，算法为迭代求解直到两次求得的位移几乎相等。
+				</section>
+	
+	
+				<section style="text-align: left;">
+					流固耦合的伴随方法：
+					<br> 流体力学残差方程为 \begin{equation} \bm{R = Aw - \alpha = 0} \end{equation} 有限元残差方程为 \begin{equation} \bm{S = Ku-f=0} \end{equation}
+					伴随方程为 \begin{equation} {\begin{bmatrix} \pypx{\bm{R}}{\bm{w}} & \pypx{\bm{R}}{\bm{u}} \\ \pypx{\bm{S}}{\bm{w}} & \pypx{\bm{S}}{\bm{u}}
+					\end{bmatrix}}^T \begin{bmatrix} \bm{\psi} \\ \bm{\phi}\end{bmatrix} =-\begin{bmatrix}\pypx{I}{\bm{w}} \\ \pypx{I}{\bm{u}}\end{bmatrix}
+					\end{equation}
+				</section>
+	
+				<section style="text-align: left;">
+					流固耦合的伴随方法：
+					<br> 流体力学残差方程为 \begin{equation} \bm{R = Aw - \alpha = 0} \end{equation} 有限元残差方程为 \begin{equation} \bm{S = Ku-f=0} \end{equation}
+					伴随方程为 \begin{equation} {\begin{bmatrix} \pypx{\bm{R}}{\bm{w}} & \pypx{\bm{R}}{\bm{u}} \\ \pypx{\bm{S}}{\bm{w}} & \pypx{\bm{S}}{\bm{u}}
+					\end{bmatrix}}^T \begin{bmatrix} \bm{\psi} \\ \bm{\phi}\end{bmatrix} =-\begin{bmatrix}\pypx{I}{\bm{w}} \\ \pypx{I}{\bm{u}}\end{bmatrix}
+					\end{equation}
+				</section>
+	
+				<section style="text-align: left;">
+					具体各个偏导数的表达式为：
+					<br> 可以得到$\pypx{\bm{R}}{\bm{w}} = \bm{A}$，$\pypx{\bm{R}}{\bm{u}} = \bm{0}$，$\pypx{\bm{S}}{\bm{w}} = -\pypx{\bm{f}}{\bm{w}}$，
+					$\pypx{\bm{S}}{\bm{u}} = \bm{K}$，因此伴随方程可以写为 $$ \begin{align} \bm{A}^T\bm{\psi} &= \pypx{I}{\bm{w}}\\ -\pypx{\bm{f}}{\bm{w}}\bm{\psi}+\bm{K}^T\bm{\phi}&=-\pypx{I}{\bm{u}}
+					\end{align} $$
+				</section>
+	
+				<section style="text-align: left;">
+					<section style="text-align: left;">
+						\begin{align} W &= c(u_1 + u_2 + \cdots) \\ L &= q(w_1 + w_2 + \cdots) \end{align} \begin{equation} \pypx{I}{\bm{u}}=\begin{bmatrix}
+						\frac{c}{L} \\ \frac{c}{L} \\ \vdots \\ \frac{c}{L} \end{bmatrix} \end{equation}
+					</section>
+					<section style="text-align: left;">
+						\begin{equation} \pypx{I}{\bm{w}}=\begin{bmatrix} -\frac{qW}{L^2} \\ -\frac{qW}{L^2} \\ \vdots \\ -\frac{qW}{L^2} \end{bmatrix}
+						\end{equation}
+					</section>
+				</section>
+	
+				<section style="text-align: left;">
+					<small>
+						von Mises应力： \begin{equation} \sigma_m = \frac{1}{\sqrt{2}}\sqrt{(\sigma_x-\sigma_y)^2+(\sigma_y-\sigma_z)^2+(\sigma_z-\sigma_x)^2+6(\tau_{xy}^2+\tau_{yz}^2+\tau_{zx}^2)}
+						\end{equation} 在这里可以简化为 \begin{equation} I = \sigma_m = \frac{1}{\sqrt{2}}\sqrt{\sigma^2+3\tau^2} \end{equation} $$
+						\begin{align} \pypx{I}{\bm{u}}&=\pypx{\sigma_m}{\sigma}\pypx{\sigma}{\bm{u}}+\pypx{\sigma_m}{\tau}\pypx{\tau}{\bm{u}}\\
+						&=\frac{\sigma}{\sqrt{\sigma^2+3\tau^2}}\bm{S}_1+\frac{3\tau}{\sqrt{\sigma^2+3\tau^2}}\bm{S}_2 \end{align} $$
+					</small>
+				</section>
+	
+				<section style="text-align: left;">
+					目前进展：正在写流固耦合伴随方法求解梯度的程序。遇到的问题就是很多的偏导数还是需要自己去推导，非常麻烦，想后面用上自动微分算法 辅助计算偏导数。另外刚编译了两个优化算法库：NLOPT和pagmo，能够利用梯度信息对局部或者全局进行优化。
+					<br> 理论进展为阅读阿诺尔德的《经典力学的数学方法》，看了刘维尔定理和庞加莱回归定理。阅读《代数学引论》，不太能看明白。
+	
+				</section>
+	
+			</div>
+	
+			<script src="https://cdn.bootcss.com/reveal.js/3.6.0/lib/js/head.min.js"></script>
+			<script src="https://cdn.bootcss.com/reveal.js/3.6.0/js/reveal.min.js"></script>
+	
+			<script>
+	
+				// More info https://github.com/hakimel/reveal.js#configuration
+				Reveal.initialize({
+					controls: true,
+					progress: true,
+					history: true,
+					center: true,
+	
+					transition: 'convex', // none/fade/slide/convex/concave/zoom
+	
+					// More info https://github.com/hakimel/reveal.js#dependencies
+					dependencies: [
+						{ src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+						{ src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+						{ src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+						{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+						{ src: 'plugin/search/search.js', async: true },
+						{ src: 'plugin/zoom-js/zoom.js', async: true },
+						{ src: 'plugin/notes/notes.js', async: true }
+					]
+				});
+	
+			</script>
+	
+	</body>
+
+</html>
