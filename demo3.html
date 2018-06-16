@@ -94,57 +94,71 @@
 				<section style="text-align: left;">
 					有限元方法：
 					<small>
-						这里以泊松方程为例子，介绍有限元的理论和思想，泊松方程为：
-						\begin{equation}
-	\Delta u = f
-	\end{equation}
-	在这里$ \Delta $代表的是拉普拉斯算子，而 $ f$和$\varphi $可以是在流形上的实数或复数值的方程。当流形属于欧几里得空间，而拉普拉斯算子通常表示为 ${\nabla}^2$，因此泊松方程通常写成
-	\begin{equation}
-	\left( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2} \right)\varphi(x,y,z) = f(x,y,z)
-	\end{equation}
-	我们提出如下的带有边界条件的问题 
-	$$
-	\begin{align*} -\Delta u &= f \qquad\qquad & \text{in}\quad\Omega, \\ u &= 0 \qquad\qquad & \text{on}\quad \partial\Omega. \end{align*}
-	$$  
-	求解的区域为平面单位正方形，$\Omega=[0,1]^2$。我们假设一个测试函数$\varphi$，并在上式的左边乘上这个函数，对整个区域$\Omega$积分，可以得到
-	\begin{equation}
-	-\int_\Omega \varphi \Delta u = \int_\Omega \varphi f
-	\end{equation}
-	 
+						这里以泊松方程为例子，介绍有限元的理论和思想，泊松方程为： \begin{equation} \Delta u = f \end{equation} 在这里$ \Delta $代表的是拉普拉斯算子，而 $ f$和$\varphi $可以是在流形上的实数或复数值的方程。当流形属于欧几里得空间，而拉普拉斯算子通常表示为
+						${\nabla}^2$，因此泊松方程通常写成 \begin{equation} \left( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} +
+						\frac{\partial^2}{\partial z^2} \right)\varphi(x,y,z) = f(x,y,z) \end{equation} 我们提出如下的带有边界条件的问题 $$ \begin{align*} -\Delta
+						u &= f \qquad\qquad & \text{in}\quad\Omega, \\ u &= 0 \qquad\qquad & \text{on}\quad \partial\Omega. \end{align*} $$
+						求解的区域为平面单位正方形，$\Omega=[0,1]^2$。我们假设一个测试函数$\varphi$，并在上式的左边乘上这个函数，对整个区域$\Omega$积分，可以得到 \begin{equation} -\int_\Omega
+						\varphi \Delta u = \int_\Omega \varphi f \end{equation}
+	
 					</small>
 				</section>
 	
 				<section style="text-align: left;">
-						<small>
-								由高斯散度定理（奥斯特罗格拉斯基公式）可以得到：
-								\begin{equation}
-								\int_\Omega \nabla\varphi \cdot \nabla u - \int_{\partial\Omega} \varphi \mathbf{n}\cdot \nabla u = \int_\Omega \varphi f
-								\end{equation}
-								我们需要让$\varphi$也同样满足边界条件（用数学属于描述就是需要让测试函数$\varphi$来自方程解的切空间），因此上式可以写成
-								\begin{equation}
-								(\nabla\varphi, \nabla u) = (\varphi, f)
-								\end{equation}
-								这里我们使用通用的内积符号$(a,b)=\int_\Omega a\; b$.我们现在的思路就是找到一个解的近似$u_h(\mathbf x)=\sum_j U_j \varphi_j(\mathbf x)$，而$U_j$是我们需要求的系数，$\varphi_i$是我们用的形函数。因此可以得到
-								\begin{equation}
-								(\nabla\varphi_i, \nabla u_h) = (\varphi_i, f), \qquad\qquad i=0\ldots N-1.
-								\end{equation}
-								现在需要求解一个矩阵代数方程
-								\begin{equation}
-								\mathbf{AU}=\mathbf{F}
-								\end{equation}
-								矩阵$\mathbf{A},\mathbf{F}$定义为  
-								$$
-								\begin{align*} A_{ij} &= (\nabla\varphi_i, \nabla \varphi_j), \\ F_i &= (\varphi_i, f). \end{align*}
-								$$  
-								显然，这样就有$\sum_j \mathbf{A}_{ij}\mathbf{U}_j=\mathbf{F}_i$。前面看到我们是左乘$\varphi$，对于对称矩阵（自伴随的），问题是以一样的，不过对于非对称的$\mathbf{A}$，那么经验表明这样会在计算中产生更大的误差。现在整理一下：$\mathbf{A,U,F}$都是稀疏矩阵,积分的计算采用高斯积分算法,这样就是全部思路。 
-						</small>
-					</section>
+					<small>
+						由高斯散度定理（奥斯特罗格拉斯基公式）可以得到： \begin{equation} \int_\Omega \nabla\varphi \cdot \nabla u - \int_{\partial\Omega} \varphi \mathbf{n}\cdot
+						\nabla u = \int_\Omega \varphi f \end{equation} 需要让$\varphi$也同样满足边界条件（用数学属于描述就是需要让测试函数$\varphi$来自方程解的切空间），因此上式可以写成 \begin{equation}
+						(\nabla\varphi, \nabla u) = (\varphi, f) \end{equation} 这里使用通用的内积符号$(a,b)=\int_\Omega a\; b$.我们现在的思路就是找到一个解的近似$u_h(\mathbf
+						x)=\sum_j U_j \varphi_j(\mathbf x)$，而$U_j$是我们需要求的系数，$\varphi_i$是我们用的形函数。因此可以得到 \begin{equation} (\nabla\varphi_i, \nabla
+						u_h) = (\varphi_i, f), \qquad\qquad i=0\ldots N-1. \end{equation} 现在要求解一个矩阵代数方程 \begin{equation} \mathbf{AU}=\mathbf{F}
+						\end{equation} 矩阵$\mathbf{A},\mathbf{F}$定义为 $$ \begin{align*} A_{ij} &= (\nabla\varphi_i, \nabla \varphi_j), \\ F_i
+						&= (\varphi_i, f). \end{align*} $$ 显然，这样就有$\sum_j \mathbf{A}_{ij}\mathbf{U}_j=\mathbf{F}_i$。前面看到我们是左乘$\varphi$，对于对称矩阵（自伴随的），问题是以一样的，不过对于非对称的$\mathbf{A}$，那么经验表明这样会在计算中产生更大的误差。现在整理一下：$\mathbf{A,U,F}$都是稀疏矩阵,积分的计算采用高斯积分算法,这样就是全部思路。
+					</small>
+				</section>
 	
-					<section>
-						拉普拉斯方程的解为：<br>
-							<img src="figures/fem_solution.png" width="50%"/>
-					</section>
-					
+				<section>
+					拉普拉斯方程的解为：
+					<br>
+					<img src="figures/fem_solution.png" width="50%" />
+				</section>
+	
+	
+				<section style="text-align: left;">
+					有限元求解弯曲单元的模型
+					<br>
+					<small>
+						设梁单元的形函数为多项式，并由卡氏第一定理可以推导弯曲单元刚度矩阵 \begin{equation}\label{k_bending_unit} [k_e]=\frac{EI_Z}{L^3}\begin{bmatrix} 12 & 6L &
+						-12 & 6L \\ 6L & 4L^2 & -6L & 2L^2 \\ -12 & -6L & 12 & -6L \\ 6L & 2L^2 & -6L & 4L^2 \end{bmatrix} \end{equation} 单个具有弯曲和扭转的单元的刚度矩阵为（这里假定梁为圆柱形截面）
+						\begin{equation} \begin{bmatrix} [k_\text{bending}]_{xy} & [0] \\ [0] & [k_\text{torsion}] \end{bmatrix} \begin{bmatrix}
+						\nu_1 \\ \theta_{z1} \\ \nu_2 \\ \theta_{z2} \\ \theta_{x1} \\ \theta_{x2} \end{bmatrix} = \begin{bmatrix} f_{y1} \\
+						M_{z1} \\ f_{y2} \\ M_{z2} \\ M_{x1} \\ M_{x2} \end{bmatrix} \end{equation}
+					</small>
+				</section>
+	
+				<section style="text-align: left;">
+					有限元的模型
+					<br>
+					<small>
+						扭转子刚度矩阵为 \begin{equation} [k_{torsion}]=\frac{JG}{L} \begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix} \end{equation} 而扭转产生的切应力计算公式为：
+						\begin{equation} \tau = G\gamma =G\rho \dydx{\varphi}{x} = G\rho\frac{M}{GI_p} \end{equation}
+					</small>
+					<img src="figures/3d_beam.png" width="45%" />
+					<img src="figures/airfoil.png" width="45%" />
+				</section>
+	
+				<section style="text-align: left;">
+					有限元方程求解
+					<br>
+					<small>
+						有限元方程得到的矩阵通常是稀疏矩阵，通常用专门的稀疏矩阵算法对矩阵进行存储和计算。常见的适合用于解决这方面问题的程序库包括Eigen和deal.II.对于线性方程 \begin{equation}\label{fem_basic} \bm{Ku-f=0}
+						\end{equation} 当问题的自由度相对较小时，可以采用LU分解或者Cholesky分解的方式。Cholesky分解在这类问题中得到广泛运用：对正定埃尔米特矩阵$\bm{A}$进行Cholesky分解，即求 矩阵$\bm{L}$使得下式成立：
+						\begin{equation} \bm{A=LL}^* \end{equation} 式中，$\bm{L}$为一个下三角矩阵且所有对角元素均为正实数，$\bm{L}^*$为$\bm{L}$的共轭转置矩阵。当$\bm{A}$是正定矩阵时，Cholesky分解是惟一的。
+						Cholesky分解的另一种形式——LDLT分解的计算方式如下所示： \begin{equation} {\displaystyle {\begin{aligned} {\mathbf {A=LDL} ^{\mathrm {T} }}&={\begin{pmatrix}
+						1&0&0\\L_{21}&1&0\\L_{31}&L_{32}&1\\\end{pmatrix}} {\begin{pmatrix}D_{1}&0&0\\0&D_{2}&0\\0&0&D_{3}\\\end{pmatrix}} {\begin{pmatrix}1&L_{21}&L_{31}\\0&1&L_{32}\\0&0&1\\\end{pmatrix}}
+						\\&={\begin{pmatrix}D_{1}&&(\mathrm {symmetric} )\\L_{21}D_{1}&L_{21}^{2}D_{1}+D_{2}&\\L_{31}D_{1}&L_{31}L_{21}D_{1}+L_{32}D_{2}&L_{31}^{2}D_{1}+L_{32}^{2}D_{2}+D_{3}.\end{pmatrix}}
+						\end{aligned}}} \end{equation}
+					</small>
+				</section>
 	
 				<section>
 					<small>
@@ -161,7 +175,7 @@
 							</tr>
 							<tr>
 								<td>
-									<a class="el" href="classEigen_1_1PartialPivLU.html" title="LU decomposition of a matrix with partial pivoting, and related features. ">PartialPivLU</a>
+									<a class="el" title="LU decomposition of a matrix with partial pivoting, and related features. ">PartialPivLU</a>
 								</td>
 								<td>Invertible </td>
 								<td>++ </td>
@@ -170,7 +184,7 @@
 							</tr>
 							<tr class="alt">
 								<td>
-									<a class="el" href="classEigen_1_1FullPivLU.html" title="LU decomposition of a matrix with complete pivoting, and related features. ">FullPivLU</a>
+									<a class="el" title="LU decomposition of a matrix with complete pivoting, and related features. ">FullPivLU</a>
 									<td>None </td>
 									<td>- </td>
 									<td>- - </td>
@@ -178,7 +192,7 @@
 							</tr>
 							<tr>
 								<td>
-									<a class="el" href="classEigen_1_1HouseholderQR.html" title="Householder QR decomposition of a matrix. ">HouseholderQR</a>
+									<a class="el" title="Householder QR decomposition of a matrix. ">HouseholderQR</a>
 								</td>
 								<td>None </td>
 								<td>++ </td>
@@ -187,7 +201,7 @@
 							</tr>
 							<tr class="alt">
 								<td>
-									<a class="el" href="classEigen_1_1ColPivHouseholderQR.html" title="Householder rank-revealing QR decomposition of a matrix with column-pivoting. ">ColPivHouseholderQR</a>
+									<a class="el" title="Householder rank-revealing QR decomposition of a matrix with column-pivoting. ">ColPivHouseholderQR</a>
 								</td>
 								<td>None </td>
 								<td>+ </td>
@@ -196,7 +210,7 @@
 							</tr>
 							<tr>
 								<td>
-									<a class="el" href="classEigen_1_1FullPivHouseholderQR.html" title="Householder rank-revealing QR decomposition of a matrix with full pivoting. ">FullPivHouseholderQR</a>
+									<a class="el" title="Householder rank-revealing QR decomposition of a matrix with full pivoting. ">FullPivHouseholderQR</a>
 								</td>
 								<td>None </td>
 								<td>- </td>
@@ -205,7 +219,7 @@
 							</tr>
 							<tr class="alt">
 								<td>
-									<a class="el" href="classEigen_1_1CompleteOrthogonalDecomposition.html" title="Complete orthogonal decomposition (COD) of a matrix. ">CompleteOrthogonalDecomposition</a>
+									<a class="el" title="Complete orthogonal decomposition (COD) of a matrix. ">CompleteOrthogonalDecomposition</a>
 								</td>
 								<td>None </td>
 								<td>+ </td>
@@ -214,7 +228,7 @@
 							</tr>
 							<tr class="alt">
 								<td>
-									<a class="el" href="classEigen_1_1LLT.html" title="Standard Cholesky decomposition (LL^T) of a matrix and associated features. ">LLT</a>
+									<a class="el" title="Standard Cholesky decomposition (LL^T) of a matrix and associated features. ">LLT</a>
 								</td>
 								<td>Positive definite </td>
 								<td>+++ </td>
@@ -223,7 +237,7 @@
 							</tr>
 							<tr>
 								<td>
-									<a class="el" href="classEigen_1_1LDLT.html" title="Robust Cholesky decomposition of a matrix with pivoting. ">LDLT</a>
+									<a class="el" title="Robust Cholesky decomposition of a matrix with pivoting. ">LDLT</a>
 								</td>
 								<td>Positive or negative
 									<br /> semidefinite </td>
@@ -233,7 +247,7 @@
 							</tr>
 							<tr class="alt">
 								<td>
-									<a class="el" href="classEigen_1_1BDCSVD.html" title="class Bidiagonal Divide and Conquer SVD ">BDCSVD</a>
+									<a class="el" title="class Bidiagonal Divide and Conquer SVD ">BDCSVD</a>
 								</td>
 								<td>None </td>
 								<td>- </td>
@@ -242,7 +256,7 @@
 							</tr>
 							<tr class="alt">
 								<td>
-									<a class="el" href="classEigen_1_1JacobiSVD.html" title="Two-sided Jacobi SVD decomposition of a rectangular matrix. ">JacobiSVD</a>
+									<a class="el" title="Two-sided Jacobi SVD decomposition of a rectangular matrix. ">JacobiSVD</a>
 								</td>
 								<td>None </td>
 								<td>- </td>
@@ -253,13 +267,208 @@
 					</small>
 				</section>
 	
-				<section style="text-align: left;">
-					现在研究的优化问题：
-					<br> 设半翼展的机翼，梁为圆形截面，与压心不重合。采用片条理论计算气动力，机翼的弦长一定，气动力对梁同时产生弯曲和扭转作用。通过设计梁的 各个截面的半径，最小化目标函数$\frac{W}{L}$，并满足应力不超过强度极限应力的约束条件。
-					<br> 现在已经完成了流固耦合求解静气弹的程序，算法为迭代求解直到两次求得的位移几乎相等。
+				<section data-markdown style="text-align: left;">
+					对于有更大自由度的有限元模型（超过$10^5$)，通常会采用一些别的求解方式。
+					  
+					例如，对于稀疏矩阵的线性方程组求解，一般采用迭代的算法进行求解。对于自伴随矩阵 ，可以采用共轭梯度下降法求解，而对于一般的方阵则采用BiCGStab算法求解。对于大规模稀疏线性方程组，迭代算法能够比矩阵分解算法更高效。
+					  
+					在我的有限元程序里面使用LDLT分解求解有限元方程。
 				</section>
 	
+				<section>
+					有限元求解简支梁：
+					<br>
+					<img src="figures/fig5.png" width="100%" />
+				</section>
 	
+				<section>
+					有限元求解超静定梁：
+					<br>
+					<img src="figures/fig7.png" width="100%" />
+				</section>
+	
+				<section>
+					用基尔霍夫平板理论的有限元模型求解平板：
+					<br>
+					<img src="figures/fig4.png" width="100%" />
+				</section>
+	
+				<section data-markdown style="text-align: left;">
+					对于航空器的气动力计算，通常有 
+					* 片条理论 
+					* 升力线方法 
+					* 涡格法 
+					* CFD方法  
+					  
+					片条理论最为简单，但精确度较低；CFD方法通常最为精确，但求解的成本较大。前面三种方法通常不考虑气体的粘性，或者在计算后对粘性进行修正，因此不适合雷诺数较小的流动状况。在考虑气动弹性的问题时，通常使用片条理论、升力线方法、涡格法而较少使用CFD方法，以寻求在计算效率和精确度之间的平衡。
+				</section>
+	
+				<section style="text-align: left;">
+					片条理论
+					<br>
+					<small> 片条理论是一种忽略了下洗的计算方法，能够简单快捷地计算升力分布。在机翼的展弦比大于5的时候，能够给出足够精确的结果。将机翼分成若干个片条，各个片条的升力为 \begin{equation} L_i = C_L^\alpha \alpha_iS_i
+						\end{equation} 在这里升力线斜率需要用经验公式修正。在处理静气动弹性问题时，由于翼面的扭转变形，攻角沿翼展变化，这时可以用一个修正公式 \begin{equation} \pypx{C_L}{\alpha} = (\pypx{C_L}{\alpha})_\infty
+						\frac{\lambda}{\lambda + 4} \end{equation} 通常处理气动力计算时，会引入气动力影响矩阵$\bm{A}$，片条理论的气动力影响矩阵为 \begin{equation} \bm{A} = \text{diag}[\frac{1}{C_L^\alpha
+						c_i}\quad\cdots\quad\frac{1}{C_L^\alpha c_n}] \end{equation} 式中，$C_L^\alpha$应按风洞试验结果或按理论公式计算，$c$为弦长。 那么攻角与升力系数满足以下关系
+						\begin{equation} \bm{As}=\bm{\alpha} \end{equation}
+					</small>
+				</section>
+	
+				<section style="text-align: left;">
+					升力线方法
+					<br>
+					<small> 由于片条理论忽略了下洗，因此会导致气动力计算的不准确，并且无法计算诱导阻力。经典的升力线方法考虑翼型的升力系数随攻角线性变化，并且不考虑气体的粘性。
+						<br>
+						<br> 普朗特升力线理论的基本方程 \begin{equation}\label{eqs:llt} \alpha(y_0)=\frac{\Gamma(y_0)}{\pi V_\infty c(y_0)}+\alpha_0+\frac{1}{4\pi}\int_{-b/2}^{b/2}\frac{(d\Gamma/dy)dy}{y_0-y}
+						\end{equation} 而诱导阻力的公式为 \begin{equation} D_i^\prime=L_i^\prime \sin\alpha_i\approx L_i^\prime \alpha_i \end{equation}
+						\begin{equation} D_i=\rho_\infty V_\infty\int_{-b/2}^{b/2}\Gamma(y)\alpha_i(y)dy \end{equation} 通过对上式进行离散化处理，采用数值积分的方式，并进行迭代计算环量$\Gamma(y)$的分布，可以在计算机上对方程（\ref{eqs:llt}）进行数值求解。
+					</small>
+				</section>
+	
+				<section style="text-align: left;">
+					涡格法
+					<br>
+					<small> 由于针对CFD求解机翼流场的成本巨大，因此工程上常常采用涡格法求解机翼流场。涡格法在面元上布置点源、点涡或者偶极子，通过控制点法向速度为0的边界条件，可以比较精确得解出下洗、诱导阻力、升力等。在势流理论中，的一个基本解是源（汇）。当这个元素的强度是正的时候，就被称为源，负的称为汇。在$(x_0,y_0,z_0)$的源作用在位于点$P(x,y,z)$
+						的点的速度势为 \begin{align} \phi(P(x,y,z)) &=-\frac{\sigma}{4\pi|\bm{r}-\bm{r}_0|} \quad & \text{(球坐标)} \notag\\ &= \frac{-\sigma}{4\pi\sqrt{(x-x_0)^2+(y-y_0)^2+(z-z_0)^2}}
+						\quad &\text{(直角坐标)}\label{eqs2_17} \end{align} 可以将基本解分布在表面上，通常称为板块或者面元。因此分布在某个面上的源作用在点$P(x,y,z)$的速度势能够通过积分式(\ref{eqs2_17})得到
+						\begin{equation}\label{eqs2_18} \phi(P(x,y,z))=\frac{-1}{4\pi}\int_S\frac{-\sigma(x_0,y_0,z_0)}{(x-x_0)^2+(y-y_0)^2+(z-z_0)^2}dS
+						\end{equation} 而若在表面布置偶极子或者点涡，则可以得到环量并计算升力。由涡格法可以得到方程： \begin{equation}\label{eqs_vlm} \bm{A\Gamma=v} \end{equation}
+						其中$\bm{A}$是气动力影响系数矩阵，$\bm{\Gamma}$是各个面元的环量组成的向量，$\bm{v}$是边界条件向量，也就是各个面元的当地攻角。
+					</small>
+				</section>
+	
+				<section>
+					涡格法示意图
+					<br>
+					<img src="figures/fig1.png" width="100%" />
+				</section>
+	
+				<section>
+					涡格法得到的机翼升力分布
+					<br>
+					<img src="figures/fig3.png" width="100%" />
+				</section>
+	
+				<section>
+					涡格法得到的机翼弯矩图
+					<br>
+					<img src="figures/fig2.png" width="100%" />
+				</section>
+	
+				<section>
+					涡格法得到的机翼诱导阻力分布
+					<br>
+					<img src="figures/fig6.png" width="100%" />
+				</section>
+	
+				<section style="text-align: left;">
+					流固耦合方程的求解
+					<br>
+					<small> “气动弹性力学”概念最早由航空工程师在20世纪30年代引出，到现在已经发展成为了一门独立的力学学科，其主要考虑气动力与弹性体之间的相互作用，进而研究弹性结构在气流中的力学行为。气流中的弹性结构在空气动力的作用下回发生弹性变形或振动，而结构变形又会让气动力重新分布，这种结构与气动间的相互耦合作用使弹性体产生各类气动弹性现象。为了明确气动弹性力学的分类以及了解气动弹性问题的研究内容，英国学者Collar在1946年绘制了气动弹性力学三角形，生动具体地表示了气动弹性力学所涉及的各个学科以及各学科间的相互联系，如图所示。
+					</small>
+				</section>
+	
+				<section>
+					<img src="figures/aeroelastic.png" width="50%" />
+				</section>
+	
+				<section style="text-align: left;">
+					流固耦合的残差方程
+					<br>
+					<small>
+						流体力学残差方程为 \begin{equation}\label{femResidual} \bm{R = Aw - \alpha = 0} \end{equation} 有限元残差方程为 \begin{equation}\label{aeroResidual}
+						\bm{S = Ku-f=0} \end{equation} 气动弹性力学的求解器通过耦合结构的有限元方程和气动的气动力方程，在收敛求解的过程中，通过分别求解结构残差方程式(\ref{femResidual})和气动残差方程(\ref{aeroResidual})，并互相使用求解出的气动力和位移数据，不断迭代，直到收敛。在这里我们仅仅考虑静气动弹性问题，因此忽略动力学相关的如模态频率，时间步长等因素。
+					</small>
+				</section>
+	
+				<section style="text-align: left;">
+					<small>
+						如图所示，当流体力学的求解器第一次被调用时，结构的位移被初始化为0.当流体力学求解器进行了一次求解以后，机翼气动面上的动压被转化为了节点上的力以及力矩，然后调用有限元求解器求解位移，新的位移用来重新求解在机翼上产生的气动力。这个过程一直持续直到气动力（流场的流动状况）和结构的位移收敛，也就是当残差方程(\ref{femResidual})和(\ref{aeroResidual})的范数小于某个很小的常数$\epsilon$时迭代停止，或者相对误差满足方程组\ref{relativeErr}时迭代停止。
+						\begin{equation}\label{relativeErr} \begin{array}{l} ||\bm{R}(\bm{w}^{(n)},\bm{u}^{(n)})||_2
+						< \epsilon_r||\bm{R}(\bm{w}^{(0)},\bm{u}^{(0)})||
+						 \\ ||\bm{S}(\bm{w}^{(n)},\bm{u}^{(n)})||_2 < \epsilon_r||\bm{S}(\bm{w}^{(0)},\bm{u}^{(0)})|| \end{array} \end{equation}
+						 </small>
+							<img src="figures/coupled.png" width="100%" />
+				</section>
+	
+				<section data-markdown style="text-align: left;">
+					在气动弹性耦合方程的状态求解过程中，在这里我们由于使用的都是线性的模型，因此求解的时间成本消耗主要在矩阵的分解上。每迭代一步，无论是气动力影响系数矩阵还是有限元刚度矩阵都会改变，因此求解线性方程组需要对矩阵重新做分解。因此，对于设计变量较多，方程的自由度数目较大时，如果需要大量调用此求解过程，时间成本会非常高。对此，Martins提出了改进的，支持并行化的，分块的求解方法，包括
+					* 非线性分块高斯-赛德尔迭代
+					* 非线性分块雅各比迭代
+					* 牛顿-科里洛夫迭代 
+					* 近似牛顿-科里洛夫迭代
+				</section>
+	
+				<section style="text-align: left;">
+					静气动弹性机翼升力重新分布求解实例<br>
+					<small>
+					设某段矩形机翼翼展为5米，展弦比为9，机翼梁的为圆柱形实心梁，梁的直径为6cm，梁的材料的弹性模量为2GPa，泊松比为0.2，梁位于弦长的30%处。假设空气密度为$\rho = 1.225\text{kg}/\text{m}^2$,风速为18m/s，机翼对气流的攻角为$5^{\circ}$，机翼的升力线斜率为$5/\text{rad}$.
+				</small>
+				</section>
+	
+				<section data-markdown style="text-align: left;">
+						* 将半段机翼的主梁考虑为具有弯曲和扭转特性的悬臂梁列出有限元方程
+						* 根据片条理论列出气动力方程
+						* 总共划分为10个网格
+						* 按照非线性高斯-赛德尔迭代求解机翼在考虑气动弹性作用下的升力分布
+						* 经过9次迭代
+							  
+						最终得到弹性机翼的升力为$L=128.306\text{N}$,而考虑为刚体的机翼的升力为$L_0=120.264\text{N}$,可见由于刚心位于焦点之后，升力的作用产生的扭转角导致翼型对气流的攻角增大，因此产生的总升力大于刚性机翼产生的总升力，在此处给定的来流下升力增大了6.7%.
+					</section>
+	
+					<section>
+							弹性机翼的扭转角
+							<br>
+							<img src="figures/deflection.png" width="70%" />
+						</section>
+		
+						<section>
+								弹性机翼的纵向形变
+								<br>
+								<img src="figures/displacement.png" width="70%" />
+							</section>
+	
+				<section style="text-align: left;">
+					运用非线性分块高斯-赛德尔迭代，迭代十步左右即收敛，得到的结果是弹性机翼由于刚心在焦点之后由于扭转变形会导致对气流的攻角增大，因此弹性机翼会产生更大的升力。对于此问题，还应该进一步进行试验验证，以分析计算结果的误差。
+				</section>
+	
+				<section data-markdown style="text-align: left;">
+						### 求梯度的方法
+						  
+						由于基于梯度的优化算法需要利用性能指标关于设计变量的导数，因此如何高效而精确地计算出导数是一个关键问题。通常有
+						* 有限差分法
+						* 复数差分法
+						* 符号微分法
+						* 自动微分法
+						* 伴随方法
+				</section>
+	
+				<section data-markdown style="text-align: left;">
+						* 有限差分法：精度低（前向差分或者后向差分为一阶精度，中心差分为二阶精度）；速度慢（需要调用目标函数计算过程）；数值稳定性低；程序简单 
+						* 复数差分法：精度较高（前向差分或者后向差分为一阶精度，中心差分为二阶精度）；速度更慢（需要调用目标函数计算过程）；数值稳定性更高；程序较简单
+						* 符号微分法：基本不可能用于复杂的表达式
+						* 自动微分法：精度高；运算速度快；编程复杂
+						* 伴随方法：精度高；运算速度快；编程复杂
+				</section>			  
+	
+				<section style="text-align: left;">
+						复数差分法
+						<br>
+						<small>			
+						考虑一个解析函数$F(z)$，这意味着该函数无限可微且能够在光滑的延拓的复平面上，那么对于实数$x_0$和$h$，根据泰勒级数有
+						\begin{equation}
+						F(x_o+ih)=F(x_0)+ihF(x_0)-\frac{h^2F(x_0)}{2!}\cdots
+						\end{equation}
+						取虚部可以得到
+						\begin{equation}
+						F(x_0+ih) = \frac{\mathrm{Im}(F(x_0+ih)}{h}+)(h^2)
+						\end{equation}
+						因此得到
+						\begin{equation}
+						F^\prime(x_0)=\frac{\mathrm{Im}(F(x_0+ih))}{h}
+						\end{equation}
+					</small>
+					</section>
 				<section style="text-align: left;">
 					流固耦合的伴随方法：
 					<br> 流体力学残差方程为 \begin{equation} \bm{R = Aw - \alpha = 0} \end{equation} 有限元残差方程为 \begin{equation} \bm{S = Ku-f=0} \end{equation}
@@ -322,8 +531,8 @@
 					// More info https://github.com/hakimel/reveal.js#dependencies
 					dependencies: [
 						{ src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
-						{ src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-						{ src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+						{ src: 'https://cdn.bootcss.com/reveal.js/3.6.0/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+						{ src: 'https://cdn.bootcss.com/reveal.js/3.6.0/plugin/markdown/markdown.min.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
 						{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
 						{ src: 'plugin/search/search.js', async: true },
 						{ src: 'plugin/zoom-js/zoom.js', async: true },
