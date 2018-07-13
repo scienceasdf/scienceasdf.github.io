@@ -28,6 +28,13 @@ cmake --version
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install --no-install-recommends gnome-panel
 gnome-desktop-item-edit --create-new ~/桌面
 </code></pre></div></div>
+
+<h2 id="从hdmi输出声音">从HDMI输出声音</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-add-repository ppa:yktooo/ppa
+sudo apt update
+sudo apt install indicator-sound-switcher
+</code></pre></div></div>
+<p>利用indicator-sound-switcher便可以在各个通道切换声音输出。注意Ubuntu 18.04添加ppa以后不需要<code class="highlighter-rouge">sudo apt update</code>这一步了。</p>
 ]]></content>
       <categories>
         
