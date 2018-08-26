@@ -2,6 +2,165 @@
 <search>
   
     <entry>
+      <title><![CDATA[再谈C++的字符串分割]]></title>
+      <url>/programming/2018/08/25/splitstring/</url>
+      <content type="html"><![CDATA[<p><strong>再次讨论如何分割C++的std::string.</strong></p>
+
+<hr />
+
+<p>一些别的方法我们之前已经讨论过了，例如Boost::tokenizer或者Boost::splitter或者QString来进行分割。不过这里我们讨论一下运用C++标准库的方法。</p>
+
+<p>思路很简单，就是用istream流的迭代器处理。</p>
+<h2 id="思路1">思路1</h2>
+<p>首先一个比较简单的用法是</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">text</span> <span class="o">=</span> <span class="s">"Let me split this into words"</span><span class="p">;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="n">iss</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">results</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">iss</span><span class="p">)),</span><span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">());</span>
+</code></pre></div></div>
+<p>如果使用C++11语法可以写成这样：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">text</span> <span class="o">=</span> <span class="s">"Let me split this into words"</span><span class="p">;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="n">iss</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">results</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">{</span><span class="n">iss</span><span class="p">}),</span><span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">());</span>
+</code></pre></div></div>
+<p>这种思路的优点是可以处理任何流而不仅仅是字符串，但是缺点是不能自定义分隔符。</p>
+
+<h2 id="思路2">思路2</h2>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="n">is</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">output</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="c1">// ...does lots of things...
+</span><span class="p">}</span>
+</code></pre></div></div>
+<p>这段代码肯定是不能改的，因为这是标准库里的东西。不过我们可以变通一下：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">WordDelimitedByComma</span> <span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span>
+<span class="p">{};</span>
+</code></pre></div></div>
+<p>这样做实际上是有争议的，因为std::string没有一个虚的析构函数，因此最好不要从std::string继承。当然，只要不去删除一个指向<code class="highlighter-rouge">WordDelimitedByComma</code>的指针，就不会出现问题。在这里我们只用来分割字符串。重载«操作符：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="n">is</span><span class="p">,</span> <span class="n">WordDelimitedByComma</span><span class="o">&amp;</span> <span class="n">output</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">is</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="sc">','</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">is</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>因此代码可以写成</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">text</span> <span class="o">=</span> <span class="s">"Let,me,split,this,into,words"</span><span class="p">;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="n">iss</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">results</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">WordDelimitedByComma</span><span class="o">&gt;</span><span class="p">(</span><span class="n">iss</span><span class="p">)),</span> <span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">WordDelimitedByComma</span><span class="o">&gt;</span><span class="p">());</span>
+</code></pre></div></div>
+<p>更为通用的代码可以写成</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span><span class="o">&lt;</span><span class="kt">char</span> <span class="n">delimiter</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">WordDelimitedBy</span> <span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span>
+<span class="p">{};</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">text</span> <span class="o">=</span> <span class="s">"Let,me,split,this,into,words"</span><span class="p">;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="n">iss</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">results</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">WordDelimitedBy</span><span class="o">&lt;</span><span class="sc">','</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">iss</span><span class="p">)),</span> <span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">WordDelimitedBy</span><span class="o">&lt;</span><span class="sc">','</span><span class="o">&gt;&gt;</span><span class="p">());</span>
+</code></pre></div></div>
+<p>这个的优点是</p>
+<ul>
+  <li>允许在编译器定义任意的分隔符</li>
+  <li>可以使用任何流而不仅仅是字符串</li>
+  <li>比方法1快20%至30%</li>
+</ul>
+
+<p>而缺点是分隔符只能在编译器定义，且代码量较大。</p>
+
+<h2 id="思路3">思路3</h2>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">split</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="kt">char</span> <span class="n">delimiter</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">tokens</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">token</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="n">tokenStream</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">tokenStream</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">delimiter</span><span class="p">)){</span>
+        <span class="n">tokens</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">token</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">tokens</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>这个思路的有点在于</p>
+<ul>
+  <li>借口清晰</li>
+  <li>能够在运行期使用任何分隔符</li>
+</ul>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> C++ </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[初窥Qt WebAssembly]]></title>
+      <url>/programming/2018/08/23/qtwasm/</url>
+      <content type="html"><![CDATA[<p><strong>Qt 5.11发布了Qt WebAssembly的技术预览(Technology Preview)。对Qt WebAssembly的代码进行了编译并编译了一些程序。</strong></p>
+
+<hr />
+
+<h2 id="安装最新emscripten">安装最新emscripten</h2>
+<p>开发机系统为Ubuntu 18.04，直接用apt install 得到的emscripten版本太老，因此需要最新版本的<a href="https://s3.amazonaws.com/mozilla-games/emscripten/releases/emsdk-portable.tar.gz">emscripten</a>.下载解压后</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./emsdk update
+./emsdk install latest
+./emsdk activate latest
+</code></pre></div></div>
+<p>然后设置环境变量，可以<code class="highlighter-rouge">source ./emsdk_env.sh</code></p>
+
+<h2 id="编译qt-webassembly源码">编译Qt-WebAssembly源码</h2>
+<p>首先下载好源码，然后坑也不少。按照官方wiki的命令编译不了，需要用命令<code class="highlighter-rouge">./configure -xplatform emscripten -developer-build -release -static -no-thread -nomake tests -nomake examples  -no-dbus -no-headersclean -system-libpng -no-ssl -no-warnings-are-errors</code>编译。编译的时候会提示不能确定指令集架构，是因为用了emscripten1.38的原因，需要在qtbase文件夹下的configure.pri修改</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>else: html5:exists($$test_out_dir/arch.js.mem): \
+content = $$cat($$test_out_dir/arch.js.mem, blob)
+</code></pre></div></div>
+<p>改成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>html5:exists($$test_out_dir/arch.wasm): \
+content = $$cat($$test_out_dir/arch.wasm, blob)
+</code></pre></div></div>
+<p>就可以configure然后make了。</p>
+
+<h2 id="编译一个具体的程序">编译一个具体的程序</h2>
+<p>编译程序用命令</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/qtbase/bin/qmake 
+make
+</code></pre></div></div>
+<p>然后可以用命令<code class="highlighter-rouge">python -m SimpleHTTPServer</code>启动一个简单的http服务器。</p>
+
+<p>不过编译的时候也有坑，不知道为什么，include目录不能有/usr/include，具体只能加上自己的目录，例如/usr/include/eigen3.这个问题的原因目前没有明白。</p>
+
+<h2 id="实际效果">实际效果</h2>
+<p>我把easyAuto给编译成了wasm文件。具体的文件包括有easyAuto.js, easyAuto.wasm, easyAuto.html, qtloader.js, qtlogo.svg.最后的效果见<a href="https://scienceasdf.gitee.io/site/rootLocus/index.html">网站</a>。在easyAuto中的QtChart不能使用openGL加速绘制。此外还有的坑包括</p>
+<ul>
+  <li>iOS设备不支持wasm</li>
+  <li>移动设备打开网页后，文本框无法触发虚拟键盘。这是因为整个Qt程序是一个canvas，其中的文本框不是dom对象，因此文本框只能用外部键盘输入，或者自己画一个键盘。。。。。。。</li>
+  <li>Qt程序不能调用系统的字体，程序里面自带了英文字体，而中文字体则无法显示。奇怪的是我在程序里面加上中文字体一起打包编译仍然显示中文不出。</li>
+  <li>wasm文件很大，不过倒是可以在服务器端压缩。</li>
+</ul>
+
+<p>总的感觉坑还是不少，不过这个只是技术预览，最终版希望能够有很大改进。</p>
+]]></content>
+      <categories>
+        
+          <category> Programming </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> Ubuntu </tag>
+        
+          <tag> Linux </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[最近使用Ubuntu的一些总结]]></title>
       <url>/programming/2018/06/02/ubuntu/</url>
       <content type="html"><![CDATA[<p><strong>最近使用Ubuntu系统的一些小技巧总结。</strong></p>

@@ -84,7 +84,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="天文,动力学,数值算法,boost," />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -112,18 +112,18 @@
 
 
 
-<meta name="description" content="">
-<meta name="keywords" content="天文, 动力学, 数值算法, boost">
+<meta name="description" content="再次讨论如何分割C++的std::string.">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初窥含太阳系动力系统在内的几类动力系统">
-<meta property="og:url" content="http://localhost:4000/dynamics/2018/04/12/dynamics/">
+<meta property="og:title" content="再谈C++的字符串分割">
+<meta property="og:url" content="http://localhost:4000/programming/2018/08/25/splitstring/">
 <meta property="og:site_name" content="scienceasdf">
-<meta property="og:description" content="">
+<meta property="og:description" content="再次讨论如何分割C++的std::string.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-13T00:00:00+08:00">
+<meta property="og:updated_time" content="2018-08-25T00:00:00+08:00">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初窥含太阳系动力系统在内的几类动力系统">
-<meta name="twitter:description" content="">
+<meta name="twitter:title" content="再谈C++的字符串分割">
+<meta name="twitter:description" content="再次讨论如何分割C++的std::string.">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -156,7 +156,7 @@
 
 
 
-  <title>初窥含太阳系动力系统在内的几类动力系统</title>
+  <title>再谈C++的字符串分割</title>
   
 
 
@@ -304,7 +304,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/dynamics/2018/04/12/dynamics/">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/programming/2018/08/25/splitstring/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="scienceasdf">
@@ -324,7 +324,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            初窥含太阳系动力系统在内的几类动力系统
+            再谈C++的字符串分割
           
         </h1>
         
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-12T00:00:00+08:00">
-                2018-04-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-25T00:00:00+08:00">
+                2018-08-25
               </time>
             
 
@@ -362,8 +362,8 @@
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/Dynamics" itemprop="url" rel="index">
-                    <span itemprop="name">Dynamics</span>
+                  <a href="/category/#/Programming" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
                   </a>
                 </span>
 
@@ -402,149 +402,87 @@
       
 
       
-        <script type="text/x-mathjax-config">
-  		MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [['$','$'], ['\\(','\\)']]
-            },
-  			TeX: { 
-                equationNumbers: {  
-                    autoNumber: "AMS"  
-                },
-     		    extensions: ["AMSmath.js"]
-            },
-            CommonHTML: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            "HTML-CSS": { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            SVG: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            }
-  		});
-		</script>
-
-<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<p><strong>初步认识一些动力系统，如太阳系系统，混沌系统等，并研究其数值解法</strong></p>
+        <p><strong>再次讨论如何分割C++的std::string.</strong></p>
 
 <hr />
-<p><strong>本文公式较多，在浏览器中将会花较长时间用于渲染公式。</strong></p>
 
-<hr />
-<p>最近看boost::numeric::odeint的文档，发现了一些很有趣的动力系统。</p>
-<h2 id="太阳系系统">太阳系系统</h2>
-<p>这个看起来简单，无非就是万有引力的动力学，但是深入探究并不简单。这里我们想考虑太阳、木星、土星、天王星、海王星等天体的运动以及他们的相互作用。</p>
+<p>一些别的方法我们之前已经讨论过了，例如Boost::tokenizer或者Boost::splitter或者QString来进行分割。不过这里我们讨论一下运用C++标准库的方法。</p>
 
-<hr />
-<p><strong>NOTE</strong></p>
+<p>思路很简单，就是用istream流的迭代器处理。</p>
+<h2 id="思路1">思路1</h2>
+<p>首先一个比较简单的用法是</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">text</span> <span class="o">=</span> <span class="s">"Let me split this into words"</span><span class="p">;</span>
 
-<p>一个简单的物理史：二体问题是可积的，可以理论分析得到解析解，而三体问题则不存在解析解。在19世纪末，庞加莱发现了这个问题，并成为混沌理论的始祖。</p>
+<span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="n">iss</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">results</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">iss</span><span class="p">)),</span><span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">());</span>
+</code></pre></div></div>
+<p>如果使用C++11语法可以写成这样：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">text</span> <span class="o">=</span> <span class="s">"Let me split this into words"</span><span class="p">;</span>
 
-<hr />
-<p>理想的天体运动都是保守场，因此可以列出哈密顿方程。首先是动量的表达式（当然这里的动量的量纲是速度的量纲，但是物理含义是动量）
-\begin{equation}
-\frac{dq_i}{dt}=p_i
-\end{equation}
-\begin{equation}
-\frac{dp_i}{dt}=\frac{1}{m_i} \sum_{i\neq j}F_{ij}
-\end{equation}
-那么哈密顿函数的表达式为
-\begin{equation}
-H=\sum_i \frac{p_i^2}{2m_i}+\sum_j V(q_i,q_j)
-\end{equation}
-$V(q_i,q_j)$是$i,j$相互的势能。哈密顿方程的动力学方程为
-<script type="math/tex">% <![CDATA[
-\begin{align}
-\frac{dq_i}{dt}&=\frac{dH}{dp_i}\\
-\frac{dp_i}{dt}&=-\frac{dH}{dq_i}
-\end{align} %]]></script>
-在boost库中求解这个动力系统，有专门的辛算法：Runge-Kutta-Nystroem算法，在boost库中是一个叫symplectic_rkn_sb3a_mclachlan的步进器。事实上，对于很多实际生活中的动力系统，只要它有惯性，不耗散，就能够写出哈密顿函数，从而写出正则方程组，用这个算法求解。三体问题就是混沌的了，因此在这个世纪太阳系问题的求解中，必须要选择符合实际的初始条件，否则得不到想要的结果。<br />
-而对于一个实际的航天器，考虑的动力学方程通常如下：
-<script type="math/tex">\begin{align}\label{eqs_force}
-\frac{d^2\mathbf{r}}{dt^2}=-\frac{\mu}{r^3}\mathbf{r}+\nabla \phi_{sj}^o+G\sum_{k\neq j}^{n_b}m_k(\frac{\mathbf{r_{ks}}}{r^3_{ks}}-\frac{\mathbf{r_{kj}}}{r^3_{kj}})+\frac{\dot m_s}{m}\frac{d\mathbf{r}}{dt}-\frac{1}{2}\rho v_{rel}^2\frac{C_dA}{m_s}\hat{\mathbf{v}}_{rel}+\frac{P_{SR}C_RA_{sun}}{m_s}\hat{\mathbf{r}}_{sun}+\frac{\mu}{c^2r^3}((4\frac{\mu}{r}-v^2)\mathbf{r}+4(\mathbf{r\cdot v})\mathbf{v})+2(\mathbf{\Omega}\times\mathbf{v})+2\frac{\mu}{c^2r^3}(\frac{3}{r^2}(\mathbf{r\times v})(\mathbf{r \cdot J})+(\mathbf{v\times J}))
-\end{align}</script>
-这里某几个项的含义是（不一一赘述了）：</p>
+<span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="n">iss</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">results</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">{</span><span class="n">iss</span><span class="p">}),</span><span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">());</span>
+</code></pre></div></div>
+<p>这种思路的优点是可以处理任何流而不仅仅是字符串，但是缺点是不能自定义分隔符。</p>
+
+<h2 id="思路2">思路2</h2>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="n">is</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">output</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="c1">// ...does lots of things...
+</span><span class="p">}</span>
+</code></pre></div></div>
+<p>这段代码肯定是不能改的，因为这是标准库里的东西。不过我们可以变通一下：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">WordDelimitedByComma</span> <span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span>
+<span class="p">{};</span>
+</code></pre></div></div>
+<p>这样做实际上是有争议的，因为std::string没有一个虚的析构函数，因此最好不要从std::string继承。当然，只要不去删除一个指向<code class="highlighter-rouge">WordDelimitedByComma</code>的指针，就不会出现问题。在这里我们只用来分割字符串。重载«操作符：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="n">is</span><span class="p">,</span> <span class="n">WordDelimitedByComma</span><span class="o">&amp;</span> <span class="n">output</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">is</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="sc">','</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">is</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>因此代码可以写成</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">text</span> <span class="o">=</span> <span class="s">"Let,me,split,this,into,words"</span><span class="p">;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="n">iss</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">results</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">WordDelimitedByComma</span><span class="o">&gt;</span><span class="p">(</span><span class="n">iss</span><span class="p">)),</span> <span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">WordDelimitedByComma</span><span class="o">&gt;</span><span class="p">());</span>
+</code></pre></div></div>
+<p>更为通用的代码可以写成</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span><span class="o">&lt;</span><span class="kt">char</span> <span class="n">delimiter</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">WordDelimitedBy</span> <span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span>
+<span class="p">{};</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">text</span> <span class="o">=</span> <span class="s">"Let,me,split,this,into,words"</span><span class="p">;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="n">iss</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">results</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">WordDelimitedBy</span><span class="o">&lt;</span><span class="sc">','</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">iss</span><span class="p">)),</span> <span class="n">std</span><span class="o">::</span><span class="n">istream_iterator</span><span class="o">&lt;</span><span class="n">WordDelimitedBy</span><span class="o">&lt;</span><span class="sc">','</span><span class="o">&gt;&gt;</span><span class="p">());</span>
+</code></pre></div></div>
+<p>这个的优点是</p>
 <ul>
-  <li>$\nabla \phi_{sj}^o$ 中心天体非圆带来的扰动项</li>
-  <li><script type="math/tex">G\sum_{k\neq j}^{n_b}m_k(\frac{\mathbf{r_{ks}}}{r^3_{ks}}-\frac{\mathbf{r_{kj}}}{r^3_{kj}})</script>其它天体的引力扰动项</li>
-  <li>$\frac{\dot m_s}{m}\frac{d\mathbf{r}}{dt}$发动机推力</li>
-  <li><script type="math/tex">\frac{1}{2}\rho v_{rel}^2\frac{C_dA}{m_s}\hat{\mathbf{v}}_{rel}</script>大气阻力</li>
-  <li>$\frac{P_{SR}C_RA_{sun}}{m_s}\hat{\mathbf{r}}_{sun}$是太阳辐射光压</li>
-  <li>$\frac{\mu}{c^2r^3}((4\frac{\mu}{r}-v^2)\mathbf{r}+4(\mathbf{r\cdot v})\mathbf{v})$为<a href="https://en.wikipedia.org/wiki/Schwarzschild_metric">史瓦西解（Schwarzsehild solution)</a></li>
-  <li>$2(\mathbf{\Omega}\times\mathbf{v})$是<a href="https://en.wikipedia.org/wiki/Geodetic_effect">测地线精度(广义相对论造成的空间扭曲形成的误差)</a></li>
-  <li>$2\frac{\mu}{c^2r^3}(\frac{3}{r^2}(\mathbf{r\times v})(\mathbf{r \cdot J})+(\mathbf{v\times J}))$是<a href="https://en.wikipedia.org/wiki/Lense%E2%80%93Thirring_precession">兰斯-蒂林效应(Lens-Thirring Precession)</a></li>
+  <li>允许在编译器定义任意的分隔符</li>
+  <li>可以使用任何流而不仅仅是字符串</li>
+  <li>比方法1快20%至30%</li>
 </ul>
 
-<p>广义相对论对受力的修正作用就是式(\ref{eqs_force})的最后三项，即[1]
-<script type="math/tex">\begin{align}
-\mathbf{a}_r=\frac{\mu}{c^2r^3}((4\frac{\mu}{r}-v^2)\mathbf{r}+4(\mathbf{r\cdot v})\mathbf{v})+2(\mathbf{\Omega}\times\mathbf{v})+2\frac{\mu}{c^2r^3}(\frac{3}{r^2}(\mathbf{r\times v})(\mathbf{r \cdot J})+(\mathbf{v\times J}))
-\end{align}</script>
-如果在J2000坐标系下，那么</p>
+<p>而缺点是分隔符只能在编译器定义，且代码量较大。</p>
+
+<h2 id="思路3">思路3</h2>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">split</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="kt">char</span> <span class="n">delimiter</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">tokens</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">token</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="n">tokenStream</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">tokenStream</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">delimiter</span><span class="p">)){</span>
+        <span class="n">tokens</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">token</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">tokens</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>这个思路的有点在于</p>
 <ul>
-  <li><script type="math/tex">\mathbf{\Omega}=\frac{3}{2}\mathbf{v}_{B/S}\times(\frac{-\mu\mathbf{r}_{B/S}}{c^2r^3_{B/S}})</script>是一个近似</li>
-  <li>$c$是光速</li>
-  <li>$\mathbf{r}$是在J2000坐标系下的位置矢量</li>
-  <li>$\mathbf{v}$是在J2000坐标系下的速度矢量</li>
-  <li>$\mathbf{r}_{B/S}$是中心天体相对于太阳的位置矢量</li>
-  <li>$\mathbf{v}_{B/S}$是中心天体相对于太阳的速度矢量</li>
-  <li>$\mathbf{J}$是中心天体的单位质量角动量，有$\mathbf{J}=\mathbf{R}^{I/F}_B[0\quad 0\quad \frac{2}{5}R_B^2\omega_B]^T$，而$\mathbf{R}^{I/F}_B$是中心天体的体坐标系到惯性系的旋转矩阵，$R_B$是中心天体的平均赤道半径，$\omega_B$是中心天体的自旋速度。</li>
+  <li>借口清晰</li>
+  <li>能够在运行期使用任何分隔符</li>
 </ul>
-
-<p>式(\ref{eqs_force})数值求解通常的方法是广义的龙格库塔法，见<a href="https://scienceasdf.github.io/programming/2017/03/27/rigidBody/">我之前的讨论</a>。</p>
-
-<h2 id="混沌系统与李雅普诺夫指数">混沌系统与李雅普诺夫指数</h2>
-<p>这个系统我是没怎么看懂。。。设$x$是自变量，$\delta x$是扰动量。扰动量满足线性微分方程，但是是时间相关的：
-\begin{equation}
-\frac{d\delta x}{dt}=J(x)\delta x
-\end{equation}
-<a href="https://en.wikipedia.org/wiki/Lyapunov_exponent">李雅普诺夫指数</a>被定义为扰动随指数形式增长的那个对数。如果存在一个李雅普诺夫指数大于0那么扰动会发散，形成混沌。如果所有李雅普诺夫指数都小于0，那么扰动将收敛至一个点。<br />
-为了计算李雅普诺夫指数，需要首先求解扰动动力学方程，每过k步后将结果正交化，李雅普诺夫指数可以用取对数的方法得到，再多次计算取平均值。boost::numeric::odeint的test有相关代码。这个东西我是真的没搞明白是什么……</p>
-
-<h2 id="刚性方程">刚性方程</h2>
-<p>在数学领域中，<a href="https://en.wikipedia.org/wiki/Stiff_equation">刚性方程</a>是指一个微分方程，其数值分析的解只有在时间间隔很小时才会稳定，只要时间间隔略大，其解就会不稳定。特点是特征值的实部均为负数并且实部最大的的特征值的实部与实部最小的的特征值的实部的比值远大于1。化学反应的动力学方程可能会是这样的方程，如果各个子反应的速率相差非常大。
-<script type="math/tex">\begin{align}
-\left\{
-    \begin{array}{l}
-    \frac{dS_1}{dt}=-101S_2-100S_1\\
-    \frac{dS_2}{dt}=-S_1 
-    \end{array}
-\right.
-\end{align}</script>
-刚性系统需要用Rosenbrock method来求解。boost::numeric::odeint提供了这个算法，然而坑的是必须和boost::ublas一起用。。。odeint的文档提供了一个对比，如果用Rosenbrock算法，只需要71步迭代，而龙格库塔算法，准确说是Dormand-Prince 5算法需要1531次迭代。</p>
-
-<h2 id="stuart-landau振子">Stuart-Landau振子</h2>
-<p>微分方程也可以是复数的形式，如下面这个例子，Stuart-Landau oscillator:
-\begin{equation}
-\frac{d\Psi}{dt}=(1=i\eta)\Psi+(1+i\alpha)|\Psi|^2\Psi 
-\end{equation}
-这个系统表示了什么，我也不知道。从数值求解来说，这个系统虽然数域是复数域，不过依然可以用4阶龙格库塔算法求解。</p>
-
-<h2 id="网格动力系统">网格动力系统</h2>
-<p>一个突出的例子是<a href="https://en.wikipedia.org/wiki/Fermi%E2%80%93Pasta%E2%80%93Ulam%E2%80%93Tsingou_problem">Fermi-Pasta-Ulam系统</a>，这是一个非线性的哈密顿系统，哈密顿函数为
-\begin{equation}
-H=\sum_i \frac{p_i^2}{2}+\frac{1}{2}(q_{i+1}-q_i)^2+\frac{\beta}{4}(q_{i+1}-q_i)^4
-\end{equation}
-和太阳系动力系统一样，这个系统也适合用辛求解算法，但是更为简单，因为$\frac{dq_i}{dt}=p_i$.<br />
-有纪念意义的是，FPU系统的求解是世界上最早的计算机上的数值实验。在1953年，洛斯阿拉莫斯，在世界上最早的计算机之一（MANIAC I）进行了这项研究，并触发了一个数学物理学的新领域。</p>
-
-<h2 id="振子集合">振子集合</h2>
-<p>N-N耦合相位振子（N all-to all coupled phase oscillator）定义为
-\begin{equation}
-\frac{d\phi_k}{dt}=\omega_k+\frac{\epsilon}{N}\sin(\phi_i-\phi_k)
-\end{equation}
-各个振子的自然频率满足某种分布，$\epsilon$是耦合强度。如果我们取$\omega_i$的分布为洛伦兹分布（其实就是<a href="https://en.wikipedia.org/wiki/Cauchy_distribution">柯西分布</a>，物理学上一般叫做洛伦兹分布），那么我们会观察到一个有趣的现象：当耦合强度超过某个临界值后，振子间会发生相位转移，伺候振子会以共同的频率运动。这种转移被称为<a href="https://en.wikipedia.org/wiki/Kuramoto_model">Kuramoto transition</a>。这个动力学系统本身的数值求解直接用4阶龙格库塔就行。</p>
-
-<hr />
-<h2 id="参考文献">参考文献</h2>
-<p>[1]Huang C, Ries J C, Tapley B D, et al. Relativistic effects for near-earth satellite orbit determination[J]. Celestial Mechanics &amp; Dynamical Astronomy, 1990, 48(2):167-185.</p>
 
       
     </div>
@@ -575,16 +513,7 @@ H=\sum_i \frac{p_i^2}{2}+\frac{1}{2}(q_{i+1}-q_i)^2+\frac{\beta}{4}(q_{i+1}-q_i)
         <div class="post-tags">
           
             
-            <a href="/tag/#/%E5%A4%A9%E6%96%87" rel="tag"># 天文</a>
-          
-            
-            <a href="/tag/#/%E5%8A%A8%E5%8A%9B%E5%AD%A6" rel="tag"># 动力学</a>
-          
-            
-            <a href="/tag/#/%E6%95%B0%E5%80%BC%E7%AE%97%E6%B3%95" rel="tag"># 数值算法</a>
-          
-            
-            <a href="/tag/#/boost" rel="tag"># boost</a>
+            <a href="/tag/#/C%2B%2B" rel="tag"># C++</a>
           
         </div>
       
@@ -600,18 +529,14 @@ H=\sum_i \frac{p_i^2}{2}+\frac{1}{2}(q_{i+1}-q_i)^2+\frac{\beta}{4}(q_{i+1}-q_i)
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/programming/2018/04/17/buildDealii/" rel="next" title="在Windows下编译deal.ii">
-                <i class="fa fa-chevron-left"></i> 在Windows下编译deal.ii
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/dynamics/2018/04/12/astrodynamics3/" rel="prev" title="初窥牛顿平方反比定律和胡克定律的对偶性">
-                初窥牛顿平方反比定律和胡克定律的对偶性 <i class="fa fa-chevron-right"></i>
+              <a href="/programming/2018/08/23/qtwasm/" rel="prev" title="初窥Qt WebAssembly">
+                初窥Qt WebAssembly <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -800,7 +725,7 @@ H=\sum_i \frac{p_i^2}{2}+\frac{1}{2}(q_{i+1}-q_i)^2+\frac{\beta}{4}(q_{i+1}-q_i)
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#太阳系系统"> <span class="nav-number">1</span> <span class="nav-text">太阳系系统</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#混沌系统与李雅普诺夫指数"> <span class="nav-number">2</span> <span class="nav-text">混沌系统与李雅普诺夫指数</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#刚性方程"> <span class="nav-number">3</span> <span class="nav-text">刚性方程</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#stuart-landau振子"> <span class="nav-number">4</span> <span class="nav-text">Stuart-Landau振子</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#网格动力系统"> <span class="nav-number">5</span> <span class="nav-text">网格动力系统</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#振子集合"> <span class="nav-number">6</span> <span class="nav-text">振子集合</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#参考文献"> <span class="nav-number">7</span> <span class="nav-text">参考文献</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#思路1"> <span class="nav-number">1</span> <span class="nav-text">思路1</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#思路2"> <span class="nav-number">2</span> <span class="nav-text">思路2</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#思路3"> <span class="nav-number">3</span> <span class="nav-text">思路3</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
     </ol>
   </div>
             

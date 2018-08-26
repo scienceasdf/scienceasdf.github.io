@@ -109,6 +109,14 @@
 <lastmod>2018-06-02T00:00:00+08:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/programming/2018/08/23/qtwasm/</loc>
+<lastmod>2018-08-23T00:00:00+08:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/programming/2018/08/25/splitstring/</loc>
+<lastmod>2018-08-25T00:00:00+08:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/category/</loc>
 </url>
 <url>
@@ -143,6 +151,9 @@
 </url>
 <url>
 <loc>http://localhost:4000/page4/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/page5/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/demo3.html</loc>

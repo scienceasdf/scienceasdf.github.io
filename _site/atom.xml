@@ -1,4 +1,125 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-13T10:26:02+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">最近使用Ubuntu的一些总结</title><link href="http://localhost:4000/programming/2018/06/02/ubuntu/" rel="alternate" type="text/html" title="最近使用Ubuntu的一些总结" /><published>2018-06-02T00:00:00+08:00</published><updated>2018-06-02T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/06/02/ubuntu</id><content type="html" xml:base="http://localhost:4000/programming/2018/06/02/ubuntu/">&lt;p&gt;&lt;strong&gt;最近使用Ubuntu系统的一些小技巧总结。&lt;/strong&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-08-25T21:49:42+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">再谈C++的字符串分割</title><link href="http://localhost:4000/programming/2018/08/25/splitstring/" rel="alternate" type="text/html" title="再谈C++的字符串分割" /><published>2018-08-25T00:00:00+08:00</published><updated>2018-08-25T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/08/25/splitstring</id><content type="html" xml:base="http://localhost:4000/programming/2018/08/25/splitstring/">&lt;p&gt;&lt;strong&gt;再次讨论如何分割C++的std::string.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;一些别的方法我们之前已经讨论过了，例如Boost::tokenizer或者Boost::splitter或者QString来进行分割。不过这里我们讨论一下运用C++标准库的方法。&lt;/p&gt;
+
+&lt;p&gt;思路很简单，就是用istream流的迭代器处理。&lt;/p&gt;
+&lt;h2 id=&quot;思路1&quot;&gt;思路1&lt;/h2&gt;
+&lt;p&gt;首先一个比较简单的用法是&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Let me split this into words&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istringstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;results&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;如果使用C++11语法可以写成这样：&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Let me split this into words&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istringstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;results&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这种思路的优点是可以处理任何流而不仅仅是字符串，但是缺点是不能自定义分隔符。&lt;/p&gt;
+
+&lt;h2 id=&quot;思路2&quot;&gt;思路2&lt;/h2&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;c1&quot;&gt;// ...does lots of things...
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这段代码肯定是不能改的，因为这是标准库里的东西。不过我们可以变通一下：&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WordDelimitedByComma&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这样做实际上是有争议的，因为std::string没有一个虚的析构函数，因此最好不要从std::string继承。当然，只要不去删除一个指向&lt;code class=&quot;highlighter-rouge&quot;&gt;WordDelimitedByComma&lt;/code&gt;的指针，就不会出现问题。在这里我们只用来分割字符串。重载«操作符：&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WordDelimitedByComma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;','&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;因此代码可以写成&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Let,me,split,this,into,words&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istringstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;results&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WordDelimitedByComma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WordDelimitedByComma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;更为通用的代码可以写成&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delimiter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WordDelimitedBy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Let,me,split,this,into,words&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istringstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;results&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WordDelimitedBy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;','&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WordDelimitedBy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;','&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这个的优点是&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;允许在编译器定义任意的分隔符&lt;/li&gt;
+  &lt;li&gt;可以使用任何流而不仅仅是字符串&lt;/li&gt;
+  &lt;li&gt;比方法1快20%至30%&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;而缺点是分隔符只能在编译器定义，且代码量较大。&lt;/p&gt;
+
+&lt;h2 id=&quot;思路3&quot;&gt;思路3&lt;/h2&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delimiter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tokens&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istringstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tokenStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tokenStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delimiter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;tokens&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;push_back&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tokens&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这个思路的有点在于&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;借口清晰&lt;/li&gt;
+  &lt;li&gt;能够在运行期使用任何分隔符&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>scienceasdf</name></author><category term="C++" /><summary type="html">再次讨论如何分割C++的std::string.</summary></entry><entry><title type="html">初窥Qt WebAssembly</title><link href="http://localhost:4000/programming/2018/08/23/qtwasm/" rel="alternate" type="text/html" title="初窥Qt WebAssembly" /><published>2018-08-23T00:00:00+08:00</published><updated>2018-08-23T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/08/23/qtwasm</id><content type="html" xml:base="http://localhost:4000/programming/2018/08/23/qtwasm/">&lt;p&gt;&lt;strong&gt;Qt 5.11发布了Qt WebAssembly的技术预览(Technology Preview)。对Qt WebAssembly的代码进行了编译并编译了一些程序。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;安装最新emscripten&quot;&gt;安装最新emscripten&lt;/h2&gt;
+&lt;p&gt;开发机系统为Ubuntu 18.04，直接用apt install 得到的emscripten版本太老，因此需要最新版本的&lt;a href=&quot;https://s3.amazonaws.com/mozilla-games/emscripten/releases/emsdk-portable.tar.gz&quot;&gt;emscripten&lt;/a&gt;.下载解压后&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./emsdk update
+./emsdk install latest
+./emsdk activate latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;然后设置环境变量，可以&lt;code class=&quot;highlighter-rouge&quot;&gt;source ./emsdk_env.sh&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;编译qt-webassembly源码&quot;&gt;编译Qt-WebAssembly源码&lt;/h2&gt;
+&lt;p&gt;首先下载好源码，然后坑也不少。按照官方wiki的命令编译不了，需要用命令&lt;code class=&quot;highlighter-rouge&quot;&gt;./configure -xplatform emscripten -developer-build -release -static -no-thread -nomake tests -nomake examples  -no-dbus -no-headersclean -system-libpng -no-ssl -no-warnings-are-errors&lt;/code&gt;编译。编译的时候会提示不能确定指令集架构，是因为用了emscripten1.38的原因，需要在qtbase文件夹下的configure.pri修改&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;else: html5:exists($$test_out_dir/arch.js.mem): \
+content = $$cat($$test_out_dir/arch.js.mem, blob)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;改成&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;html5:exists($$test_out_dir/arch.wasm): \
+content = $$cat($$test_out_dir/arch.wasm, blob)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;就可以configure然后make了。&lt;/p&gt;
+
+&lt;h2 id=&quot;编译一个具体的程序&quot;&gt;编译一个具体的程序&lt;/h2&gt;
+&lt;p&gt;编译程序用命令&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/qtbase/bin/qmake 
+make
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;然后可以用命令&lt;code class=&quot;highlighter-rouge&quot;&gt;python -m SimpleHTTPServer&lt;/code&gt;启动一个简单的http服务器。&lt;/p&gt;
+
+&lt;p&gt;不过编译的时候也有坑，不知道为什么，include目录不能有/usr/include，具体只能加上自己的目录，例如/usr/include/eigen3.这个问题的原因目前没有明白。&lt;/p&gt;
+
+&lt;h2 id=&quot;实际效果&quot;&gt;实际效果&lt;/h2&gt;
+&lt;p&gt;我把easyAuto给编译成了wasm文件。具体的文件包括有easyAuto.js, easyAuto.wasm, easyAuto.html, qtloader.js, qtlogo.svg.最后的效果见&lt;a href=&quot;https://scienceasdf.gitee.io/site/rootLocus/index.html&quot;&gt;网站&lt;/a&gt;。在easyAuto中的QtChart不能使用openGL加速绘制。此外还有的坑包括&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;iOS设备不支持wasm&lt;/li&gt;
+  &lt;li&gt;移动设备打开网页后，文本框无法触发虚拟键盘。这是因为整个Qt程序是一个canvas，其中的文本框不是dom对象，因此文本框只能用外部键盘输入，或者自己画一个键盘。。。。。。。&lt;/li&gt;
+  &lt;li&gt;Qt程序不能调用系统的字体，程序里面自带了英文字体，而中文字体则无法显示。奇怪的是我在程序里面加上中文字体一起打包编译仍然显示中文不出。&lt;/li&gt;
+  &lt;li&gt;wasm文件很大，不过倒是可以在服务器端压缩。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;总的感觉坑还是不少，不过这个只是技术预览，最终版希望能够有很大改进。&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="Ubuntu" /><category term="Linux" /><summary type="html">Qt 5.11发布了Qt WebAssembly的技术预览(Technology Preview)。对Qt WebAssembly的代码进行了编译并编译了一些程序。</summary></entry><entry><title type="html">最近使用Ubuntu的一些总结</title><link href="http://localhost:4000/programming/2018/06/02/ubuntu/" rel="alternate" type="text/html" title="最近使用Ubuntu的一些总结" /><published>2018-06-02T00:00:00+08:00</published><updated>2018-06-02T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/06/02/ubuntu</id><content type="html" xml:base="http://localhost:4000/programming/2018/06/02/ubuntu/">&lt;p&gt;&lt;strong&gt;最近使用Ubuntu系统的一些小技巧总结。&lt;/strong&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -686,263 +807,4 @@ H=\sum_i \frac{p_i^2}{2}+\frac{1}{2}(q_{i+1}-q_i)^2+\frac{\beta}{4}(q_{i+1}-q_i)
 
 &lt;hr /&gt;
 &lt;h2 id=&quot;参考文献&quot;&gt;参考文献&lt;/h2&gt;
-&lt;p&gt;[1]Huang C, Ries J C, Tapley B D, et al. Relativistic effects for near-earth satellite orbit determination[J]. Celestial Mechanics &amp;amp; Dynamical Astronomy, 1990, 48(2):167-185.&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="天文" /><category term="动力学" /><category term="数值算法" /><category term="boost" /><summary type="html"></summary></entry><entry><title type="html">初窥牛顿平方反比定律和胡克定律的对偶性</title><link href="http://localhost:4000/dynamics/2018/04/12/astrodynamics3/" rel="alternate" type="text/html" title="初窥牛顿平方反比定律和胡克定律的对偶性" /><published>2018-04-12T00:00:00+08:00</published><updated>2018-04-12T00:00:00+08:00</updated><id>http://localhost:4000/dynamics/2018/04/12/astrodynamics3</id><content type="html" xml:base="http://localhost:4000/dynamics/2018/04/12/astrodynamics3/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-  		MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [['$','$'], ['\\(','\\)']]
-            },
-  			TeX: { 
-                equationNumbers: {  
-                    autoNumber: &quot;AMS&quot;  
-                },
-     		    extensions: [&quot;AMSmath.js&quot;]
-            },
-            CommonHTML: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            &quot;HTML-CSS&quot;: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            SVG: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            }
-  		});
-		&lt;/script&gt;
-
-&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;探讨牛顿平方反比定律与胡克定律的对偶性，研究相关的动力学系统以及共形映射。本文的大多数结论来自于Arnold等人的著作。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;本文公式较多，在浏览器中将会花较长时间用于渲染公式。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;h2 id=&quot;共形映射&quot;&gt;共形映射&lt;/h2&gt;
-&lt;p&gt;这个是复变函数论的一个重要工具，在这里我们需要以下两个共形映射函数。（吐槽一下，百度的ECharts实在不适合绘制数学函数）&lt;/p&gt;
-&lt;h3 id=&quot;茹科夫斯基函数&quot;&gt;茹科夫斯基函数&lt;/h3&gt;
-&lt;p&gt;\begin{equation}
-f(z) = z+\frac{1}{z}
-\end{equation}
-若$z=|R|&amp;gt;1$，则得到的是焦点为$\pm 2$的椭圆，证明如下：
-\begin{equation}
-z=R(\cos\theta+i\sin\theta)
-\end{equation}
-那么有
-&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
-\begin{align}
-f(z)&amp;=z+\frac{1}{z}\\
-&amp;=R(\cos\theta+i\sin\theta)+\frac{1}{R(\cos\theta+i\sin\theta)}\\
-&amp;=R(\cos\theta+i\sin\theta)+\frac{1}{R}(\cos\theta-i\sin\theta)\\
-&amp;=(R+\frac{1}{R})\cos\theta+i(R-\frac{1}{R})\sin\theta
-\end{align} %]]&gt;&lt;/script&gt;
-很显然可以得到：&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;a=R+\frac{1}{R}&lt;/script&gt;&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;b=R-\frac{1}{R}&lt;/script&gt;&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;c=\sqrt{a^2-b^2}=2&lt;/script&gt;&lt;br /&gt;
-&lt;img src=&quot;http://localhost:4000/assets//blog_images/Jukowsky.png&quot; width=&quot;500px&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;平方函数&quot;&gt;平方函数&lt;/h3&gt;
-&lt;p&gt;\begin{equation}
-f(z)=z^2
-\end{equation}
-设$z$为一个椭圆，$z=a\cos\theta+ib\sin\theta$
-则有：
-&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
-\begin{align}
-f(z)&amp;=a^2\cos^2\theta-b^2\sin^2\theta+2ab\cos\theta\sin\theta i\\
-&amp;=\frac{a^2(1+\cos 2\theta)}{2}-\frac{b^2(1-\cos{2\theta})}{2}+ab\sin{2\theta}i\\
-&amp;=\frac{a^2-b^2}{2}+\frac{a^2+b^2}{2}\cos{2\theta}+ab\sin{2\theta}i
-\end{align} %]]&gt;&lt;/script&gt;
-可以得到映射后的图形是其中一个焦点在原点的椭圆&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;A=\frac{a^2+b^2}{2}&lt;/script&gt;&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;B=ab&lt;/script&gt;&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;C=\frac{a^2-b^2}{2}&lt;/script&gt;&lt;br /&gt;
-&lt;img src=&quot;http://localhost:4000/assets//blog_images/square.PNG&quot; width=&quot;500px&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;胡克定律&quot;&gt;胡克定律&lt;/h2&gt;
-&lt;p&gt;胡克定律
-\begin{equation}
-\mathbf{F}=-k\mathbf{x}
-\end{equation}
-这个东西与椭圆也大有关系。首先，在一维问题中，如果一个小球和弹簧相连，那么会形成简谐振动，而简谐振动的相平面就是椭圆（能量守恒易得）。我们考虑更加复杂的情况：一个弹簧连着一个小球进行二维平面运动，也会得到椭圆的运动轨迹，证明如下&lt;a href=&quot;http://www.physics.hmc.edu/~saeta/courses/p111/uploads/Y2011/HSChapter6.pdf&quot;&gt;[1]&lt;/a&gt;：&lt;br /&gt;
-将平面运动分解为径向和周向的速度分量，角动量方程为：
-\begin{equation}
-L=mr^2\dot\theta
-\end{equation}
-能量方程为：
-\begin{equation}
-E=\frac{1}{2}m\dot r^2+\frac{L^2}{2mr^2}+U(r)
-\end{equation}
-根据以上两个方程，可以分别求出$r,\theta$对时间的导数，因此可以得到
-\begin{equation}
-\frac{dr}{d\theta}=\frac{dr/dt}{d\theta/dt}=\pm\sqrt{\frac{2m}{l^2}}r^2\sqrt{E-l^2/2mr^2-U(r)}
-\end{equation}
-\begin{equation}
-\theta=\int d\theta=\pm\frac{l}{\sqrt{2m}}\int^r\frac{dr/r^2}{\sqrt{E-l^2/2mr^2-U(r)}}
-\end{equation}
-势能的表达式
-\begin{equation}
-U=0.5kr^2
-\end{equation}
-因此可以得到
-\begin{equation}
-\theta(r)=\pm\frac{i}{\sqrt{2m}}\int^r\frac{dr/r^2}{\sqrt{E-l^2/2mr^2-0.5kr^2}}
-\end{equation}
-令$z=r^2$，有
-\begin{equation}
-\theta(z)=\pm\frac{l}{2\sqrt{2m}}\int^z\frac{dz/z}{\sqrt{-l^2/2m+Ez-(k/2)z^2}}
-\end{equation}
-因为
-\begin{equation}
-\int^z\frac{dz/z}{\sqrt{a+bz+cz^2}}=\frac{1}{-a}\mathrm{asin}(\frac{bz+2a}{z\sqrt{b^2-4ac}})
-\end{equation}
-所以有
-\begin{equation}
-\theta-\theta_0=\pm\frac{1}{2}\mathrm{asin}(\frac{Er^2-l^2/m}{r^2\sqrt{E^2-kl^2/m}})
-\end{equation}
-反解$r$得到
-\begin{equation}
-r^2(\theta)=\frac{l^2/m}{E\mp(\sqrt{E^2-kl^2/m})\sin{2(\theta-\theta_0)}}
-\end{equation}
-显然，这个轨道是闭合的（因为$r^2(\theta+2\pi)=r^2(\theta)$），也可以证明表示的是一个椭圆（把分母有理化）。不过如果我们知道比如长轴的位置速度信息，求短轴就不必这么麻烦，一个角动量守恒方程一个能量守恒方程就可以得到短轴的位置速度。&lt;/p&gt;
-
-&lt;h2 id=&quot;牛顿平方反比定律与胡克定律的对偶性&quot;&gt;牛顿平方反比定律与胡克定律的对偶性&lt;/h2&gt;
-&lt;p&gt;参考文献为&lt;a href=&quot;https://www.researchgate.net/publication/228571130_Planetary_Motion_and_the_Duality_of_Force_Laws&quot;&gt;[2]&lt;/a&gt;(W. Hall, Rachel &amp;amp; Josic, Kresimir. (2000). Planetary Motion and the Duality of Force Laws. Society for Industrial and Applied Mathematics. 42. 115-124. 10.1137/S0036144598346005. )&lt;/p&gt;
-
-&lt;p&gt;考虑胡克定律的动力学形式为复数形式：
-\begin{equation}
-\ddot w = -Cw
-\end{equation}
-这里的时间自变量为$t$，假设另一个时间变量$\tau$满足$\tau=\tau(t)$，另外一个运动$z=z(\tau)$，我们会得到$\frac{d^2z}{d\tau^2}=-\tilde{C}\frac{z}{|z|^3}$.&lt;br /&gt;
-事实上，只要做变换$z=w^2$，并令$\frac{d\tau}{dt}=|w|^2$，就可以得到平方反比的形式，证明如下：
-&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
-\begin{align}
-\frac{d^2z}{d\tau^2}&amp;=\frac{1}{|w|^2}\frac{d}{dt}(\frac{1}{|w|^2}\frac{dw^2}{dt})\\
-&amp;=\frac{2}{w\bar w}\frac{d}{dt}(\frac{1}{\bar w}\frac{dw}{dt})\\
-&amp;=\frac{2}{w\bar w^3}\frac{dw}{dt}\frac{d\bar w}{dt}+\frac{2}{w\bar w^2}\frac{d^2w}{dt^2}\\
-&amp;=-\frac{2}{w\bar w}[\bar w^{-2}\frac{dw}{dt}\bar{\frac{dw}{dt}}+C\frac{w}{\bar w}]\\
-&amp;=-2w^{-1}(\bar w)^{-3}[|\dot w|^2+C|w|^2]
-\end{align} %]]&gt;&lt;/script&gt;
-现在令$E_w=\frac{1}{2}(|\dot w|^2+C|w|^2)$，可以得到
-\begin{equation}
-\frac{d^2 z}{d\tau^2}=-4E_ww^{-1}\bar w^{-3}=-4E_w\frac{z}{|z|^3}
-\end{equation}
-这就是我们想要得到的形式。不得不说，Arnold等人的想法太意识流了，这也能想到。&lt;br /&gt;
-其实核心就在于上面的那个平方关系的共形映射，让中心在原点的椭圆映射到焦点在原点的椭圆。而那个$\tau,t$的关系是如何得到的呢？事实上，由于角动量守恒，胡克椭圆和开普勒椭圆都会满足面积率。我们记$A_1,A_2$分别是$w(t),z(\tau)$所扫过的面积。$w(t)=(r,\theta)$，而$z=w^2(t)=(r^2,2\theta)$.可以得到
-&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
-\begin{align}
-\mathrm{const}&amp;=\frac{\frac{dA_1}{dt}}{\frac{dA_2}{dt}}\\
-&amp;=\frac{r\theta\frac{dr}{dt}+0.5r^2\frac{d\theta}{dt}}{2r^3\theta\frac{dr}{dt}+r^4\frac{d\theta}{dt}}\\
-&amp;=\frac{1}{2}\frac{d\tau}{dt}\frac{1}{r^2}\\
-&amp;=\frac{1}{2}\frac{d\tau}{dt}\frac{1}{|w|^2}
-\end{align} %]]&gt;&lt;/script&gt;
-这样想到的取$\frac{d\tau}{dt}=|w|^2$……&lt;br /&gt;
-上面这个东西还可以进一步推论：点在幂为$a$的力场中的轨道，在经过适当的变换$w=z^\beta$后变成幂为A的力场中的轨道，则有$A,a,\beta$满足：&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;(a+3)(A+4)=4,\quad \beta=\frac{a+3}{2}&lt;/script&gt;&lt;br /&gt;
-证明过程与刚才类似，不过需要注意的是要选择的$\tau$要满足关系
-\begin{equation}
-\frac{d\tau}{dt}=\frac{|z(\tau(t))|^2}{|w(t)|^2}=|w(t)|^{2(\beta-1)}
-\end{equation}&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="天文" /><category term="动力学" /><summary type="html"></summary></entry><entry><title type="html">在线绘制星下点轨迹</title><link href="http://localhost:4000/programming/2018/04/06/groundTrackPlot/" rel="alternate" type="text/html" title="在线绘制星下点轨迹" /><published>2018-04-06T00:00:00+08:00</published><updated>2018-04-06T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/04/06/groundTrackPlot</id><content type="html" xml:base="http://localhost:4000/programming/2018/04/06/groundTrackPlot/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-  		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
-  							TeX: { equationNumbers: {  autoNumber: &quot;AMS&quot;  },
-     							   extensions: [&quot;AMSmath.js&quot;]}
-  		});
-		&lt;/script&gt;
-
-&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;自己写了写网页绘制星下点轨迹的代码。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;h2 id=&quot;算法&quot;&gt;算法&lt;/h2&gt;
-&lt;p&gt;这个算是原创算法了吧，身边没有轨道动力学和弹道导弹学的教材，都是自己瞎琢磨的算法。之前我们分析了&lt;a href=&quot;https://scienceasdf.github.io/programming/2017/04/07/astrodynamics1/&quot;&gt;轨道动力学中常用的计算机算法&lt;/a&gt;,&lt;a href=&quot;https://scienceasdf.github.io/programming/2017/04/14/astrodynamics2/&quot;&gt;轨道动力学中常用的计算机算法（二）&lt;/a&gt;，这些很有用，可以让我们把轨道六根数转化为笛卡尔坐标系的坐标，以及进行轨道外推。&lt;/p&gt;
-
-&lt;p&gt;星下点轨迹的具体计算过程如下：每隔时间$dt$后，外推此时的轨道六根数，并得到相应的笛卡尔坐标系坐标。然后经度
-\begin{equation}
-\lambda = \mathrm{atan2}(y,x)
-\end{equation}
-纬度
-\begin{equation}
-\phi = \mathrm{asin}(\frac{z}{r})
-\end{equation}
-其中
-\begin{equation}
-r=\sqrt{x^2+y^2+z^2}
-\end{equation}
-这里就基本完成了。不过还要考虑地球自转的影响，这个很让人头疼，因为atan2函数本身值域没问题,$[-\pi,\pi]$,但是考虑地球自转后需要
-\begin{equation}
-\lambda = \lambda - t * \omega
-\end{equation}
-这样$\lambda$的值域就会变化。想了挺长时间，得到这样的一种解决方法&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;geo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;adjust&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;180&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;radPerDeg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;atan2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;degPerRad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;具体实现&quot;&gt;具体实现&lt;/h2&gt;
-&lt;p&gt;我是javascript的门外汉，把我以前写的C++代码全部移植到javascript很是费劲。不过运算速度比我想象中快多了。这里直接用的是开普勒运动的轨道外推，如果考虑摄动项那就需要用龙格库塔算法了。整个javascript的代码在&lt;a href=&quot;https://scienceasdf.github.io/site/js/orbitState.js&quot;&gt;orbitState.js&lt;/a&gt;，代码是可读的。&lt;/p&gt;
-
-&lt;p&gt;UI还是以前的东西，用jQuery Mobile+ECharts做的。最后，绘图的连接在&lt;a href=&quot;https://scienceasdf.github.io/site/groundTrackPlot.html&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;h2 id=&quot;更新2018-4-8&quot;&gt;更新（2018-4-8）&lt;/h2&gt;
-&lt;p&gt;另外自己还做了一个&lt;a href=&quot;https://scienceasdf.github.io/site/TLE/index.html&quot;&gt;在线解析TLE数据绘制星下点轨迹的网页&lt;/a&gt;，这个的算法就不是我写的了，而是用的开源的&lt;a href=&quot;https://github.com/shashwatak/satellite-js&quot;&gt;satellite.js&lt;/a&gt;的SGP4算法，他的代码也写得非常好。网页里面还有试一试功能，就是在NORAD的网站里面按编号随机抓取一个TLE数据，不过再度遇到了跨域访问的问题，这一次的解决方法则是protocol:&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ajax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; 
-  &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'GET'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-  &lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://crossorigin.me/https://celestrak.com/cgi-bin/TLE.pl?CATNR='&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rndSat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;amp;callback=?'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-  &lt;span class=&quot;na&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-  &lt;span class=&quot;na&quot;&gt;dataType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;text&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-  &lt;span class=&quot;na&quot;&gt;crossDomain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-  &lt;span class=&quot;na&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Origin'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'http://foo.example'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; 
-  &lt;span class=&quot;na&quot;&gt;success&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt; 
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'html'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'BODY'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'PRE'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;textContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;eachLine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[\n]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eachLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'No TLE found'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;#myPopup3&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;popup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;open&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;titleStr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;eachLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;[\s]&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;deb/ig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;的碎片&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;随机得到的卫星名字是&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;titleStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'#areaTLE'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eachLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;n'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;eachLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;boolNotGet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;没错，通过一个crossorigin.me的网站来抓数据，这样就可以实现跨域访问了。但是需要注意的是一定要加上Origin的访问头，否则得不到数据。&lt;/p&gt;
-&lt;h3 id=&quot;2018-4-14更新&quot;&gt;2018-4-14更新&lt;/h3&gt;
-&lt;p&gt;https://crossorigin.me访问不了了，只能登陆http://crossorigin，又是费了很大劲找解决方案。最终找到了一个替代的网站：https://cors-anywhere.herokuapp.com，和crossorigin的使用没什么区别。还有一些不支持https的站点，以及一些用不了的站点，我就不列举在这里了。&lt;/p&gt;
-
-&lt;h2 id=&quot;航天类开源代码一览&quot;&gt;航天类开源代码一览&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://sourceforge.net/projects/gmat/&quot;&gt;GMAT&lt;/a&gt;：这个是对我帮助最大的一个软件，C++的代码，软件设计非常好，无论是数学类算法还是从软件工程上说大量设计模式的运用，能够在一定程度上取代STK，不过遗憾的是GUI是用wxWidgets写的，如果是Qt就好了；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/shashwatak/satellite-js&quot;&gt;satellite.js&lt;/a&gt;：就是我网页里用到的开源代码，写得也很好，可以实现在网页中的计算（如果结合three.js这些3D渲染框架，在网页上还能进行动画演示）；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.celestrak.com/publications/AIAA/2006-6753/&quot;&gt;Vallado的代码&lt;/a&gt;：这个Vallodo是天体动力学的祖师级大神，他的代码我虽然没有看过，但是他的代码和学术出版都是对我有很大帮助的，satellite.js的代码就是参考了Vallado的代码的；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;下面的这些我不太了解了，仅供参考：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://previsat.sourceforge.net/&quot;&gt;PreviSat&lt;/a&gt;：还在更新，C++写的，Qt做GUI；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.gano.name/shawn/JSatTrak/&quot;&gt;JSatTrak&lt;/a&gt;：Java写的，更新很慢；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://jat.sourceforge.net/&quot;&gt;JAT&lt;/a&gt;：Java写的，没更新了；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://odtbx.sourceforge.net/&quot;&gt;ODTBX&lt;/a&gt;：Java写的，更新很慢；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.orekit.org/&quot;&gt;Orekit&lt;/a&gt;：Java写的，更新很慢；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;rhodesmill.org/pyephem/&quot;&gt;PyEphem&lt;/a&gt;：Python库，很久没更新了；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pypi.python.org/pypi/sgp4/&quot;&gt;SGP4&lt;/a&gt;：Python库，很久没更新了&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这些开源的不知道为什么有不少托管在SourceForge上面，按理说GitHub生态更好啊。不更新也可以理解，毕竟航天这个东西生态圈太小了。&lt;br /&gt;
-另外再给两个在网页上渲染轨道运行的网页的例子，托管在GitHub上的：&lt;a href=&quot;https://github.com/koansys/isat&quot;&gt;SOT&lt;/a&gt;    &lt;a href=&quot;https://github.com/daoneil/spacemission&quot;&gt;spacemission&lt;/a&gt;&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="JavaScript" /><category term="天文" /><summary type="html">自己写了写网页绘制星下点轨迹的代码。</summary></entry></feed>
+&lt;p&gt;[1]Huang C, Ries J C, Tapley B D, et al. Relativistic effects for near-earth satellite orbit determination[J]. Celestial Mechanics &amp;amp; Dynamical Astronomy, 1990, 48(2):167-185.&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="天文" /><category term="动力学" /><category term="数值算法" /><category term="boost" /><summary type="html"></summary></entry></feed>
