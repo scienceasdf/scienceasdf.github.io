@@ -89,5 +89,5 @@ std::vector<std::string> split(const std::string& s, char delimiter)
 }
 ```
 这个思路的有点在于
-* 借口清晰
+* 接口清晰
 * 能够在运行期使用任何分隔符

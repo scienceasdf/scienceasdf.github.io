@@ -120,10 +120,14 @@
 <meta property="og:site_name" content="scienceasdf">
 <meta property="og:description" content="Qt 5.11发布了Qt WebAssembly的技术预览(Technology Preview)。对Qt WebAssembly的代码进行了编译并编译了一些程序。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/easyauto_wasm1.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/easyauto_wasm2.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/easyauto_wasm3.png">
 <meta property="og:updated_time" content="2018-08-23T00:00:00+08:00">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初窥Qt WebAssembly">
 <meta name="twitter:description" content="Qt 5.11发布了Qt WebAssembly的技术预览(Technology Preview)。对Qt WebAssembly的代码进行了编译并编译了一些程序。">
+<meta name="twitter:image" content="http://localhost:4000/assets//blog_images/easyauto_wasm1.png">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -439,11 +443,16 @@ make
 <ul>
   <li>iOS设备不支持wasm</li>
   <li>移动设备打开网页后，文本框无法触发虚拟键盘。这是因为整个Qt程序是一个canvas，其中的文本框不是dom对象，因此文本框只能用外部键盘输入，或者自己画一个键盘。。。。。。。</li>
-  <li>Qt程序不能调用系统的字体，程序里面自带了英文字体，而中文字体则无法显示。奇怪的是我在程序里面加上中文字体一起打包编译仍然显示中文不出。</li>
+  <li>Qt程序不能调用系统的字体，程序里面自带了英文字体，而中文字体则无法显示。奇怪的是我在程序里面加上中文字体一起打包编译仍然显示中文不出。好像是需要在源码中改/qtbase/src/plugins/platforms/html5/font里面的qrc，具体是不是我也不知道。。。。。。</li>
   <li>wasm文件很大，不过倒是可以在服务器端压缩。</li>
+  <li>在手机上运行很卡，而且有的demo甚至会闪退。</li>
+  <li>无法获取本地文件，解决方法见<a href="https://codereview.qt-project.org/#/c/228599/">这里</a>。</li>
 </ul>
 
-<p>总的感觉坑还是不少，不过这个只是技术预览，最终版希望能够有很大改进。</p>
+<p>总的感觉坑还是不少，不过这个只是技术预览，最终版希望能够有很大改进。这里给出几张easyAuto-WebAssembly程序的截图吧。
+<img src="http://localhost:4000/assets//blog_images/easyauto_wasm1.png" width="350px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/easyauto_wasm2.png" width="350px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/easyauto_wasm3.png" width="350px" height="200px" /></p>
 
       
     </div>
@@ -583,7 +592,7 @@ make
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

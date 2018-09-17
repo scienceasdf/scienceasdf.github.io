@@ -2,6 +2,131 @@
 <search>
   
     <entry>
+      <title><![CDATA[切比雪夫多项式、节点与插值]]></title>
+      <url>/math/2018/09/15/chebyshev/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']]
+            },
+  			TeX: { 
+                equationNumbers: {  
+                    autoNumber: "AMS"  
+                },
+     		    extensions: ["AMSmath.js"]
+            },
+            CommonHTML: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            "HTML-CSS": { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            SVG: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            }
+  		});
+		</script>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p><strong>In this post we discuss on Chebyshev polynomials, nodes and interpolation.讨论关于切比雪夫多项式、节点与插值</strong></p>
+
+<hr />
+<h2 id="切比雪夫节点">切比雪夫节点</h2>
+<p>对于拉格朗日插值公式，如何选取节点是一个重要的问题。通常而言，等距选取节点并不是一个最优的选择。我们考虑如下的问题描述：
+取插值节点：$a\leq x_0\leq x_1\leq ……\leq x_n\leq b$
+满足$L_n(x_k)=f(x_k)$的多项式插值余项</p>
+
+<script type="math/tex; mode=display">R_n(x)=f(x)-L_n(x)=\frac{f^{(n+1)}(\zeta_n)}{(n+1)!}\omega_{n+1}(x)</script>
+
+<p>其中，</p>
+
+<script type="math/tex; mode=display">\omega_{n+1}(x)=(x-x_0)(x-x_1)...(x-x_n)</script>
+
+<p>选取$x_0,x_1,……,x_n$使</p>
+
+<script type="math/tex; mode=display">\text{max}|\omega_{n+1}(x)|=\text{min}</script>
+
+<p>因此需要选取切比雪夫多项式$T_{n+1}(x)$的全部零点。</p>
+
+<p>如果$a=-1,b=1$,那么</p>
+
+<script type="math/tex; mode=display">x_k=\cos(\frac{(2k+1)\pi}{2(n+1)})</script>
+
+<p>如果$[a,b]\neq [-1,1]$,那么</p>
+
+<script type="math/tex; mode=display">x_k=\frac{b+a}{2}+\frac{b-a}{2}\cos(\frac{(2k+1)\pi}{2(n+1)})</script>
+
+<p>当然选取了节点之后既可以用拉格朗日插值，也可以用牛顿插值。</p>
+
+<h2 id="切比雪夫多项式">切比雪夫多项式</h2>
+<p>在微分方程的研究中，切比雪夫提出切比雪夫微分方程</p>
+
+<script type="math/tex; mode=display">(1-x^2)y^{\prime\prime}-xy^\prime+n^2y=0</script>
+
+<p>和</p>
+
+<script type="math/tex; mode=display">(1-x^2)y^{\prime\prime}-3xy^\prime+n(n+2)y=0</script>
+
+<p>相应地，第一类和第二类切比雪夫多项式分别为这两个方程的解。 这些方程是斯图姆-刘维尔微分方程的特殊情形。本文只研究第一类切比雪夫多项式。</p>
+
+<p>第一类切比雪夫多项式由以下递推关系确定</p>
+
+<script type="math/tex; mode=display">T_0(x)=1</script>
+
+<script type="math/tex; mode=display">T_1(x)=x</script>
+
+<script type="math/tex; mode=display">T_{n+1}(x)=2xT_n(x)-T_{n-1}(x)</script>
+
+<p>也可以用母函数表示
+<script type="math/tex">\sum_{n=0}^\infty T_n(x)t^n=\frac{1-tx}{1-2tx+t^2}</script></p>
+
+<p>切比雪夫多项式也具有正交性，即</p>
+
+<script type="math/tex; mode=display">\int_{-1}^1 T_n(x)T_m(x)\frac{dx}{\sqrt{1-x^2}}=\left\{
+    \begin{array}{c}
+    0：n\neq m\\
+    \pi:n=m=0\\
+    \pi/2:n=m\neq 0
+    \end{array}
+    \right.</script>
+
+<p>离散形式的正交性可以表示为</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\sum_{k=1}^{n+1} T_i(x_k)T_j(x_k)=\left\{
+    \begin{array}{c}
+    0：i\neq j\\
+    n+1:i=j=0\\
+    \frac{1}{2}(n+1):0<i=j\neq n
+    \end{array}
+    \right. %]]></script>
+
+<p>根据正交性，可以得到另外一种方法来进行拉格朗日插值。设<script type="math/tex">p_n(x)=\sum_{i=0}^nc_iT_i(x)</script>
+，易得</p>
+
+<script type="math/tex; mode=display">c_i=\frac{2}{n+1}\sum_{k=1}^{n+1}f(x_k)T_i(x_k)</script>
+]]></content>
+      <categories>
+        
+          <category> Math </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 数值算法 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[再谈C++的字符串分割]]></title>
       <url>/programming/2018/08/25/splitstring/</url>
       <content type="html"><![CDATA[<p><strong>再次讨论如何分割C++的std::string.</strong></p>
@@ -82,7 +207,7 @@
 </code></pre></div></div>
 <p>这个思路的有点在于</p>
 <ul>
-  <li>借口清晰</li>
+  <li>接口清晰</li>
   <li>能够在运行期使用任何分隔符</li>
 </ul>
 ]]></content>
@@ -139,11 +264,16 @@ make
 <ul>
   <li>iOS设备不支持wasm</li>
   <li>移动设备打开网页后，文本框无法触发虚拟键盘。这是因为整个Qt程序是一个canvas，其中的文本框不是dom对象，因此文本框只能用外部键盘输入，或者自己画一个键盘。。。。。。。</li>
-  <li>Qt程序不能调用系统的字体，程序里面自带了英文字体，而中文字体则无法显示。奇怪的是我在程序里面加上中文字体一起打包编译仍然显示中文不出。</li>
+  <li>Qt程序不能调用系统的字体，程序里面自带了英文字体，而中文字体则无法显示。奇怪的是我在程序里面加上中文字体一起打包编译仍然显示中文不出。好像是需要在源码中改/qtbase/src/plugins/platforms/html5/font里面的qrc，具体是不是我也不知道。。。。。。</li>
   <li>wasm文件很大，不过倒是可以在服务器端压缩。</li>
+  <li>在手机上运行很卡，而且有的demo甚至会闪退。</li>
+  <li>无法获取本地文件，解决方法见<a href="https://codereview.qt-project.org/#/c/228599/">这里</a>。</li>
 </ul>
 
-<p>总的感觉坑还是不少，不过这个只是技术预览，最终版希望能够有很大改进。</p>
+<p>总的感觉坑还是不少，不过这个只是技术预览，最终版希望能够有很大改进。这里给出几张easyAuto-WebAssembly程序的截图吧。
+<img src="http://localhost:4000/assets//blog_images/easyauto_wasm1.png" width="350px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/easyauto_wasm2.png" width="350px" height="200px" />
+<img src="http://localhost:4000/assets//blog_images/easyauto_wasm3.png" width="350px" height="200px" /></p>
 ]]></content>
       <categories>
         
@@ -1468,7 +1598,7 @@ r=\sqrt{x^2+y^2+z^2}
 
 <p>最后放上链接：
 <a href="https://scienceasdf.github.io/site/rootLocus/index.html">在线绘制根轨迹</a>
-<a href="https://scienceasdf.github.io/site/prop/index.html">在线查询螺旋桨数据</a></p>
+<a href="/site/prop/index.html">在线查询螺旋桨数据</a></p>
 ]]></content>
       <categories>
         
