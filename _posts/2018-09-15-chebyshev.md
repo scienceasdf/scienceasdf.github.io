@@ -33,10 +33,8 @@ updated: 2018-09-15
                 } 
             }
   		});
-		</script>
-
- <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
+</script>
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 **In this post we discuss on Chebyshev polynomials, nodes and interpolation.讨论关于切比雪夫多项式、节点与插值**
 
 ---
