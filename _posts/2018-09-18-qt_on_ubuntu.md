@@ -1,5 +1,5 @@
 ---
-title: 切比雪夫多项式、节点与插值
+title: 一些Qt在Ubuntu下的问题
 categories:
 - Math
 tags:
