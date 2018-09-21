@@ -1,4 +1,278 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-09-17T22:37:10+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">切比雪夫多项式、节点与插值</title><link href="http://localhost:4000/math/2018/09/15/chebyshev/" rel="alternate" type="text/html" title="切比雪夫多项式、节点与插值" /><published>2018-09-15T00:00:00+08:00</published><updated>2018-09-15T00:00:00+08:00</updated><id>http://localhost:4000/math/2018/09/15/chebyshev</id><content type="html" xml:base="http://localhost:4000/math/2018/09/15/chebyshev/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-09-21T20:41:45+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">用LaTeX画足球场与阵型</title><link href="http://localhost:4000/latex/2018/09/21/latex_football/" rel="alternate" type="text/html" title="用LaTeX画足球场与阵型" /><published>2018-09-21T00:00:00+08:00</published><updated>2018-09-21T00:00:00+08:00</updated><id>http://localhost:4000/latex/2018/09/21/latex_football</id><content type="html" xml:base="http://localhost:4000/latex/2018/09/21/latex_football/">&lt;p&gt;&lt;strong&gt;This post is showing how to draw a football field in LaTeX. The contents are all unoriginal.本文展示如何用LaTeX画足球场。（非原创）&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;谷歌到的关于这个的结果很少，但还是得到了答案。没有专门的宏包来绘制这个东西，不过可以用tikz宏包。&lt;/p&gt;
+
+&lt;h2 id=&quot;鸭子形状的球员&quot;&gt;鸭子形状的球员&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets//blog_images/duck_soccer1.png&quot; width=&quot;600px&quot; height=&quot;400px&quot; /&gt;&lt;/p&gt;
+&lt;div class=&quot;language-latex highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;\documentclass&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[tikz,border=2mm]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;standalone&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;\usetikzlibrary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;positioning, ducks&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\usepackage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;tikzducks&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\newcommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;[3]&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#3&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, xscale=-.4, yscale=.4]
+&lt;span class=&quot;k&quot;&gt;\duck&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\path&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[preaction={fill=red}, pattern=checkerboard, pattern color=white]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\duckpathjacket&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at ([xshift=5mm]wing) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#1&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at (1.1,-.22) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#2&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\newcommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;[3]&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#3&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, scale=.4]
+&lt;span class=&quot;k&quot;&gt;\duck&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[jacket=blue]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at ([xshift=5mm]wing) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#1&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at (1.1,-.22) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#2&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\definecolor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;field&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;RGB&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;0,156,0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\newcommand\area&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[2]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;(#1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, transform shape, rotate=#2]
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=.55cm,minimum height=1.832cm, anchor=west]&lt;/span&gt; (small#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=1.65cm,minimum height=4.032cm, anchor=west]&lt;/span&gt; (big#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=.244cm, minimum height=.732cm, anchor=east]&lt;/span&gt; (goal#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[inner sep=.3mm, circle, fill=white]&lt;/span&gt; (penalty#2) at (1.1,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\tikzset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;every path/.style=&lt;span class=&quot;p&quot;&gt;{}}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\clip&lt;/span&gt; (big#2.south east) rectangle ++ (1,5); 
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[white, very thick]&lt;/span&gt; (penalty#2) circle (0.915cm);
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+
+&lt;span class=&quot;nt&quot;&gt;\begin{document}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{tikzpicture}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[&lt;span class=&quot;c&quot;&gt;%    &lt;/span&gt;
+    every node/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=white, very thick, inner sep=0, outer sep=0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;,
+   every path/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=white, very thick&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;,
+]
+&lt;span class=&quot;k&quot;&gt;\fill&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[field]&lt;/span&gt; (-1,-1) rectangle (13,10);
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=12cm, minimum height=9cm]&lt;/span&gt; (contour) at (6,4.5) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+
+&lt;span class=&quot;c&quot;&gt;%\draw (contour.south west) grid (contour.north east);&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;% Center&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; (contour.north) -- (contour.south);
+&lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; (contour.center) circle (0.915cm);
+&lt;span class=&quot;k&quot;&gt;\fill&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[white]&lt;/span&gt; (contour.center) circle (.5mm);
+
+&lt;span class=&quot;c&quot;&gt;% Areas&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\area&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;contour.west&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\area&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;contour.east&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;180&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;% Corners&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\foreach&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt; [count=&lt;span class=&quot;k&quot;&gt;\xi&lt;/span&gt; starting from 0] in &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;south west, south east, north east, north west&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[rotate around=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;90*&lt;span class=&quot;k&quot;&gt;\xi&lt;/span&gt;:(contour.&lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt;)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;]
+        &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; ([xshift=1mm]contour.&lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt;) arc (0:90:1mm);
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;23&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Subasic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(1.25,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;3&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Strinic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(2.6,7.2)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;21&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Vida&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(2.3,5.3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;6&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Lovren&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(2.3,2.9)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;2&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Virsalijko&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(2.6,1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;11&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Brozovic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(3.5,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;4&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Perisic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(4.5,7.2)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;7&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Rakitic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(4.5,5.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;10&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Modric&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(4.5,3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;18&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Rebic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(4.5,1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;17&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Mandzukic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(5.6,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Lloris&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(10.75,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;2&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Pavard&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,7.2)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;4&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Varane&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,5.3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;5&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Umtiti&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,2.9)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;21&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Lucas&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;13&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Kante&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(8.5,6)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;6&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Pogba&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(8.5,2.3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;10&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Mbappe&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(7,7)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;7&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Griezman&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(7.8,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;14&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Matuidi&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(7,1.5)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;9&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Giroud&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(6.4,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{tikzpicture}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{document}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;正常外形的球员&quot;&gt;正常外形的球员&lt;/h2&gt;
+&lt;p&gt;用的是&lt;code class=&quot;highlighter-rouge&quot;&gt;tikzpeople&lt;/code&gt;.这个不太容易给克罗地亚的队服加上格子花纹了。
+&lt;img src=&quot;http://localhost:4000/assets//blog_images/soccer2.png&quot; width=&quot;600px&quot; height=&quot;400px&quot; /&gt;&lt;/p&gt;
+&lt;div class=&quot;language-latex highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;\documentclass&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[tikz,border=2mm]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;standalone&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;\usetikzlibrary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;positioning&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\usepackage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;tikzmarmots&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\newcommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;[3]&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#3&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, scale=.5] &lt;span class=&quot;k&quot;&gt;\marmot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\path&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[preaction={fill=red}, pattern=checkerboard, pattern color=white]&lt;/span&gt; (1.35,0.71) .. controls (1.35,0.41) and (1.17,0.37) .. (0.92,0.37) .. controls (0.69,0.37) and (0.48,0.41) .. (0.48,0.71) .. controls (0.48,1.01) and (0.67,1.26) .. (0.91,1.26) .. controls (1.15,1.26) and (1.3 5,1.01) .. (1.35,0.71) -- cycle; &lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at (0.95,0.82) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#1&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at (1.1,-.22) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#2&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;; &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\newcommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;[3]&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#3&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, scale=.5] &lt;span class=&quot;k&quot;&gt;\marmot&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[body=brown!80!yellow]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\path&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[fill=blue]&lt;/span&gt; (1.35,0.71) .. controls (1.35,0.41) and (1.17,0.37) .. (0.92,0.37) .. controls (0.69,0.37) and (0.48,0.41) .. (0.48,0.71) .. controls (0.48,1.01) and (0.67,1.26) .. (0.91,1.26) .. controls (1.15,1.26) and (1.3 5,1.01) .. (1.35,0.71) -- cycle; &lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at (0.95,0.82) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#1&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at (1.1,-.22) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#2&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;; &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\definecolor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;field&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;RGB&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;0,156,0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\newcommand\area&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[2]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;(#1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, transform shape, rotate=#2]
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=.55cm,minimum height=1.832cm, anchor=west]&lt;/span&gt; (small#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=1.65cm,minimum height=4.032cm, anchor=west]&lt;/span&gt; (big#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=.244cm, minimum height=.732cm, anchor=east]&lt;/span&gt; (goal#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[inner sep=.3mm, circle, fill=white]&lt;/span&gt; (penalty#2) at (1.1,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\tikzset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;every path/.style=&lt;span class=&quot;p&quot;&gt;{}}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\clip&lt;/span&gt; (big#2.south east) rectangle ++ (1,5); 
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[white, very thick]&lt;/span&gt; (penalty#2) circle (0.915cm);
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+
+&lt;span class=&quot;nt&quot;&gt;\begin{document}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{tikzpicture}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[&lt;span class=&quot;c&quot;&gt;%    &lt;/span&gt;
+    every node/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=white, very thick, inner sep=0, outer sep=0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;,
+   every path/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=white, very thick&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;,
+]
+&lt;span class=&quot;k&quot;&gt;\fill&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[field]&lt;/span&gt; (-1,-1) rectangle (13,10);
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=12cm, minimum height=9cm]&lt;/span&gt; (contour) at (6,4.5) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+
+&lt;span class=&quot;c&quot;&gt;%\draw (contour.south west) grid (contour.north east);&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;% Center&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; (contour.north) -- (contour.south);
+&lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; (contour.center) circle (0.915cm);
+&lt;span class=&quot;k&quot;&gt;\fill&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[white]&lt;/span&gt; (contour.center) circle (.5mm);
+
+&lt;span class=&quot;c&quot;&gt;% Areas&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\area&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;contour.west&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\area&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;contour.east&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;180&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;% Corners&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\foreach&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt; [count=&lt;span class=&quot;k&quot;&gt;\xi&lt;/span&gt; starting from 0] in &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;south west, south east, north east, north west&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[rotate around=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;90*&lt;span class=&quot;k&quot;&gt;\xi&lt;/span&gt;:(contour.&lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt;)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;]
+        &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; ([xshift=1mm]contour.&lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt;) arc (0:90:1mm);
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;23&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Subasic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(0.25,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;3&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Strinic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(1.6,7.2)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;21&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Vida&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(1.3,5.3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;6&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Lovren&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(1.3,2.9)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;2&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Virsalijko&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(1.6,1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;11&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Brozovic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(2.5,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;4&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Perisic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(3.5,7.2)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;7&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Rakitic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(3.5,5.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;10&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Modric&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(3.5,3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;18&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Rebic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(3.5,1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;17&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Mandzukic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(4.6,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Lloris&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(10.75,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;2&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Pavard&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,7.2)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;4&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Varane&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,5.3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;5&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Umtiti&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,2.9)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;21&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Lucas&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;13&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Kante&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(8.5,6)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;6&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Pogba&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(8.5,2.3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;10&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Mbappe&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(7,7)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;7&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Griezman&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(7.8,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;14&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Matuidi&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(7,1.5)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;9&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Giroud&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(6.4,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{tikzpicture}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{document}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;七人制的一个阵型&quot;&gt;七人制的一个阵型&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets//blog_images/soccer3.png&quot; width=&quot;600px&quot; height=&quot;400px&quot; /&gt;
+只需要改一下一些坐标就行了。&lt;/p&gt;
+
+&lt;h2 id=&quot;绘制球场&quot;&gt;绘制球场&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets//blog_images/soccer4.png&quot; width=&quot;600px&quot; height=&quot;400px&quot; /&gt;&lt;/p&gt;
+&lt;div class=&quot;language-latex highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;\documentclass&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[margin=10pt]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;standalone&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\usepackage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;tikz&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\usetikzlibrary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;arrows.meta, calc&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\definecolor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;field&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;RGB&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;0,156,0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\tikzset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    every node/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=white, very thick, inner sep=0, outer sep=0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;,
+    every path/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=white, very thick&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;,
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\newcommand\area&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[2]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;(#1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, transform shape, rotate=#2]
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=.55cm,minimum height=1.832cm, anchor=west]&lt;/span&gt; (small#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=1.65cm,minimum height=4.032cm, anchor=west]&lt;/span&gt; (big#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=.244cm, minimum height=.732cm, anchor=east]&lt;/span&gt; (goal#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[inner sep=.3mm, circle, fill=white]&lt;/span&gt; (penalty#2) at (1.1,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\tikzset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;every path/.style=&lt;span class=&quot;p&quot;&gt;{}}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\clip&lt;/span&gt; (big#2.south east) rectangle ++ (1,5); 
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[white, very thick]&lt;/span&gt; (penalty#2) circle (0.915cm);
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\newcommand\showmeasures&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\tikzset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;every node/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=none,fill=field, inner sep=2pt, sloped&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, {Latex}-{Latex}]&lt;/span&gt; (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;contour.north west&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) -- (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;contour.north east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) node[midway] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\textbf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;Sideline:&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; min 90m - max 120m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, {Latex}-{Latex}]&lt;/span&gt; (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;contour.south west&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) -- (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;contour.north west&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) node[midway] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\textbf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;Goal line:&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; min 45m - max 90m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, -{Latex}]&lt;/span&gt; (penalty0) --++ (-15:0.915cm) node[midway, above, font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;, fill=none, yshift=2pt] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;r = 9.15m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, {Latex}-{Latex}]&lt;/span&gt; (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;small&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.south east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) -- (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;small&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.north east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) node[midway,above, fill=none,font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;18.32m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black]&lt;/span&gt; (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;small&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.north west&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) -- (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;small&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.north east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) node[midway, above, font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;, fill=none, xshift=3pt] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;5.50m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black]&lt;/span&gt; (contour.south east) --++ (135:1mm) node[anchor=south east] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;r = 1m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, {Latex}-{Latex}]&lt;/span&gt; (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;big&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.south east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) -- (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;big&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.north east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) node[midway,above, rotate=180,fill=none,font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;40.32m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, {Latex}-{Latex}]&lt;/span&gt; (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;big&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.south west&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) -- (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;big&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.south east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) node[midway,above,fill=none,font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;16.50m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black]&lt;/span&gt; (contour.east) --++ (-11mm,0) node[midway,above, fill=none,font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;11m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\small, rotate=-90, yshift=5mm]&lt;/span&gt; at (goal180) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\textbf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;Goal:&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 7.32m &lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\times&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt; 2.44m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, -{Latex}]&lt;/span&gt; (contour.center) --++ (0:0.915cm) node[midway, above, fill=none,font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;, yshift=2pt] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;r = 9.15m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;\begin{document}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{tikzpicture}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\fill&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[field]&lt;/span&gt; (-1,-1) rectangle (13,10);
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=12cm, minimum height=9cm]&lt;/span&gt; (contour) at (6,4.5) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+
+&lt;span class=&quot;c&quot;&gt;% Center&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; (contour.north) -- (contour.south);
+&lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; (contour.center) circle (0.915cm);
+&lt;span class=&quot;k&quot;&gt;\fill&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[white]&lt;/span&gt; (contour.center) circle (.5mm);
+
+&lt;span class=&quot;c&quot;&gt;% Areas&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\area&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;contour.west&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\area&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;contour.east&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;180&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;% Corners&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\foreach&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt; [count=&lt;span class=&quot;k&quot;&gt;\xi&lt;/span&gt; starting from 0] in &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;south west, south east, north east, north west&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[rotate around=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;90*&lt;span class=&quot;k&quot;&gt;\xi&lt;/span&gt;:(contour.&lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt;)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;]
+        &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; ([xshift=1mm]contour.&lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt;) arc (0:90:1mm);
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;\showmeasures&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{tikzpicture}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{document}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>scienceasdf</name></author><summary type="html">This post is showing how to draw a football field in LaTeX. The contents are all unoriginal.本文展示如何用LaTeX画足球场。（非原创）</summary></entry><entry><title type="html">一些Qt在Ubuntu下的问题</title><link href="http://localhost:4000/math/2018/09/18/qt_on_ubuntu/" rel="alternate" type="text/html" title="一些Qt在Ubuntu下的问题" /><published>2018-09-18T00:00:00+08:00</published><updated>2018-09-18T00:00:00+08:00</updated><id>http://localhost:4000/math/2018/09/18/qt_on_ubuntu</id><content type="html" xml:base="http://localhost:4000/math/2018/09/18/qt_on_ubuntu/">&lt;p&gt;&lt;strong&gt;In this post we will talk about some problems occured in Ubuntu OS when writing Qt program.本文讨论一些在ubuntu使用Qt的问题。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;qdebug的使用&quot;&gt;qDebug的使用&lt;/h2&gt;
+&lt;p&gt;通常而言，实际上&lt;code class=&quot;highlighter-rouge&quot;&gt;qDebug&lt;/code&gt;是不能直接输出&lt;code class=&quot;highlighter-rouge&quot;&gt;std::string&lt;/code&gt;的，但是在Windows和Android上直接拿来用没有遇到过问题。。。在Ubuntu上使用会报错，因此需要重载«操作符：&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;QDebug&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QDebug&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fromStdString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;ssl的使用&quot;&gt;ssl的使用&lt;/h2&gt;
+&lt;p&gt;在把paperServer服务器从Win/Android移植到Linux下遇到了问题，如果访问https连接的话，会发现ssl的函数没有实现。具体的，发现自己其实已经安装了openssl,libssl-dev的包，可是还是不对。我们输出一下相关的信息：&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;qDebug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SSL version use for build: &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QSslSocket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sslLibraryBuildVersionString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;qDebug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SSL version use for run-time: &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QSslSocket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sslLibraryVersionNumber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;qDebug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QCoreApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;libraryPaths&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;发现Qt的ssl是基于1.0版本的，而apt得到的是1.1版本的，二者并不兼容。因此需要安装&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt-get install libssl1.0-dev&lt;/code&gt;，会把原来的ssl库卸载掉，而且还会连带卸载petsc库。。。。。。解决方法是系统中安装openssl1.1，而自己编译一个openssl1.0.2的so，一定要动态编译（&lt;code class=&quot;highlighter-rouge&quot;&gt;./config shared&lt;/code&gt;)，不然无法链接，因为我Qt是编译的动态库。然后很坑的是设置elf的RUNPATH居然不管用，必须要&lt;code class=&quot;highlighter-rouge&quot;&gt;export LD_LIBRARY_PATH=$PWD&lt;/code&gt;才能让程序正确地链接到同目录下的ssl。真是天坑。。。&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="数值算法" /><summary type="html">In this post we will talk about some problems occured in Ubuntu OS when writing Qt program.本文讨论一些在ubuntu使用Qt的问题。</summary></entry><entry><title type="html">切比雪夫多项式、节点与插值</title><link href="http://localhost:4000/math/2018/09/15/chebyshev/" rel="alternate" type="text/html" title="切比雪夫多项式、节点与插值" /><published>2018-09-15T00:00:00+08:00</published><updated>2018-09-15T00:00:00+08:00</updated><id>http://localhost:4000/math/2018/09/15/chebyshev</id><content type="html" xml:base="http://localhost:4000/math/2018/09/15/chebyshev/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({
             tex2jax: {
                 inlineMath: [['$','$'], ['\\(','\\)']]
@@ -25,7 +299,7 @@
                 } 
             }
   		});
-		&lt;/script&gt;
+&lt;/script&gt;
 
 &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
 
@@ -105,7 +379,7 @@
 &lt;p&gt;根据正交性，可以得到另外一种方法来进行拉格朗日插值。设&lt;script type=&quot;math/tex&quot;&gt;p_n(x)=\sum_{i=0}^nc_iT_i(x)&lt;/script&gt;
 ，易得&lt;/p&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;c_i=\frac{2}{n+1}\sum_{k=1}^{n+1}f(x_k)T_i(x_k)&lt;/script&gt;</content><author><name>scienceasdf</name></author><category term="数值算法" /><summary type="html"></summary></entry><entry><title type="html">再谈C++的字符串分割</title><link href="http://localhost:4000/programming/2018/08/25/splitstring/" rel="alternate" type="text/html" title="再谈C++的字符串分割" /><published>2018-08-25T00:00:00+08:00</published><updated>2018-08-25T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/08/25/splitstring</id><content type="html" xml:base="http://localhost:4000/programming/2018/08/25/splitstring/">&lt;p&gt;&lt;strong&gt;再次讨论如何分割C++的std::string.&lt;/strong&gt;&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;c_i=\frac{2}{n+1}\sum_{k=1}^{n+1}f(x_k)T_i(x_k)&lt;/script&gt;</content><author><name>scienceasdf</name></author><category term="数值算法" /><summary type="html">In this post we discuss on Chebyshev polynomials, nodes and interpolation.讨论关于切比雪夫多项式、节点与插值</summary></entry><entry><title type="html">再谈C++的字符串分割</title><link href="http://localhost:4000/programming/2018/08/25/splitstring/" rel="alternate" type="text/html" title="再谈C++的字符串分割" /><published>2018-08-25T00:00:00+08:00</published><updated>2018-08-25T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/08/25/splitstring</id><content type="html" xml:base="http://localhost:4000/programming/2018/08/25/splitstring/">&lt;p&gt;&lt;strong&gt;再次讨论如何分割C++的std::string.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -581,200 +855,4 @@ is explained here: http://eigen.tuxfamily.org/dox-devel/group__TopicUnalignedArr
 &lt;span class=&quot;c1&quot;&gt;// True if equal
 &lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isApprox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1e-5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;原理是两个矩阵相减并求Frobenius范数。&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="C++" /><summary type="html">总结一些最近编程遇到的坑（C++）</summary></entry><entry><title type="html">一个三角恒等式的证明</title><link href="http://localhost:4000/math/2018/04/18/TrigonometricFormula/" rel="alternate" type="text/html" title="一个三角恒等式的证明" /><published>2018-04-18T00:00:00+08:00</published><updated>2018-04-18T00:00:00+08:00</updated><id>http://localhost:4000/math/2018/04/18/TrigonometricFormula</id><content type="html" xml:base="http://localhost:4000/math/2018/04/18/TrigonometricFormula/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-  		MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [['$','$'], ['\\(','\\)']]
-            },
-  			TeX: { 
-                equationNumbers: {  
-                    autoNumber: &quot;AMS&quot;  
-                },
-     		    extensions: [&quot;AMSmath.js&quot;]
-            },
-            CommonHTML: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            &quot;HTML-CSS&quot;: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            },
-            SVG: { 
-                linebreaks: { 
-                    automatic: true 
-                } 
-            }
-  		});
-		&lt;/script&gt;
-
-&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;一道神奇的三角恒等式的证明（非原创）&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;本文公式较多，在浏览器中将会花较长时间用于渲染公式。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;在柯斯特利金的《代数学引论》里面居然看到了这样的一个恒等式：
-\begin{equation}
-\sum_{k=1}^n \cot^2(\frac{k\pi}{2n+1}) = \frac{n(2n-1)}{3}
-\end{equation}
-自己想了想，用数学归纳法没有证明出来，于是谷歌查解法（谷歌的匹配还是很强大的），查到证明如下，书上的留白太小，所以把它记录在这里：
-首先是一个引理，也是一个恒等式
-\begin{equation}
-\tan rx=\frac{\binom r1\tan x-\binom r3\tan^3x+\cdots}{1-\binom r2\tan^2x+\cdots}
-\end{equation}
-证明如下：
-根据复变函数欧拉公式和二项式展开定理可以得到
-&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
-\begin{align}
-\sin rx&amp;=\binom r1\cos^{r-1}x\sin x-\binom r3\cos^{r-3}x\sin^3x+\binom r5\cos^{r-5}x\sin^5x-\cdots\\
-&amp;=\cos^nx\left(1-\binom r2\tan^2x+\binom r4\tan^4x-\cdots\right)
-\end{align} %]]&gt;&lt;/script&gt;&lt;br /&gt;
-&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
-\begin{align}
-\cos rx &amp;= \cos^rx-\binom r2\cos^{r-2}x\sin^2x+\binom r4\cos^{r-4}x\sin^4x-\cdots\\
-&amp;= \cos^nx\left(1-\binom r2\tan^2x+\binom r4\tan^4x-\cdots\right)
-\end{align} %]]&gt;&lt;/script&gt;
-相除得到
-\begin{equation}
-\tan rx=\frac{\binom r1\tan x-\binom r3\tan^3x+\binom r5\tan^5x-\cdots}{1-\binom r2\tan^2x+\binom r4\tan^4x-\cdots}
-\end{equation}
-接下来，如果$\tan(2n+1)x=0$，即$(2n+1)x=n\pi,n\in N$，那么$\tan x$将满足方程
-\begin{equation}
-\binom{2n+1}1\tan x-\binom{2n+1}3\tan^3x+\cdots+(-1)^{n}\tan^{2n+1}x=0
-\end{equation}
-令$\tan^2 x = \frac{1}{y}$，那么$y$会是下面的多项式的根：
-\begin{equation}
-\binom{2n+1}1y^n-\binom{2n+1}3y^{n-1}+\cdots+(-1)^n=0
-\end{equation}
-方程的根为$\cot^2x = y$，当$x=0,\pm\dfrac{\pi}{2n+1},\pm\dfrac{2\pi}{2n+1},\pm\dfrac{k\pi}{2n+1}$&lt;br /&gt;
-最后，由韦达定理可以得到
-\begin{equation}
-\implies \sum_{k=1}^n \cot^2(\frac{k\pi}{2n+1}) = \frac{n(2n-1)}{3}
-\end{equation}&lt;/p&gt;</content><author><name>scienceasdf</name></author><summary type="html"></summary></entry><entry><title type="html">在Windows下编译deal.ii</title><link href="http://localhost:4000/programming/2018/04/17/buildDealii/" rel="alternate" type="text/html" title="在Windows下编译deal.ii" /><published>2018-04-17T00:00:00+08:00</published><updated>2018-04-17T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/04/17/buildDealii</id><content type="html" xml:base="http://localhost:4000/programming/2018/04/17/buildDealii/">&lt;p&gt;&lt;strong&gt;在Windows下用MSVC2017编译deal.ii&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;最近由于一些原因需要学习开源有限元的程序。在Github上找了一下，C++的还算有三位数stars的有deal.ii,libMesh和mFem（按照stars数目由多到少排列）。libMesh的代码下载下来居然不支持cmake，编译只能用msys来make，似乎也不能用MSVC编译。而deal.ii只能支持MSVC而不支持mingw.权衡了一下，选择deal.ii来学习，一个是它stars数多，知名度更高，另一个是mingw的编译器编译出来的程序通常比MSVC编译出来的更慢，这个在科学计算中比较头疼。&lt;/p&gt;
-
-&lt;p&gt;CMake里面configure的过程要设置一大堆flag，我都没有管，毕竟windows什么都特别不方便。像LAPACK库，GSL库我觉得还是有必要去链接的。希望这个东西的矩阵运算效率至少能够达到Eigen的水平。Configure第一次不对劲，原因竟然是我设置的build目录里面有’-‘减号。重新设置了build目录以后，生成了sln文件，感觉似乎有点希望了。不过不敢乐观，以前cmake成功但是sln最后还是编译不了的例子也有。&lt;/p&gt;
-
-&lt;p&gt;打开MSVC后，开始编译。很神奇的是，编译到一半出错了，说cmd停止运行，然后打开目录里面却发现已经deal_II.g.lib和deal_II.lib生成了。这个时候我相信它是编译成功了，但是打开别的test目录里却发现没有编译，examples也没有。有些失落，直接试试这个库到底能不能用。&lt;/p&gt;
-
-&lt;p&gt;直接把官网的第一个例子复制过来，用QMake编译：&lt;/p&gt;
-&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* ---------------------------------------------------------------------
- *
- * Copyright (C) 1999 - 2016 by the deal.II authors
- *
- * This file is part of the deal.II library.
- *
- * The deal.II library is free software; you can use it, redistribute
- * it, and/or modify it under the terms of the GNU Lesser General
- * Public License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- * The full text of the license can be found in the file LICENSE at
- * the top level of the deal.II distribution.
- *
- * ---------------------------------------------------------------------
-
- */&lt;/span&gt;
-
-
-&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;deal.II/grid/tria.h&amp;gt;
-#include &amp;lt;deal.II/grid/tria_accessor.h&amp;gt;
-#include &amp;lt;deal.II/grid/tria_iterator.h&amp;gt;
-#include &amp;lt;deal.II/grid/grid_generator.h&amp;gt;
-#include &amp;lt;deal.II/grid/manifold_lib.h&amp;gt;
-#include &amp;lt;deal.II/grid/grid_out.h&amp;gt;
-&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;iostream&amp;gt;
-#include &amp;lt;fstream&amp;gt;
-#include &amp;lt;cmath&amp;gt;
-&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dealii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-
-&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;first_grid&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;Triangulation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;triangulation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;GridGenerator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hyper_cube&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;triangulation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;triangulation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;refine_global&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ofstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;grid-1.eps&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;GridOut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grid_out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;grid_out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write_eps&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;triangulation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Grid written to grid-1.eps&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-
-
-
-&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;second_grid&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;Triangulation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;triangulation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Point&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;center&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inner_radius&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-               &lt;span class=&quot;n&quot;&gt;outer_radius&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;GridGenerator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hyper_shell&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;triangulation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                              &lt;span class=&quot;n&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inner_radius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outer_radius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                              &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SphericalManifold&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;manifold_description&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;triangulation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_manifold&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;manifold_description&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;triangulation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_all_manifold_ids&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;step&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;step&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;step&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;Triangulation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;active_cell_iterator&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cell&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;triangulation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin_active&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;Triangulation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;active_cell_iterator&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;endc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;triangulation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cell&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-               &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GeometryInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vertices_per_cell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-               &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-              &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;distance_from_center&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;distance&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cell&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vertex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-
-              &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fabs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;distance_from_center&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inner_radius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1e-10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-                &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                  &lt;span class=&quot;n&quot;&gt;cell&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_refine_flag&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-                  &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-      &lt;span class=&quot;n&quot;&gt;triangulation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;execute_coarsening_and_refinement&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-
-  &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ofstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;grid-2.eps&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;GridOut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grid_out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;grid_out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write_eps&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;triangulation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Grid written to grid-2.eps&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;triangulation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_manifold&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-
-
-
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;first_grid&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;second_grid&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;编译的时候也是坑，又提示需要include boost，我在QMAKE加了boost目录，还是没有包含，干脆把所有的boost文件全部复制到deal.ii的include路径下。而且deal.iibuild目录下的include和deal.ii源代码下的include还要合并。然后又说不对，还需要链接boost::serialization库，接着又是链接这个库。还是不对，说&lt;code class=&quot;highlighter-rouge&quot;&gt;triangulation.set_manifold (0);&lt;/code&gt;没有这个方法。把这一行注释掉，运行又有问题，不过倒是输出了eps图片。到底编译成功没有还是个未知数。&lt;/p&gt;
-
-&lt;p&gt;接着是第二个例子，用刚才的QMAKE配置一次成功。第三个例子的一句话是&lt;code class=&quot;highlighter-rouge&quot;&gt;Functions::ZeroFunction&amp;lt;2&amp;gt;&lt;/code&gt;，又不对了，需要自己包含&lt;code class=&quot;highlighter-rouge&quot;&gt;#include &amp;lt;deal.II/base/function.h&amp;gt;&lt;/code&gt;，然后还不对，进头文件一看，ZeroFunction继承于Functions类，这个官网的例子实在有点扯。最后编译成功了。但是出的gpl图居然又不能在GNU PLOT里面打开，说有语法错误。&lt;/p&gt;
-
-&lt;p&gt;用release又编译了第四个例子，一次成功了，但是又费劲地用three.js渲染vtk文件，没有显示出来，不知道是什么毛病。只能说姑且认为这个编译成功了，但是坑还很大。&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;第二个例子生成了svg图片，不小心发现了我的win10电脑上居然还有IE,版本是11，果断试试&lt;a href=&quot;https://scienceasdf.github.io&quot;&gt;我的网站&lt;/a&gt;在IE11上的兼容性，好像很差（主要是sql.js和echarts）。非常无奈，中国还有许多人用IE，现在移动端对html5的支持居然都比IE好。不过edge长得太像IE了，微软改名部啊:Grin:&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="有限元" /><category term="数值算法" /><category term="boost" /><summary type="html">在Windows下用MSVC2017编译deal.ii</summary></entry></feed>
+&lt;p&gt;原理是两个矩阵相减并求Frobenius范数。&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="C++" /><summary type="html">总结一些最近编程遇到的坑（C++）</summary></entry></feed>

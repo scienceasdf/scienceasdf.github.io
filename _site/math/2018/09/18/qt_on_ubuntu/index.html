@@ -84,7 +84,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Ubuntu,Linux," />
+  <meta name="keywords" content="数值算法," />
 
 
 
@@ -112,18 +112,18 @@
 
 
 
-<meta name="description" content="最近使用Ubuntu系统的一些小技巧总结。">
-<meta name="keywords" content="Ubuntu, Linux">
+<meta name="description" content="In this post we will talk about some problems occured in Ubuntu OS when writing Qt program.本文讨论一些在ubuntu使用Qt的问题。">
+<meta name="keywords" content="数值算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="最近使用Ubuntu的一些总结">
-<meta property="og:url" content="http://localhost:4000/programming/2018/06/02/ubuntu/">
+<meta property="og:title" content="一些Qt在Ubuntu下的问题">
+<meta property="og:url" content="http://localhost:4000/math/2018/09/18/qt_on_ubuntu/">
 <meta property="og:site_name" content="scienceasdf">
-<meta property="og:description" content="最近使用Ubuntu系统的一些小技巧总结。">
+<meta property="og:description" content="In this post we will talk about some problems occured in Ubuntu OS when writing Qt program.本文讨论一些在ubuntu使用Qt的问题。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-13T00:00:00+08:00">
+<meta property="og:updated_time" content="2018-09-18T00:00:00+08:00">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="最近使用Ubuntu的一些总结">
-<meta name="twitter:description" content="最近使用Ubuntu系统的一些小技巧总结。">
+<meta name="twitter:title" content="一些Qt在Ubuntu下的问题">
+<meta name="twitter:description" content="In this post we will talk about some problems occured in Ubuntu OS when writing Qt program.本文讨论一些在ubuntu使用Qt的问题。">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -156,7 +156,7 @@
 
 
 
-  <title>最近使用Ubuntu的一些总结</title>
+  <title>一些Qt在Ubuntu下的问题</title>
   
 
 
@@ -304,7 +304,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/programming/2018/06/02/ubuntu/">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/math/2018/09/18/qt_on_ubuntu/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="scienceasdf">
@@ -324,7 +324,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            最近使用Ubuntu的一些总结
+            一些Qt在Ubuntu下的问题
           
         </h1>
         
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-02T00:00:00+08:00">
-                2018-06-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-18T00:00:00+08:00">
+                2018-09-18
               </time>
             
 
@@ -362,8 +362,8 @@
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/Programming" itemprop="url" rel="index">
-                    <span itemprop="name">Programming</span>
+                  <a href="/category/#/Math" itemprop="url" rel="index">
+                    <span itemprop="name">Math</span>
                   </a>
                 </span>
 
@@ -402,37 +402,27 @@
       
 
       
-        <p><strong>最近使用Ubuntu系统的一些小技巧总结。</strong></p>
+        <p><strong>In this post we will talk about some problems occured in Ubuntu OS when writing Qt program.本文讨论一些在ubuntu使用Qt的问题。</strong></p>
 
 <hr />
 
-<h2 id="编译最新cmake">编译最新CMake</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt remove cmake
-sudo apt purge --auto-remove cmake
-version=3.11
-build=1
-mkdir ~/temp
-cd ~/temp
-wget https://cmake.org/files/v$version/cmake-$version.$build.tar.gz
-tar -xzvf cmake-$version.$build.tar.gz
-cd cmake-$version.$build
-./bootstrap
-make -j16
-sudo make install
-cmake --version
+<h2 id="qdebug的使用">qDebug的使用</h2>
+<p>通常而言，实际上<code class="highlighter-rouge">qDebug</code>是不能直接输出<code class="highlighter-rouge">std::string</code>的，但是在Windows和Android上直接拿来用没有遇到过问题。。。在Ubuntu上使用会报错，因此需要重载«操作符：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">QDebug</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">QDebug</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">str</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">QString</span><span class="o">::</span><span class="n">fromStdString</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">out</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<h2 id="创建快捷方式">创建快捷方式</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install --no-install-recommends gnome-panel
-gnome-desktop-item-edit --create-new ~/桌面
+<h2 id="ssl的使用">ssl的使用</h2>
+<p>在把paperServer服务器从Win/Android移植到Linux下遇到了问题，如果访问https连接的话，会发现ssl的函数没有实现。具体的，发现自己其实已经安装了openssl,libssl-dev的包，可是还是不对。我们输出一下相关的信息：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">qDebug</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">"SSL version use for build: "</span><span class="o">&lt;&lt;</span><span class="n">QSslSocket</span><span class="o">::</span><span class="n">sslLibraryBuildVersionString</span><span class="p">();</span>
+<span class="n">qDebug</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">"SSL version use for run-time: "</span><span class="o">&lt;&lt;</span><span class="n">QSslSocket</span><span class="o">::</span><span class="n">sslLibraryVersionNumber</span><span class="p">();</span>
+<span class="n">qDebug</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">QCoreApplication</span><span class="o">::</span><span class="n">libraryPaths</span><span class="p">();</span>
 </code></pre></div></div>
 
-<h2 id="从hdmi输出声音">从HDMI输出声音</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-add-repository ppa:yktooo/ppa
-sudo apt update
-sudo apt install indicator-sound-switcher
-</code></pre></div></div>
-<p>利用indicator-sound-switcher便可以在各个通道切换声音输出。注意Ubuntu 18.04添加ppa以后不需要<code class="highlighter-rouge">sudo apt update</code>这一步了。</p>
+<p>发现Qt的ssl是基于1.0版本的，而apt得到的是1.1版本的，二者并不兼容。因此需要安装<code class="highlighter-rouge">sudo apt-get install libssl1.0-dev</code>，会把原来的ssl库卸载掉，而且还会连带卸载petsc库。。。。。。解决方法是系统中安装openssl1.1，而自己编译一个openssl1.0.2的so，一定要动态编译（<code class="highlighter-rouge">./config shared</code>)，不然无法链接，因为我Qt是编译的动态库。然后很坑的是设置elf的RUNPATH居然不管用，必须要<code class="highlighter-rouge">export LD_LIBRARY_PATH=$PWD</code>才能让程序正确地链接到同目录下的ssl。真是天坑。。。</p>
 
       
     </div>
@@ -463,10 +453,7 @@ sudo apt install indicator-sound-switcher
         <div class="post-tags">
           
             
-            <a href="/tag/#/Ubuntu" rel="tag"># Ubuntu</a>
-          
-            
-            <a href="/tag/#/Linux" rel="tag"># Linux</a>
+            <a href="/tag/#/%E6%95%B0%E5%80%BC%E7%AE%97%E6%B3%95" rel="tag"># 数值算法</a>
           
         </div>
       
@@ -482,8 +469,8 @@ sudo apt install indicator-sound-switcher
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/programming/2018/08/23/qtwasm/" rel="next" title="初窥Qt WebAssembly">
-                <i class="fa fa-chevron-left"></i> 初窥Qt WebAssembly
+              <a href="/latex/2018/09/21/latex_football/" rel="next" title="用LaTeX画足球场与阵型">
+                <i class="fa fa-chevron-left"></i> 用LaTeX画足球场与阵型
               </a>
             
           </div>
@@ -492,8 +479,8 @@ sudo apt install indicator-sound-switcher
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/math/2018/04/27/poinsonFEM/" rel="prev" title="泊松方程的有限元求解（理论）">
-                泊松方程的有限元求解（理论） <i class="fa fa-chevron-right"></i>
+              <a href="/math/2018/09/15/chebyshev/" rel="prev" title="切比雪夫多项式、节点与插值">
+                切比雪夫多项式、节点与插值 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -682,7 +669,7 @@ sudo apt install indicator-sound-switcher
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#编译最新cmake"> <span class="nav-number">1</span> <span class="nav-text">编译最新CMake</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#创建快捷方式"> <span class="nav-number">2</span> <span class="nav-text">创建快捷方式</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#从hdmi输出声音"> <span class="nav-number">3</span> <span class="nav-text">从HDMI输出声音</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#qdebug的使用"> <span class="nav-number">1</span> <span class="nav-text">qDebug的使用</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#ssl的使用"> <span class="nav-number">2</span> <span class="nav-text">ssl的使用</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
     </ol>
   </div>
             

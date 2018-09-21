@@ -37,7 +37,7 @@ updated: 2018-09-21
 
 \definecolor{field}{RGB}{0,156,0}
 
-\newcommand\area[2]{%
+\newcommand\area[2]{
 \begin{scope}[shift={(#1)}, transform shape, rotate=#2]
 \node[minimum width=.55cm,minimum height=1.832cm, anchor=west] (small#2) at (0,0) {};
 \node[minimum width=1.65cm,minimum height=4.032cm, anchor=west] (big#2) at (0,0) {};
@@ -120,7 +120,7 @@ updated: 2018-09-21
 \newcommand{\france}[3]{ \begin{scope}[shift={#3}, scale=.5] \marmot[body=brown!80!yellow] \path[fill=blue] (1.35,0.71) .. controls (1.35,0.41) and (1.17,0.37) .. (0.92,0.37) .. controls (0.69,0.37) and (0.48,0.41) .. (0.48,0.71) .. controls (0.48,1.01) and (0.67,1.26) .. (0.91,1.26) .. controls (1.15,1.26) and (1.3 5,1.01) .. (1.35,0.71) -- cycle; \node[font=\sffamily\bfseries] at (0.95,0.82) {#1}; \node[font=\sffamily\bfseries] at (1.1,-.22) {#2}; \end{scope} }
 \definecolor{field}{RGB}{0,156,0}
 
-\newcommand\area[2]{%
+\newcommand\area[2]{
 \begin{scope}[shift={(#1)}, transform shape, rotate=#2]
 \node[minimum width=.55cm,minimum height=1.832cm, anchor=west] (small#2) at (0,0) {};
 \node[minimum width=1.65cm,minimum height=4.032cm, anchor=west] (big#2) at (0,0) {};
@@ -208,7 +208,7 @@ updated: 2018-09-21
     every path/.style={draw=white, very thick},
 }
 
-\newcommand\area[2]{%
+\newcommand\area[2]{
 \begin{scope}[shift={(#1)}, transform shape, rotate=#2]
 \node[minimum width=.55cm,minimum height=1.832cm, anchor=west] (small#2) at (0,0) {};
 \node[minimum width=1.65cm,minimum height=4.032cm, anchor=west] (big#2) at (0,0) {};
@@ -222,7 +222,7 @@ updated: 2018-09-21
 \end{scope}
 }
 
-\newcommand\showmeasures{%
+\newcommand\showmeasures{
     \begin{scope}
     \tikzset{every node/.style={draw=none,fill=field, inner sep=2pt, sloped}}
     \draw[black, {Latex}-{Latex}] ($(contour.north west)+(0,.5)$) -- ($(contour.north east)+(0,.5)$) node[midway] {\textbf{Sideline:} min 90m - max 120m};

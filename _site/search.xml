@@ -2,6 +2,315 @@
 <search>
   
     <entry>
+      <title><![CDATA[用LaTeX画足球场与阵型]]></title>
+      <url>/latex/2018/09/21/latex_football/</url>
+      <content type="html"><![CDATA[<p><strong>This post is showing how to draw a football field in LaTeX. The contents are all unoriginal.本文展示如何用LaTeX画足球场。（非原创）</strong></p>
+
+<hr />
+<p>谷歌到的关于这个的结果很少，但还是得到了答案。没有专门的宏包来绘制这个东西，不过可以用tikz宏包。</p>
+
+<h2 id="鸭子形状的球员">鸭子形状的球员</h2>
+<p><img src="http://localhost:4000/assets//blog_images/duck_soccer1.png" width="600px" height="400px" /></p>
+<div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\documentclass</span><span class="na">[tikz,border=2mm]</span><span class="p">{</span>standalone<span class="p">}</span> 
+<span class="k">\usetikzlibrary</span><span class="p">{</span>positioning, ducks<span class="p">}</span>
+<span class="k">\usepackage</span><span class="p">{</span>tikzducks<span class="p">}</span>
+
+<span class="k">\newcommand</span><span class="p">{</span><span class="k">\croacia</span><span class="p">}</span>[3]<span class="p">{</span>
+<span class="nt">\begin{scope}</span>[shift=<span class="p">{</span>#3<span class="p">}</span>, xscale=-.4, yscale=.4]
+<span class="k">\duck</span>
+<span class="k">\path</span><span class="na">[preaction={fill=red}, pattern=checkerboard, pattern color=white]</span> <span class="k">\duckpathjacket</span>;
+<span class="k">\node</span><span class="na">[font=\sffamily\bfseries]</span> at ([xshift=5mm]wing) <span class="p">{</span>#1<span class="p">}</span>;
+<span class="k">\node</span><span class="na">[font=\sffamily\bfseries]</span> at (1.1,-.22) <span class="p">{</span>#2<span class="p">}</span>;
+<span class="nt">\end{scope}</span>
+<span class="p">}</span>
+
+<span class="k">\newcommand</span><span class="p">{</span><span class="k">\france</span><span class="p">}</span>[3]<span class="p">{</span>
+<span class="nt">\begin{scope}</span>[shift=<span class="p">{</span>#3<span class="p">}</span>, scale=.4]
+<span class="k">\duck</span><span class="na">[jacket=blue]</span>
+<span class="k">\node</span><span class="na">[font=\sffamily\bfseries]</span> at ([xshift=5mm]wing) <span class="p">{</span>#1<span class="p">}</span>;
+<span class="k">\node</span><span class="na">[font=\sffamily\bfseries]</span> at (1.1,-.22) <span class="p">{</span>#2<span class="p">}</span>;
+<span class="nt">\end{scope}</span>
+<span class="p">}</span>
+
+<span class="k">\definecolor</span><span class="p">{</span>field<span class="p">}{</span>RGB<span class="p">}{</span>0,156,0<span class="p">}</span>
+
+<span class="k">\newcommand\area</span><span class="na">[2]</span><span class="p">{</span>
+<span class="nt">\begin{scope}</span>[shift=<span class="p">{</span>(#1)<span class="p">}</span>, transform shape, rotate=#2]
+<span class="k">\node</span><span class="na">[minimum width=.55cm,minimum height=1.832cm, anchor=west]</span> (small#2) at (0,0) <span class="p">{}</span>;
+<span class="k">\node</span><span class="na">[minimum width=1.65cm,minimum height=4.032cm, anchor=west]</span> (big#2) at (0,0) <span class="p">{}</span>;
+<span class="k">\node</span><span class="na">[minimum width=.244cm, minimum height=.732cm, anchor=east]</span> (goal#2) at (0,0) <span class="p">{}</span>;
+<span class="k">\node</span><span class="na">[inner sep=.3mm, circle, fill=white]</span> (penalty#2) at (1.1,0) <span class="p">{}</span>;
+    <span class="nt">\begin{scope}</span>
+    <span class="k">\tikzset</span><span class="p">{</span>every path/.style=<span class="p">{}}</span>
+    <span class="k">\clip</span> (big#2.south east) rectangle ++ (1,5); 
+    <span class="k">\draw</span><span class="na">[white, very thick]</span> (penalty#2) circle (0.915cm);
+    <span class="nt">\end{scope}</span>
+<span class="nt">\end{scope}</span>
+<span class="p">}</span>
+
+
+<span class="nt">\begin{document}</span>
+<span class="nt">\begin{tikzpicture}</span>
+<span class="nt">\begin{scope}</span>[<span class="c">%    </span>
+    every node/.style=<span class="p">{</span>draw=white, very thick, inner sep=0, outer sep=0<span class="p">}</span>,
+   every path/.style=<span class="p">{</span>draw=white, very thick<span class="p">}</span>,
+]
+<span class="k">\fill</span><span class="na">[field]</span> (-1,-1) rectangle (13,10);
+<span class="k">\node</span><span class="na">[minimum width=12cm, minimum height=9cm]</span> (contour) at (6,4.5) <span class="p">{}</span>;
+
+<span class="c">%\draw (contour.south west) grid (contour.north east);</span>
+
+<span class="c">% Center</span>
+<span class="k">\draw</span> (contour.north) -- (contour.south);
+<span class="k">\draw</span> (contour.center) circle (0.915cm);
+<span class="k">\fill</span><span class="na">[white]</span> (contour.center) circle (.5mm);
+
+<span class="c">% Areas</span>
+<span class="k">\area</span><span class="p">{</span>contour.west<span class="p">}{</span>0<span class="p">}</span>
+<span class="k">\area</span><span class="p">{</span>contour.east<span class="p">}{</span>180<span class="p">}</span>
+
+<span class="c">% Corners</span>
+<span class="k">\foreach</span> <span class="k">\corner</span> [count=<span class="k">\xi</span> starting from 0] in <span class="p">{</span>south west, south east, north east, north west<span class="p">}{</span>
+    <span class="nt">\begin{scope}</span>[rotate around=<span class="p">{</span>90*<span class="k">\xi</span>:(contour.<span class="k">\corner</span>)<span class="p">}</span>]
+        <span class="k">\draw</span> ([xshift=1mm]contour.<span class="k">\corner</span>) arc (0:90:1mm);
+    <span class="nt">\end{scope}</span>
+<span class="p">}</span>
+<span class="nt">\end{scope}</span>
+
+<span class="k">\croacia</span><span class="p">{</span>23<span class="p">}{</span>Subasic<span class="p">}{</span>(1.25,4.25)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>3<span class="p">}{</span>Strinic<span class="p">}{</span>(2.6,7.2)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>21<span class="p">}{</span>Vida<span class="p">}{</span>(2.3,5.3)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>6<span class="p">}{</span>Lovren<span class="p">}{</span>(2.3,2.9)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>2<span class="p">}{</span>Virsalijko<span class="p">}{</span>(2.6,1)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>11<span class="p">}{</span>Brozovic<span class="p">}{</span>(3.5,4.25)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>4<span class="p">}{</span>Perisic<span class="p">}{</span>(4.5,7.2)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>7<span class="p">}{</span>Rakitic<span class="p">}{</span>(4.5,5.25)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>10<span class="p">}{</span>Modric<span class="p">}{</span>(4.5,3)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>18<span class="p">}{</span>Rebic<span class="p">}{</span>(4.5,1)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>17<span class="p">}{</span>Mandzukic<span class="p">}{</span>(5.6,4.25)<span class="p">}</span>
+
+<span class="k">\france</span><span class="p">{</span>1<span class="p">}{</span>Lloris<span class="p">}{</span>(10.75,4.25)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>2<span class="p">}{</span>Pavard<span class="p">}{</span>(9.5,7.2)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>4<span class="p">}{</span>Varane<span class="p">}{</span>(9.5,5.3)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>5<span class="p">}{</span>Umtiti<span class="p">}{</span>(9.5,2.9)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>21<span class="p">}{</span>Lucas<span class="p">}{</span>(9.5,1)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>13<span class="p">}{</span>Kante<span class="p">}{</span>(8.5,6)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>6<span class="p">}{</span>Pogba<span class="p">}{</span>(8.5,2.3)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>10<span class="p">}{</span>Mbappe<span class="p">}{</span>(7,7)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>7<span class="p">}{</span>Griezman<span class="p">}{</span>(7.8,4.25)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>14<span class="p">}{</span>Matuidi<span class="p">}{</span>(7,1.5)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>9<span class="p">}{</span>Giroud<span class="p">}{</span>(6.4,4.25)<span class="p">}</span>
+<span class="nt">\end{tikzpicture}</span>
+<span class="nt">\end{document}</span>
+</code></pre></div></div>
+
+<h2 id="正常外形的球员">正常外形的球员</h2>
+<p>用的是<code class="highlighter-rouge">tikzpeople</code>.这个不太容易给克罗地亚的队服加上格子花纹了。
+<img src="http://localhost:4000/assets//blog_images/soccer2.png" width="600px" height="400px" /></p>
+<div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\documentclass</span><span class="na">[tikz,border=2mm]</span><span class="p">{</span>standalone<span class="p">}</span> 
+<span class="k">\usetikzlibrary</span><span class="p">{</span>positioning<span class="p">}</span>
+<span class="k">\usepackage</span><span class="p">{</span>tikzmarmots<span class="p">}</span>
+
+<span class="k">\newcommand</span><span class="p">{</span><span class="k">\croacia</span><span class="p">}</span>[3]<span class="p">{</span> <span class="nt">\begin{scope}</span>[shift=<span class="p">{</span>#3<span class="p">}</span>, scale=.5] <span class="k">\marmot</span> <span class="k">\path</span><span class="na">[preaction={fill=red}, pattern=checkerboard, pattern color=white]</span> (1.35,0.71) .. controls (1.35,0.41) and (1.17,0.37) .. (0.92,0.37) .. controls (0.69,0.37) and (0.48,0.41) .. (0.48,0.71) .. controls (0.48,1.01) and (0.67,1.26) .. (0.91,1.26) .. controls (1.15,1.26) and (1.3 5,1.01) .. (1.35,0.71) -- cycle; <span class="k">\node</span><span class="na">[font=\sffamily\bfseries]</span> at (0.95,0.82) <span class="p">{</span>#1<span class="p">}</span>; <span class="k">\node</span><span class="na">[font=\sffamily\bfseries]</span> at (1.1,-.22) <span class="p">{</span>#2<span class="p">}</span>; <span class="nt">\end{scope}</span> <span class="p">}</span>
+
+<span class="k">\newcommand</span><span class="p">{</span><span class="k">\france</span><span class="p">}</span>[3]<span class="p">{</span> <span class="nt">\begin{scope}</span>[shift=<span class="p">{</span>#3<span class="p">}</span>, scale=.5] <span class="k">\marmot</span><span class="na">[body=brown!80!yellow]</span> <span class="k">\path</span><span class="na">[fill=blue]</span> (1.35,0.71) .. controls (1.35,0.41) and (1.17,0.37) .. (0.92,0.37) .. controls (0.69,0.37) and (0.48,0.41) .. (0.48,0.71) .. controls (0.48,1.01) and (0.67,1.26) .. (0.91,1.26) .. controls (1.15,1.26) and (1.3 5,1.01) .. (1.35,0.71) -- cycle; <span class="k">\node</span><span class="na">[font=\sffamily\bfseries]</span> at (0.95,0.82) <span class="p">{</span>#1<span class="p">}</span>; <span class="k">\node</span><span class="na">[font=\sffamily\bfseries]</span> at (1.1,-.22) <span class="p">{</span>#2<span class="p">}</span>; <span class="nt">\end{scope}</span> <span class="p">}</span>
+<span class="k">\definecolor</span><span class="p">{</span>field<span class="p">}{</span>RGB<span class="p">}{</span>0,156,0<span class="p">}</span>
+
+<span class="k">\newcommand\area</span><span class="na">[2]</span><span class="p">{</span>
+<span class="nt">\begin{scope}</span>[shift=<span class="p">{</span>(#1)<span class="p">}</span>, transform shape, rotate=#2]
+<span class="k">\node</span><span class="na">[minimum width=.55cm,minimum height=1.832cm, anchor=west]</span> (small#2) at (0,0) <span class="p">{}</span>;
+<span class="k">\node</span><span class="na">[minimum width=1.65cm,minimum height=4.032cm, anchor=west]</span> (big#2) at (0,0) <span class="p">{}</span>;
+<span class="k">\node</span><span class="na">[minimum width=.244cm, minimum height=.732cm, anchor=east]</span> (goal#2) at (0,0) <span class="p">{}</span>;
+<span class="k">\node</span><span class="na">[inner sep=.3mm, circle, fill=white]</span> (penalty#2) at (1.1,0) <span class="p">{}</span>;
+    <span class="nt">\begin{scope}</span>
+    <span class="k">\tikzset</span><span class="p">{</span>every path/.style=<span class="p">{}}</span>
+    <span class="k">\clip</span> (big#2.south east) rectangle ++ (1,5); 
+    <span class="k">\draw</span><span class="na">[white, very thick]</span> (penalty#2) circle (0.915cm);
+    <span class="nt">\end{scope}</span>
+<span class="nt">\end{scope}</span>
+<span class="p">}</span>
+
+
+<span class="nt">\begin{document}</span>
+<span class="nt">\begin{tikzpicture}</span>
+<span class="nt">\begin{scope}</span>[<span class="c">%    </span>
+    every node/.style=<span class="p">{</span>draw=white, very thick, inner sep=0, outer sep=0<span class="p">}</span>,
+   every path/.style=<span class="p">{</span>draw=white, very thick<span class="p">}</span>,
+]
+<span class="k">\fill</span><span class="na">[field]</span> (-1,-1) rectangle (13,10);
+<span class="k">\node</span><span class="na">[minimum width=12cm, minimum height=9cm]</span> (contour) at (6,4.5) <span class="p">{}</span>;
+
+<span class="c">%\draw (contour.south west) grid (contour.north east);</span>
+
+<span class="c">% Center</span>
+<span class="k">\draw</span> (contour.north) -- (contour.south);
+<span class="k">\draw</span> (contour.center) circle (0.915cm);
+<span class="k">\fill</span><span class="na">[white]</span> (contour.center) circle (.5mm);
+
+<span class="c">% Areas</span>
+<span class="k">\area</span><span class="p">{</span>contour.west<span class="p">}{</span>0<span class="p">}</span>
+<span class="k">\area</span><span class="p">{</span>contour.east<span class="p">}{</span>180<span class="p">}</span>
+
+<span class="c">% Corners</span>
+<span class="k">\foreach</span> <span class="k">\corner</span> [count=<span class="k">\xi</span> starting from 0] in <span class="p">{</span>south west, south east, north east, north west<span class="p">}{</span>
+    <span class="nt">\begin{scope}</span>[rotate around=<span class="p">{</span>90*<span class="k">\xi</span>:(contour.<span class="k">\corner</span>)<span class="p">}</span>]
+        <span class="k">\draw</span> ([xshift=1mm]contour.<span class="k">\corner</span>) arc (0:90:1mm);
+    <span class="nt">\end{scope}</span>
+<span class="p">}</span>
+<span class="nt">\end{scope}</span>
+
+<span class="k">\croacia</span><span class="p">{</span>23<span class="p">}{</span>Subasic<span class="p">}{</span>(0.25,4.25)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>3<span class="p">}{</span>Strinic<span class="p">}{</span>(1.6,7.2)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>21<span class="p">}{</span>Vida<span class="p">}{</span>(1.3,5.3)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>6<span class="p">}{</span>Lovren<span class="p">}{</span>(1.3,2.9)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>2<span class="p">}{</span>Virsalijko<span class="p">}{</span>(1.6,1)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>11<span class="p">}{</span>Brozovic<span class="p">}{</span>(2.5,4.25)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>4<span class="p">}{</span>Perisic<span class="p">}{</span>(3.5,7.2)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>7<span class="p">}{</span>Rakitic<span class="p">}{</span>(3.5,5.25)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>10<span class="p">}{</span>Modric<span class="p">}{</span>(3.5,3)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>18<span class="p">}{</span>Rebic<span class="p">}{</span>(3.5,1)<span class="p">}</span>
+<span class="k">\croacia</span><span class="p">{</span>17<span class="p">}{</span>Mandzukic<span class="p">}{</span>(4.6,4.25)<span class="p">}</span>
+
+<span class="k">\france</span><span class="p">{</span>1<span class="p">}{</span>Lloris<span class="p">}{</span>(10.75,4.25)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>2<span class="p">}{</span>Pavard<span class="p">}{</span>(9.5,7.2)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>4<span class="p">}{</span>Varane<span class="p">}{</span>(9.5,5.3)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>5<span class="p">}{</span>Umtiti<span class="p">}{</span>(9.5,2.9)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>21<span class="p">}{</span>Lucas<span class="p">}{</span>(9.5,1)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>13<span class="p">}{</span>Kante<span class="p">}{</span>(8.5,6)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>6<span class="p">}{</span>Pogba<span class="p">}{</span>(8.5,2.3)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>10<span class="p">}{</span>Mbappe<span class="p">}{</span>(7,7)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>7<span class="p">}{</span>Griezman<span class="p">}{</span>(7.8,4.25)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>14<span class="p">}{</span>Matuidi<span class="p">}{</span>(7,1.5)<span class="p">}</span>
+<span class="k">\france</span><span class="p">{</span>9<span class="p">}{</span>Giroud<span class="p">}{</span>(6.4,4.25)<span class="p">}</span>
+<span class="nt">\end{tikzpicture}</span>
+<span class="nt">\end{document}</span>
+</code></pre></div></div>
+
+<h2 id="七人制的一个阵型">七人制的一个阵型</h2>
+<p><img src="http://localhost:4000/assets//blog_images/soccer3.png" width="600px" height="400px" />
+只需要改一下一些坐标就行了。</p>
+
+<h2 id="绘制球场">绘制球场</h2>
+<p><img src="http://localhost:4000/assets//blog_images/soccer4.png" width="600px" height="400px" /></p>
+<div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\documentclass</span><span class="na">[margin=10pt]</span><span class="p">{</span>standalone<span class="p">}</span>
+<span class="k">\usepackage</span><span class="p">{</span>tikz<span class="p">}</span>
+<span class="k">\usetikzlibrary</span><span class="p">{</span>arrows.meta, calc<span class="p">}</span>
+
+<span class="k">\definecolor</span><span class="p">{</span>field<span class="p">}{</span>RGB<span class="p">}{</span>0,156,0<span class="p">}</span>
+
+<span class="k">\tikzset</span><span class="p">{</span>
+    every node/.style=<span class="p">{</span>draw=white, very thick, inner sep=0, outer sep=0<span class="p">}</span>,
+    every path/.style=<span class="p">{</span>draw=white, very thick<span class="p">}</span>,
+<span class="p">}</span>
+
+<span class="k">\newcommand\area</span><span class="na">[2]</span><span class="p">{</span>
+<span class="nt">\begin{scope}</span>[shift=<span class="p">{</span>(#1)<span class="p">}</span>, transform shape, rotate=#2]
+<span class="k">\node</span><span class="na">[minimum width=.55cm,minimum height=1.832cm, anchor=west]</span> (small#2) at (0,0) <span class="p">{}</span>;
+<span class="k">\node</span><span class="na">[minimum width=1.65cm,minimum height=4.032cm, anchor=west]</span> (big#2) at (0,0) <span class="p">{}</span>;
+<span class="k">\node</span><span class="na">[minimum width=.244cm, minimum height=.732cm, anchor=east]</span> (goal#2) at (0,0) <span class="p">{}</span>;
+<span class="k">\node</span><span class="na">[inner sep=.3mm, circle, fill=white]</span> (penalty#2) at (1.1,0) <span class="p">{}</span>;
+    <span class="nt">\begin{scope}</span>
+    <span class="k">\tikzset</span><span class="p">{</span>every path/.style=<span class="p">{}}</span>
+    <span class="k">\clip</span> (big#2.south east) rectangle ++ (1,5); 
+    <span class="k">\draw</span><span class="na">[white, very thick]</span> (penalty#2) circle (0.915cm);
+    <span class="nt">\end{scope}</span>
+<span class="nt">\end{scope}</span>
+<span class="p">}</span>
+
+<span class="k">\newcommand\showmeasures</span><span class="p">{</span>
+    <span class="nt">\begin{scope}</span>
+    <span class="k">\tikzset</span><span class="p">{</span>every node/.style=<span class="p">{</span>draw=none,fill=field, inner sep=2pt, sloped<span class="p">}}</span>
+    <span class="k">\draw</span><span class="na">[black, {Latex}-{Latex}]</span> (<span class="p">$</span><span class="o">(</span><span class="nb">contour.north west</span><span class="o">)+(</span><span class="m">0</span><span class="nb">,.</span><span class="m">5</span><span class="o">)</span><span class="p">$</span>) -- (<span class="p">$</span><span class="o">(</span><span class="nb">contour.north east</span><span class="o">)+(</span><span class="m">0</span><span class="nb">,.</span><span class="m">5</span><span class="o">)</span><span class="p">$</span>) node[midway] <span class="p">{</span><span class="k">\textbf</span><span class="p">{</span>Sideline:<span class="p">}</span> min 90m - max 120m<span class="p">}</span>;
+    <span class="k">\draw</span><span class="na">[black, {Latex}-{Latex}]</span> (<span class="p">$</span><span class="o">(</span><span class="nb">contour.south west</span><span class="o">)+(-</span><span class="nb">.</span><span class="m">6</span><span class="nb">,</span><span class="m">0</span><span class="o">)</span><span class="p">$</span>) -- (<span class="p">$</span><span class="o">(</span><span class="nb">contour.north west</span><span class="o">)+(-</span><span class="nb">.</span><span class="m">6</span><span class="nb">,</span><span class="m">0</span><span class="o">)</span><span class="p">$</span>) node[midway] <span class="p">{</span><span class="k">\textbf</span><span class="p">{</span>Goal line:<span class="p">}</span> min 45m - max 90m<span class="p">}</span>;
+    <span class="k">\draw</span><span class="na">[black, -{Latex}]</span> (penalty0) --++ (-15:0.915cm) node[midway, above, font=<span class="k">\scriptsize</span>, fill=none, yshift=2pt] <span class="p">{</span>r = 9.15m<span class="p">}</span>;
+    <span class="k">\draw</span><span class="na">[black, {Latex}-{Latex}]</span> (<span class="p">$</span><span class="o">(</span><span class="nb">small</span><span class="m">0</span><span class="nb">.south east</span><span class="o">)+(-</span><span class="nb">.</span><span class="m">2</span><span class="nb">,</span><span class="m">0</span><span class="o">)</span><span class="p">$</span>) -- (<span class="p">$</span><span class="o">(</span><span class="nb">small</span><span class="m">0</span><span class="nb">.north east</span><span class="o">)+(-</span><span class="nb">.</span><span class="m">2</span><span class="nb">,</span><span class="m">0</span><span class="o">)</span><span class="p">$</span>) node[midway,above, fill=none,font=<span class="k">\scriptsize</span>] <span class="p">{</span>18.32m<span class="p">}</span>;
+    <span class="k">\draw</span><span class="na">[black]</span> (<span class="p">$</span><span class="o">(</span><span class="nb">small</span><span class="m">0</span><span class="nb">.north west</span><span class="o">)+(</span><span class="m">0</span><span class="nb">,.</span><span class="m">2</span><span class="o">)</span><span class="p">$</span>) -- (<span class="p">$</span><span class="o">(</span><span class="nb">small</span><span class="m">0</span><span class="nb">.north east</span><span class="o">)+(</span><span class="m">0</span><span class="nb">,.</span><span class="m">2</span><span class="o">)</span><span class="p">$</span>) node[midway, above, font=<span class="k">\scriptsize</span>, fill=none, xshift=3pt] <span class="p">{</span>5.50m<span class="p">}</span>;
+    <span class="k">\draw</span><span class="na">[black]</span> (contour.south east) --++ (135:1mm) node[anchor=south east] <span class="p">{</span>r = 1m<span class="p">}</span>;
+    <span class="k">\draw</span><span class="na">[black, {Latex}-{Latex}]</span> (<span class="p">$</span><span class="o">(</span><span class="nb">big</span><span class="m">180</span><span class="nb">.south east</span><span class="o">)+(-</span><span class="nb">.</span><span class="m">5</span><span class="nb">,</span><span class="m">0</span><span class="o">)</span><span class="p">$</span>) -- (<span class="p">$</span><span class="o">(</span><span class="nb">big</span><span class="m">180</span><span class="nb">.north east</span><span class="o">)+(-</span><span class="nb">.</span><span class="m">5</span><span class="nb">,</span><span class="m">0</span><span class="o">)</span><span class="p">$</span>) node[midway,above, rotate=180,fill=none,font=<span class="k">\scriptsize</span>] <span class="p">{</span>40.32m<span class="p">}</span>;
+    <span class="k">\draw</span><span class="na">[black, {Latex}-{Latex}]</span> (<span class="p">$</span><span class="o">(</span><span class="nb">big</span><span class="m">180</span><span class="nb">.south west</span><span class="o">)+(</span><span class="m">0</span><span class="nb">,.</span><span class="m">2</span><span class="o">)</span><span class="p">$</span>) -- (<span class="p">$</span><span class="o">(</span><span class="nb">big</span><span class="m">180</span><span class="nb">.south east</span><span class="o">)+(</span><span class="m">0</span><span class="nb">,.</span><span class="m">2</span><span class="o">)</span><span class="p">$</span>) node[midway,above,fill=none,font=<span class="k">\scriptsize</span>] <span class="p">{</span>16.50m<span class="p">}</span>;
+    <span class="k">\draw</span><span class="na">[black]</span> (contour.east) --++ (-11mm,0) node[midway,above, fill=none,font=<span class="k">\scriptsize</span>] <span class="p">{</span>11m<span class="p">}</span>;
+    <span class="k">\node</span><span class="na">[font=\small, rotate=-90, yshift=5mm]</span> at (goal180) <span class="p">{</span><span class="k">\textbf</span><span class="p">{</span>Goal:<span class="p">}</span> 7.32m <span class="p">$</span><span class="nv">\times</span><span class="p">$</span> 2.44m<span class="p">}</span>;
+    <span class="k">\draw</span><span class="na">[black, -{Latex}]</span> (contour.center) --++ (0:0.915cm) node[midway, above, fill=none,font=<span class="k">\scriptsize</span>, yshift=2pt] <span class="p">{</span>r = 9.15m<span class="p">}</span>;
+    <span class="nt">\end{scope}</span>
+<span class="p">}</span>
+
+<span class="nt">\begin{document}</span>
+<span class="nt">\begin{tikzpicture}</span>
+<span class="k">\fill</span><span class="na">[field]</span> (-1,-1) rectangle (13,10);
+<span class="k">\node</span><span class="na">[minimum width=12cm, minimum height=9cm]</span> (contour) at (6,4.5) <span class="p">{}</span>;
+
+<span class="c">% Center</span>
+<span class="k">\draw</span> (contour.north) -- (contour.south);
+<span class="k">\draw</span> (contour.center) circle (0.915cm);
+<span class="k">\fill</span><span class="na">[white]</span> (contour.center) circle (.5mm);
+
+<span class="c">% Areas</span>
+<span class="k">\area</span><span class="p">{</span>contour.west<span class="p">}{</span>0<span class="p">}</span>
+<span class="k">\area</span><span class="p">{</span>contour.east<span class="p">}{</span>180<span class="p">}</span>
+
+<span class="c">% Corners</span>
+<span class="k">\foreach</span> <span class="k">\corner</span> [count=<span class="k">\xi</span> starting from 0] in <span class="p">{</span>south west, south east, north east, north west<span class="p">}{</span>
+    <span class="nt">\begin{scope}</span>[rotate around=<span class="p">{</span>90*<span class="k">\xi</span>:(contour.<span class="k">\corner</span>)<span class="p">}</span>]
+        <span class="k">\draw</span> ([xshift=1mm]contour.<span class="k">\corner</span>) arc (0:90:1mm);
+    <span class="nt">\end{scope}</span>
+<span class="p">}</span>
+
+<span class="k">\showmeasures</span>
+<span class="nt">\end{tikzpicture}</span>
+<span class="nt">\end{document}</span>
+</code></pre></div></div>
+
+]]></content>
+      <categories>
+        
+          <category> LaTeX </category>
+        
+      </categories>
+      <tags>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[一些Qt在Ubuntu下的问题]]></title>
+      <url>/math/2018/09/18/qt_on_ubuntu/</url>
+      <content type="html"><![CDATA[<p><strong>In this post we will talk about some problems occured in Ubuntu OS when writing Qt program.本文讨论一些在ubuntu使用Qt的问题。</strong></p>
+
+<hr />
+
+<h2 id="qdebug的使用">qDebug的使用</h2>
+<p>通常而言，实际上<code class="highlighter-rouge">qDebug</code>是不能直接输出<code class="highlighter-rouge">std::string</code>的，但是在Windows和Android上直接拿来用没有遇到过问题。。。在Ubuntu上使用会报错，因此需要重载«操作符：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">QDebug</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">QDebug</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">str</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">QString</span><span class="o">::</span><span class="n">fromStdString</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">out</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="ssl的使用">ssl的使用</h2>
+<p>在把paperServer服务器从Win/Android移植到Linux下遇到了问题，如果访问https连接的话，会发现ssl的函数没有实现。具体的，发现自己其实已经安装了openssl,libssl-dev的包，可是还是不对。我们输出一下相关的信息：</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">qDebug</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">"SSL version use for build: "</span><span class="o">&lt;&lt;</span><span class="n">QSslSocket</span><span class="o">::</span><span class="n">sslLibraryBuildVersionString</span><span class="p">();</span>
+<span class="n">qDebug</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">"SSL version use for run-time: "</span><span class="o">&lt;&lt;</span><span class="n">QSslSocket</span><span class="o">::</span><span class="n">sslLibraryVersionNumber</span><span class="p">();</span>
+<span class="n">qDebug</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">QCoreApplication</span><span class="o">::</span><span class="n">libraryPaths</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>发现Qt的ssl是基于1.0版本的，而apt得到的是1.1版本的，二者并不兼容。因此需要安装<code class="highlighter-rouge">sudo apt-get install libssl1.0-dev</code>，会把原来的ssl库卸载掉，而且还会连带卸载petsc库。。。。。。解决方法是系统中安装openssl1.1，而自己编译一个openssl1.0.2的so，一定要动态编译（<code class="highlighter-rouge">./config shared</code>)，不然无法链接，因为我Qt是编译的动态库。然后很坑的是设置elf的RUNPATH居然不管用，必须要<code class="highlighter-rouge">export LD_LIBRARY_PATH=$PWD</code>才能让程序正确地链接到同目录下的ssl。真是天坑。。。</p>
+]]></content>
+      <categories>
+        
+          <category> Math </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 数值算法 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[切比雪夫多项式、节点与插值]]></title>
       <url>/math/2018/09/15/chebyshev/</url>
       <content type="html"><![CDATA[<script type="text/x-mathjax-config">
@@ -31,7 +340,7 @@
                 } 
             }
   		});
-		</script>
+</script>
 
 <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
