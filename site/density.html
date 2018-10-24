@@ -68,7 +68,7 @@ function getAirDensity(geoHeight)
         return 1.225*Math.pow(w,4.2559);
     }
     if(z<20063.1){
-        w=exp((14964.7-H)/6341.6);
+        w=Math.exp((14964.7-H)/6341.6);
         return 1.225*.15898*w;
     }
     if(z<32161.9){
