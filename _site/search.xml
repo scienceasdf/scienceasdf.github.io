@@ -2,6 +2,109 @@
 <search>
   
     <entry>
+      <title><![CDATA[哈密顿系统及保辛数值算法]]></title>
+      <url>/dynamics/2018/11/18/hamiltonian/</url>
+      <content type="html"><![CDATA[<script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']]
+            },
+  			TeX: { 
+                equationNumbers: {  
+                    autoNumber: "AMS"  
+                },
+     		    extensions: ["AMSmath.js"]
+            },
+            CommonHTML: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            "HTML-CSS": { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            SVG: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            }
+  		});
+</script>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<div style="display:none">
+			\( \def\
+			&lt;#1&gt;{\left
+				&lt;#1\right&gt;} \newcommand{\CC}{\bm{C}} \newcommand{\dydx}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}} \newcommand{\pypx}[2]{\frac{\partial
+					#1}{\partial #2}} \newcommand{\pyypxx}[2]{\frac{\partial^2 #1}{\partial #2^2}} \newcommand{\dyydxx}[2]{\frac{\mathrm{d}^2
+					#1}{\mathrm{d} #2^2}} \)
+</div>
+<p><strong>It is natural to look forward to those discrete systems which preserve
+as much as possible the intrinsic properties of the continuous
+system. (Feng Kang 1985)</strong></p>
+
+<hr />
+<h2 id="哈密顿系统ui刘维尔定理">哈密顿系统ui刘维尔定理</h2>
+<p>哈密顿系统通常可以写成这样的形式：</p>
+
+<script type="math/tex; mode=display">\begin{array}{l}
+\dot p=-\pypx{H}{q}\\
+\dot q=\pypx{H}{p}
+\end{array}</script>
+
+<p>其中$p$为广义动量，$q$为广义坐标（这里为了简化没有写成向量的黑体）。</p>
+
+<p>假设哈密顿系统是可分离的，也就是说，哈密顿函数可以写成下面的形式
+\begin{equation}
+H(p,q)=T(p)+V(q)
+\end{equation}
+这个是可以在大部分的哈密顿系统中满足，其中$T$就是动能，而$V$就是势能。</p>
+
+<p>刘维尔定理：哈密顿系统的相流保持相体积不变。要证明刘维尔定理，只需要证明常微分方程组的散度为0，而这个是易证的。具体证明过程可以参考阿诺尔德的教材《经典力学的数学方法》，这里就不给出详细的证明过程了。那么我们还可以得到结论：哈密顿方程组在相空间中不可能有渐进稳定的点和渐进稳定的极限环。由刘维尔定理还可以推出庞加莱回归定理，具体表述也可以参考阿诺尔德的教材。</p>
+
+<h2 id="数值积分算法">数值积分算法</h2>
+<p><a href="http://localhost:4000/programming/2017/03/27/rigidBody/">我之前的讨论</a>讨论了许多常用的积分算法，但是这些算法对于哈密顿系统而言有一个缺点：并不保辛。可以用一个直观的图片来反应这个现象：
+<img src="http://localhost:4000/assets//blog_images/hamiltonian.png" width="100%" />
+像这样的一个哈密顿系统，起初在相流当中有一个图形，根据刘维尔定理经过变换后的图形的面积应该和原图形相等，然而欧拉算法、龙格库塔算法却没有出现这样的现象，因此我们需要保辛的算法。</p>
+
+<p>对于哈密顿方程，可以使用分块的龙格库塔算法：
+\begin{equation}
+P_i=p_0+h\sum_j a_{ij}k_j\quad Q_i=q_0h\sum_j \hat{a_{ij}}l_j
+\end{equation}
+\begin{equation}
+p_1=p_0+h\sum_i b_ik_i\quad q_1=q_0+h\sum_i \hat{b_i}l_i
+\end{equation}
+\begin{equation}
+k_i=-\pypx{H}{Q}{P_i,Q_i}\quad l_i=\pypx{H}{p}(P_i,Q_i)
+\end{equation}
+对于分块龙格库塔算法，有如下定理：如果上式中的系数满足:
+\begin{equation}
+b_i=\hat{b_i}
+\end{equation}
+\begin{equation}</p>
+
+<p>\end{equation}</p>
+
+]]></content>
+      <categories>
+        
+          <category> Dynamics </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 数值算法 </tag>
+        
+          <tag> 刚体动力学 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[用LaTeX画足球场与阵型]]></title>
       <url>/latex/2018/09/21/latex_football/</url>
       <content type="html"><![CDATA[<p><strong>This post is showing how to draw a football field in LaTeX. The contents are all unoriginal.本文展示如何用LaTeX画足球场。（非原创）</strong></p>
