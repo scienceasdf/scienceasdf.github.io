@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-11-18T21:49:15+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">哈密顿系统及保辛数值算法</title><link href="http://localhost:4000/dynamics/2018/11/18/hamiltonian/" rel="alternate" type="text/html" title="哈密顿系统及保辛数值算法" /><published>2018-11-18T00:00:00+08:00</published><updated>2018-11-18T00:00:00+08:00</updated><id>http://localhost:4000/dynamics/2018/11/18/hamiltonian</id><content type="html" xml:base="http://localhost:4000/dynamics/2018/11/18/hamiltonian/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-11-24T19:49:15+08:00</updated><id>http://localhost:4000/</id><title type="html">scienceasdf</title><subtitle>We will bury them !</subtitle><author><name>scienceasdf</name></author><entry><title type="html">哈密顿系统及保辛数值算法</title><link href="http://localhost:4000/dynamics/2018/11/18/hamiltonian/" rel="alternate" type="text/html" title="哈密顿系统及保辛数值算法" /><published>2018-11-18T00:00:00+08:00</published><updated>2018-11-18T00:00:00+08:00</updated><id>http://localhost:4000/dynamics/2018/11/18/hamiltonian</id><content type="html" xml:base="http://localhost:4000/dynamics/2018/11/18/hamiltonian/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({
             tex2jax: {
                 inlineMath: [['$','$'], ['\\(','\\)']]
@@ -134,286 +134,281 @@ b:&amp;\frac{1}{2(2-2^{1/3})}&amp;\frac{1-2^{1/3}}{2(2-2^{1/3})}&amp;\frac{1-2^{
 
 &lt;p&gt;【4】Haruo Yoshida, “Construction of higher order symplectic integrators,” Physics Letters A 150, no. 5 (November 12, 1990): 262-268.&lt;/p&gt;
 
-&lt;p&gt;【5】Forest, E.; Ruth, Ronald D. (1990). “Fourth-order symplectic integration”. Physica D. 43: 105.&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="数值算法" /><category term="刚体动力学" /><summary type="html">\( \def\ &amp;lt;#1&amp;gt;{\left &amp;lt;#1\right&amp;gt;} \newcommand{\CC}{\bm{C}} \newcommand{\dydx}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}} \newcommand{\pypx}[2]{\frac{\partial #1}{\partial #2}} \newcommand{\pyypxx}[2]{\frac{\partial^2 #1}{\partial #2^2}} \newcommand{\dyydxx}[2]{\frac{\mathrm{d}^2 #1}{\mathrm{d} #2^2}} \) It is natural to look forward to those discrete systems which preserve as much as possible the intrinsic properties of the continuous system. (Feng Kang 1985)</summary></entry><entry><title type="html">用LaTeX画足球场与阵型</title><link href="http://localhost:4000/latex/2018/09/21/latex_football/" rel="alternate" type="text/html" title="用LaTeX画足球场与阵型" /><published>2018-09-21T00:00:00+08:00</published><updated>2018-09-21T00:00:00+08:00</updated><id>http://localhost:4000/latex/2018/09/21/latex_football</id><content type="html" xml:base="http://localhost:4000/latex/2018/09/21/latex_football/">**This post is showing how to draw a football field in LaTeX. The contents are all unoriginal.本文展示如何用LaTeX画足球场。（非原创）**
+&lt;p&gt;【5】Forest, E.; Ruth, Ronald D. (1990). “Fourth-order symplectic integration”. Physica D. 43: 105.&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="数值算法" /><category term="刚体动力学" /><summary type="html">\( \def\ &amp;lt;#1&amp;gt;{\left &amp;lt;#1\right&amp;gt;} \newcommand{\CC}{\bm{C}} \newcommand{\dydx}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}} \newcommand{\pypx}[2]{\frac{\partial #1}{\partial #2}} \newcommand{\pyypxx}[2]{\frac{\partial^2 #1}{\partial #2^2}} \newcommand{\dyydxx}[2]{\frac{\mathrm{d}^2 #1}{\mathrm{d} #2^2}} \) It is natural to look forward to those discrete systems which preserve as much as possible the intrinsic properties of the continuous system. (Feng Kang 1985)</summary></entry><entry><title type="html">用LaTeX画足球场与阵型</title><link href="http://localhost:4000/latex/2018/09/21/latex_football/" rel="alternate" type="text/html" title="用LaTeX画足球场与阵型" /><published>2018-09-21T00:00:00+08:00</published><updated>2018-09-21T00:00:00+08:00</updated><id>http://localhost:4000/latex/2018/09/21/latex_football</id><content type="html" xml:base="http://localhost:4000/latex/2018/09/21/latex_football/">&lt;p&gt;&lt;strong&gt;This post is showing how to draw a football field in LaTeX. The contents are all unoriginal.本文展示如何用LaTeX画足球场。（非原创）&lt;/strong&gt;&lt;/p&gt;
 
----
-谷歌到的关于这个的结果很少，但还是得到了答案。没有专门的宏包来绘制这个东西，不过可以用tikz宏包。
+&lt;hr /&gt;
+&lt;p&gt;谷歌到的关于这个的结果很少，但还是得到了答案。没有专门的宏包来绘制这个东西，不过可以用tikz宏包。&lt;/p&gt;
 
-## 鸭子形状的球员
-&lt;img src=&quot;{{ site.url }}/assets//blog_images/duck_soccer1.png&quot; width=&quot;600px&quot; height=&quot;400px&quot;/&gt;
-```latex
-\documentclass[tikz,border=2mm]{standalone} 
-\usetikzlibrary{positioning, ducks}
-\usepackage{tikzducks}
+&lt;h2 id=&quot;鸭子形状的球员&quot;&gt;鸭子形状的球员&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets//blog_images/duck_soccer1.png&quot; width=&quot;600px&quot; height=&quot;400px&quot; /&gt;&lt;/p&gt;
+&lt;div class=&quot;language-latex highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;\documentclass&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[tikz,border=2mm]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;standalone&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;\usetikzlibrary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;positioning, ducks&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\usepackage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;tikzducks&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\newcommand{\croacia}[3]{
-\begin{scope}[shift={#3}, xscale=-.4, yscale=.4]
-\duck
-\path[preaction={fill=red}, pattern=checkerboard, pattern color=white] \duckpathjacket;
-\node[font=\sffamily\bfseries] at ([xshift=5mm]wing) {#1};
-\node[font=\sffamily\bfseries] at (1.1,-.22) {#2};
-\end{scope}
-}
+&lt;span class=&quot;k&quot;&gt;\newcommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;[3]&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#3&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, xscale=-.4, yscale=.4]
+&lt;span class=&quot;k&quot;&gt;\duck&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\path&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[preaction={fill=red}, pattern=checkerboard, pattern color=white]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\duckpathjacket&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at ([xshift=5mm]wing) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#1&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at (1.1,-.22) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#2&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\newcommand{\france}[3]{
-\begin{scope}[shift={#3}, scale=.4]
-\duck[jacket=blue]
-\node[font=\sffamily\bfseries] at ([xshift=5mm]wing) {#1};
-\node[font=\sffamily\bfseries] at (1.1,-.22) {#2};
-\end{scope}
-}
+&lt;span class=&quot;k&quot;&gt;\newcommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;[3]&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#3&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, scale=.4]
+&lt;span class=&quot;k&quot;&gt;\duck&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[jacket=blue]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at ([xshift=5mm]wing) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#1&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at (1.1,-.22) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#2&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\definecolor{field}{RGB}{0,156,0}
+&lt;span class=&quot;k&quot;&gt;\definecolor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;field&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;RGB&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;0,156,0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\newcommand\area[2]{
-\begin{scope}[shift={(#1)}, transform shape, rotate=#2]
-\node[minimum width=.55cm,minimum height=1.832cm, anchor=west] (small#2) at (0,0) {};
-\node[minimum width=1.65cm,minimum height=4.032cm, anchor=west] (big#2) at (0,0) {};
-\node[minimum width=.244cm, minimum height=.732cm, anchor=east] (goal#2) at (0,0) {};
-\node[inner sep=.3mm, circle, fill=white] (penalty#2) at (1.1,0) {};
-    \begin{scope}
-    \tikzset{every path/.style={}}
-    \clip (big#2.south east) rectangle ++ (1,5); 
-    \draw[white, very thick] (penalty#2) circle (0.915cm);
-    \end{scope}
-\end{scope}
-}
+&lt;span class=&quot;k&quot;&gt;\newcommand\area&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[2]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;(#1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, transform shape, rotate=#2]
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=.55cm,minimum height=1.832cm, anchor=west]&lt;/span&gt; (small#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=1.65cm,minimum height=4.032cm, anchor=west]&lt;/span&gt; (big#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=.244cm, minimum height=.732cm, anchor=east]&lt;/span&gt; (goal#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[inner sep=.3mm, circle, fill=white]&lt;/span&gt; (penalty#2) at (1.1,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\tikzset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;every path/.style=&lt;span class=&quot;p&quot;&gt;{}}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\clip&lt;/span&gt; (big#2.south east) rectangle ++ (1,5); 
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[white, very thick]&lt;/span&gt; (penalty#2) circle (0.915cm);
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
 
-\begin{document}
-\begin{tikzpicture}
-\begin{scope}[%    
-    every node/.style={draw=white, very thick, inner sep=0, outer sep=0},
-   every path/.style={draw=white, very thick},
+&lt;span class=&quot;nt&quot;&gt;\begin{document}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{tikzpicture}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[&lt;span class=&quot;c&quot;&gt;%    &lt;/span&gt;
+    every node/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=white, very thick, inner sep=0, outer sep=0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;,
+   every path/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=white, very thick&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;,
 ]
-\fill[field] (-1,-1) rectangle (13,10);
-\node[minimum width=12cm, minimum height=9cm] (contour) at (6,4.5) {};
+&lt;span class=&quot;k&quot;&gt;\fill&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[field]&lt;/span&gt; (-1,-1) rectangle (13,10);
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=12cm, minimum height=9cm]&lt;/span&gt; (contour) at (6,4.5) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
 
-%\draw (contour.south west) grid (contour.north east);
+&lt;span class=&quot;c&quot;&gt;%\draw (contour.south west) grid (contour.north east);&lt;/span&gt;
 
-% Center
-\draw (contour.north) -- (contour.south);
-\draw (contour.center) circle (0.915cm);
-\fill[white] (contour.center) circle (.5mm);
+&lt;span class=&quot;c&quot;&gt;% Center&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; (contour.north) -- (contour.south);
+&lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; (contour.center) circle (0.915cm);
+&lt;span class=&quot;k&quot;&gt;\fill&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[white]&lt;/span&gt; (contour.center) circle (.5mm);
 
-% Areas
-\area{contour.west}{0}
-\area{contour.east}{180}
+&lt;span class=&quot;c&quot;&gt;% Areas&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\area&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;contour.west&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\area&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;contour.east&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;180&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-% Corners
-\foreach \corner [count=\xi starting from 0] in {south west, south east, north east, north west}{
-    \begin{scope}[rotate around={90*\xi:(contour.\corner)}]
-        \draw ([xshift=1mm]contour.\corner) arc (0:90:1mm);
-    \end{scope}
-}
-\end{scope}
+&lt;span class=&quot;c&quot;&gt;% Corners&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\foreach&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt; [count=&lt;span class=&quot;k&quot;&gt;\xi&lt;/span&gt; starting from 0] in &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;south west, south east, north east, north west&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[rotate around=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;90*&lt;span class=&quot;k&quot;&gt;\xi&lt;/span&gt;:(contour.&lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt;)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;]
+        &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; ([xshift=1mm]contour.&lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt;) arc (0:90:1mm);
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
 
-\croacia{23}{Subasic}{(1.25,4.25)}
-\croacia{3}{Strinic}{(2.6,7.2)}
-\croacia{21}{Vida}{(2.3,5.3)}
-\croacia{6}{Lovren}{(2.3,2.9)}
-\croacia{2}{Virsalijko}{(2.6,1)}
-\croacia{11}{Brozovic}{(3.5,4.25)}
-\croacia{4}{Perisic}{(4.5,7.2)}
-\croacia{7}{Rakitic}{(4.5,5.25)}
-\croacia{10}{Modric}{(4.5,3)}
-\croacia{18}{Rebic}{(4.5,1)}
-\croacia{17}{Mandzukic}{(5.6,4.25)}
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;23&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Subasic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(1.25,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;3&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Strinic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(2.6,7.2)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;21&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Vida&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(2.3,5.3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;6&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Lovren&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(2.3,2.9)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;2&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Virsalijko&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(2.6,1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;11&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Brozovic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(3.5,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;4&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Perisic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(4.5,7.2)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;7&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Rakitic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(4.5,5.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;10&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Modric&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(4.5,3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;18&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Rebic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(4.5,1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;17&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Mandzukic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(5.6,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\france{1}{Lloris}{(10.75,4.25)}
-\france{2}{Pavard}{(9.5,7.2)}
-\france{4}{Varane}{(9.5,5.3)}
-\france{5}{Umtiti}{(9.5,2.9)}
-\france{21}{Lucas}{(9.5,1)}
-\france{13}{Kante}{(8.5,6)}
-\france{6}{Pogba}{(8.5,2.3)}
-\france{10}{Mbappe}{(7,7)}
-\france{7}{Griezman}{(7.8,4.25)}
-\france{14}{Matuidi}{(7,1.5)}
-\france{9}{Giroud}{(6.4,4.25)}
-\end{tikzpicture}
-\end{document}
-```
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Lloris&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(10.75,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;2&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Pavard&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,7.2)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;4&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Varane&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,5.3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;5&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Umtiti&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,2.9)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;21&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Lucas&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;13&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Kante&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(8.5,6)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;6&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Pogba&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(8.5,2.3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;10&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Mbappe&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(7,7)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;7&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Griezman&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(7.8,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;14&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Matuidi&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(7,1.5)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;9&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Giroud&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(6.4,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{tikzpicture}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{document}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-## 正常外形的球员
-用的是`tikzpeople`.这个不太容易给克罗地亚的队服加上格子花纹了。
-&lt;img src=&quot;{{ site.url }}/assets//blog_images/soccer2.png&quot; width=&quot;600px&quot; height=&quot;400px&quot;/&gt;
-```latex
-\documentclass[tikz,border=2mm]{standalone} 
-\usetikzlibrary{positioning}
-\usepackage{tikzmarmots}
+&lt;h2 id=&quot;正常外形的球员&quot;&gt;正常外形的球员&lt;/h2&gt;
+&lt;p&gt;用的是&lt;code class=&quot;highlighter-rouge&quot;&gt;tikzpeople&lt;/code&gt;.这个不太容易给克罗地亚的队服加上格子花纹了。
+&lt;img src=&quot;http://localhost:4000/assets//blog_images/soccer2.png&quot; width=&quot;600px&quot; height=&quot;400px&quot; /&gt;&lt;/p&gt;
+&lt;div class=&quot;language-latex highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;\documentclass&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[tikz,border=2mm]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;standalone&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;\usetikzlibrary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;positioning&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\usepackage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;tikzmarmots&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\newcommand{\croacia}[3]{ \begin{scope}[shift={#3}, scale=.5] \marmot \path[preaction={fill=red}, pattern=checkerboard, pattern color=white] (1.35,0.71) .. controls (1.35,0.41) and (1.17,0.37) .. (0.92,0.37) .. controls (0.69,0.37) and (0.48,0.41) .. (0.48,0.71) .. controls (0.48,1.01) and (0.67,1.26) .. (0.91,1.26) .. controls (1.15,1.26) and (1.3 5,1.01) .. (1.35,0.71) -- cycle; \node[font=\sffamily\bfseries] at (0.95,0.82) {#1}; \node[font=\sffamily\bfseries] at (1.1,-.22) {#2}; \end{scope} }
+&lt;span class=&quot;k&quot;&gt;\newcommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;[3]&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#3&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, scale=.5] &lt;span class=&quot;k&quot;&gt;\marmot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\path&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[preaction={fill=red}, pattern=checkerboard, pattern color=white]&lt;/span&gt; (1.35,0.71) .. controls (1.35,0.41) and (1.17,0.37) .. (0.92,0.37) .. controls (0.69,0.37) and (0.48,0.41) .. (0.48,0.71) .. controls (0.48,1.01) and (0.67,1.26) .. (0.91,1.26) .. controls (1.15,1.26) and (1.3 5,1.01) .. (1.35,0.71) -- cycle; &lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at (0.95,0.82) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#1&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at (1.1,-.22) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#2&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;; &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\newcommand{\france}[3]{ \begin{scope}[shift={#3}, scale=.5] \marmot[body=brown!80!yellow] \path[fill=blue] (1.35,0.71) .. controls (1.35,0.41) and (1.17,0.37) .. (0.92,0.37) .. controls (0.69,0.37) and (0.48,0.41) .. (0.48,0.71) .. controls (0.48,1.01) and (0.67,1.26) .. (0.91,1.26) .. controls (1.15,1.26) and (1.3 5,1.01) .. (1.35,0.71) -- cycle; \node[font=\sffamily\bfseries] at (0.95,0.82) {#1}; \node[font=\sffamily\bfseries] at (1.1,-.22) {#2}; \end{scope} }
-\definecolor{field}{RGB}{0,156,0}
+&lt;span class=&quot;k&quot;&gt;\newcommand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;[3]&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#3&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, scale=.5] &lt;span class=&quot;k&quot;&gt;\marmot&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[body=brown!80!yellow]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\path&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[fill=blue]&lt;/span&gt; (1.35,0.71) .. controls (1.35,0.41) and (1.17,0.37) .. (0.92,0.37) .. controls (0.69,0.37) and (0.48,0.41) .. (0.48,0.71) .. controls (0.48,1.01) and (0.67,1.26) .. (0.91,1.26) .. controls (1.15,1.26) and (1.3 5,1.01) .. (1.35,0.71) -- cycle; &lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at (0.95,0.82) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#1&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\sffamily\bfseries]&lt;/span&gt; at (1.1,-.22) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;#2&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;; &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\definecolor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;field&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;RGB&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;0,156,0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\newcommand\area[2]{
-\begin{scope}[shift={(#1)}, transform shape, rotate=#2]
-\node[minimum width=.55cm,minimum height=1.832cm, anchor=west] (small#2) at (0,0) {};
-\node[minimum width=1.65cm,minimum height=4.032cm, anchor=west] (big#2) at (0,0) {};
-\node[minimum width=.244cm, minimum height=.732cm, anchor=east] (goal#2) at (0,0) {};
-\node[inner sep=.3mm, circle, fill=white] (penalty#2) at (1.1,0) {};
-    \begin{scope}
-    \tikzset{every path/.style={}}
-    \clip (big#2.south east) rectangle ++ (1,5); 
-    \draw[white, very thick] (penalty#2) circle (0.915cm);
-    \end{scope}
-\end{scope}
-}
+&lt;span class=&quot;k&quot;&gt;\newcommand\area&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[2]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;(#1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, transform shape, rotate=#2]
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=.55cm,minimum height=1.832cm, anchor=west]&lt;/span&gt; (small#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=1.65cm,minimum height=4.032cm, anchor=west]&lt;/span&gt; (big#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=.244cm, minimum height=.732cm, anchor=east]&lt;/span&gt; (goal#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[inner sep=.3mm, circle, fill=white]&lt;/span&gt; (penalty#2) at (1.1,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\tikzset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;every path/.style=&lt;span class=&quot;p&quot;&gt;{}}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\clip&lt;/span&gt; (big#2.south east) rectangle ++ (1,5); 
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[white, very thick]&lt;/span&gt; (penalty#2) circle (0.915cm);
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
 
-\begin{document}
-\begin{tikzpicture}
-\begin{scope}[%    
-    every node/.style={draw=white, very thick, inner sep=0, outer sep=0},
-   every path/.style={draw=white, very thick},
+&lt;span class=&quot;nt&quot;&gt;\begin{document}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{tikzpicture}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[&lt;span class=&quot;c&quot;&gt;%    &lt;/span&gt;
+    every node/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=white, very thick, inner sep=0, outer sep=0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;,
+   every path/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=white, very thick&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;,
 ]
-\fill[field] (-1,-1) rectangle (13,10);
-\node[minimum width=12cm, minimum height=9cm] (contour) at (6,4.5) {};
+&lt;span class=&quot;k&quot;&gt;\fill&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[field]&lt;/span&gt; (-1,-1) rectangle (13,10);
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=12cm, minimum height=9cm]&lt;/span&gt; (contour) at (6,4.5) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
 
-%\draw (contour.south west) grid (contour.north east);
+&lt;span class=&quot;c&quot;&gt;%\draw (contour.south west) grid (contour.north east);&lt;/span&gt;
 
-% Center
-\draw (contour.north) -- (contour.south);
-\draw (contour.center) circle (0.915cm);
-\fill[white] (contour.center) circle (.5mm);
+&lt;span class=&quot;c&quot;&gt;% Center&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; (contour.north) -- (contour.south);
+&lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; (contour.center) circle (0.915cm);
+&lt;span class=&quot;k&quot;&gt;\fill&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[white]&lt;/span&gt; (contour.center) circle (.5mm);
 
-% Areas
-\area{contour.west}{0}
-\area{contour.east}{180}
+&lt;span class=&quot;c&quot;&gt;% Areas&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\area&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;contour.west&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\area&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;contour.east&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;180&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-% Corners
-\foreach \corner [count=\xi starting from 0] in {south west, south east, north east, north west}{
-    \begin{scope}[rotate around={90*\xi:(contour.\corner)}]
-        \draw ([xshift=1mm]contour.\corner) arc (0:90:1mm);
-    \end{scope}
-}
-\end{scope}
+&lt;span class=&quot;c&quot;&gt;% Corners&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\foreach&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt; [count=&lt;span class=&quot;k&quot;&gt;\xi&lt;/span&gt; starting from 0] in &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;south west, south east, north east, north west&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[rotate around=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;90*&lt;span class=&quot;k&quot;&gt;\xi&lt;/span&gt;:(contour.&lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt;)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;]
+        &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; ([xshift=1mm]contour.&lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt;) arc (0:90:1mm);
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
 
-\croacia{23}{Subasic}{(0.25,4.25)}
-\croacia{3}{Strinic}{(1.6,7.2)}
-\croacia{21}{Vida}{(1.3,5.3)}
-\croacia{6}{Lovren}{(1.3,2.9)}
-\croacia{2}{Virsalijko}{(1.6,1)}
-\croacia{11}{Brozovic}{(2.5,4.25)}
-\croacia{4}{Perisic}{(3.5,7.2)}
-\croacia{7}{Rakitic}{(3.5,5.25)}
-\croacia{10}{Modric}{(3.5,3)}
-\croacia{18}{Rebic}{(3.5,1)}
-\croacia{17}{Mandzukic}{(4.6,4.25)}
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;23&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Subasic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(0.25,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;3&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Strinic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(1.6,7.2)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;21&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Vida&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(1.3,5.3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;6&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Lovren&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(1.3,2.9)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;2&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Virsalijko&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(1.6,1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;11&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Brozovic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(2.5,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;4&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Perisic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(3.5,7.2)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;7&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Rakitic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(3.5,5.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;10&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Modric&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(3.5,3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;18&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Rebic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(3.5,1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\croacia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;17&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Mandzukic&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(4.6,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\france{1}{Lloris}{(10.75,4.25)}
-\france{2}{Pavard}{(9.5,7.2)}
-\france{4}{Varane}{(9.5,5.3)}
-\france{5}{Umtiti}{(9.5,2.9)}
-\france{21}{Lucas}{(9.5,1)}
-\france{13}{Kante}{(8.5,6)}
-\france{6}{Pogba}{(8.5,2.3)}
-\france{10}{Mbappe}{(7,7)}
-\france{7}{Griezman}{(7.8,4.25)}
-\france{14}{Matuidi}{(7,1.5)}
-\france{9}{Giroud}{(6.4,4.25)}
-\end{tikzpicture}
-\end{document}
-```
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Lloris&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(10.75,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;2&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Pavard&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,7.2)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;4&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Varane&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,5.3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;5&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Umtiti&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,2.9)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;21&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Lucas&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(9.5,1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;13&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Kante&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(8.5,6)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;6&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Pogba&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(8.5,2.3)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;10&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Mbappe&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(7,7)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;7&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Griezman&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(7.8,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;14&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Matuidi&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(7,1.5)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\france&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;9&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;Giroud&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;(6.4,4.25)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{tikzpicture}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{document}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-## 七人制的一个阵型
-&lt;img src=&quot;{{ site.url }}/assets//blog_images/soccer3.png&quot; width=&quot;600px&quot; height=&quot;400px&quot;/&gt;
-只需要改一下一些坐标就行了。
+&lt;h2 id=&quot;七人制的一个阵型&quot;&gt;七人制的一个阵型&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets//blog_images/soccer3.png&quot; width=&quot;600px&quot; height=&quot;400px&quot; /&gt;
+只需要改一下一些坐标就行了。&lt;/p&gt;
 
-## 绘制球场
-&lt;img src=&quot;{{ site.url }}/assets//blog_images/soccer4.png&quot; width=&quot;600px&quot; height=&quot;400px&quot;/&gt;
-```latex
-\documentclass[margin=10pt]{standalone}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta, calc}
+&lt;h2 id=&quot;绘制球场&quot;&gt;绘制球场&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets//blog_images/soccer4.png&quot; width=&quot;600px&quot; height=&quot;400px&quot; /&gt;&lt;/p&gt;
+&lt;div class=&quot;language-latex highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;\documentclass&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[margin=10pt]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;standalone&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\usepackage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;tikz&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\usetikzlibrary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;arrows.meta, calc&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\definecolor{field}{RGB}{0,156,0}
+&lt;span class=&quot;k&quot;&gt;\definecolor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;field&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;RGB&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;0,156,0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\tikzset{
-    every node/.style={draw=white, very thick, inner sep=0, outer sep=0},
-    every path/.style={draw=white, very thick},
-}
+&lt;span class=&quot;k&quot;&gt;\tikzset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    every node/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=white, very thick, inner sep=0, outer sep=0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;,
+    every path/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=white, very thick&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;,
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\newcommand\area[2]{
-\begin{scope}[shift={(#1)}, transform shape, rotate=#2]
-\node[minimum width=.55cm,minimum height=1.832cm, anchor=west] (small#2) at (0,0) {};
-\node[minimum width=1.65cm,minimum height=4.032cm, anchor=west] (big#2) at (0,0) {};
-\node[minimum width=.244cm, minimum height=.732cm, anchor=east] (goal#2) at (0,0) {};
-\node[inner sep=.3mm, circle, fill=white] (penalty#2) at (1.1,0) {};
-    \begin{scope}
-    \tikzset{every path/.style={}}
-    \clip (big#2.south east) rectangle ++ (1,5); 
-    \draw[white, very thick] (penalty#2) circle (0.915cm);
-    \end{scope}
-\end{scope}
-}
+&lt;span class=&quot;k&quot;&gt;\newcommand\area&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[2]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[shift=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;(#1)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;, transform shape, rotate=#2]
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=.55cm,minimum height=1.832cm, anchor=west]&lt;/span&gt; (small#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=1.65cm,minimum height=4.032cm, anchor=west]&lt;/span&gt; (big#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=.244cm, minimum height=.732cm, anchor=east]&lt;/span&gt; (goal#2) at (0,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[inner sep=.3mm, circle, fill=white]&lt;/span&gt; (penalty#2) at (1.1,0) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\tikzset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;every path/.style=&lt;span class=&quot;p&quot;&gt;{}}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\clip&lt;/span&gt; (big#2.south east) rectangle ++ (1,5); 
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[white, very thick]&lt;/span&gt; (penalty#2) circle (0.915cm);
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\newcommand\showmeasures{
-    \begin{scope}
-    \tikzset{every node/.style={draw=none,fill=field, inner sep=2pt, sloped}}
-    \draw[black, {Latex}-{Latex}] ($(contour.north west)+(0,.5)$) -- ($(contour.north east)+(0,.5)$) node[midway] {\textbf{Sideline:} min 90m - max 120m};
-    \draw[black, {Latex}-{Latex}] ($(contour.south west)+(-.6,0)$) -- ($(contour.north west)+(-.6,0)$) node[midway] {\textbf{Goal line:} min 45m - max 90m};
-    \draw[black, -{Latex}] (penalty0) --++ (-15:0.915cm) node[midway, above, font=\scriptsize, fill=none, yshift=2pt] {r = 9.15m};
-    \draw[black, {Latex}-{Latex}] ($(small0.south east)+(-.2,0)$) -- ($(small0.north east)+(-.2,0)$) node[midway,above, fill=none,font=\scriptsize] {18.32m};
-    \draw[black] ($(small0.north west)+(0,.2)$) -- ($(small0.north east)+(0,.2)$) node[midway, above, font=\scriptsize, fill=none, xshift=3pt] {5.50m};
-    \draw[black] (contour.south east) --++ (135:1mm) node[anchor=south east] {r = 1m};
-    \draw[black, {Latex}-{Latex}] ($(big180.south east)+(-.5,0)$) -- ($(big180.north east)+(-.5,0)$) node[midway,above, rotate=180,fill=none,font=\scriptsize] {40.32m};
-    \draw[black, {Latex}-{Latex}] ($(big180.south west)+(0,.2)$) -- ($(big180.south east)+(0,.2)$) node[midway,above,fill=none,font=\scriptsize] {16.50m};
-    \draw[black] (contour.east) --++ (-11mm,0) node[midway,above, fill=none,font=\scriptsize] {11m};
-    \node[font=\small, rotate=-90, yshift=5mm] at (goal180) {\textbf{Goal:} 7.32m $\times$ 2.44m};
-    \draw[black, -{Latex}] (contour.center) --++ (0:0.915cm) node[midway, above, fill=none,font=\scriptsize, yshift=2pt] {r = 9.15m};
-    \end{scope}
-}
+&lt;span class=&quot;k&quot;&gt;\newcommand\showmeasures&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\tikzset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;every node/.style=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;draw=none,fill=field, inner sep=2pt, sloped&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, {Latex}-{Latex}]&lt;/span&gt; (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;contour.north west&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) -- (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;contour.north east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) node[midway] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\textbf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;Sideline:&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; min 90m - max 120m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, {Latex}-{Latex}]&lt;/span&gt; (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;contour.south west&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) -- (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;contour.north west&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) node[midway] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\textbf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;Goal line:&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; min 45m - max 90m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, -{Latex}]&lt;/span&gt; (penalty0) --++ (-15:0.915cm) node[midway, above, font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;, fill=none, yshift=2pt] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;r = 9.15m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, {Latex}-{Latex}]&lt;/span&gt; (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;small&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.south east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) -- (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;small&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.north east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) node[midway,above, fill=none,font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;18.32m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black]&lt;/span&gt; (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;small&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.north west&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) -- (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;small&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.north east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) node[midway, above, font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;, fill=none, xshift=3pt] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;5.50m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black]&lt;/span&gt; (contour.south east) --++ (135:1mm) node[anchor=south east] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;r = 1m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, {Latex}-{Latex}]&lt;/span&gt; (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;big&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.south east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) -- (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;big&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.north east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) node[midway,above, rotate=180,fill=none,font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;40.32m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, {Latex}-{Latex}]&lt;/span&gt; (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;big&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.south west&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) -- (&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;big&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;180&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.south east&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)+(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;,.&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;) node[midway,above,fill=none,font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;16.50m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black]&lt;/span&gt; (contour.east) --++ (-11mm,0) node[midway,above, fill=none,font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;11m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[font=\small, rotate=-90, yshift=5mm]&lt;/span&gt; at (goal180) &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\textbf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;Goal:&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 7.32m &lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;\times&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt; 2.44m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[black, -{Latex}]&lt;/span&gt; (contour.center) --++ (0:0.915cm) node[midway, above, fill=none,font=&lt;span class=&quot;k&quot;&gt;\scriptsize&lt;/span&gt;, yshift=2pt] &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;r = 9.15m&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;;
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\begin{document}
-\begin{tikzpicture}
-\fill[field] (-1,-1) rectangle (13,10);
-\node[minimum width=12cm, minimum height=9cm] (contour) at (6,4.5) {};
+&lt;span class=&quot;nt&quot;&gt;\begin{document}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\begin{tikzpicture}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\fill&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[field]&lt;/span&gt; (-1,-1) rectangle (13,10);
+&lt;span class=&quot;k&quot;&gt;\node&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[minimum width=12cm, minimum height=9cm]&lt;/span&gt; (contour) at (6,4.5) &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;;
 
-% Center
-\draw (contour.north) -- (contour.south);
-\draw (contour.center) circle (0.915cm);
-\fill[white] (contour.center) circle (.5mm);
+&lt;span class=&quot;c&quot;&gt;% Center&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; (contour.north) -- (contour.south);
+&lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; (contour.center) circle (0.915cm);
+&lt;span class=&quot;k&quot;&gt;\fill&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[white]&lt;/span&gt; (contour.center) circle (.5mm);
 
-% Areas
-\area{contour.west}{0}
-\area{contour.east}{180}
+&lt;span class=&quot;c&quot;&gt;% Areas&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\area&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;contour.west&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\area&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;contour.east&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;180&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-% Corners
-\foreach \corner [count=\xi starting from 0] in {south west, south east, north east, north west}{
-    \begin{scope}[rotate around={90*\xi:(contour.\corner)}]
-        \draw ([xshift=1mm]contour.\corner) arc (0:90:1mm);
-    \end{scope}
-}
+&lt;span class=&quot;c&quot;&gt;% Corners&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;\foreach&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt; [count=&lt;span class=&quot;k&quot;&gt;\xi&lt;/span&gt; starting from 0] in &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;south west, south east, north east, north west&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;\begin{scope}&lt;/span&gt;[rotate around=&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;90*&lt;span class=&quot;k&quot;&gt;\xi&lt;/span&gt;:(contour.&lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt;)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;]
+        &lt;span class=&quot;k&quot;&gt;\draw&lt;/span&gt; ([xshift=1mm]contour.&lt;span class=&quot;k&quot;&gt;\corner&lt;/span&gt;) arc (0:90:1mm);
+    &lt;span class=&quot;nt&quot;&gt;\end{scope}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-\showmeasures
-\end{tikzpicture}
-\end{document}
-```</content><author><name>scienceasdf</name></author><summary type="html">This post is showing how to draw a football field in LaTeX. The contents are all unoriginal.本文展示如何用LaTeX画足球场。（非原创）</summary></entry><entry><title type="html">一些Qt在Ubuntu下的问题</title><link href="http://localhost:4000/math/2018/09/18/qt_on_ubuntu/" rel="alternate" type="text/html" title="一些Qt在Ubuntu下的问题" /><published>2018-09-18T00:00:00+08:00</published><updated>2018-09-18T00:00:00+08:00</updated><id>http://localhost:4000/math/2018/09/18/qt_on_ubuntu</id><content type="html" xml:base="http://localhost:4000/math/2018/09/18/qt_on_ubuntu/">**In this post we will talk about some problems occured in Ubuntu OS when writing Qt program.本文讨论一些在ubuntu使用Qt的问题。**
+&lt;span class=&quot;k&quot;&gt;\showmeasures&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{tikzpicture}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;\end{document}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>scienceasdf</name></author><summary type="html">This post is showing how to draw a football field in LaTeX. The contents are all unoriginal.本文展示如何用LaTeX画足球场。（非原创）</summary></entry><entry><title type="html">一些Qt在Ubuntu下的问题</title><link href="http://localhost:4000/math/2018/09/18/qt_on_ubuntu/" rel="alternate" type="text/html" title="一些Qt在Ubuntu下的问题" /><published>2018-09-18T00:00:00+08:00</published><updated>2018-09-18T00:00:00+08:00</updated><id>http://localhost:4000/math/2018/09/18/qt_on_ubuntu</id><content type="html" xml:base="http://localhost:4000/math/2018/09/18/qt_on_ubuntu/">&lt;p&gt;&lt;strong&gt;In this post we will talk about some problems occured in Ubuntu OS when writing Qt program.本文讨论一些在ubuntu使用Qt的问题。&lt;/strong&gt;&lt;/p&gt;
 
----
+&lt;hr /&gt;
 
-## qDebug的使用
-通常而言，实际上`qDebug`是不能直接输出`std::string`的，但是在Windows和Android上直接拿来用没有遇到过问题。。。在Ubuntu上使用会报错，因此需要重载&lt;&lt;操作符：
-```c++
-QDebug operator&lt;&lt;(QDebug out, const std::string&amp; str)
-{
-    out &lt;&lt; QString::fromStdString(str);
-    return out;
-}
-```
-  
-## ssl的使用
-在把paperServer服务器从Win/Android移植到Linux下遇到了问题，如果访问https连接的话，会发现ssl的函数没有实现。具体的，发现自己其实已经安装了openssl,libssl-dev的包，可是还是不对。我们输出一下相关的信息：
-```c++
-qDebug()&lt;&lt;&quot;SSL version use for build: &quot;&lt;&lt;QSslSocket::sslLibraryBuildVersionString();
-qDebug()&lt;&lt;&quot;SSL version use for run-time: &quot;&lt;&lt;QSslSocket::sslLibraryVersionNumber();
-qDebug()&lt;&lt;QCoreApplication::libraryPaths();
-```
-  
-发现Qt的ssl是基于1.0版本的，而apt得到的是1.1版本的，二者并不兼容。因此需要安装`sudo apt-get install libssl1.0-dev`，会把原来的ssl库卸载掉，而且还会连带卸载petsc库。。。。。。解决方法是系统中安装openssl1.1，而自己编译一个openssl1.0.2的so，一定要动态编译（`./config shared`)，不然无法链接，因为我Qt是编译的动态库。然后很坑的是设置elf的RUNPATH居然不管用，必须要`export LD_LIBRARY_PATH=$PWD`才能让程序正确地链接到同目录下的ssl。真是天坑。。。</content><author><name>scienceasdf</name></author><category term="数值算法" /><summary type="html">In this post we will talk about some problems occured in Ubuntu OS when writing Qt program.本文讨论一些在ubuntu使用Qt的问题。</summary></entry><entry><title type="html">切比雪夫多项式、节点与插值</title><link href="http://localhost:4000/math/2018/09/15/chebyshev/" rel="alternate" type="text/html" title="切比雪夫多项式、节点与插值" /><published>2018-09-15T00:00:00+08:00</published><updated>2018-09-15T00:00:00+08:00</updated><id>http://localhost:4000/math/2018/09/15/chebyshev</id><content type="html" xml:base="http://localhost:4000/math/2018/09/15/chebyshev/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+&lt;h2 id=&quot;qdebug的使用&quot;&gt;qDebug的使用&lt;/h2&gt;
+&lt;p&gt;通常而言，实际上&lt;code class=&quot;highlighter-rouge&quot;&gt;qDebug&lt;/code&gt;是不能直接输出&lt;code class=&quot;highlighter-rouge&quot;&gt;std::string&lt;/code&gt;的，但是在Windows和Android上直接拿来用没有遇到过问题。。。在Ubuntu上使用会报错，因此需要重载«操作符：&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;QDebug&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QDebug&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fromStdString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;ssl的使用&quot;&gt;ssl的使用&lt;/h2&gt;
+&lt;p&gt;在把paperServer服务器从Win/Android移植到Linux下遇到了问题，如果访问https连接的话，会发现ssl的函数没有实现。具体的，发现自己其实已经安装了openssl,libssl-dev的包，可是还是不对。我们输出一下相关的信息：&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;qDebug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SSL version use for build: &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QSslSocket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sslLibraryBuildVersionString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;qDebug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SSL version use for run-time: &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QSslSocket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sslLibraryVersionNumber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;qDebug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QCoreApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;libraryPaths&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;发现Qt的ssl是基于1.0版本的，而apt得到的是1.1版本的，二者并不兼容。因此需要安装&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt-get install libssl1.0-dev&lt;/code&gt;，会把原来的ssl库卸载掉，而且还会连带卸载petsc库。。。。。。解决方法是系统中安装openssl1.1，而自己编译一个openssl1.0.2的so，一定要动态编译（&lt;code class=&quot;highlighter-rouge&quot;&gt;./config shared&lt;/code&gt;)，不然无法链接，因为我Qt是编译的动态库。然后很坑的是设置elf的RUNPATH居然不管用，必须要&lt;code class=&quot;highlighter-rouge&quot;&gt;export LD_LIBRARY_PATH=$PWD&lt;/code&gt;才能让程序正确地链接到同目录下的ssl。真是天坑。。。&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="数值算法" /><summary type="html">In this post we will talk about some problems occured in Ubuntu OS when writing Qt program.本文讨论一些在ubuntu使用Qt的问题。</summary></entry><entry><title type="html">切比雪夫多项式、节点与插值</title><link href="http://localhost:4000/math/2018/09/15/chebyshev/" rel="alternate" type="text/html" title="切比雪夫多项式、节点与插值" /><published>2018-09-15T00:00:00+08:00</published><updated>2018-09-15T00:00:00+08:00</updated><id>http://localhost:4000/math/2018/09/15/chebyshev</id><content type="html" xml:base="http://localhost:4000/math/2018/09/15/chebyshev/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({
             tex2jax: {
                 inlineMath: [['$','$'], ['\\(','\\)']]
@@ -441,221 +436,217 @@ qDebug()&lt;&lt;QCoreApplication::libraryPaths();
             }
   		});
 &lt;/script&gt;
+
 &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
-**In this post we discuss on Chebyshev polynomials, nodes and interpolation.讨论关于切比雪夫多项式、节点与插值**
 
----
-## 切比雪夫节点
-对于拉格朗日插值公式，如何选取节点是一个重要的问题。通常而言，等距选取节点并不是一个最优的选择。我们考虑如下的问题描述：
-取插值节点：$a\leq x_0\leq x_1\leq ......\leq x_n\leq b$
-满足$L_n(x_k)=f(x_k)$的多项式插值余项
-  
-$$R_n(x)=f(x)-L_n(x)=\frac{f^{(n+1)}(\zeta_n)}{(n+1)!}\omega_{n+1}(x)$$
-  
-其中，
-  
-$$\omega_{n+1}(x)=(x-x_0)(x-x_1)...(x-x_n)$$
-  
-选取$x_0,x_1,......,x_n$使
-  
-$$\text{max}|\omega_{n+1}(x)|=\text{min}$$
-  
-因此需要选取切比雪夫多项式$T_{n+1}(x)$的全部零点。
-  
-如果$a=-1,b=1$,那么
-  
-$$x_k=\cos(\frac{(2k+1)\pi}{2(n+1)})$$
-  
-如果$[a,b]\neq [-1,1]$,那么
-  
-$$x_k=\frac{b+a}{2}+\frac{b-a}{2}\cos(\frac{(2k+1)\pi}{2(n+1)})$$
-  
-当然选取了节点之后既可以用拉格朗日插值，也可以用牛顿插值。
-  
-## 切比雪夫多项式
-在微分方程的研究中，切比雪夫提出切比雪夫微分方程
-  
-$$(1-x^2)y^{\prime\prime}-xy^\prime+n^2y=0$$
-  
-和
-  
-$$(1-x^2)y^{\prime\prime}-3xy^\prime+n(n+2)y=0$$
-  
-相应地，第一类和第二类切比雪夫多项式分别为这两个方程的解。 这些方程是斯图姆-刘维尔微分方程的特殊情形。本文只研究第一类切比雪夫多项式。
-  
-第一类切比雪夫多项式由以下递推关系确定 
-  
-$$T_0(x)=1$$
-  
-$$T_1(x)=x$$
-  
-$$T_{n+1}(x)=2xT_n(x)-T_{n-1}(x)$$
-  
-也可以用母函数表示
-$$\sum_{n=0}^\infty T_n(x)t^n=\frac{1-tx}{1-2tx+t^2}$$
+&lt;p&gt;&lt;strong&gt;In this post we discuss on Chebyshev polynomials, nodes and interpolation.讨论关于切比雪夫多项式、节点与插值&lt;/strong&gt;&lt;/p&gt;
 
-切比雪夫多项式也具有正交性，即
-  
-$$\int_{-1}^1 T_n(x)T_m(x)\frac{dx}{\sqrt{1-x^2}}=\left\{
+&lt;hr /&gt;
+&lt;h2 id=&quot;切比雪夫节点&quot;&gt;切比雪夫节点&lt;/h2&gt;
+&lt;p&gt;对于拉格朗日插值公式，如何选取节点是一个重要的问题。通常而言，等距选取节点并不是一个最优的选择。我们考虑如下的问题描述：
+取插值节点：$a\leq x_0\leq x_1\leq ……\leq x_n\leq b$
+满足$L_n(x_k)=f(x_k)$的多项式插值余项&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;R_n(x)=f(x)-L_n(x)=\frac{f^{(n+1)}(\zeta_n)}{(n+1)!}\omega_{n+1}(x)&lt;/script&gt;
+
+&lt;p&gt;其中，&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\omega_{n+1}(x)=(x-x_0)(x-x_1)...(x-x_n)&lt;/script&gt;
+
+&lt;p&gt;选取$x_0,x_1,……,x_n$使&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{max}|\omega_{n+1}(x)|=\text{min}&lt;/script&gt;
+
+&lt;p&gt;因此需要选取切比雪夫多项式$T_{n+1}(x)$的全部零点。&lt;/p&gt;
+
+&lt;p&gt;如果$a=-1,b=1$,那么&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;x_k=\cos(\frac{(2k+1)\pi}{2(n+1)})&lt;/script&gt;
+
+&lt;p&gt;如果$[a,b]\neq [-1,1]$,那么&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;x_k=\frac{b+a}{2}+\frac{b-a}{2}\cos(\frac{(2k+1)\pi}{2(n+1)})&lt;/script&gt;
+
+&lt;p&gt;当然选取了节点之后既可以用拉格朗日插值，也可以用牛顿插值。&lt;/p&gt;
+
+&lt;h2 id=&quot;切比雪夫多项式&quot;&gt;切比雪夫多项式&lt;/h2&gt;
+&lt;p&gt;在微分方程的研究中，切比雪夫提出切比雪夫微分方程&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;(1-x^2)y^{\prime\prime}-xy^\prime+n^2y=0&lt;/script&gt;
+
+&lt;p&gt;和&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;(1-x^2)y^{\prime\prime}-3xy^\prime+n(n+2)y=0&lt;/script&gt;
+
+&lt;p&gt;相应地，第一类和第二类切比雪夫多项式分别为这两个方程的解。 这些方程是斯图姆-刘维尔微分方程的特殊情形。本文只研究第一类切比雪夫多项式。&lt;/p&gt;
+
+&lt;p&gt;第一类切比雪夫多项式由以下递推关系确定&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;T_0(x)=1&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;T_1(x)=x&lt;/script&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;T_{n+1}(x)=2xT_n(x)-T_{n-1}(x)&lt;/script&gt;
+
+&lt;p&gt;也可以用母函数表示
+&lt;script type=&quot;math/tex&quot;&gt;\sum_{n=0}^\infty T_n(x)t^n=\frac{1-tx}{1-2tx+t^2}&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;切比雪夫多项式也具有正交性，即&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\int_{-1}^1 T_n(x)T_m(x)\frac{dx}{\sqrt{1-x^2}}=\left\{
     \begin{array}{c}
     0：n\neq m\\
     \pi:n=m=0\\
     \pi/2:n=m\neq 0
     \end{array}
-    \right.$$
+    \right.&lt;/script&gt;
 
-离散形式的正交性可以表示为
-  
-$$\sum_{k=1}^{n+1} T_i(x_k)T_j(x_k)=\left\{
+&lt;p&gt;离散形式的正交性可以表示为&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\sum_{k=1}^{n+1} T_i(x_k)T_j(x_k)=\left\{
     \begin{array}{c}
     0：i\neq j\\
     n+1:i=j=0\\
     \frac{1}{2}(n+1):0&lt;i=j\neq n
     \end{array}
-    \right.$$
-  
-根据正交性，可以得到另外一种方法来进行拉格朗日插值。设$$p_n(x)=\sum_{i=0}^nc_iT_i(x)$$
-，易得
-  
-$$c_i=\frac{2}{n+1}\sum_{k=1}^{n+1}f(x_k)T_i(x_k)$$</content><author><name>scienceasdf</name></author><category term="数值算法" /><summary type="html">In this post we discuss on Chebyshev polynomials, nodes and interpolation.讨论关于切比雪夫多项式、节点与插值</summary></entry><entry><title type="html">再谈C++的字符串分割</title><link href="http://localhost:4000/programming/2018/08/25/splitstring/" rel="alternate" type="text/html" title="再谈C++的字符串分割" /><published>2018-08-25T00:00:00+08:00</published><updated>2018-08-25T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/08/25/splitstring</id><content type="html" xml:base="http://localhost:4000/programming/2018/08/25/splitstring/">**再次讨论如何分割C++的std::string.**
+    \right. %]]&gt;&lt;/script&gt;
 
----
+&lt;p&gt;根据正交性，可以得到另外一种方法来进行拉格朗日插值。设&lt;script type=&quot;math/tex&quot;&gt;p_n(x)=\sum_{i=0}^nc_iT_i(x)&lt;/script&gt;
+，易得&lt;/p&gt;
 
-一些别的方法我们之前已经讨论过了，例如Boost::tokenizer或者Boost::splitter或者QString来进行分割。不过这里我们讨论一下运用C++标准库的方法。
-  
-思路很简单，就是用istream流的迭代器处理。
-## 思路1
-首先一个比较简单的用法是
-```c++
-std::string text = &quot;Let me split this into words&quot;;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;c_i=\frac{2}{n+1}\sum_{k=1}^{n+1}f(x_k)T_i(x_k)&lt;/script&gt;</content><author><name>scienceasdf</name></author><category term="数值算法" /><summary type="html">In this post we discuss on Chebyshev polynomials, nodes and interpolation.讨论关于切比雪夫多项式、节点与插值</summary></entry><entry><title type="html">再谈C++的字符串分割</title><link href="http://localhost:4000/programming/2018/08/25/splitstring/" rel="alternate" type="text/html" title="再谈C++的字符串分割" /><published>2018-08-25T00:00:00+08:00</published><updated>2018-08-25T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/08/25/splitstring</id><content type="html" xml:base="http://localhost:4000/programming/2018/08/25/splitstring/">&lt;p&gt;&lt;strong&gt;再次讨论如何分割C++的std::string.&lt;/strong&gt;&lt;/p&gt;
 
-std::istringstream iss(text);
-std::vector&lt;std::string&gt; results((std::istream_iterator&lt;std::string&gt;(iss)),std::istream_iterator&lt;std::string&gt;());
-```
-如果使用C++11语法可以写成这样：
-```c++
-std::string text = &quot;Let me split this into words&quot;;
+&lt;hr /&gt;
 
-std::istringstream iss(text);
-std::vector&lt;std::string&gt; results((std::istream_iterator&lt;std::string&gt;{iss}),std::istream_iterator&lt;std::string&gt;());
-```
-这种思路的优点是可以处理任何流而不仅仅是字符串，但是缺点是不能自定义分隔符。
+&lt;p&gt;一些别的方法我们之前已经讨论过了，例如Boost::tokenizer或者Boost::splitter或者QString来进行分割。不过这里我们讨论一下运用C++标准库的方法。&lt;/p&gt;
 
-## 思路2
-```c++
-std::istream&amp; operator&gt;&gt;(std::istream&amp; is, std::string&amp; output)
-{
-   // ...does lots of things...
-}
-```
-这段代码肯定是不能改的，因为这是标准库里的东西。不过我们可以变通一下：
-```c++
-class WordDelimitedByComma : public std::string
-{};
-```
-这样做实际上是有争议的，因为std::string没有一个虚的析构函数，因此最好不要从std::string继承。当然，只要不去删除一个指向`WordDelimitedByComma`的指针，就不会出现问题。在这里我们只用来分割字符串。重载&lt;&lt;操作符：
-```c++
-std::istream&amp; operator&gt;&gt;(std::istream&amp; is, WordDelimitedByComma&amp; output)
-{
-    std::getline(is, output, ',');
-    return is;
-}
-```
-因此代码可以写成
-```c++
-std::string text = &quot;Let,me,split,this,into,words&quot;;
+&lt;p&gt;思路很简单，就是用istream流的迭代器处理。&lt;/p&gt;
+&lt;h2 id=&quot;思路1&quot;&gt;思路1&lt;/h2&gt;
+&lt;p&gt;首先一个比较简单的用法是&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Let me split this into words&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-std::istringstream iss(text);
-std::vector&lt;std::string&gt; results((std::istream_iterator&lt;WordDelimitedByComma&gt;(iss)), std::istream_iterator&lt;WordDelimitedByComma&gt;());
-```
-更为通用的代码可以写成
-```c++
-template&lt;char delimiter&gt;
-class WordDelimitedBy : public std::string
-{};
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istringstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;results&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;如果使用C++11语法可以写成这样：&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Let me split this into words&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-std::string text = &quot;Let,me,split,this,into,words&quot;;
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istringstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;results&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这种思路的优点是可以处理任何流而不仅仅是字符串，但是缺点是不能自定义分隔符。&lt;/p&gt;
 
-std::istringstream iss(text);
-std::vector&lt;std::string&gt; results((std::istream_iterator&lt;WordDelimitedBy&lt;','&gt;&gt;(iss)), std::istream_iterator&lt;WordDelimitedBy&lt;','&gt;&gt;());
-```
-这个的优点是
-* 允许在编译器定义任意的分隔符
-* 可以使用任何流而不仅仅是字符串
-* 比方法1快20%至30%
-  
-而缺点是分隔符只能在编译器定义，且代码量较大。
+&lt;h2 id=&quot;思路2&quot;&gt;思路2&lt;/h2&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;c1&quot;&gt;// ...does lots of things...
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这段代码肯定是不能改的，因为这是标准库里的东西。不过我们可以变通一下：&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WordDelimitedByComma&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这样做实际上是有争议的，因为std::string没有一个虚的析构函数，因此最好不要从std::string继承。当然，只要不去删除一个指向&lt;code class=&quot;highlighter-rouge&quot;&gt;WordDelimitedByComma&lt;/code&gt;的指针，就不会出现问题。在这里我们只用来分割字符串。重载«操作符：&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WordDelimitedByComma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;','&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;因此代码可以写成&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Let,me,split,this,into,words&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-## 思路3
-```c++
-std::vector&lt;std::string&gt; split(const std::string&amp; s, char delimiter)
-{
-    std::vector&lt;std::string&gt; tokens;
-    std::string token;
-    std::istringstream tokenStream(s);
-    while(std::getline(tokenStream, token, delimiter)){
-        tokens.push_back(token);
-    }
-    return tokens;
-}
-```
-这个思路的有点在于
-* 接口清晰
-* 能够在运行期使用任何分隔符</content><author><name>scienceasdf</name></author><category term="C++" /><summary type="html">再次讨论如何分割C++的std::string.</summary></entry><entry><title type="html">初窥Qt WebAssembly</title><link href="http://localhost:4000/programming/2018/08/23/qtwasm/" rel="alternate" type="text/html" title="初窥Qt WebAssembly" /><published>2018-08-23T00:00:00+08:00</published><updated>2018-08-23T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/08/23/qtwasm</id><content type="html" xml:base="http://localhost:4000/programming/2018/08/23/qtwasm/">**Qt 5.11发布了Qt WebAssembly的技术预览(Technology Preview)。对Qt WebAssembly的代码进行了编译并编译了一些程序。**
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istringstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;results&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WordDelimitedByComma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WordDelimitedByComma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;更为通用的代码可以写成&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delimiter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WordDelimitedBy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
 
----
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Let,me,split,this,into,words&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-## 安装最新emscripten
-开发机系统为Ubuntu 18.04，直接用apt install 得到的emscripten版本太老，因此需要最新版本的[emscripten](https://s3.amazonaws.com/mozilla-games/emscripten/releases/emsdk-portable.tar.gz).下载解压后
-```
-./emsdk update
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istringstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;results&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WordDelimitedBy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;','&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream_iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WordDelimitedBy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;','&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这个的优点是&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;允许在编译器定义任意的分隔符&lt;/li&gt;
+  &lt;li&gt;可以使用任何流而不仅仅是字符串&lt;/li&gt;
+  &lt;li&gt;比方法1快20%至30%&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;而缺点是分隔符只能在编译器定义，且代码量较大。&lt;/p&gt;
+
+&lt;h2 id=&quot;思路3&quot;&gt;思路3&lt;/h2&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delimiter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tokens&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istringstream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tokenStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tokenStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delimiter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;tokens&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;push_back&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tokens&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这个思路的有点在于&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;接口清晰&lt;/li&gt;
+  &lt;li&gt;能够在运行期使用任何分隔符&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>scienceasdf</name></author><category term="C++" /><summary type="html">再次讨论如何分割C++的std::string.</summary></entry><entry><title type="html">初窥Qt WebAssembly</title><link href="http://localhost:4000/programming/2018/08/23/qtwasm/" rel="alternate" type="text/html" title="初窥Qt WebAssembly" /><published>2018-08-23T00:00:00+08:00</published><updated>2018-08-23T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/08/23/qtwasm</id><content type="html" xml:base="http://localhost:4000/programming/2018/08/23/qtwasm/">&lt;p&gt;&lt;strong&gt;Qt 5.11发布了Qt WebAssembly的技术预览(Technology Preview)。对Qt WebAssembly的代码进行了编译并编译了一些程序。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;安装最新emscripten&quot;&gt;安装最新emscripten&lt;/h2&gt;
+&lt;p&gt;开发机系统为Ubuntu 18.04，直接用apt install 得到的emscripten版本太老，因此需要最新版本的&lt;a href=&quot;https://s3.amazonaws.com/mozilla-games/emscripten/releases/emsdk-portable.tar.gz&quot;&gt;emscripten&lt;/a&gt;.下载解压后&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./emsdk update
 ./emsdk install latest
 ./emsdk activate latest
-```
-然后设置环境变量，可以`source ./emsdk_env.sh`
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;然后设置环境变量，可以&lt;code class=&quot;highlighter-rouge&quot;&gt;source ./emsdk_env.sh&lt;/code&gt;&lt;/p&gt;
 
-## 编译Qt-WebAssembly源码
-首先下载好源码，然后坑也不少。按照官方wiki的命令编译不了，需要用命令`./configure -xplatform emscripten -developer-build -release -static -no-thread -nomake tests -nomake examples  -no-dbus -no-headersclean -system-libpng -no-ssl -no-warnings-are-errors`编译。编译的时候会提示不能确定指令集架构，是因为用了emscripten1.38的原因，需要在qtbase文件夹下的configure.pri修改
-```
-else: html5:exists($$test_out_dir/arch.js.mem): \
+&lt;h2 id=&quot;编译qt-webassembly源码&quot;&gt;编译Qt-WebAssembly源码&lt;/h2&gt;
+&lt;p&gt;首先下载好源码，然后坑也不少。按照官方wiki的命令编译不了，需要用命令&lt;code class=&quot;highlighter-rouge&quot;&gt;./configure -xplatform emscripten -developer-build -release -static -no-thread -nomake tests -nomake examples  -no-dbus -no-headersclean -system-libpng -no-ssl -no-warnings-are-errors&lt;/code&gt;编译。编译的时候会提示不能确定指令集架构，是因为用了emscripten1.38的原因，需要在qtbase文件夹下的configure.pri修改&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;else: html5:exists($$test_out_dir/arch.js.mem): \
 content = $$cat($$test_out_dir/arch.js.mem, blob)
-```
-改成
-```
-html5:exists($$test_out_dir/arch.wasm): \
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;改成&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;html5:exists($$test_out_dir/arch.wasm): \
 content = $$cat($$test_out_dir/arch.wasm, blob)
-```
-就可以configure然后make了。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;就可以configure然后make了。&lt;/p&gt;
 
-## 编译一个具体的程序
-编译程序用命令
-```
-/qtbase/bin/qmake 
+&lt;h2 id=&quot;编译一个具体的程序&quot;&gt;编译一个具体的程序&lt;/h2&gt;
+&lt;p&gt;编译程序用命令&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/qtbase/bin/qmake 
 make
-```
-然后可以用命令`python -m SimpleHTTPServer`启动一个简单的http服务器。
-  
-不过编译的时候也有坑，不知道为什么，include目录不能有/usr/include，具体只能加上自己的目录，例如/usr/include/eigen3.这个问题的原因目前没有明白。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;然后可以用命令&lt;code class=&quot;highlighter-rouge&quot;&gt;python -m SimpleHTTPServer&lt;/code&gt;启动一个简单的http服务器。&lt;/p&gt;
 
-## 实际效果
-我把easyAuto给编译成了wasm文件。具体的文件包括有easyAuto.js, easyAuto.wasm, easyAuto.html, qtloader.js, qtlogo.svg.最后的效果见[网站](https://scienceasdf.gitee.io/site/rootLocus/index.html)。在easyAuto中的QtChart不能使用openGL加速绘制。此外还有的坑包括
-* iOS设备不支持wasm
-* 移动设备打开网页后，文本框无法触发虚拟键盘。这是因为整个Qt程序是一个canvas，其中的文本框不是dom对象，因此文本框只能用外部键盘输入，或者自己画一个键盘。。。。。。。
-* Qt程序不能调用系统的字体，程序里面自带了英文字体，而中文字体则无法显示。奇怪的是我在程序里面加上中文字体一起打包编译仍然显示中文不出。好像是需要在源码中改/qtbase/src/plugins/platforms/html5/font里面的qrc，具体是不是我也不知道。。。。。。
-* wasm文件很大，不过倒是可以在服务器端压缩。
-* 在手机上运行很卡，而且有的demo甚至会闪退。
-* 无法获取本地文件，解决方法见[这里](https://codereview.qt-project.org/#/c/228599/)。
-  
-总的感觉坑还是不少，不过这个只是技术预览，最终版希望能够有很大改进。这里给出几张easyAuto-WebAssembly程序的截图吧。
-&lt;img src=&quot;{{ site.url }}/assets//blog_images/easyauto_wasm1.png&quot; width=&quot;350px&quot; height=&quot;200px&quot;/&gt;
-&lt;img src=&quot;{{ site.url }}/assets//blog_images/easyauto_wasm2.png&quot; width=&quot;350px&quot; height=&quot;200px&quot;/&gt;
-&lt;img src=&quot;{{ site.url }}/assets//blog_images/easyauto_wasm3.png&quot; width=&quot;350px&quot; height=&quot;200px&quot;/&gt;</content><author><name>scienceasdf</name></author><category term="Ubuntu" /><category term="Linux" /><summary type="html">Qt 5.11发布了Qt WebAssembly的技术预览(Technology Preview)。对Qt WebAssembly的代码进行了编译并编译了一些程序。</summary></entry><entry><title type="html">最近使用Ubuntu的一些总结</title><link href="http://localhost:4000/programming/2018/06/02/ubuntu/" rel="alternate" type="text/html" title="最近使用Ubuntu的一些总结" /><published>2018-06-02T00:00:00+08:00</published><updated>2018-06-02T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/06/02/ubuntu</id><content type="html" xml:base="http://localhost:4000/programming/2018/06/02/ubuntu/">**最近使用Ubuntu系统的一些小技巧总结。**
+&lt;p&gt;不过编译的时候也有坑，不知道为什么，include目录不能有/usr/include，具体只能加上自己的目录，例如/usr/include/eigen3.这个问题的原因目前没有明白。&lt;/p&gt;
 
----
+&lt;h2 id=&quot;实际效果&quot;&gt;实际效果&lt;/h2&gt;
+&lt;p&gt;我把easyAuto给编译成了wasm文件。具体的文件包括有easyAuto.js, easyAuto.wasm, easyAuto.html, qtloader.js, qtlogo.svg.最后的效果见&lt;a href=&quot;https://scienceasdf.gitee.io/site/rootLocus/index.html&quot;&gt;网站&lt;/a&gt;。在easyAuto中的QtChart不能使用openGL加速绘制。此外还有的坑包括&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;iOS设备不支持wasm&lt;/li&gt;
+  &lt;li&gt;移动设备打开网页后，文本框无法触发虚拟键盘。这是因为整个Qt程序是一个canvas，其中的文本框不是dom对象，因此文本框只能用外部键盘输入，或者自己画一个键盘。。。。。。。&lt;/li&gt;
+  &lt;li&gt;Qt程序不能调用系统的字体，程序里面自带了英文字体，而中文字体则无法显示。奇怪的是我在程序里面加上中文字体一起打包编译仍然显示中文不出。好像是需要在源码中改/qtbase/src/plugins/platforms/html5/font里面的qrc，具体是不是我也不知道。。。。。。&lt;/li&gt;
+  &lt;li&gt;wasm文件很大，不过倒是可以在服务器端压缩。&lt;/li&gt;
+  &lt;li&gt;在手机上运行很卡，而且有的demo甚至会闪退。&lt;/li&gt;
+  &lt;li&gt;无法获取本地文件，解决方法见&lt;a href=&quot;https://codereview.qt-project.org/#/c/228599/&quot;&gt;这里&lt;/a&gt;。&lt;/li&gt;
+&lt;/ul&gt;
 
-## 编译最新CMake
-```
-sudo apt remove cmake
+&lt;p&gt;总的感觉坑还是不少，不过这个只是技术预览，最终版希望能够有很大改进。这里给出几张easyAuto-WebAssembly程序的截图吧。
+&lt;img src=&quot;http://localhost:4000/assets//blog_images/easyauto_wasm1.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
+&lt;img src=&quot;http://localhost:4000/assets//blog_images/easyauto_wasm2.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;
+&lt;img src=&quot;http://localhost:4000/assets//blog_images/easyauto_wasm3.png&quot; width=&quot;350px&quot; height=&quot;200px&quot; /&gt;&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="Ubuntu" /><category term="Linux" /><summary type="html">Qt 5.11发布了Qt WebAssembly的技术预览(Technology Preview)。对Qt WebAssembly的代码进行了编译并编译了一些程序。</summary></entry><entry><title type="html">最近使用Ubuntu的一些总结</title><link href="http://localhost:4000/programming/2018/06/02/ubuntu/" rel="alternate" type="text/html" title="最近使用Ubuntu的一些总结" /><published>2018-06-02T00:00:00+08:00</published><updated>2018-06-02T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/06/02/ubuntu</id><content type="html" xml:base="http://localhost:4000/programming/2018/06/02/ubuntu/">&lt;p&gt;&lt;strong&gt;最近使用Ubuntu系统的一些小技巧总结。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;编译最新cmake&quot;&gt;编译最新CMake&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt remove cmake
 sudo apt purge --auto-remove cmake
 version=3.11
 build=1
@@ -668,21 +659,19 @@ cd cmake-$version.$build
 make -j16
 sudo make install
 cmake --version
-```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-## 创建快捷方式
-```
-sudo apt-get install --no-install-recommends gnome-panel
+&lt;h2 id=&quot;创建快捷方式&quot;&gt;创建快捷方式&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install --no-install-recommends gnome-panel
 gnome-desktop-item-edit --create-new ~/桌面
-```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-## 从HDMI输出声音
-```
-sudo apt-add-repository ppa:yktooo/ppa
+&lt;h2 id=&quot;从hdmi输出声音&quot;&gt;从HDMI输出声音&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-add-repository ppa:yktooo/ppa
 sudo apt update
 sudo apt install indicator-sound-switcher
-```
-利用indicator-sound-switcher便可以在各个通道切换声音输出。注意Ubuntu 18.04添加ppa以后不需要`sudo apt update`这一步了。</content><author><name>scienceasdf</name></author><category term="Ubuntu" /><category term="Linux" /><summary type="html">最近使用Ubuntu系统的一些小技巧总结。</summary></entry><entry><title type="html">泊松方程的有限元求解（理论）</title><link href="http://localhost:4000/math/2018/04/27/poinsonFEM/" rel="alternate" type="text/html" title="泊松方程的有限元求解（理论）" /><published>2018-04-27T00:00:00+08:00</published><updated>2018-04-27T00:00:00+08:00</updated><id>http://localhost:4000/math/2018/04/27/poinsonFEM</id><content type="html" xml:base="http://localhost:4000/math/2018/04/27/poinsonFEM/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;利用indicator-sound-switcher便可以在各个通道切换声音输出。注意Ubuntu 18.04添加ppa以后不需要&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt update&lt;/code&gt;这一步了。&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="Ubuntu" /><category term="Linux" /><summary type="html">最近使用Ubuntu系统的一些小技巧总结。</summary></entry><entry><title type="html">泊松方程的有限元求解（理论）</title><link href="http://localhost:4000/math/2018/04/27/poinsonFEM/" rel="alternate" type="text/html" title="泊松方程的有限元求解（理论）" /><published>2018-04-27T00:00:00+08:00</published><updated>2018-04-27T00:00:00+08:00</updated><id>http://localhost:4000/math/2018/04/27/poinsonFEM</id><content type="html" xml:base="http://localhost:4000/math/2018/04/27/poinsonFEM/">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
   		MathJax.Hub.Config({
             tex2jax: {
                 inlineMath: [['$','$'], ['\\(','\\)']]
@@ -711,33 +700,33 @@ sudo apt install indicator-sound-switcher
   		});
 &lt;/script&gt;
 
- &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
-**从泊松方程入手，谈论有限元的一些基本知识。**
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
 
----
-**本文公式较多，在浏览器中将会花较长时间用于渲染公式。**  
-  
---- 
-## 泊松方程
-泊松方程为
+&lt;p&gt;&lt;strong&gt;从泊松方程入手，谈论有限元的一些基本知识。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;本文公式较多，在浏览器中将会花较长时间用于渲染公式。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;泊松方程&quot;&gt;泊松方程&lt;/h2&gt;
+&lt;p&gt;泊松方程为
 \begin{equation}
 \Delta u = f
 \end{equation}
 在这里$ \Delta $代表的是拉普拉斯算子，而 $ f$和$\varphi $可以是在流形上的实数或复数值的方程。当流形属于欧几里得空间，而拉普拉斯算子通常表示为 ${\nabla}^2$，因此泊松方程通常写成
 \begin{equation}
 \left( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2} \right)\varphi(x,y,z) = f(x,y,z)
-\end{equation}
+\end{equation}&lt;/p&gt;
 
-## 具体的问题及求解
-我们提出如下的带有边界条件的问题  
-$$
-\begin{align*} -\Delta u &amp;= f \qquad\qquad &amp; \text{in}\ \Omega, \\ u &amp;= 0 \qquad\qquad &amp; \text{on}\ \partial\Omega. \end{align*}
-$$  
+&lt;h2 id=&quot;具体的问题及求解&quot;&gt;具体的问题及求解&lt;/h2&gt;
+&lt;p&gt;我们提出如下的带有边界条件的问题&lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{align*} -\Delta u &amp;= f \qquad\qquad &amp; \text{in}\ \Omega, \\ u &amp;= 0 \qquad\qquad &amp; \text{on}\ \partial\Omega. \end{align*} %]]&gt;&lt;/script&gt;&lt;br /&gt;
 求解的区域为平面单位正方形，$\Omega=[0,1]^2$。我们假设一个测试函数$\varphi$，并在上式的左边乘上这个函数，对整个区域$\Omega$积分，可以得到
 \begin{equation}
 -\int_\Omega \varphi \Delta u = \int_\Omega \varphi f
 \end{equation}
-由[高斯散度定理（奥斯特罗格拉斯基公式）](https://en.wikipedia.org/wiki/Divergence_theorem)可以得到：
+由&lt;a href=&quot;https://en.wikipedia.org/wiki/Divergence_theorem&quot;&gt;高斯散度定理（奥斯特罗格拉斯基公式）&lt;/a&gt;可以得到：
 \begin{equation}
 \int_\Omega \nabla\varphi \cdot \nabla u - \int_{\partial\Omega} \varphi \mathbf{n}\cdot \nabla u = \int_\Omega \varphi f
 \end{equation}
@@ -753,197 +742,190 @@ $$
 \begin{equation}
 \mathbf{AU}=\mathbf{F}
 \end{equation}
-矩阵$\mathbf{A},\mathbf{F}$定义为  
-$$
-\begin{align*} A_{ij} &amp;= (\nabla\varphi_i, \nabla \varphi_j), \\ F_i &amp;= (\varphi_i, f). \end{align*}
-$$  
-显然，这样就有$\sum_j \mathbf{A}_{ij}\mathbf{U}_j=\mathbf{F}_i$。前面看到我们是左乘$\varphi$，对于对称矩阵（自伴随的），问题是以一样的，不过对于非对称的$\mathbf{A}$，那么经验表明这样会在计算中产生更大的误差。现在整理一下：
-* $\mathbf{A,U,F}$都是稀疏矩阵
-* 积分的计算采用高斯积分算法  
+矩阵$\mathbf{A},\mathbf{F}$定义为&lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+\begin{align*} A_{ij} &amp;= (\nabla\varphi_i, \nabla \varphi_j), \\ F_i &amp;= (\varphi_i, f). \end{align*} %]]&gt;&lt;/script&gt;&lt;br /&gt;
+显然，这样就有$\sum_j \mathbf{A}_{ij}\mathbf{U}_j=\mathbf{F}_i$。前面看到我们是左乘$\varphi$，对于对称矩阵（自伴随的），问题是以一样的，不过对于非对称的$\mathbf{A}$，那么经验表明这样会在计算中产生更大的误差。现在整理一下：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;$\mathbf{A,U,F}$都是稀疏矩阵&lt;/li&gt;
+  &lt;li&gt;积分的计算采用高斯积分算法&lt;/li&gt;
+&lt;/ul&gt;
 
-这样就是全部思路。</content><author><name>scienceasdf</name></author><category term="有限元" /><category term="数值算法" /><summary type="html"></summary></entry><entry><title type="html">实现一个简单的在线请假系统</title><link href="http://localhost:4000/programming/2018/04/26/serverSystem/" rel="alternate" type="text/html" title="实现一个简单的在线请假系统" /><published>2018-04-26T00:00:00+08:00</published><updated>2018-04-26T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/04/26/serverSystem</id><content type="html" xml:base="http://localhost:4000/programming/2018/04/26/serverSystem/">**实现了一个B/S架构的在线请假申请系统。路子十分野，所以只是用于这种极为特殊的个人项目里面。**
-  
+&lt;p&gt;这样就是全部思路。&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="有限元" /><category term="数值算法" /><summary type="html"></summary></entry><entry><title type="html">实现一个简单的在线请假系统</title><link href="http://localhost:4000/programming/2018/04/26/serverSystem/" rel="alternate" type="text/html" title="实现一个简单的在线请假系统" /><published>2018-04-26T00:00:00+08:00</published><updated>2018-04-26T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/04/26/serverSystem</id><content type="html" xml:base="http://localhost:4000/programming/2018/04/26/serverSystem/">&lt;p&gt;&lt;strong&gt;实现了一个B/S架构的在线请假申请系统。路子十分野，所以只是用于这种极为特殊的个人项目里面。&lt;/strong&gt;&lt;/p&gt;
 
-  
----
-自从上次发现了qhttpserver之后，便增加了很多可以玩的东西。以前有个同学找我希望我做一个在线的请假申请系统，当时我还比较弱，只会C++/Qt和sqlite开发，想的架构是C/S架构的，我想了想，这个不能跨平台，不便于产品更新，而且即使这样我也做不出来。现在写过网页，写过http server的程序，这个东西我想了想，还是能够实现的。  
+&lt;hr /&gt;
+&lt;p&gt;自从上次发现了qhttpserver之后，便增加了很多可以玩的东西。以前有个同学找我希望我做一个在线的请假申请系统，当时我还比较弱，只会C++/Qt和sqlite开发，想的架构是C/S架构的，我想了想，这个不能跨平台，不便于产品更新，而且即使这样我也做不出来。现在写过网页，写过http server的程序，这个东西我想了想，还是能够实现的。&lt;/p&gt;
 
-## 基本需求
-用户访问页面，填写相关信息，并且需要附上说明请假情况的图片，通过post请求发送到服务器。  
+&lt;h2 id=&quot;基本需求&quot;&gt;基本需求&lt;/h2&gt;
+&lt;p&gt;用户访问页面，填写相关信息，并且需要附上说明请假情况的图片，通过post请求发送到服务器。&lt;/p&gt;
 
-## 用户选择图片并在预览
-首先需要一个文件输入框`&lt;input type=&quot;file&quot; id=&quot;take-picture&quot; accept=&quot;image/*&quot;&gt;`，用户点击按钮可以通过调用摄像头或者选择存储空间中的图片。选择了图片之后还需要预览，预览的相关代码如下：
-```javascript
-(function () {
-    var takePicture = document.querySelector(&quot;#take-picture&quot;),
-        showPicture = document.querySelector(&quot;#show-picture&quot;);
+&lt;h2 id=&quot;用户选择图片并在预览&quot;&gt;用户选择图片并在预览&lt;/h2&gt;
+&lt;p&gt;首先需要一个文件输入框&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;input type=&quot;file&quot; id=&quot;take-picture&quot; accept=&quot;image/*&quot;&amp;gt;&lt;/code&gt;，用户点击按钮可以通过调用摄像头或者选择存储空间中的图片。选择了图片之后还需要预览，预览的相关代码如下：&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;takePicture&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#take-picture&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;showPicture&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#show-picture&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-    if (takePicture &amp;&amp; showPicture) {
-        // Set events
-        takePicture.onchange = function (event) {
-            // Get a reference to the taken picture or chosen file
-            var files = event.target.files,
-                file;
-            if (files &amp;&amp; files.length &gt; 0) {
-                file = files[0];
-                try {
-                    // Get window.URL object
-                    var fileReader = new FileReader();
-                    fileReader.onload = function (event) {
-                        showPicture.src = event.target.result;
-                    };
-                    fileReader.readAsDataURL(file);
-                    imageFlag = true;
-                }
-                catch (e) {
-                    try {
-                        // Fallback if createObjectURL is not supported
-                        var fileReader = new FileReader();
-                        fileReader.onload = function (event) {
-                            showPicture.src = event.target.result;
-                        };
-                        fileReader.readAsDataURL(file);
-                    }
-                    catch (e) {
-                        //
-                        window.alert(&quot;ca)&quot;);
-                        var error = document.querySelector(&quot;#error&quot;);
-                        if (error) {
-                            error.innerHTML = &quot;Neither createObjectURL or FileReader are supported&quot;;
-                        }
-                    }
-                }
-            }
-        };
-    }
-})();
-```
-我经过实际的测试，发现本来预览图片应该有两种方法的，但是实际上在手机上获取window.URL既不抛出异常，也不能加载图片，因此就直接用`readAsDataURL`的方法。  
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;takePicture&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;showPicture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Set events&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;takePicture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onchange&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// Get a reference to the taken picture or chosen file&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;c1&quot;&gt;// Get window.URL object&lt;/span&gt;
+                    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fileReader&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FileReader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+                    &lt;span class=&quot;nx&quot;&gt;fileReader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;nx&quot;&gt;showPicture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+                    &lt;span class=&quot;nx&quot;&gt;fileReader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;readAsDataURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;nx&quot;&gt;imageFlag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;c1&quot;&gt;// Fallback if createObjectURL is not supported&lt;/span&gt;
+                        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fileReader&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FileReader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+                        &lt;span class=&quot;nx&quot;&gt;fileReader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                            &lt;span class=&quot;nx&quot;&gt;showPicture&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                        &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+                        &lt;span class=&quot;nx&quot;&gt;fileReader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;readAsDataURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
+                        &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ca)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;querySelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#error&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                            &lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Neither createObjectURL or FileReader are supported&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;我经过实际的测试，发现本来预览图片应该有两种方法的，但是实际上在手机上获取window.URL既不抛出异常，也不能加载图片，因此就直接用&lt;code class=&quot;highlighter-rouge&quot;&gt;readAsDataURL&lt;/code&gt;的方法。&lt;/p&gt;
 
-## 关于信息的上传
-这里我用的是野得不能再野得路子了。通常的解决方案是生成multipart/form-data数据，但是这个方法我不用的原因是服务器端我没有使用任何PHP（目前还没有学习PHP的必要），C++来parse这个东西又需要另外写代码，比较麻烦，因此直接将单独的图片数据post到服务器。图片的post也是个大麻烦，理论上xhr可以直接send类型为file的对象的，但是实际上却在我的手机上不支持。因此，还是需要用下面的办法，就是`readAsArrayBuffer`，然后调用回调函数发送请求。
-```javascript
-var fileReader2 = new FileReader();
-fileReader2.readAsArrayBuffer(document.getElementById(&quot;take-picture&quot;).files[0]);
-fileReader2.onloadend = function (event) {
-    var xhr2 = new XMLHttpRequest();
-    xhr2.onreadystatechange = function () {
-        if (xhr2.readyState == XMLHttpRequest.DONE) {
-            swal(xhr2.response);
-        }
-    }
-    xhr2.open(&quot;POST&quot;,  encodeURI(queryStr));
-    xhr2.send(event.target.result);
-}
-```
-接下来的问题就是其他信息的上传。本来想用header来发送的，不过却发现手机上连header都发不了（我感觉这里很有可能是我自己代码的问题，手机浏览器怎么可能不能发送请求头</content><author><name>scienceasdf</name></author><category term="C++" /><category term="Qt" /><category term="安卓开发" /><category term="网络" /><category term="javascript" /><summary type="html">实现了一个B/S架构的在线请假申请系统。路子十分野，所以只是用于这种极为特殊的个人项目里面。</summary></entry><entry><title type="html">Qt for Android实现与webview的交互</title><link href="http://localhost:4000/programming/2018/04/23/QtLocalHost/" rel="alternate" type="text/html" title="Qt for Android实现与webview的交互" /><published>2018-04-23T00:00:00+08:00</published><updated>2018-04-23T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/04/23/QtLocalHost</id><content type="html" xml:base="http://localhost:4000/programming/2018/04/23/QtLocalHost/">**在Qt的程序里搭建一个localhost，实现前端webview+html+js和后端C++的交互，该解决方案能够跨平台。**
-  
+&lt;h2 id=&quot;关于信息的上传&quot;&gt;关于信息的上传&lt;/h2&gt;
+&lt;p&gt;这里我用的是野得不能再野得路子了。通常的解决方案是生成multipart/form-data数据，但是这个方法我不用的原因是服务器端我没有使用任何PHP（目前还没有学习PHP的必要），C++来parse这个东西又需要另外写代码，比较麻烦，因此直接将单独的图片数据post到服务器。图片的post也是个大麻烦，理论上xhr可以直接send类型为file的对象的，但是实际上却在我的手机上不支持。因此，还是需要用下面的办法，就是&lt;code class=&quot;highlighter-rouge&quot;&gt;readAsArrayBuffer&lt;/code&gt;，然后调用回调函数发送请求。&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fileReader2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FileReader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;fileReader2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;readAsArrayBuffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;take-picture&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;fileReader2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onloadend&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;xhr2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;XMLHttpRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;xhr2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onreadystatechange&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;xhr2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;readyState&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;XMLHttpRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;DONE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;swal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;xhr2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;xhr2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;POST&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;nb&quot;&gt;encodeURI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;queryStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;xhr2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;接下来的问题就是其他信息的上传。本来想用header来发送的，不过却发现手机上连header都发不了（我感觉这里很有可能是我自己代码的问题，手机浏览器怎么可能不能发送请求头&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="C++" /><category term="Qt" /><category term="安卓开发" /><category term="网络" /><category term="javascript" /><summary type="html">实现了一个B/S架构的在线请假申请系统。路子十分野，所以只是用于这种极为特殊的个人项目里面。</summary></entry><entry><title type="html">Qt for Android实现与webview的交互</title><link href="http://localhost:4000/programming/2018/04/23/QtLocalHost/" rel="alternate" type="text/html" title="Qt for Android实现与webview的交互" /><published>2018-04-23T00:00:00+08:00</published><updated>2018-04-23T00:00:00+08:00</updated><id>http://localhost:4000/programming/2018/04/23/QtLocalHost</id><content type="html" xml:base="http://localhost:4000/programming/2018/04/23/QtLocalHost/">&lt;p&gt;&lt;strong&gt;在Qt的程序里搭建一个localhost，实现前端webview+html+js和后端C++的交互，该解决方案能够跨平台。&lt;/strong&gt;&lt;/p&gt;
 
-  
----
-Qt要在移动端写浏览器只能用一些比较牵强的方案（如果不自己造轮子的话），就是QtWebView.然而QtWebView提供的接口太少，不方便C++与html交互，如果是写web应用就比较劣势，毕竟cordova，react native等的方案非常流行，如果无法前后端交互，纯一个静态页面实在不好玩，还不如把网页挂在互联网上用浏览器直接访问网页。在安卓上有一种可行的方案：C++通过jni与java交互，再与js对象交互。这个也有弊端，一个是不是跨平台的方案，第二个是我不会java，只会c++和js.在网上查到的另一种解决方法是搭建一个local server，通过http请求进行交互。  
+&lt;hr /&gt;
+&lt;p&gt;Qt要在移动端写浏览器只能用一些比较牵强的方案（如果不自己造轮子的话），就是QtWebView.然而QtWebView提供的接口太少，不方便C++与html交互，如果是写web应用就比较劣势，毕竟cordova，react native等的方案非常流行，如果无法前后端交互，纯一个静态页面实在不好玩，还不如把网页挂在互联网上用浏览器直接访问网页。在安卓上有一种可行的方案：C++通过jni与java交互，再与js对象交互。这个也有弊端，一个是不是跨平台的方案，第二个是我不会java，只会c++和js.在网上查到的另一种解决方法是搭建一个local server，通过http请求进行交互。&lt;/p&gt;
 
-在GitHub上找到了一些用Qt搭建http server的代码（当然用boost也可以），例如[QtWEbApp](http://stefanfrings.de/qtwebapp/index-en.html)，[QtWebApp](https://github.com/fffaraz/QtWebApp)。我最终用的是[qhttpserver](https://github.com/nikhilm/qhttpserver)，star数目很多，比较可惜的是有一阵没有更新了，但是还是很好的一个东西。  
+&lt;p&gt;在GitHub上找到了一些用Qt搭建http server的代码（当然用boost也可以），例如&lt;a href=&quot;http://stefanfrings.de/qtwebapp/index-en.html&quot;&gt;QtWEbApp&lt;/a&gt;，&lt;a href=&quot;https://github.com/fffaraz/QtWebApp&quot;&gt;QtWebApp&lt;/a&gt;。我最终用的是&lt;a href=&quot;https://github.com/nikhilm/qhttpserver&quot;&gt;qhttpserver&lt;/a&gt;，star数目很多，比较可惜的是有一阵没有更新了，但是还是很好的一个东西。&lt;/p&gt;
 
-这个程序按照GitHub直接下载下来的项目把代码编译，例子可以直接运行在安卓机上。例如运行例子Helloworld，那么在手机浏览器上打开http://localhost:8080，可以看到helloworld字样。按照release模式编译得到libqhttpserver.so，然后按照文档在自己的项目里面添加头文件包含和需要链接的库就可以了。  
+&lt;p&gt;这个程序按照GitHub直接下载下来的项目把代码编译，例子可以直接运行在安卓机上。例如运行例子Helloworld，那么在手机浏览器上打开http://localhost:8080，可以看到helloworld字样。按照release模式编译得到libqhttpserver.so，然后按照文档在自己的项目里面添加头文件包含和需要链接的库就可以了。&lt;/p&gt;
 
-在Qt构建移动web应用有两种方案：网页资源放在qrc文件里面，运行时把qrc里面的内容全部复制到存储中，或者直接放在assets目录下（**安卓的url格式为：file:///android_asset/site/groundTrackPlot.html，不能直接用assets目录访问，这个需要注意**）。由于QtWebView只是一个原生浏览器的wrapper，因此不能直接访问qrc里面的文件。现在一种可行的解决方案是后端直接用QFile读取qrc文件，作为http请求的响应返回给前端：
-```c++
-class HelloWorld : public QObject
-{
-    Q_OBJECT
+&lt;p&gt;在Qt构建移动web应用有两种方案：网页资源放在qrc文件里面，运行时把qrc里面的内容全部复制到存储中，或者直接放在assets目录下（&lt;strong&gt;安卓的url格式为：file:///android_asset/site/groundTrackPlot.html，不能直接用assets目录访问，这个需要注意&lt;/strong&gt;）。由于QtWebView只是一个原生浏览器的wrapper，因此不能直接访问qrc里面的文件。现在一种可行的解决方案是后端直接用QFile读取qrc文件，作为http请求的响应返回给前端：&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QObject&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Q_OBJECT&lt;/span&gt;
 
-public:
-    HelloWorld();
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 
-private slots:
-    void handleRequest(QHttpRequest *req, QHttpResponse *resp);
-};
+&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;slots&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handleRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QHttpRequest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QHttpResponse&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
 
-HelloWorld::HelloWorld()
-{
-    QHttpServer *server = new QHttpServer(this);
-    connect(server, SIGNAL(newRequest(QHttpRequest*, QHttpResponse*)),
-            this, SLOT(handleRequest(QHttpRequest*, QHttpResponse*)));
+&lt;span class=&quot;n&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;QHttpServer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QHttpServer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SIGNAL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QHttpRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QHttpResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SLOT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;handleRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QHttpRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QHttpResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)));&lt;/span&gt;
 
-    server-&gt;listen(QHostAddress::Any, 8080);
-}
+    &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QHostAddress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-void HelloWorld::handleRequest(QHttpRequest *req, QHttpResponse *resp)
-{
-    Q_UNUSED(req);
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;handleRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QHttpRequest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QHttpResponse&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Q_UNUSED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-    QByteArray body = req-&gt;path().toLocal8Bit();
-    qDebug() &lt;&lt; req-&gt;path();
-    QFile file(&quot;:&quot; + req-&gt;path());
-    if (!file.open(QIODevice::ReadOnly)) {
-        //return;
-    }
-    QByteArray data = QByteArray(file.readAll());
-    qDebug() &lt;&lt; data;
-    resp-&gt;setHeader(&quot;Content-Length&quot;, QString::number(data.size()));
-    resp-&gt;writeHead(200);
-    resp-&gt;end(data);
-    file.close();
-}
-```
-在main主函数里直接调用在QApplication对象创建后就创建HelloWorld(这个http server)，就可以实现想要的效果了。速度非常快，返回的数据量如果特别大那一定是渲染会花更多的时间而不是http请求的过程耗时间。用qrc的一个好处是编译成obj文件后占空间更小，而且不会被用户直接得到，但是编译会很花时间。     
+    &lt;span class=&quot;n&quot;&gt;QByteArray&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;toLocal8Bit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;qDebug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;QFile&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;:&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QIODevice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ReadOnly&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//return;
+&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;QByteArray&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QByteArray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;qDebug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setHeader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Content-Length&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()));&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;writeHead&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;在main主函数里直接调用在QApplication对象创建后就创建HelloWorld(这个http server)，就可以实现想要的效果了。速度非常快，返回的数据量如果特别大那一定是渲染会花更多的时间而不是http请求的过程耗时间。用qrc的一个好处是编译成obj文件后占空间更小，而且不会被用户直接得到，但是编译会很花时间。&lt;/p&gt;
 
-另外有时我们会需要Qt的http request是同步的，比如我们的localhost需要先访问一个外部的资源，再用得到的结果响应请求，那么代码如下
-```c++
-class HelloWorld : public QObject
-{
-    Q_OBJECT
+&lt;p&gt;另外有时我们会需要Qt的http request是同步的，比如我们的localhost需要先访问一个外部的资源，再用得到的结果响应请求，那么代码如下&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HelloWorld&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QObject&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Q_OBJECT&lt;/span&gt;
 
-public:
-    HelloWorld();
-    QByteArray get(const QString&amp;);
-    QNetworkAccessManager m_qnam;
-private slots:
-    void handleRequest(QHttpRequest *req, QHttpResponse *resp);
-};
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;QByteArray&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;QNetworkAccessManager&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m_qnam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;slots&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handleRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QHttpRequest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QHttpResponse&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
 
-HelloWorld::HelloWorld() : m_qnam()
-{
-    QHttpServer *server = new QHttpServer(this);
-    connect(server, SIGNAL(newRequest(QHttpRequest*, QHttpResponse*)),
-            this, SLOT(handleRequest(QHttpRequest*, QHttpResponse*)));
+&lt;span class=&quot;n&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m_qnam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;QHttpServer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QHttpServer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SIGNAL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QHttpRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QHttpResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SLOT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;handleRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QHttpRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QHttpResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)));&lt;/span&gt;
 
-    server-&gt;listen(QHostAddress::Any, 8080);
-}
+    &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QHostAddress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-QByteArray HelloWorld::get(const QString &amp;strUrl)
-{
-    assert(!strUrl.isEmpty());
+&lt;span class=&quot;n&quot;&gt;QByteArray&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
 
-    const QUrl url = QUrl::fromUserInput(strUrl);
-    assert(url.isValid());
+    &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QUrl&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QUrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fromUserInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isValid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
 
-    QNetworkRequest qnr(url);
-    qnr.setRawHeader(&quot;Origin&quot;,&quot;a&quot;);
-    QNetworkReply* reply = m_qnam.get(qnr); //m_qnam是QNetworkAccessManager对象
+    &lt;span class=&quot;n&quot;&gt;QNetworkRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;qnr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;qnr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setRawHeader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Origin&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;QNetworkReply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reply&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m_qnam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;qnr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//m_qnam是QNetworkAccessManager对象
+&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;QEventLoop&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eventLoop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QNetworkReply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;finished&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eventLoop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QEventLoop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;quit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;eventLoop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QEventLoop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ExcludeUserInputEvents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-    QEventLoop eventLoop;
-    connect(reply, &amp;QNetworkReply::finished, &amp;eventLoop, &amp;QEventLoop::quit);
-    eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
+    &lt;span class=&quot;n&quot;&gt;QByteArray&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;replyData&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;reply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deleteLater&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;reply&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nullptr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-    QByteArray replyData = reply-&gt;readAll();
-    reply-&gt;deleteLater();
-    reply = nullptr;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;replyData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-    return replyData;
-}
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;handleRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QHttpRequest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QHttpResponse&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;QByteArray&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;toLocal8Bit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;qDebug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 
-void HelloWorld::handleRequest(QHttpRequest *req, QHttpResponse *resp)
-{
-    QByteArray body = req-&gt;path().toLocal8Bit();
-    qDebug() &lt;&lt; req-&gt;path();
-
-    QByteArray data = get(&quot;some domain&quot; + req-&gt;path());
-    qDebug() &lt;&lt; data;
-    resp-&gt;setHeader(&quot;Content-Length&quot;, QString::number(data.size()));
-    resp-&gt;writeHead(200);
-    resp-&gt;end(data);
-}
-```
-这样我们就能够综合js,qml,c++的好处，得到一个十分优化的web应用程序。一个神奇的现象是安卓的后台机制，如果我在这个程序里面开了host，自己访问会很快，但是别的浏览器访问就会很慢，如果我们此时切回server的那个程序，再切出到外部浏览器，那么会发现资源又加载好了，这个的原因应该是Android的后台程序只会得到很少的性能的分配。</content><author><name>scienceasdf</name></author><category term="C++" /><category term="Qt" /><category term="安卓开发" /><category term="网络" /><category term="javascript" /><summary type="html">在Qt的程序里搭建一个localhost，实现前端webview+html+js和后端C++的交互，该解决方案能够跨平台。</summary></entry></feed>
+    &lt;span class=&quot;n&quot;&gt;QByteArray&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;some domain&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;qDebug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setHeader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Content-Length&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()));&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;writeHead&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;resp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这样我们就能够综合js,qml,c++的好处，得到一个十分优化的web应用程序。一个神奇的现象是安卓的后台机制，如果我在这个程序里面开了host，自己访问会很快，但是别的浏览器访问就会很慢，如果我们此时切回server的那个程序，再切出到外部浏览器，那么会发现资源又加载好了，这个的原因应该是Android的后台程序只会得到很少的性能的分配。&lt;/p&gt;</content><author><name>scienceasdf</name></author><category term="C++" /><category term="Qt" /><category term="安卓开发" /><category term="网络" /><category term="javascript" /><summary type="html">在Qt的程序里搭建一个localhost，实现前端webview+html+js和后端C++的交互，该解决方案能够跨平台。</summary></entry></feed>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+    	<style type="text/css">
+            @font-face
+            {
+                font-family: myFirstFont;
+                src: url("./Russkopis-Normalny.otf");
+            }
+        
+                body {font-family: myFirstFont;}
+        </style>
+           <style type='text/css'>
+                html { background-color: #333; }
+                @media only screen and (min-width: 600px){
+                    .ui-page {
+                        width: 1000px !important;
+                        margin: 0 auto !important;
+                        position: relative !important;
+                        border-right: 1px #666 outset !important;
+                        border-left: 1px #666 outset !important;
+                    }
+                }
+            </style>
+  <meta charset="utf8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>在线输出英文俄文花体</title>
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
+
+</head>
+
+
+<body>
+    <div data-role="page">
+        <div data-role="header">
+          <a href="../index.html" data-role="button" data-icon="home" data-ajax="false">首页</a>
+          <h1>在线输出<br>英文俄文花体</h1>
+        </div>
+        <label for="points">字号:</label>
+        <input type="range" name="size" id="size" value="22" min="0" max="100">
+
+        <label for="points">间距:</label>
+        <input type="range" name="spacing" id="spacing" value="0" min="-5" max="5">
+
+        <label for="points">行高（%）:</label>
+        <input type="range" name="height" id="height" value="100" min="70" max="300">
+        <br><br><br>请在下面输入文字.
+        <textarea name="TextInput" id="TextInput" class="input" cols="60" rows="10" style="font-family:myFirstFont; text-align: justify;word-wrap: break-word;">I love you!&#13;&#10;Я люблю тебя!</textarea>
+        
+    </div>
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+<script>
+TextInput.style.fontSize = "22px";
+$(document).ready(function() {
+    $( "#size" ).on( 'slidestop', function( event ) {
+    var TextInput = document.getElementById("TextInput");
+    TextInput.style.fontSize = $("#size").val()+"px";   
+    $('#TextInput').trigger('input');;
+});
+
+    $("#spacing").on( 'slidestop', function( event ) {
+    var TextInput = document.getElementById("TextInput");
+    TextInput.style.letterSpacing = $("#spacing").val()+"px";   
+    $('#TextInput').trigger('input');;
+});
+
+$("#height").on( 'slidestop', function( event ) {
+    var TextInput = document.getElementById("TextInput");
+    TextInput.style.lineHeight = $("#height").val()+"%";   
+    $('#TextInput').trigger('input');
+});
+});
+
+</script>
+
