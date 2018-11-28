@@ -63,9 +63,9 @@
 <script type="text/javascript">
     function getPaper() {
         if ($('input[name=figureType]:checked').attr('id') == "doi")
-            window.location.href = "/web/viewer?type=doi&str=" + $('#iDoi').val() + "";
+            window.location.href = "/web/viewer.html?type=doi&str=" + $('#iDoi').val() + "";
         else
-            window.location.href = "/web/viewer?type=isbn&str=" + $('#iDoi').val() + "";
+            window.location.href = "/web/viewer.html?type=isbn&str=" + $('#iDoi').val() + "";
     }
 </script>
 
