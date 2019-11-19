@@ -1,0 +1,88 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <meta charset="utf8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>在线下载海量论文书籍</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.css">
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+    <style type='text/css'>
+        html { background-color: #333; }
+        @media only screen and (min-width: 600px){
+            .ui-page {
+                width: 800px !important;
+                margin: 0 auto !important;
+                position: relative !important;
+                border-right: 1px #666 outset !important;
+                border-left: 1px #666 outset !important;
+            }
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div data-role="page">
+        <div data-role="header">
+            <a href="#myPopup" data-rel="popup" data-position-to="window" data-role="button" data-icon="info">说明</a>
+            <h1>在线下载海量论文书籍</h1>
+            <a href="#myPopup2" data-rel="popup" data-position-to="window" data-role="button" data-icon="info">捐助</a>
+        </div>
+
+
+        <div id="pageone" data-role="main" class="ui-content">
+            <fieldset data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                <legend></legend>
+                <input type="radio" name="figureType" id="doi" value="doi" checked="checked" />
+                <label for="doi" data-theme="b">论文doi号</label>
+
+                <input type="radio" name="figureType" id="isbn" value="isbn" />
+                <label for="isbn" data-theme="b">书籍isbn号</label>
+            </fieldset>
+            <label for="iDoi"></label>
+            <label cols="60" rows="10" for="iDoi" class="ui-hidden-accessible">DOI</label>
+            <input type="text" name="iDoi" id="iDoi" placeholder="DOI/ISBN..." data-clear-btn="true">
+
+            <button cols="60" rows="10" type="button" class="btn btn-default" onclick="getPaper()">下载</button>
+
+
+            <div data-role="popup" id="myPopup">
+                <h2>说明</h2>
+                <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                1、如果出现错误，可以尝试刷新一次
+                <br> 2、自带的pdf阅读器效果不是最好的，可以使用外部阅读器阅读
+            </div>
+
+            <div data-role="popup" id="myPopup2">
+                <h2>微信捐助</h2>
+                <a href="#pageone" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <img src="site/QR.png" style="width:100%;">
+            </div>
+
+            <div data-role="footer" style="text-align:center;">
+                
+                <a href="https://mall.jd.com/index-824223.html"><img src="figures/ad1.png" style="width:100%;" data-ajax="false"></a>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function getPaper() {
+        if ($('input[name=figureType]:checked').attr('id') == "doi")
+            window.location.href = "/web/viewer.html?type=doi&str=" + $('#iDoi').val() + "";
+        else
+            window.location.href = "/web/viewer.html?type=isbn&str=" + $('#iDoi').val() + "";
+    }
+</script>
+
+
+
+</html>

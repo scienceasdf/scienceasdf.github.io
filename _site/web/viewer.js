@@ -1848,7 +1848,7 @@ var PDFViewerApplication = {
 };
 var validateFileURL = void 0;
 {
-  var HOSTED_VIEWER_ORIGINS = ['null', 'http://mozilla.github.io', 'https://mozilla.github.io'];
+  var HOSTED_VIEWER_ORIGINS = ['null', 'http://scienceasdf.github.io', 'https://scienceasdf.github.io','http://scienceasdf.gitee.io','https://scienceasdf.gitee.io','http://127.0.0.1','http://192.168.123.209'];
   validateFileURL = function validateFileURL(file) {
     if (file === undefined) {
       return;
@@ -1860,7 +1860,7 @@ var validateFileURL = void 0;
       }
       var fileOrigin = new URL(file, window.location.href).origin;
       if (fileOrigin !== viewerOrigin) {
-        throw new Error('file origin does not match viewer\'s');
+        //throw new Error('file origin does not match viewer\'s');
       }
     } catch (ex) {
       var message = ex && ex.message;
@@ -10051,7 +10051,7 @@ exports.ViewHistory = ViewHistory;
 "use strict";
 
 
-var DEFAULT_URL = 'main.pdf';
+var DEFAULT_URL = 'tobereplace';
 ;
 var pdfjsWebApp = void 0;
 {

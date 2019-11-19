@@ -1,0 +1,1126 @@
+
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="BxS7OcHvX7-ftkocsamdTLK77NoDN5rdetrGZi2YK8M" />
+<meta name="360-site-verification" content="f8b7cc1b3e4619db12648deb9acfcbe0" />
+<meta name="shenma-site-verification" content="58e5afc85f7fa985d0c25b2016e567d6_1523332488"/>
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数值算法,有限元,动力学," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="scienceasdf" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="\( \def\ &amp;lt;#1&amp;gt;{\left &amp;lt;#1\right&amp;gt;} ewcommand{\CC}{\bm{C}} ewcommand{\dydx}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}} ewcommand{\pypx}[2]{\frac{\partial #1}{\partial #2}} ewcommand{\pyypxx}[2]{\frac{\partial^2 #1}{\partial #2^2}} ewcommand{\dyydxx}[2]{\frac{\mathrm{d}^2 #1}{\mathrm{d} #2^2}} \) \( ewcommand{\bm}[1]{\boldsymbol{\mathbf{#1}}} \) 本文对一道悬臂梁的动力学响应问题进行了研究，分别实现了时域方法、时域和频域结合的方法、纯频域方法等多种数值方法，并对不同方法进行了比较。">
+<meta name="keywords" content="数值算法, 有限元, 动力学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一道结构动力学问题的多种方法求解">
+<meta property="og:url" content="http://localhost:4000/dynamics/2019/01/08/beamdyn/">
+<meta property="og:site_name" content="scienceasdf">
+<meta property="og:description" content="\( \def\ &amp;lt;#1&amp;gt;{\left &amp;lt;#1\right&amp;gt;} ewcommand{\CC}{\bm{C}} ewcommand{\dydx}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}} ewcommand{\pypx}[2]{\frac{\partial #1}{\partial #2}} ewcommand{\pyypxx}[2]{\frac{\partial^2 #1}{\partial #2^2}} ewcommand{\dyydxx}[2]{\frac{\mathrm{d}^2 #1}{\mathrm{d} #2^2}} \) \( ewcommand{\bm}[1]{\boldsymbol{\mathbf{#1}}} \) 本文对一道悬臂梁的动力学响应问题进行了研究，分别实现了时域方法、时域和频域结合的方法、纯频域方法等多种数值方法，并对不同方法进行了比较。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/exercise1.jpg">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/fem_freq.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/rk4fig1.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/rk4fig2.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/rk4fig3.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/yinshi_fig1.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/yinshi_fig2.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/yinshi_fig3.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/decomp1.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/decomp2.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/decomp3.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/duha1.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/duha2.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/duha3.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/timedomain1.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/timedomain2.png">
+<meta property="og:image" content="http://localhost:4000/assets//blog_images/timedomain3.png">
+<meta property="og:updated_time" content="2019-01-08T00:00:00+08:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一道结构动力学问题的多种方法求解">
+<meta name="twitter:description" content="\( \def\ &amp;lt;#1&amp;gt;{\left &amp;lt;#1\right&amp;gt;} ewcommand{\CC}{\bm{C}} ewcommand{\dydx}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}} ewcommand{\pypx}[2]{\frac{\partial #1}{\partial #2}} ewcommand{\pyypxx}[2]{\frac{\partial^2 #1}{\partial #2^2}} ewcommand{\dyydxx}[2]{\frac{\mathrm{d}^2 #1}{\mathrm{d} #2^2}} \) \( ewcommand{\bm}[1]{\boldsymbol{\mathbf{#1}}} \) 本文对一道悬臂梁的动力学响应问题进行了研究，分别实现了时域方法、时域和频域结合的方法、纯频域方法等多种数值方法，并对不同方法进行了比较。">
+<meta name="twitter:image" content="http://localhost:4000/assets//blog_images/exercise1.jpg">
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://localhost:4000/"/>
+
+
+
+
+
+  <title>一道结构动力学问题的多种方法求解</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ea13fa2dc2aa892b0c36fe0fbc9d067d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">scienceasdf</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+<div id="posts" class="posts-expand">
+  
+  
+
+  
+
+  
+  
+  
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/dynamics/2019/01/08/beamdyn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="scienceasdf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="scienceasdf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            一道结构动力学问题的多种方法求解
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-08T00:00:00+08:00">
+                2019-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/Dynamics" itemprop="url" rel="index">
+                    <span itemprop="name">Dynamics</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            
+                <div class="post-description">
+                    
+                </div>
+            
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script type="text/x-mathjax-config">
+  		MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']]
+            },
+  			TeX: { 
+                equationNumbers: {  
+                    autoNumber: "AMS"  
+                },
+     		    extensions: ["AMSmath.js"]
+            },
+            CommonHTML: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            "HTML-CSS": { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            },
+            SVG: { 
+                linebreaks: { 
+                    automatic: true 
+                } 
+            }
+  		});
+</script>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<div style="display:none">
+			\( \def\
+			&lt;#1&gt;{\left
+				&lt;#1\right&gt;} \newcommand{\CC}{\bm{C}} \newcommand{\dydx}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}} \newcommand{\pypx}[2]{\frac{\partial
+					#1}{\partial #2}} \newcommand{\pyypxx}[2]{\frac{\partial^2 #1}{\partial #2^2}} \newcommand{\dyydxx}[2]{\frac{\mathrm{d}^2
+					#1}{\mathrm{d} #2^2}} \)
+                    \(
+\newcommand{\bm}[1]{\boldsymbol{\mathbf{#1}}}
+\)
+</div>
+<p><strong>本文对一道悬臂梁的动力学响应问题进行了研究，分别实现了时域方法、时域和频域结合的方法、纯频域方法等多种数值方法，并对不同方法进行了比较。</strong></p>
+
+<hr />
+<h2 id="题目描述">题目描述</h2>
+<p><img src="http://localhost:4000/assets//blog_images/exercise1.jpg" width="100%" />
+如图所示悬臂梁，长度L=1m,弯曲刚度$EI=10\text{Nm}^2$,线密度$\rho=0.3\text{kg/m}^3$,计算当$T=0.1,0.5,1.0s$时梁在$f(t)$作用下的根部弯矩的时间响应。</p>
+
+<h2 id="时域方法">时域方法</h2>
+<h3 id="有限元方法">有限元方法</h3>
+<p>建立梁单元的刚度矩阵为</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{equation}
+  \bm{k}=\frac{EI}{L^3}\begin{bmatrix}
+    12&6l&-12&6l\\
+    6l&4l^2&-6l&2l^2\\
+    -12&-6l&12&-6l\\
+    6l&2l^2&-6l&4l^2
+  \end{bmatrix}
+\end{equation} %]]></script>
+
+<p>单元质量矩阵为</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{equation}
+    \bm{m}=\frac{\rho al}{420}\begin{bmatrix}
+      156&22l&54&-13l\\
+      22l&4l^2&14l&-3l^2\\
+      54&13l&156&-22l\\
+      -13l&-13l^2&-22l&4l^2
+    \end{bmatrix}
+  \end{equation} %]]></script>
+
+<p>将梁分为数个梁单元，边界条件为一端固支。组装有限元方程后，可以通过求$\lambda{\bm{M}^{-1}\bm{K}}$与梁的解析解的固有角频率的平方比较，当划分的网格增大时，特征值趋于梁的解析解的固有角频率的平方，验证有限元模型的正确性。因此写出有限元的动力学方程：
+  \begin{equation}
+    \bm{M}\bm{\ddot x}+\bm{Kx}=\bm{f}
+  \end{equation}</p>
+
+<p>有限元模型计算此模型的固有频率与解析解求得的固有频率对比如表1所示。
+  <img src="http://localhost:4000/assets//blog_images/fem_freq.png" width="100%" /></p>
+
+<h3 id="龙格库塔算法">龙格库塔算法</h3>
+<p>这里采用经典四阶龙格库塔算法。但是由于这里的方程是刚性方程【1】，因此需要将时间步长取到很小才能保证算法的稳定性。在这里得到的结果如图1,图2,图3所示。
+  <img src="http://localhost:4000/assets//blog_images/rk4fig1.png" width="100%" />
+  <img src="http://localhost:4000/assets//blog_images/rk4fig2.png" width="100%" />
+  <img src="http://localhost:4000/assets//blog_images/rk4fig3.png" width="100%" /></p>
+
+<h3 id="韦尔莱积分算法">韦尔莱积分算法</h3>
+
+<p>此系统由于没有黏性项，因此我想到了位置韦尔莱积分会比较方便【2】。即使有速度项也可以用速度韦尔莱积分。</p>
+
+<p>位置韦尔莱的公式以及推导为</p>
+
+<script type="math/tex; mode=display">{\displaystyle r(t+\Delta t)=r(t)+v(t)\Delta t+{\frac {f(t)}{2m}}\Delta t^{2}+{\frac {1}{3!}}{\frac {d^{3}r}{dt^{3}}}\Delta t^{3}+O(\Delta t^{4})}</script>
+
+<script type="math/tex; mode=display">{\displaystyle r(t-\Delta t)=r(t)-v(t)\Delta t+{\frac {f(t)}{2m}}\Delta t^{2}-{\frac {1}{3!}}{\frac {d^{3}r}{dt^{3}}}\Delta t^{3}+O(\Delta t^{4})}</script>
+
+<p>\begin{equation}
+    \Rightarrow {\displaystyle r(t+\Delta t)\simeq 2r(t)-r(t-\Delta t)+{\frac {f(t)}{m}}\Delta t^{2}}
+\end{equation}
+新位置的计算误差为四阶。我本以为这样可以让算法能够稳定的，但是发现还是不能取过大的步长。得到的结果由于和龙格库塔得到的结果相同，故略去。</p>
+
+<h3 id="隐式龙格库塔方法">隐式龙格库塔方法</h3>
+<p>隐式龙格库塔方法可以具有更好的数值稳定性，更适合用于刚性方程的求解。方程如下：</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+    \begin{array}{l}
+    y_{n+1}-y_n=\frac{h}{2}(K_1+K_2)\\
+    K_1=f(t_n+(\frac{1}{2}+\frac{\sqrt{3}}{6})h,y_n+\frac{1}{4}hK_1+(\frac{1}{4}+\frac{\sqrt{3}}{6})hK_2)\\
+    K_2=f(t_n+(\frac{1}{2}-\frac{\sqrt{3}}{6})h,y_n+(\frac{1}{4}-\frac{\sqrt{3}}{6})hK_1+\frac{1}{4}hK_2)
+    \end{array}
+\end{equation}</script>
+
+<p>上式中的隐式方程可以用不动点迭代求解。隐式龙格库塔方法可以在更大的时间步长下保证稳定性。得到的结果如图4,图5,图6所示。
+  <img src="http://localhost:4000/assets//blog_images/yinshi_fig1.png" width="100%" />
+  <img src="http://localhost:4000/assets//blog_images/yinshi_fig2.png" width="100%" />
+  <img src="http://localhost:4000/assets//blog_images/yinshi_fig3.png" width="100%" /></p>
+
+<p>实际上针对刚性方程还有更为有效的算法：Rosenbrock算法【3】，但是由于考前时间有限，没办法去实现了。</p>
+
+<h3 id="newmark-β方法">Newmark-β方法</h3>
+<p>根据【4】,一种常用的Newmark方法可以保证无条件稳定:</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+    \left\{\begin{array}{l}
+        \dot x_{k+1}=\dot x_k+h[\frac{1}{2}(\ddot x_k + \ddot x_{k+1})]\\
+        x_{k+1}=x_k+h\dot x_k+\frac{h^2}{2}[\frac{1}{2}(\ddot x_k+\ddot x_{k+1})]
+    \end{array}\right.
+\end{equation}</script>
+
+<p>Newmark方法除了需要初始位移和初始速度以外，还需要初始加速度。且Newmark方法得到的相位误差滞后。得到的结果和前面的结果几乎相同，因此不再重新作图。</p>
+
+<h2 id="时域和频域混合的方法">时域和频域混合的方法</h2>
+<h3 id="梁的模态分解及传递函数">梁的模态分解及传递函数</h3>
+
+<p>梁的受迫振动方程为
+\begin{equation}\label{beamMotion}
+    EI\frac{\partial^4u}{\partial x^4}+\rho\pyypxx{u}{x}=f_0\sin\omega t\delta(x-l)
+\end{equation}
+通过分离变量可以得到梁的自由振动下的固有振型和固有频率，分别为$\phi_i,\omega_i$,其中
+\begin{equation}
+    \phi_i(x)=\cosh(\alpha_i x)-\cos(\alpha_i x)+\beta_i[\sinh(\alpha_i x)-\sin(\alpha_i x)]
+\end{equation}
+且满足</p>
+
+<script type="math/tex; mode=display">\begin{equation}
+    \left.\begin{array}{l}
+        \omega_i=\alpha_i^2\sqrt{\frac{EI}{\rho}}\\
+        \int_0^l\phi_i^2dx=l\\
+        \phi_i(l)=2(-1)^{i+1}
+    \end{array}\right\}
+\end{equation}</script>
+
+<p>当梁的自由端作用外力时，按模态进行分解，梁的响应可以设为
+\begin{equation}\label{eq1}
+    u(t)=\sin\omega t\sum c_i\phi_i(x)
+\end{equation}
+求出不同模态对这个激励的响应，将式(\ref{eq1})代入至式(\ref{beamMotion})中，乘上某个特定的模态，利用正交性，对式子从$0$到$l$积分，并且
+\begin{equation}
+    \int_{a^-}^{a^+}p(x)\delta(x-a)dx=p(a) <br />
+\end{equation}
+可以得到
+\begin{equation}
+    c_i=\frac{1}{\rho l}\frac{f_0}{\omega_i^2-\omega^2}
+\end{equation}</p>
+
+<h3 id="分解模态后用龙格库塔算法">分解模态后用龙格库塔算法</h3>
+
+<p>可以利用模态分解后得到的式子列出二阶运动的微分方程，并用龙格库塔算法求解。当$T=0.1s$时，取前两阶模态计算，当$T=0.5s/1s$时，只取系统的基频计算。得到的梁根部弯矩的响应曲线分别如图7,图8,图9所示。对模态分解之后得到的二阶微分方程仍然是刚性方程，为了求解的数值稳定性，龙格库塔方法的计算步长依然需要很小。因此此种方法相对于纯时域方法只是减少了有限元方法的运算量，龙格库塔算法仍需要大量运算。</p>
+
+<p><img src="http://localhost:4000/assets//blog_images/decomp1.png" width="100%" />
+<img src="http://localhost:4000/assets//blog_images/decomp2.png" width="100%" />
+<img src="http://localhost:4000/assets//blog_images/decomp3.png" width="100%" /></p>
+
+<h3 id="分解模态后用杜哈梅尔积分">分解模态后用杜哈梅尔积分</h3>
+
+<p>由条件可知，系统的模态为一个无阻尼二阶系统，可以得到系统的单位脉冲响应为
+    \begin{equation}
+        c(t)=\frac{1}{\rho l\omega_i}\sin(\omega_i t)
+    \end{equation}
+    将任意载荷$f(t)$视为一系列脉冲激励的迭加： 
+    \begin{equation}
+    f(t)\approx \sum {f(\tau )\cdot \Delta \tau \cdot \delta }(t-\tau )
+    \end{equation}
+    那么根据线性性质可知，系统的响应同样可以表示成对这一系列脉冲激励的响应函数的迭加： 
+    \begin{equation}\label{eq:dis}
+        x(t)\approx \sum {f(\tau )\cdot \Delta \tau \cdot c}(t-\tau )
+    \end{equation}
+    根据此编写程序，取前九阶模态，可以得到的响应曲线分别如图10,图11,图12所示。这种方法的运算量相对小很多，而且准确性很高，但是仍然注意到进行离散卷积时采用的取样点的周期如果大于最高阶模态的周期的话会导致很大的误差，因此需要要么少取一些高阶模态，要么减小采样周期。</p>
+
+<p><img src="http://localhost:4000/assets//blog_images/duha1.png" width="100%" />
+<img src="http://localhost:4000/assets//blog_images/duha2.png" width="100%" />
+<img src="http://localhost:4000/assets//blog_images/duha3.png" width="100%" /></p>
+
+<h2 id="纯时域方法">纯时域方法</h2>
+
+<p>对于题目中给的输入信号，我们可以想通过FFT把他分解成三角函数的和的形式，再分别利用FRF对响应的幅值和相位进行计算，再利用IFFT还原为响应。这种方法的理论基础是卷积定理【5】：
+\begin{equation}
+    \mathcal{F}(f*g) = \mathcal{F}(f) \cdot \mathcal{F}(g)
+\end{equation}
+可以想象成杜哈梅尔积分的时域形式，单位冲击响应的频域表达式就是FRF.取前七阶模态，这种方法得到的结果分别如图13,图14,图15所示。这种方法的速度很快，这里我自己写的递归FFT并非最快的，如果使用蝶形分治算法还能提升FFT的计算效率。但是这种方法的精度貌似不高，而且和采样周期以及采样时间有很大关系。</p>
+
+<p><img src="http://localhost:4000/assets//blog_images/timedomain1.png" width="100%" />
+<img src="http://localhost:4000/assets//blog_images/timedomain2.png" width="100%" />
+<img src="http://localhost:4000/assets//blog_images/timedomain3.png" width="100%" /></p>
+
+<h2 id="参考文献">参考文献</h2>
+<p>【1】Ernst Hairer and Gerhard Wanner. Solving Ordinary Differential Equations II. Stiff and
+Differential-Algebraic Problems. Springer, Berlin, 1996. ID: unige:12344.</p>
+
+<p>【2】Jason Gregory. Game engine architecture. Taylor &amp; Francis Ltd., 1 edition, 2009.</p>
+
+<p>【3】William H. Press, Saul A. Teukolsky, William T. Vetterling, and Brian P. Flannery. Numerical
+Recipes 3rd Edition: The Art of Scientific Computing. Cambridge University Press,
+New York, NY, USA, 3 edition, 2007.</p>
+
+<p>【4】邢誉峰，李敏. 计算固体力学原理与方法. 北京航空航天大学出版社, 2011.</p>
+
+<p>【5】Albert Boggess and Francis J Narcowich. A First Course in Wavelets with Fourier Analysis.
+Publishing House of Electronics Industry, 2002.</p>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            
+            <a href="/tag/#/%E6%95%B0%E5%80%BC%E7%AE%97%E6%B3%95" rel="tag"># 数值算法</a>
+          
+            
+            <a href="/tag/#/%E6%9C%89%E9%99%90%E5%85%83" rel="tag"># 有限元</a>
+          
+            
+            <a href="/tag/#/%E5%8A%A8%E5%8A%9B%E5%AD%A6" rel="tag"># 动力学</a>
+          
+        </div>
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+        <div class="post-nav" id="post-nav-id">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/programming/2019/01/09/femcode/" rel="next" title="一个简单的面向对象有限元程序的开发">
+                <i class="fa fa-chevron-left"></i> 一个简单的面向对象有限元程序的开发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/dynamics/2018/11/18/hamiltonian/" rel="prev" title="哈密顿系统及保辛数值算法">
+                哈密顿系统及保辛数值算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+      
+
+      
+    </footer>
+  </article>
+
+  <div class="post-spread">
+    
+  </div>
+</div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        
+        
+        
+
+
+
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/assets/images/avatar.png"
+               alt="scienceasdf" />
+          <p class="site-author-name" itemprop="name">scienceasdf</p>
+           
+              <p class="site-description motion-element" itemprop="description">We will bury them !</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+        
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="https://github.com/scienceasdf" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/scienceasdf/activities" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-joomla"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="404.html" target="_blank" title="404公益@宝贝回家">
+                  
+                    <i class="fa fa-fw fa-child"></i>
+                  
+                  404公益@宝贝回家
+                </a>
+              </span>
+            
+              
+              
+              <span class="links-of-author-item">
+                <a href="site/" target="_blank" title="神奇的网页">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  神奇的网页
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#题目描述"> <span class="nav-number">1</span> <span class="nav-text">题目描述</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#时域方法"> <span class="nav-number">2</span> <span class="nav-text">时域方法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#有限元方法"> <span class="nav-number">2.1</span> <span class="nav-text">有限元方法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#龙格库塔算法"> <span class="nav-number">2.2</span> <span class="nav-text">龙格库塔算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#韦尔莱积分算法"> <span class="nav-number">2.3</span> <span class="nav-text">韦尔莱积分算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#隐式龙格库塔方法"> <span class="nav-number">2.4</span> <span class="nav-text">隐式龙格库塔方法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#newmark-β方法"> <span class="nav-number">2.5</span> <span class="nav-text">Newmark-β方法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#时域和频域混合的方法"> <span class="nav-number">3</span> <span class="nav-text">时域和频域混合的方法</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#梁的模态分解及传递函数"> <span class="nav-number">3.1</span> <span class="nav-text">梁的模态分解及传递函数</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#分解模态后用龙格库塔算法"> <span class="nav-number">3.2</span> <span class="nav-text">分解模态后用龙格库塔算法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#分解模态后用杜哈梅尔积分"> <span class="nav-number">3.3</span> <span class="nav-text">分解模态后用杜哈梅尔积分</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#纯时域方法"> <span class="nav-number">4</span> <span class="nav-text">纯时域方法</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> </li></ol> </li></ol> </li></ol> </li></ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#参考文献"> <span class="nav-number">5</span> <span class="nav-text">参考文献</span> </a> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child"> <ol class="nav-child">
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">scienceasdf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://jekyllrb.com">Jekyll</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/simpleyyt/jekyll-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+   
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="/assets/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/assets/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/assets/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  <script type="text/javascript" src="/assets/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/assets/js/src/post-details.js?v=5.1.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/assets/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+    
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
+
